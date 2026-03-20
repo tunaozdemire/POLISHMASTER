@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -104,13 +104,13 @@
     }
 
     .card {
-      width: min(100%, 460px);
+      width: min(100%, 760px);
       padding: 24px;
       border: 1px solid var(--line);
       border-radius: 28px;
       background: linear-gradient(180deg, rgba(18, 18, 19, 0.96), rgba(9, 9, 10, 0.96));
       box-shadow: var(--shadow);
-      text-align: center;
+      text-align: left;
     }
 
     .eyebrow {
@@ -131,7 +131,7 @@
     }
 
     p {
-      margin: 16px auto 0;
+      margin: 16px 0 0;
       max-width: 32ch;
       color: var(--muted);
       font-size: 0.98rem;
@@ -139,7 +139,7 @@
     }
 
     .visual {
-      margin: 28px auto 0;
+      margin: 26px 0 0;
       position: relative;
       padding: 14px;
       border-radius: 22px;
@@ -180,8 +180,8 @@
       display: inline-flex;
       align-items: center;
       justify-content: space-between;
-      min-width: 240px;
-      margin-top: 28px;
+      width: min(100%, 360px);
+      margin-top: 24px;
       padding: 14px 16px 14px 20px;
       border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 22px;
@@ -269,47 +269,29 @@
       -webkit-text-fill-color: rgba(255, 255, 255, 0.62);
     }
 
-    .hero-brand {
+    .hero-headline {
       margin: 0;
       color: #fff4ea;
-      font-size: clamp(2.9rem, 10vw, 5.6rem);
-      line-height: 0.92;
-      letter-spacing: -0.08em;
+      font-size: clamp(2.6rem, 9vw, 4.8rem);
+      line-height: 0.96;
+      letter-spacing: -0.07em;
       font-weight: 800;
-      text-transform: uppercase;
+      max-width: 10ch;
     }
 
-    .hero-subtitle {
-      margin-top: 14px;
-      max-width: 24ch;
-      color: rgba(255, 255, 255, 0.84);
+    .hero-support {
+      margin-top: 16px;
+      max-width: 28ch;
+      color: rgba(255, 255, 255, 0.8);
       font-size: 1rem;
       line-height: 1.7;
     }
 
-    .hero-points {
-      display: grid;
-      gap: 12px;
-      margin: 22px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .hero-points li {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      color: rgba(255, 255, 255, 0.78);
-      font-size: 0.94rem;
-      line-height: 1.65;
-    }
-
-    .hero-points li::before {
-      content: "✓";
-      color: var(--accent);
-      font-weight: 700;
-      flex: 0 0 auto;
-      margin-top: 1px;
+    .hero-proof {
+      margin-top: 10px;
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 0.92rem;
+      line-height: 1.6;
     }
 
     .cta-icon {
@@ -574,6 +556,8 @@
       text-align: left;
       transform: translateY(20px) scale(0.96);
       transition: transform 0.28s ease;
+      max-height: calc(100vh - 40px);
+      overflow: auto;
     }
 
     .modal.is-open .modal-panel {
@@ -632,7 +616,9 @@
     }
 
     .rating-summary {
-      display: grid;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
       gap: 14px;
       margin-bottom: 18px;
       padding: 16px;
@@ -671,35 +657,6 @@
       color: rgba(255, 255, 255, 0.62);
       font-size: 0.86rem;
       text-align: right;
-    }
-
-    .rating-bars {
-      display: grid;
-      gap: 8px;
-    }
-
-    .rating-row {
-      display: grid;
-      grid-template-columns: 38px 1fr 40px;
-      align-items: center;
-      gap: 10px;
-      color: rgba(255, 255, 255, 0.68);
-      font-size: 0.82rem;
-    }
-
-    .rating-track {
-      position: relative;
-      height: 8px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-
-    .rating-fill {
-      position: absolute;
-      inset: 0 auto 0 0;
-      border-radius: 999px;
-      background: linear-gradient(90deg, rgba(255, 106, 0, 0.5), rgba(255, 106, 0, 0.95));
     }
 
     .social-label {
@@ -803,10 +760,25 @@
     }
 
     .faq-item {
-      padding: 16px 18px;
+      padding: 0;
       border: 1px solid rgba(255, 255, 255, 0.06);
       border-radius: 16px;
       background: rgba(255, 255, 255, 0.025);
+      overflow: hidden;
+    }
+
+    .faq-toggle {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 16px 18px;
+      background: transparent;
+      border: 0;
+      color: inherit;
+      cursor: pointer;
+      text-align: left;
     }
 
     .faq-question {
@@ -816,11 +788,66 @@
       line-height: 1.4;
     }
 
+    .faq-icon {
+      color: rgba(255, 255, 255, 0.58);
+      transition: transform 0.24s ease;
+      flex: 0 0 auto;
+    }
+
+    .faq-item.is-open .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    .faq-content {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.24s ease;
+    }
+
+    .faq-item.is-open .faq-content {
+      grid-template-rows: 1fr;
+    }
+
+    .faq-content-inner {
+      overflow: hidden;
+    }
+
     .faq-answer {
-      margin-top: 8px;
+      padding: 0 18px 16px;
       color: rgba(255, 255, 255, 0.7);
       font-size: 0.92rem;
       line-height: 1.7;
+    }
+
+    .popup-return {
+      position: sticky;
+      bottom: 12px;
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 16px;
+      padding-top: 8px;
+      pointer-events: none;
+    }
+
+    .popup-return button {
+      pointer-events: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 16px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(12, 12, 13, 0.9);
+      color: rgba(255, 255, 255, 0.88);
+      box-shadow: 0 12px 26px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      animation: returnFloat 3.2s ease-in-out infinite;
+    }
+
+    @keyframes returnFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-3px); }
     }
 
     .site-footer {
@@ -849,21 +876,12 @@
       }
 
       .card {
-        width: min(100%, 980px);
+        width: min(100%, 760px);
         padding: 40px;
-        display: grid;
-        grid-template-columns: 1.05fr 0.95fr;
-        gap: 32px;
-        text-align: left;
-        align-items: center;
       }
 
       p {
         margin-left: 0;
-      }
-
-      .visual {
-        margin-top: 0;
       }
 
       .visual img {
@@ -885,7 +903,6 @@
       }
 
       .rating-summary {
-        grid-template-columns: 0.9fr 1.1fr;
         align-items: center;
       }
     }
@@ -897,21 +914,13 @@
       <div class="card">
         <div>
           <span class="eyebrow">PolishMaster</span>
-          <h1 class="hero-brand">POLISHMASTER</h1>
-          <div class="hero-subtitle">People don't buy 3D prints. They buy products.</div>
-          <ul class="hero-points">
-            <li>Apply the PolishMaster method and stop selling layer lines.</li>
-            <li>Join 200+ paid members already running the PolishMaster finish standard.</li>
-            <li>The finish method behind the viral PolishMaster videos.</li>
-            <li>Download new models every week engineered to sand fast, polish perfectly, and sell.</li>
-            <li>Commercial license included. Sell physical prints made from the models.</li>
-            <li>See the raw-to-premium transformations members are producing inside the PolishMaster system.</li>
-            <li>Your next print will not look 3D printed.</li>
-          </ul>
+          <h1 class="hero-headline">Stop selling layer lines. Start selling products.</h1>
+          <p class="hero-support">Everything you need to turn raw prints into premium products.</p>
+          <p class="hero-proof">Join 200+ makers already inside.</p>
           <div class="actions">
             <a class="cta" href="#">
               <span class="cta-text">
-                <span class="cta-label">Join Now</span>
+                <span class="cta-label">Access the PolishMaster Patreon</span>
               </span>
               <span class="cta-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
@@ -923,11 +932,10 @@
             <button class="members-btn" id="members-trigger" type="button"><span>Member Reviews</span></button>
             <button class="faq-btn" id="faq-trigger" type="button"><span>FAQ</span></button>
           </div>
-        </div>
-
-        <div class="visual">
-          <div class="visual-badge">Raw to Mirror Finish</div>
-          <img src="surface-comparison.png" alt="Before and after surface finish comparison" />
+          <div class="visual">
+            <div class="visual-badge">Raw to Mirror Finish</div>
+            <img src="surface-comparison.png" alt="Before and after surface finish comparison" />
+          </div>
         </div>
       </div>
     </section>
@@ -941,7 +949,7 @@
           <span class="social-label">Patreon Reviews</span>
           <h2 class="modal-title" id="members-title">What members are saying</h2>
         </div>
-        <button class="close-btn" id="members-close" type="button" aria-label="Close members popup">×</button>
+        <button class="close-btn" id="members-close" type="button" aria-label="Close members popup">x</button>
       </div>
 
       <div class="social-proof" id="members">
@@ -962,23 +970,6 @@
             <div class="rating-sub">Based on mixed member feedback across finish quality, clarity, and results.</div>
           </div>
 
-          <div class="rating-bars">
-            <div class="rating-row">
-              <span>5★</span>
-              <div class="rating-track"><div class="rating-fill" style="width: 76%"></div></div>
-              <span>76%</span>
-            </div>
-            <div class="rating-row">
-              <span>4★</span>
-              <div class="rating-track"><div class="rating-fill" style="width: 14%"></div></div>
-              <span>14%</span>
-            </div>
-            <div class="rating-row">
-              <span>3★</span>
-              <div class="rating-track"><div class="rating-fill" style="width: 10%"></div></div>
-              <span>10%</span>
-            </div>
-          </div>
         </div>
 
         <div class="reviews">
@@ -1154,7 +1145,7 @@
                 <div class="reviewer-name">Fatima H.</div>
               </div>
             </div>
-            <p dir="rtl">هذا الاشتراك ساعدني أفهم كيف أخلي القطعة تبدو أغلى وأكثر احترافية.</p>
+            <p dir="rtl">Ù‡Ø°Ø§ Ø§Ù„Ø§Ø´ØªØ±Ø§Ùƒ Ø³Ø§Ø¹Ø¯Ù†ÙŠ Ø£ÙÙ‡Ù… ÙƒÙŠÙ Ø£Ø®Ù„ÙŠ Ø§Ù„Ù‚Ø·Ø¹Ø© ØªØ¨Ø¯Ùˆ Ø£ØºÙ„Ù‰ ÙˆØ£ÙƒØ«Ø± Ø§Ø­ØªØ±Ø§ÙÙŠØ©.</p>
             <div class="stars">★★★★★</div>
           </article>
 
@@ -1198,7 +1189,7 @@
                 <div class="reviewer-name">Omar A.</div>
               </div>
             </div>
-            <p dir="rtl">فكرة القيمة البيعية كانت مفاجئة بالنسبة لي. التشطيب الافضل غيّر فعلا إحساس المنتج.</p>
+            <p dir="rtl">ÙÙƒØ±Ø© Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„Ø¨ÙŠØ¹ÙŠØ© ÙƒØ§Ù†Øª Ù…ÙØ§Ø¬Ø¦Ø© Ø¨Ø§Ù„Ù†Ø³Ø¨Ø© Ù„ÙŠ. Ø§Ù„ØªØ´Ø·ÙŠØ¨ Ø§Ù„Ø§ÙØ¶Ù„ ØºÙŠÙ‘Ø± ÙØ¹Ù„Ø§ Ø¥Ø­Ø³Ø§Ø³ Ø§Ù„Ù…Ù†ØªØ¬.</p>
             <div class="stars">★★★★★</div>
           </article>
 
@@ -1224,6 +1215,9 @@
             <div class="stars">★★★★★</div>
           </article>
         </div>
+        <div class="popup-return">
+          <button type="button" data-return="true">Return to main page</button>
+        </div>
       </div>
     </div>
   </div>
@@ -1242,37 +1236,40 @@
       <div class="social-proof">
         <div class="faq-list">
           <div class="faq-item">
-            <div class="faq-question">1. What do I get when I join?</div>
-            <div class="faq-answer">You get the full PolishMaster method step-by-step: sanding sequence, surface refinement, and polishing, plus the exact types of tools and materials to use.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">1. What do I get when I join?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">You get the full PolishMaster method step-by-step: sanding sequence, surface refinement, and polishing, plus the exact types of tools and materials to use.</div></div></div>
           </div>
           <div class="faq-item">
-            <div class="faq-question">2. Do you sell tools or physical products?</div>
-            <div class="faq-answer">No. This is not a product store. You learn the method and how to choose the right tools yourself.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">2. Do you sell tools or physical products?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">No. This is not a product store. You learn the method and how to choose the right tools yourself.</div></div></div>
           </div>
           <div class="faq-item">
-            <div class="faq-question">3. Can I learn this remotely?</div>
-            <div class="faq-answer">Yes. The system is built to be followed step-by-step from anywhere.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">3. Can I learn this remotely?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. The system is built to be followed step-by-step from anywhere.</div></div></div>
           </div>
           <div class="faq-item">
-            <div class="faq-question">4. What materials does this work with?</div>
-            <div class="faq-answer">Mainly PLA and similar 3D printing plastics. The method is based on surface control, not a single material.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">4. What materials does this work with?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Mainly PLA and similar 3D printing plastics. The method is based on surface control, not a single material.</div></div></div>
           </div>
           <div class="faq-item">
-            <div class="faq-question">5. What if I can’t find the same tools in my country?</div>
-            <div class="faq-answer">Tools are region-specific. Inside, you’ll learn what matters so you can use local alternatives. If needed, you can contact me after joining.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">5. What if I can't find the same tools in my country?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Tools are region-specific. Inside, you'll learn what matters so you can use local alternatives. If needed, you can contact me after joining.</div></div></div>
           </div>
           <div class="faq-item">
-            <div class="faq-question">6. Does this work for small, detailed figures?</div>
-            <div class="faq-answer">Yes, but very small, highly detailed models are harder to sand. If your focus is ultra-detailed miniatures, the process becomes more challenging.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">6. Does this work for small, detailed figures?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes, but very small, highly detailed models are harder to sand. If your focus is ultra-detailed miniatures, the process becomes more challenging.</div></div></div>
           </div>
           <div class="faq-item">
-            <div class="faq-question">7. Can I get a matte finish instead of glossy?</div>
-            <div class="faq-answer">Yes. Matte comes from stopping before polishing, so the surface stays sanded rather than polished.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">7. Can I get a matte finish instead of glossy?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. Matte comes from stopping before polishing, so the surface stays sanded rather than polished.</div></div></div>
           </div>
           <div class="faq-item">
-            <div class="faq-question">8. What is the PolishMaster System?</div>
-            <div class="faq-answer">First you learn the method. Then the system layer helps you turn prints into sellable products with new models, pricing guidance, and ideas on where to sell.</div>
+            <button class="faq-toggle" type="button"><span class="faq-question">8. What is the PolishMaster System?</span><span class="faq-icon">+</span></button>
+            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">First you learn the method. Then the system layer helps you turn prints into sellable products with new models, pricing guidance, and ideas on where to sell.</div></div></div>
           </div>
+        </div>
+        <div class="popup-return">
+          <button type="button" data-return="true">Return to main page</button>
         </div>
       </div>
     </div>
@@ -1296,6 +1293,8 @@
       var faqTrigger = document.getElementById("faq-trigger");
       var faqModal = document.getElementById("faq-modal");
       var faqClose = document.getElementById("faq-close");
+      var returnButtons = document.querySelectorAll("[data-return='true']");
+      var faqToggles = document.querySelectorAll(".faq-toggle");
 
       function openModal(modal) {
         if (!modal) return;
@@ -1359,6 +1358,18 @@
           }
         });
       });
+      returnButtons.forEach(function (button) {
+        button.addEventListener("click", function () {
+          closeAll();
+        });
+      });
+      faqToggles.forEach(function (toggle) {
+        toggle.addEventListener("click", function () {
+          var item = toggle.closest(".faq-item");
+          if (!item) return;
+          item.classList.toggle("is-open");
+        });
+      });
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
           closeAll();
@@ -1368,3 +1379,6 @@
   </script>
 </body>
 </html>
+
+
+
