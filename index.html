@@ -26,6 +26,7 @@
 
     html {
       scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
@@ -75,10 +76,17 @@
         50% 50%,
         0 0;
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Tahoma, Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      overflow-x: hidden;
       animation: fallingPattern 150s linear infinite;
+    }
+
+    html.modal-open,
+    body.modal-open {
+      overflow: hidden;
+      height: 100%;
     }
 
     img {
@@ -289,9 +297,11 @@
 
     .hero-proof {
       margin-top: 10px;
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 0.92rem;
-      line-height: 1.6;
+      color: rgba(255, 255, 255, 0.9);
+      font-size: 1.08rem;
+      font-weight: 700;
+      line-height: 1.5;
+      letter-spacing: -0.02em;
     }
 
     .cta-icon {
@@ -378,8 +388,8 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      align-items: center;
-      margin-top: 28px;
+      align-items: flex-start;
+      margin-top: 22px;
     }
 
     .members-btn {
@@ -528,6 +538,8 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.25s ease;
+      overflow: hidden;
+      overscroll-behavior: contain;
     }
 
     .modal.is-open {
@@ -545,6 +557,8 @@
     .modal-panel {
       position: relative;
       z-index: 1;
+      display: flex;
+      flex-direction: column;
       width: min(100%, 760px);
       padding: 22px;
       border: 1px solid rgba(255, 255, 255, 0.08);
@@ -557,7 +571,10 @@
       transform: translateY(20px) scale(0.96);
       transition: transform 0.28s ease;
       max-height: calc(100vh - 40px);
-      overflow: auto;
+      overflow-x: hidden;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+      -webkit-overflow-scrolling: touch;
     }
 
     .modal.is-open .modal-panel {
@@ -605,6 +622,7 @@
       border-radius: 22px;
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
       text-align: left;
+      min-height: 0;
     }
 
     .social-top {
@@ -677,9 +695,9 @@
     .reviews {
       display: grid;
       gap: 10px;
-      max-height: min(68vh, 720px);
-      overflow: auto;
-      padding-right: 4px;
+      max-height: none;
+      overflow: visible;
+      padding-right: 0;
     }
 
     .review {
@@ -752,6 +770,12 @@
       font-size: 0.92rem;
       line-height: 1.65;
       color: rgba(255, 255, 255, 0.82);
+    }
+
+    .review p[lang="ar"] {
+      direction: rtl;
+      text-align: right;
+      font-family: "Segoe UI", Tahoma, Arial, sans-serif;
     }
 
     .faq-list {
@@ -880,14 +904,6 @@
         padding: 40px;
       }
 
-      p {
-        margin-left: 0;
-      }
-
-      .visual img {
-        width: 100%;
-      }
-
       .actions {
         flex-direction: row;
         align-items: center;
@@ -914,13 +930,13 @@
       <div class="card">
         <div>
           <span class="eyebrow">PolishMaster</span>
-          <h1 class="hero-headline">Stop selling layer lines. Start selling products.</h1>
+          <h1 class="hero-headline">Stop selling layer lines.<br />Start selling products.</h1>
           <p class="hero-support">Everything you need to turn raw prints into premium products.</p>
           <p class="hero-proof">Join 200+ makers already inside.</p>
           <div class="actions">
-            <a class="cta" href="#">
+            <a class="cta" href="https://www.patreon.com/15111337/join">
               <span class="cta-text">
-                <span class="cta-label">Access the PolishMaster Patreon</span>
+                <span class="cta-label">Access the System on Patreon</span>
               </span>
               <span class="cta-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
@@ -929,12 +945,14 @@
                 </svg>
               </span>
             </a>
-            <button class="members-btn" id="members-trigger" type="button"><span>Member Reviews</span></button>
-            <button class="faq-btn" id="faq-trigger" type="button"><span>FAQ</span></button>
           </div>
           <div class="visual">
             <div class="visual-badge">Raw to Mirror Finish</div>
             <img src="surface-comparison.png" alt="Before and after surface finish comparison" />
+          </div>
+          <div class="actions">
+            <button class="members-btn" id="members-trigger" type="button"><span>Member Reviews</span></button>
+            <button class="faq-btn" id="faq-trigger" type="button"><span>FAQ</span></button>
           </div>
         </div>
       </div>
@@ -1145,7 +1163,7 @@
                 <div class="reviewer-name">Fatima H.</div>
               </div>
             </div>
-            <p dir="rtl">Ù‡Ø°Ø§ Ø§Ù„Ø§Ø´ØªØ±Ø§Ùƒ Ø³Ø§Ø¹Ø¯Ù†ÙŠ Ø£ÙÙ‡Ù… ÙƒÙŠÙ Ø£Ø®Ù„ÙŠ Ø§Ù„Ù‚Ø·Ø¹Ø© ØªØ¨Ø¯Ùˆ Ø£ØºÙ„Ù‰ ÙˆØ£ÙƒØ«Ø± Ø§Ø­ØªØ±Ø§ÙÙŠØ©.</p>
+            <p lang="ar" dir="rtl">هذا الاشتراك ساعدني أفهم كيف أخلي القطعة تبدو أغلى وأكثر احترافية.</p>
             <div class="stars">★★★★★</div>
           </article>
 
@@ -1189,7 +1207,7 @@
                 <div class="reviewer-name">Omar A.</div>
               </div>
             </div>
-            <p dir="rtl">ÙÙƒØ±Ø© Ø§Ù„Ù‚ÙŠÙ…Ø© Ø§Ù„Ø¨ÙŠØ¹ÙŠØ© ÙƒØ§Ù†Øª Ù…ÙØ§Ø¬Ø¦Ø© Ø¨Ø§Ù„Ù†Ø³Ø¨Ø© Ù„ÙŠ. Ø§Ù„ØªØ´Ø·ÙŠØ¨ Ø§Ù„Ø§ÙØ¶Ù„ ØºÙŠÙ‘Ø± ÙØ¹Ù„Ø§ Ø¥Ø­Ø³Ø§Ø³ Ø§Ù„Ù…Ù†ØªØ¬.</p>
+            <p lang="ar" dir="rtl">فكرة القيمة البيعية كانت مفاجئة بالنسبة لي. التشطيب الأفضل غيّر فعلاً إحساس المنتج.</p>
             <div class="stars">★★★★★</div>
           </article>
 
@@ -1295,12 +1313,35 @@
       var faqClose = document.getElementById("faq-close");
       var returnButtons = document.querySelectorAll("[data-return='true']");
       var faqToggles = document.querySelectorAll(".faq-toggle");
+      var scrollTop = 0;
+
+      function lockPageScroll() {
+        scrollTop = window.scrollY || window.pageYOffset || 0;
+        document.documentElement.classList.add("modal-open");
+        document.body.classList.add("modal-open");
+        document.body.style.position = "fixed";
+        document.body.style.top = "-" + scrollTop + "px";
+        document.body.style.left = "0";
+        document.body.style.right = "0";
+        document.body.style.width = "100%";
+      }
+
+      function unlockPageScroll() {
+        document.documentElement.classList.remove("modal-open");
+        document.body.classList.remove("modal-open");
+        document.body.style.position = "";
+        document.body.style.top = "";
+        document.body.style.left = "";
+        document.body.style.right = "";
+        document.body.style.width = "";
+        window.scrollTo(0, scrollTop);
+      }
 
       function openModal(modal) {
         if (!modal) return;
         modal.classList.add("is-open");
         modal.setAttribute("aria-hidden", "false");
-        document.body.style.overflow = "hidden";
+        lockPageScroll();
       }
 
       function closeModal(modal) {
@@ -1311,7 +1352,7 @@
           (!membersModal || !membersModal.classList.contains("is-open")) &&
           (!faqModal || !faqModal.classList.contains("is-open"))
         ) {
-          document.body.style.overflow = "";
+          unlockPageScroll();
         }
       }
 
@@ -1324,7 +1365,7 @@
           faqModal.classList.remove("is-open");
           faqModal.setAttribute("aria-hidden", "true");
         }
-        document.body.style.overflow = "";
+        unlockPageScroll();
       }
 
       if (membersTrigger && membersModal) {
