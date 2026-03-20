@@ -122,18 +122,39 @@
 
     .visual {
       margin: 28px auto 0;
-      padding: 18px;
+      position: relative;
+      padding: 14px;
       border-radius: 22px;
       background:
         radial-gradient(circle at 50% 18%, rgba(255, 106, 0, 0.2), transparent 32%),
         linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
       border: 1px solid rgba(255, 255, 255, 0.06);
+      overflow: hidden;
     }
 
     .visual img {
-      width: min(100%, 240px);
+      width: 100%;
+      border-radius: 16px;
       margin: 0 auto;
       filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55));
+    }
+
+    .visual-badge {
+      position: absolute;
+      left: 14px;
+      top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.56);
+      color: #fff3ea;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      backdrop-filter: blur(10px);
     }
 
     .cta {
@@ -412,6 +433,46 @@
       background: rgba(255, 255, 255, 0.025);
     }
 
+    .review-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+    }
+
+    .reviewer {
+      min-width: 0;
+    }
+
+    .reviewer-name {
+      color: #fff3ea;
+      font-size: 0.92rem;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .reviewer-role {
+      margin-top: 3px;
+      font-size: 0.78rem;
+      color: rgba(255, 255, 255, 0.48);
+    }
+
+    .stars {
+      margin-top: 8px;
+      color: rgba(255, 106, 0, 0.95);
+      font-size: 0.84rem;
+      letter-spacing: 0.14em;
+    }
+
     .review p {
       margin: 0;
       max-width: none;
@@ -450,7 +511,7 @@
       }
 
       .visual img {
-        width: min(100%, 320px);
+        width: 100%;
       }
 
       .actions {
@@ -486,13 +547,14 @@
           </div>
           <div class="actions">
             <a class="cta" href="#"><span class="cta-text">Join Now</span></a>
-            <button class="members-btn" id="members-trigger" type="button">Members</button>
+            <button class="members-btn" id="members-trigger" type="button">Member Reviews</button>
           </div>
-          <div class="note">$19.99 / month</div>
+          <div class="note">$29.99 / month • $24.89 / month billed annually</div>
         </div>
 
         <div class="visual">
-          <img src="king.png" alt="Polished 3D printed chess king" />
+          <div class="visual-badge">Raw to Mirror Finish</div>
+          <img src="surface-comparison.png" alt="Before and after surface finish comparison" />
         </div>
       </div>
     </section>
@@ -503,7 +565,7 @@
     <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="members-title">
       <div class="modal-head">
         <div>
-          <span class="social-label">Patreon Members</span>
+          <span class="social-label">Patreon Reviews</span>
           <h2 class="modal-title" id="members-title">What members are saying</h2>
         </div>
         <button class="close-btn" id="members-close" type="button" aria-label="Close members popup">×</button>
@@ -517,18 +579,54 @@
 
         <div class="reviews">
           <article class="review">
+            <div class="review-head">
+              <img
+                class="avatar"
+                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80"
+                alt="Emre profile photo"
+              />
+              <div class="reviewer">
+                <div class="reviewer-name">Emre K.</div>
+                <div class="reviewer-role">Verified Patreon member</div>
+              </div>
+            </div>
             <p>"My prints finally look sellable instead of unfinished prototypes."</p>
-            <div class="review-meta">Emre K. • Verified Patreon member</div>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Started getting paid orders after improving finish quality.</div>
           </article>
 
           <article class="review">
+            <div class="review-head">
+              <img
+                class="avatar"
+                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80"
+                alt="Lina profile photo"
+              />
+              <div class="reviewer">
+                <div class="reviewer-name">Lina A.</div>
+                <div class="reviewer-role">Verified Patreon member</div>
+              </div>
+            </div>
             <p>"The polishing steps are simple, clear, and made my results look premium fast."</p>
-            <div class="review-meta">Lina A. • Verified Patreon member</div>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Used the workflow to launch a cleaner-looking desk object line.</div>
           </article>
 
           <article class="review">
+            <div class="review-head">
+              <img
+                class="avatar"
+                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80"
+                alt="Marcus profile photo"
+              />
+              <div class="reviewer">
+                <div class="reviewer-name">Marcus T.</div>
+                <div class="reviewer-role">Verified Patreon member</div>
+              </div>
+            </div>
             <p>"This made it way easier to charge confidently for my finished pieces."</p>
-            <div class="review-meta">Marcus T. • Verified Patreon member</div>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Says the same prints now feel premium enough to justify higher pricing.</div>
           </article>
         </div>
       </div>
