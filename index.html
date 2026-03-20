@@ -35,10 +35,10 @@
       background-image:
         radial-gradient(circle at 50% 50%, transparent 1.5px, #000 0 8px, transparent 8px),
         radial-gradient(circle at 50% 50%, transparent 1.5px, #000 0 8px, transparent 8px),
-        radial-gradient(circle at 18% 18%, rgba(255, 0, 90, 0.2), transparent 26%),
-        radial-gradient(circle at 82% 22%, rgba(255, 220, 0, 0.16), transparent 24%),
-        radial-gradient(circle at 30% 82%, rgba(0, 255, 140, 0.14), transparent 26%),
-        radial-gradient(ellipse at 72% 72%, rgba(0, 110, 255, 0.18), transparent 30%),
+        radial-gradient(circle at 18% 18%, rgba(255, 106, 0, 0.18), transparent 26%),
+        radial-gradient(circle at 82% 22%, rgba(255, 106, 0, 0.14), transparent 24%),
+        radial-gradient(circle at 30% 82%, rgba(255, 106, 0, 0.12), transparent 26%),
+        radial-gradient(ellipse at 72% 72%, rgba(255, 106, 0, 0.16), transparent 30%),
         linear-gradient(180deg, #000000 0%, #050505 100%);
       background-size:
         10px 17.32px,
@@ -60,7 +60,7 @@
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      animation: gradientShift 22s linear infinite, hueSpin 10s linear infinite;
+      animation: gradientShift 22s linear infinite;
     }
 
     img {
@@ -237,19 +237,97 @@
       }
     }
 
-    @keyframes hueSpin {
-      0% {
-        filter: hue-rotate(0deg);
-      }
-      100% {
-        filter: hue-rotate(360deg);
-      }
-    }
-
     .note {
       margin-top: 14px;
       font-size: 0.82rem;
       color: rgba(255, 255, 255, 0.42);
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+      margin-top: 28px;
+    }
+
+    .members-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 190px;
+      padding: 14px 22px;
+      border: 1px solid rgba(255, 106, 0, 0.22);
+      border-radius: 999px;
+      background: rgba(255, 106, 0, 0.08);
+      color: #ffd9bf;
+      font-size: 0.92rem;
+      font-weight: 700;
+      transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .members-btn:hover {
+      background: rgba(255, 106, 0, 0.14);
+      border-color: rgba(255, 106, 0, 0.36);
+      transform: translateY(-1px);
+    }
+
+    .social-proof {
+      margin-top: 26px;
+      padding: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.015));
+      text-align: left;
+    }
+
+    .social-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .social-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .rating {
+      color: #fff3ea;
+      font-size: 0.9rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .reviews {
+      display: grid;
+      gap: 10px;
+    }
+
+    .review {
+      padding: 12px 14px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .review p {
+      margin: 0;
+      max-width: none;
+      font-size: 0.92rem;
+      line-height: 1.65;
+      color: rgba(255, 255, 255, 0.82);
+    }
+
+    .review-meta {
+      margin-top: 8px;
+      font-size: 0.8rem;
+      color: rgba(255, 255, 255, 0.46);
     }
 
     @media (min-width: 768px) {
@@ -278,6 +356,16 @@
       .visual img {
         width: min(100%, 320px);
       }
+
+      .actions {
+        flex-direction: row;
+        align-items: center;
+        justify-content: flex-start;
+      }
+
+      .reviews {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
     }
   </style>
 </head>
@@ -292,8 +380,35 @@
             A simple finishing system that helps turn rough 3D prints into clean,
             premium-looking products.
           </p>
-          <a class="cta" href="#"><span class="cta-text">Join Now</span></a>
+          <div class="actions">
+            <a class="cta" href="#"><span class="cta-text">Join Now</span></a>
+            <a class="members-btn" href="#members">Members</a>
+          </div>
           <div class="note">$19.99 / month</div>
+
+          <div class="social-proof" id="members">
+            <div class="social-top">
+              <span class="social-label">Member Reviews</span>
+              <span class="rating">4.9/5 from 200+ makers</span>
+            </div>
+
+            <div class="reviews">
+              <article class="review">
+                <p>"My prints finally look sellable instead of unfinished prototypes."</p>
+                <div class="review-meta">Emre K. • Verified member</div>
+              </article>
+
+              <article class="review">
+                <p>"The polishing steps are simple, clear, and made my results look premium fast."</p>
+                <div class="review-meta">Lina A. • Verified member</div>
+              </article>
+
+              <article class="review">
+                <p>"This made it way easier to charge confidently for my finished pieces."</p>
+                <div class="review-meta">Marcus T. • Verified member</div>
+              </article>
+            </div>
+          </div>
         </div>
 
         <div class="visual">
