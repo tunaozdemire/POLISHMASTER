@@ -3,874 +3,1649 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PolishMaster — Turn Prints Into Products</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <title>PolishMaster — 3D Print Finishing System</title>
   <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root {
-      --bg: #ffffff;
-      --black: #0a0a0a;
-      --gray: #6b6b6b;
-      --light: #f5f5f5;
-      --border: #e8e8e8;
-      --orange: #FF6A00;
-      --orange-dark: #e55e00;
-    }
-
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; font-size: 16px; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      background: var(--bg);
-      color: var(--black);
-      line-height: 1.6;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+      background: #ffffff;
+      color: #0a0a0a;
       overflow-x: hidden;
     }
 
-    /* ── NAV ── */
-    nav {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 18px 48px;
-      background: rgba(255,255,255,0.9);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-      transition: all 0.3s ease;
+    /* ─── CSS CUSTOM PROPERTIES ───────────────────────────────────── */
+    :root {
+      --orange: #FF6A00;
+      --black: #0a0a0a;
+      --white: #ffffff;
+      --gray: #888888;
+      --gray-light: #f5f5f7;
+      --radius: 20px;
+      --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
+
+    /* ─── CANVAS ──────────────────────────────────────────────────── */
+    #webgl {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease;
+    }
+
+    /* ─── LAYOUT UTILS ────────────────────────────────────────────── */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .section-label {
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: clamp(36px, 5vw, 72px);
+      font-weight: 700;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+    }
+
+    .section-sub {
+      font-size: 18px;
+      color: var(--gray);
+      line-height: 1.6;
+      max-width: 500px;
+      margin-top: 16px;
+    }
+
+    /* ─── NAVIGATION ──────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 20px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: rgba(255, 255, 255, 0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+    }
+
     .nav-logo {
-      font-size: 18px; font-weight: 800; letter-spacing: -0.5px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
       color: var(--black);
+      text-decoration: none;
     }
     .nav-logo span { color: var(--orange); }
-    .nav-cta {
-      background: var(--orange); color: #fff; border: none; cursor: pointer;
-      padding: 10px 22px; border-radius: 50px; font-size: 14px; font-weight: 600;
-      font-family: inherit; transition: all 0.2s ease; text-decoration: none;
-    }
-    .nav-cta:hover { background: var(--orange-dark); transform: translateY(-1px); }
 
-    /* ── SECTIONS ── */
-    section { padding: 100px 24px; }
-    .container { max-width: 960px; margin: 0 auto; }
-    .container-sm { max-width: 720px; margin: 0 auto; }
-
-    /* ── HERO ── */
-    #hero {
-      padding: 160px 24px 100px;
-      text-align: center;
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
     }
-    .hero-badge {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: rgba(255,106,0,0.08); border: 1px solid rgba(255,106,0,0.2);
-      color: var(--orange); border-radius: 50px;
-      padding: 6px 16px; font-size: 13px; font-weight: 600;
-      margin-bottom: 28px; letter-spacing: 0.02em;
-    }
-    .hero-badge .dot { width: 6px; height: 6px; background: var(--orange); border-radius: 50%; }
-    h1 {
-      font-size: clamp(42px, 7vw, 72px);
-      font-weight: 900; line-height: 1.05;
-      letter-spacing: -2.5px;
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
       color: var(--black);
-      margin-bottom: 22px;
+      text-decoration: none;
+      opacity: 0.65;
+      transition: opacity var(--transition);
     }
-    h1 em { font-style: normal; color: var(--orange); }
-    .hero-sub {
-      font-size: clamp(17px, 2.5vw, 20px);
-      color: var(--gray);
-      max-width: 520px; margin: 0 auto 44px;
-      font-weight: 400; line-height: 1.55;
+    .nav-links a:hover { opacity: 1; }
+
+    .nav-cta {
+      background: var(--orange) !important;
+      color: white !important;
+      opacity: 1 !important;
+      padding: 10px 22px !important;
+      border-radius: 100px !important;
+      font-weight: 600 !important;
+      transition: transform var(--transition), box-shadow var(--transition) !important;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 24px rgba(255, 106, 0, 0.35) !important;
     }
 
-    /* Video mockup */
-    .video-wrapper {
-      position: relative; max-width: 720px; margin: 0 auto 48px;
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 40px 100px rgba(0,0,0,0.14);
-      background: var(--black);
-      aspect-ratio: 16/9;
-    }
-    .video-stages {
-      display: flex; height: 100%; width: 100%;
-    }
-    .stage {
-      flex: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 10px;
-      border-right: 1px solid rgba(255,255,255,0.07);
-      padding: 20px 10px;
-      position: relative; overflow: hidden;
-      transition: background 0.4s ease;
-    }
-    .stage:last-child { border-right: none; }
-    .stage-1 { background: #1a1a1a; }
-    .stage-2 { background: #1e1410; }
-    .stage-3 { background: #1a1208; }
-    .stage-4 { background: linear-gradient(135deg, #0d0d0d, #1a1a1a); }
-
-    .stage-icon { font-size: clamp(24px, 4vw, 40px); line-height: 1; }
-    .stage-label {
-      font-size: clamp(9px, 1.2vw, 12px); font-weight: 600;
-      color: rgba(255,255,255,0.5); letter-spacing: 0.12em; text-transform: uppercase;
-    }
-    .stage-arrow {
-      position: absolute; right: -1px; top: 50%; transform: translateY(-50%);
-      width: 20px; height: 20px;
+    /* ─── BUTTONS ─────────────────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
       background: var(--orange);
-      clip-path: polygon(0 0, 60% 50%, 0 100%);
+      color: white;
+      border: none;
+      padding: 16px 36px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+      letter-spacing: -0.01em;
+      font-family: inherit;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(255, 106, 0, 0.4);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      background: transparent;
+      color: var(--gray);
+      border: 1.5px solid rgba(0,0,0,0.12);
+      padding: 14px 32px;
+      border-radius: 100px;
+      font-size: 15px;
+      font-weight: 500;
+      cursor: pointer;
+      text-decoration: none;
+      transition: border-color var(--transition), color var(--transition);
+      font-family: inherit;
+    }
+    .btn-secondary:hover {
+      border-color: var(--black);
+      color: var(--black);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 1 — HERO
+    ═══════════════════════════════════════════════════════ */
+    #hero {
+      position: relative;
+      height: 300vh;
       z-index: 2;
     }
-    .stage:last-child .stage-arrow { display: none; }
-    .stage-4 .stage-icon { font-size: clamp(30px, 5vw, 50px); }
-    /* Shimmer on stage 4 */
-    .stage-4::after {
-      content: '';
-      position: absolute; top: -50%; left: -50%;
-      width: 200%; height: 200%;
-      background: linear-gradient(45deg, transparent 40%, rgba(255,255,255,0.05) 50%, transparent 60%);
-      animation: shimmer 2.5s infinite;
-    }
-    @keyframes shimmer {
-      0% { transform: translateX(-100%) rotate(45deg); }
-      100% { transform: translateX(100%) rotate(45deg); }
-    }
 
-    .cta-btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--orange); color: #fff;
-      padding: 18px 40px; border-radius: 50px;
-      font-size: 16px; font-weight: 700; font-family: inherit;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 8px 30px rgba(255,106,0,0.35);
-    }
-    .cta-btn:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,106,0,0.45); }
-    .cta-btn svg { transition: transform 0.2s; }
-    .cta-btn:hover svg { transform: translateX(3px); }
-
-    .hero-trust {
-      margin-top: 18px;
-      font-size: 13px; color: var(--gray); font-weight: 500;
-    }
-    .hero-trust span { color: var(--black); font-weight: 600; }
-
-    /* ── BEFORE / AFTER ── */
-    #proof { background: var(--light); }
-    .section-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: var(--orange);
-      margin-bottom: 14px; display: block;
-    }
-    h2 {
-      font-size: clamp(32px, 5vw, 52px);
-      font-weight: 800; letter-spacing: -1.5px;
-      line-height: 1.1; margin-bottom: 16px;
-    }
-    .section-desc {
-      font-size: 17px; color: var(--gray);
-      max-width: 480px; line-height: 1.6;
-    }
-
-    .ba-wrapper {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
-      border-radius: 20px; overflow: hidden;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.1);
-      margin-top: 52px;
-      position: relative;
-    }
-    .ba-side {
-      aspect-ratio: 4/3;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 16px; padding: 40px;
-      position: relative;
-    }
-    .ba-before { background: #2a2a2a; }
-    .ba-after { background: linear-gradient(135deg, #1a1a1a, #0d0d0d); }
-    .ba-icon { font-size: 64px; line-height: 1; }
-    .ba-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.4);
-    }
-    .ba-title {
-      font-size: 20px; font-weight: 700; color: #fff;
-      text-align: center; line-height: 1.3;
-    }
-    .ba-after .ba-title { color: var(--orange); }
-    .ba-badge {
-      position: absolute; bottom: 20px;
-      background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
-      color: rgba(255,255,255,0.7);
-      padding: 6px 14px; border-radius: 50px; font-size: 12px; font-weight: 500;
-    }
-    .ba-after .ba-badge { background: rgba(255,106,0,0.15); border-color: rgba(255,106,0,0.3); color: var(--orange); }
-    .ba-divider {
-      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
-      z-index: 10;
-      width: 44px; height: 44px; border-radius: 50%;
-      background: #fff; border: 3px solid var(--orange);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 16px; font-weight: 900; color: var(--orange);
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-    }
-    .ba-caption {
-      text-align: center; margin-top: 24px;
-      font-size: 16px; font-weight: 600; color: var(--gray);
-      letter-spacing: -0.2px;
-    }
-    .ba-caption strong { color: var(--black); }
-
-    /* ── VALUE STACK ── */
-    #value .container { text-align: center; }
-    .value-grid {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 24px; margin-top: 52px;
-    }
-    .value-card {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 20px; padding: 36px 28px;
-      text-align: left; transition: all 0.25s ease;
-      position: relative; overflow: hidden;
-    }
-    .value-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: var(--orange); opacity: 0;
-      transition: opacity 0.25s ease;
-    }
-    .value-card:hover { border-color: rgba(255,106,0,0.25); transform: translateY(-4px); box-shadow: 0 20px 50px rgba(0,0,0,0.07); }
-    .value-card:hover::before { opacity: 1; }
-    .value-num {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.1em;
-      text-transform: uppercase; color: var(--orange); margin-bottom: 18px;
-    }
-    .value-title {
-      font-size: 20px; font-weight: 700; letter-spacing: -0.5px;
-      margin-bottom: 14px; color: var(--black);
-    }
-    .value-list { list-style: none; }
-    .value-list li {
-      display: flex; align-items: flex-start; gap: 10px;
-      font-size: 14px; color: var(--gray);
-      margin-bottom: 8px; line-height: 1.4;
-    }
-    .value-list li::before {
-      content: '→'; color: var(--orange);
-      font-weight: 700; flex-shrink: 0; margin-top: 1px;
-    }
-
-    /* ── LEARN ── */
-    #learn { background: var(--black); }
-    #learn h2 { color: #fff; }
-    #learn .section-label { color: var(--orange); }
-    #learn .section-desc { color: rgba(255,255,255,0.45); }
-    .learn-grid {
-      display: grid; grid-template-columns: repeat(2, 1fr);
-      gap: 16px; margin-top: 52px;
-    }
-    .learn-item {
-      background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px; padding: 28px 26px;
-      display: flex; align-items: flex-start; gap: 18px;
-      transition: all 0.25s ease;
-    }
-    .learn-item:hover {
-      background: rgba(255,106,0,0.06);
-      border-color: rgba(255,106,0,0.2);
-      transform: translateY(-2px);
-    }
-    .learn-icon {
-      width: 44px; height: 44px; border-radius: 12px;
-      background: rgba(255,106,0,0.12); border: 1px solid rgba(255,106,0,0.2);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
-    }
-    .learn-text h4 {
-      font-size: 16px; font-weight: 700; color: #fff;
-      margin-bottom: 6px; letter-spacing: -0.3px;
-    }
-    .learn-text p { font-size: 13px; color: rgba(255,255,255,0.4); line-height: 1.5; }
-
-    /* ── SOCIAL PROOF ── */
-    #proof2 { background: var(--light); }
-    #proof2 .container { text-align: center; }
-    .proof-counter {
-      display: inline-flex; align-items: center; gap: 10px;
-      background: var(--orange); color: #fff;
-      padding: 10px 24px; border-radius: 50px;
-      font-size: 15px; font-weight: 700;
-      margin-bottom: 52px;
-    }
-    .testimonials {
-      display: grid; grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-    }
-    .testi-card {
-      background: var(--bg); border: 1px solid var(--border);
-      border-radius: 16px; padding: 26px;
-      text-align: left; transition: all 0.25s ease;
-    }
-    .testi-card:hover { transform: translateY(-3px); box-shadow: 0 16px 40px rgba(0,0,0,0.07); }
-    .testi-stars { color: var(--orange); font-size: 13px; margin-bottom: 12px; letter-spacing: 2px; }
-    .testi-text {
-      font-size: 14px; color: var(--black); line-height: 1.6;
-      margin-bottom: 16px; font-style: italic;
-    }
-    .testi-author { display: flex; align-items: center; gap: 10px; }
-    .testi-avatar {
-      width: 34px; height: 34px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--orange), #ff9a00);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
-    }
-    .testi-name { font-size: 13px; font-weight: 700; color: var(--black); }
-    .testi-meta { font-size: 12px; color: var(--gray); }
-    .testi-dm {
-      background: var(--black); border-radius: 16px; padding: 20px;
-      text-align: left; grid-column: span 1;
-    }
-    .dm-header {
-      display: flex; align-items: center; gap: 10px;
-      margin-bottom: 14px; padding-bottom: 12px;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .dm-dot { width: 8px; height: 8px; border-radius: 50%; background: #30d158; }
-    .dm-title { font-size: 12px; color: rgba(255,255,255,0.4); font-weight: 500; }
-    .dm-msg {
-      background: rgba(255,255,255,0.06); border-radius: 12px; padding: 12px 14px;
-      font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.5; margin-bottom: 8px;
-    }
-    .dm-msg-right {
-      background: var(--orange); border-radius: 12px; padding: 12px 14px;
-      font-size: 13px; color: #fff; line-height: 1.5;
-      margin-left: 20px;
-    }
-
-    /* ── TRANSFORMATION ── */
-    #transform {
-      background: var(--black);
-      padding: 0;
+    .hero-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
       overflow: hidden;
     }
-    .transform-grid { display: grid; grid-template-columns: 1fr auto 1fr; }
-    .transform-side {
-      padding: 100px 60px;
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      gap: 20px; text-align: center;
-    }
-    .transform-left { background: #111; }
-    .transform-right { background: #0a0a0a; }
-    .transform-big-icon { font-size: 80px; line-height: 1; }
-    .transform-side-label {
-      font-size: 12px; font-weight: 700; letter-spacing: 0.12em;
-      text-transform: uppercase; color: rgba(255,255,255,0.25);
-    }
-    .transform-side-title { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.5px; }
-    .transform-side-desc { font-size: 14px; color: rgba(255,255,255,0.35); max-width: 200px; }
-    .transform-center {
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center;
-      padding: 60px 40px; background: #0d0d0d;
-      border-left: 1px solid rgba(255,255,255,0.05);
-      border-right: 1px solid rgba(255,255,255,0.05);
-    }
-    .transform-vs {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.15em;
-      color: rgba(255,255,255,0.15); margin-bottom: 20px; text-transform: uppercase;
-    }
-    .transform-arrow { font-size: 36px; color: var(--orange); margin: 10px 0; }
-    .transform-text {
-      font-size: clamp(14px, 2vw, 18px); font-weight: 700; color: #fff;
-      text-align: center; max-width: 220px; line-height: 1.4;
-      letter-spacing: -0.3px;
-    }
-    .transform-text em { font-style: normal; color: var(--orange); }
 
-    /* ── OFFER ── */
-    #offer { text-align: center; }
-    .offer-card {
-      max-width: 460px; margin: 52px auto 0;
-      background: var(--black); border-radius: 28px;
-      padding: 48px 40px; position: relative; overflow: hidden;
+    .hero-content {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: center;
+      gap: 60px;
     }
-    .offer-card::before {
-      content: ''; position: absolute;
-      top: 0; left: 0; right: 0; height: 3px;
-      background: linear-gradient(90deg, var(--orange), #ff9a00);
-    }
-    .offer-badge {
-      display: inline-block; background: rgba(255,106,0,0.15);
-      border: 1px solid rgba(255,106,0,0.3); color: var(--orange);
-      padding: 5px 14px; border-radius: 50px; font-size: 12px; font-weight: 700;
-      letter-spacing: 0.05em; margin-bottom: 28px;
-    }
-    .offer-price {
-      font-size: 72px; font-weight: 900; color: #fff;
-      letter-spacing: -3px; line-height: 1;
-    }
-    .offer-price sup { font-size: 28px; letter-spacing: -1px; vertical-align: super; }
-    .offer-period { font-size: 16px; color: rgba(255,255,255,0.3); font-weight: 500; margin-bottom: 32px; }
-    .offer-features { list-style: none; margin-bottom: 36px; }
-    .offer-features li {
-      display: flex; align-items: center; gap: 12px;
-      padding: 12px 0; border-bottom: 1px solid rgba(255,255,255,0.06);
-      font-size: 15px; color: rgba(255,255,255,0.75); text-align: left;
-    }
-    .offer-features li:last-child { border-bottom: none; }
-    .offer-check {
-      width: 22px; height: 22px; border-radius: 50%;
-      background: rgba(255,106,0,0.15); border: 1px solid rgba(255,106,0,0.3);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 11px; color: var(--orange); flex-shrink: 0;
-    }
-    .offer-cta {
-      display: block; width: 100%;
-      background: var(--orange); color: #fff; border: none; cursor: pointer;
-      padding: 18px; border-radius: 14px;
-      font-size: 17px; font-weight: 700; font-family: inherit;
-      transition: all 0.2s ease;
-      box-shadow: 0 8px 30px rgba(255,106,0,0.4);
-    }
-    .offer-cta:hover { background: var(--orange-dark); transform: translateY(-2px); box-shadow: 0 12px 40px rgba(255,106,0,0.5); }
-    .offer-note { margin-top: 14px; font-size: 13px; color: rgba(255,255,255,0.2); }
 
-    /* ── URGENCY ── */
-    #urgency { background: var(--orange); text-align: center; padding: 80px 24px; }
-    #urgency h2 { color: #fff; letter-spacing: -1.5px; }
-    #urgency h2 em { font-style: normal; opacity: 0.7; }
-    .urgency-sub {
-      font-size: 18px; color: rgba(255,255,255,0.75);
-      margin: 16px auto 36px; max-width: 420px; font-weight: 500;
-    }
-    .cta-btn-white {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: #fff; color: var(--orange);
-      padding: 18px 40px; border-radius: 50px;
-      font-size: 16px; font-weight: 800; font-family: inherit;
-      text-decoration: none; border: none; cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-    }
-    .cta-btn-white:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(0,0,0,0.2); }
+    .hero-text { position: relative; z-index: 3; }
 
-    /* ── FAQ ── */
-    #faq .container-sm { text-align: center; }
-    .faq-list { margin-top: 48px; text-align: left; }
-    .faq-item {
-      border-bottom: 1px solid var(--border);
+    .hero-label {
+      opacity: 0;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 24px;
     }
-    .faq-q {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 22px 0; cursor: pointer;
-      font-size: 16px; font-weight: 600; color: var(--black);
-      letter-spacing: -0.2px; gap: 20px;
-      user-select: none; list-style: none;
-      transition: color 0.2s;
-    }
-    .faq-q:hover { color: var(--orange); }
-    .faq-icon {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 1.5px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; font-size: 16px; color: var(--gray);
-      transition: all 0.2s ease;
-    }
-    .faq-item.open .faq-q { color: var(--orange); }
-    .faq-item.open .faq-icon { background: var(--orange); border-color: var(--orange); color: #fff; transform: rotate(45deg); }
-    .faq-a {
-      max-height: 0; overflow: hidden;
-      transition: max-height 0.35s ease, padding 0.35s ease;
-      font-size: 15px; color: var(--gray); line-height: 1.65;
-    }
-    .faq-item.open .faq-a { max-height: 200px; padding-bottom: 22px; }
 
-    /* ── FINAL CTA ── */
-    #final { background: var(--black); text-align: center; }
-    #final h2 { color: #fff; font-size: clamp(36px, 6vw, 64px); }
-    #final h2 em { font-style: normal; color: var(--orange); }
-    #final .section-desc { color: rgba(255,255,255,0.4); margin: 16px auto 44px; }
+    .hero-title {
+      opacity: 0;
+      transform: translateY(30px);
+      font-size: clamp(42px, 5.5vw, 82px);
+      font-weight: 800;
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 24px;
+    }
+    .hero-title span { color: var(--orange); }
 
-    /* ── FOOTER ── */
-    footer {
+    .hero-sub {
+      opacity: 0;
+      font-size: 19px;
+      color: var(--gray);
+      line-height: 1.6;
+      max-width: 440px;
+      margin-bottom: 40px;
+    }
+
+    .hero-cta-wrap {
+      opacity: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-trust {
+      font-size: 13px;
+      color: #aaa;
+      font-weight: 500;
+    }
+
+    .hero-visual {
+      position: relative;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 2 — TRANSFORMATION
+    ═══════════════════════════════════════════════════════ */
+    #transformation {
+      position: relative;
+      height: 250vh;
+      z-index: 2;
+    }
+
+    .transform-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      background: white;
+    }
+
+    .transform-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+    }
+
+    .transform-header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .transform-caption {
+      text-align: center;
+      font-size: 14px;
+      color: var(--gray);
+      margin-top: 20px;
+      font-weight: 500;
+    }
+
+    /* Split reveal */
+    .split-container {
+      position: relative;
+      width: 100%;
+      height: 58vh;
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.12);
+    }
+
+    .split-left {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, #c8b8a2 0%, #a89070 100%);
+      background-image: repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 4px,
+        rgba(0,0,0,0.08) 4px,
+        rgba(0,0,0,0.08) 5px
+      );
+    }
+
+    .split-left-label {
+      position: absolute;
+      bottom: 24px;
+      left: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(0,0,0,0.45);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .split-right {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 50%, #0a0a0a 100%);
+      clip-path: inset(0 0 0 50%);
+    }
+
+    .split-right-label {
+      position: absolute;
+      bottom: 24px;
+      right: 24px;
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.45);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .split-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 50%;
+      width: 2px;
+      background: white;
+      z-index: 3;
+      transform: translateX(-50%);
+    }
+
+    .split-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 4;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.2);
+      font-size: 12px;
+      color: #555;
+      font-weight: 700;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 3 — SURFACE DETAIL
+    ═══════════════════════════════════════════════════════ */
+    #surface {
+      position: relative;
+      height: 200vh;
+      z-index: 2;
+    }
+
+    .surface-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      background: white;
+    }
+
+    .surface-text {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 4 — SYSTEM BREAKDOWN
+    ═══════════════════════════════════════════════════════ */
+    #system {
+      position: relative;
+      height: 250vh;
+      z-index: 2;
+      background: white;
+    }
+
+    .system-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .system-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+
+    .system-header { }
+
+    .system-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      perspective: 1000px;
+    }
+
+    .system-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 28px 28px 28px 24px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.08), 0 1px 4px rgba(0,0,0,0.04);
+      position: relative;
+      border-top: 3px solid var(--orange);
+      transform-style: preserve-3d;
+      will-change: transform;
+    }
+
+    .system-card:nth-child(1) { transform: translateZ(30px); }
+    .system-card:nth-child(2) { transform: translateZ(15px); }
+    .system-card:nth-child(3) { transform: translateZ(0px); }
+
+    .card-icon {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--orange), #ff8c00);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 18px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 10px;
+    }
+
+    .card-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .card-features li {
+      font-size: 13px;
+      color: var(--gray);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-features li::before {
+      content: '';
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--orange);
+      flex-shrink: 0;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 5 — PRODUCT SHOWCASE
+    ═══════════════════════════════════════════════════════ */
+    #showcase {
+      position: relative;
+      height: 200vh;
+      z-index: 2;
+    }
+
+    .showcase-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: white;
+    }
+
+    .showcase-text {
+      position: relative;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .showcase-title {
+      font-size: clamp(40px, 5vw, 72px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.05;
+      margin-bottom: 16px;
+    }
+
+    .showcase-sub {
+      font-size: 16px;
+      color: var(--gray);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 6 — SOCIAL PROOF
+    ═══════════════════════════════════════════════════════ */
+    #social {
+      position: relative;
+      height: 200vh;
+      z-index: 2;
+      background: var(--gray-light);
+    }
+
+    .social-sticky {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .social-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 48px;
+      width: 100%;
+    }
+
+    .social-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--orange);
+      color: white;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 8px 16px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+    }
+
+    .proof-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      perspective: 1200px;
+      transform: rotateX(2deg);
+    }
+
+    .proof-card {
+      background: white;
+      border-radius: 16px;
+      padding: 26px;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.07);
+    }
+
+    .proof-card.result-card {
       background: var(--black);
-      border-top: 1px solid rgba(255,255,255,0.06);
-      padding: 28px 48px;
-      display: flex; align-items: center; justify-content: space-between;
+      color: white;
     }
-    .footer-logo { font-size: 16px; font-weight: 800; color: #fff; }
+
+    .testimonial-stars {
+      display: flex;
+      gap: 3px;
+      margin-bottom: 14px;
+    }
+
+    .star { color: var(--orange); font-size: 14px; }
+
+    .proof-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #333;
+      margin-bottom: 18px;
+      font-style: italic;
+    }
+
+    .proof-author {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--black);
+    }
+
+    .result-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+    }
+
+    .result-title {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: white;
+      line-height: 1.2;
+    }
+
+    .result-desc {
+      margin-top: 10px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.45);
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 7 — OFFER
+    ═══════════════════════════════════════════════════════ */
+    #offer {
+      position: relative;
+      height: 100vh;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      padding: 0 24px;
+    }
+
+    .offer-card {
+      background: white;
+      border: 1.5px solid rgba(0,0,0,0.1);
+      border-radius: 28px;
+      padding: 56px 64px;
+      max-width: 520px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .offer-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--orange), #ff9c40);
+    }
+
+    .offer-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 14px;
+    }
+
+    .offer-name {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    .offer-price {
+      font-size: 56px;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .offer-price-sub {
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--gray);
+      vertical-align: middle;
+    }
+
+    .offer-period {
+      font-size: 14px;
+      color: var(--gray);
+      margin-bottom: 36px;
+    }
+
+    .offer-features {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      text-align: left;
+      margin-bottom: 40px;
+    }
+
+    .offer-features li {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 15px;
+      font-weight: 500;
+    }
+
+    .check-icon {
+      width: 22px;
+      height: 22px;
+      background: linear-gradient(135deg, var(--orange), #ff9c40);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      color: white;
+      font-weight: 700;
+    }
+
+    .offer-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .offer-cta-wrap .btn-primary {
+      width: 100%;
+      justify-content: center;
+      font-size: 17px;
+      padding: 18px 36px;
+    }
+
+    .offer-cancel {
+      font-size: 13px;
+      color: var(--gray);
+    }
+
+    .offer-trust {
+      margin-top: 20px;
+      font-size: 12px;
+      color: #bbb;
+      font-weight: 500;
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 8 — FINAL CTA
+    ═══════════════════════════════════════════════════════ */
+    #final {
+      position: relative;
+      height: 100vh;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: white;
+      padding: 0 24px;
+    }
+
+    .final-content {
+      position: relative;
+      z-index: 3;
+    }
+
+    .final-title {
+      font-size: clamp(48px, 6vw, 90px);
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.02;
+      margin-bottom: 36px;
+    }
+
+    .final-cta-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .final-sub {
+      font-size: 14px;
+      color: var(--gray);
+    }
+
+    /* ═══════════════════════════════════════════════════════
+       SECTION 9 — FAQ
+    ═══════════════════════════════════════════════════════ */
+    #faq {
+      position: relative;
+      z-index: 2;
+      background: white;
+      padding: 120px 0;
+    }
+
+    .faq-inner {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 48px;
+    }
+
+    .faq-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .faq-list {
+      border-top: 1px solid rgba(0,0,0,0.08);
+    }
+
+    .faq-item {
+      border-bottom: 1px solid rgba(0,0,0,0.08);
+      overflow: hidden;
+    }
+
+    .faq-question {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0;
+      font-size: 17px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      cursor: pointer;
+      user-select: none;
+      gap: 24px;
+      list-style: none;
+    }
+
+    .faq-icon {
+      width: 28px;
+      height: 28px;
+      border: 1.5px solid rgba(0,0,0,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 18px;
+      line-height: 1;
+      color: var(--gray);
+      transition: all var(--transition);
+      font-weight: 300;
+    }
+
+    .faq-item.open .faq-icon {
+      background: var(--orange);
+      border-color: var(--orange);
+      color: white;
+      transform: rotate(45deg);
+    }
+
+    .faq-answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .faq-item.open .faq-answer { max-height: 200px; }
+
+    .faq-answer-inner {
+      padding: 0 0 24px 0;
+      font-size: 16px;
+      color: var(--gray);
+      line-height: 1.7;
+    }
+
+    /* ─── FOOTER ──────────────────────────────────────────── */
+    footer {
+      position: relative;
+      z-index: 2;
+      background: var(--black);
+      color: rgba(255,255,255,0.45);
+      padding: 40px 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+    }
+
+    .footer-logo {
+      font-size: 15px;
+      font-weight: 800;
+      color: white;
+      letter-spacing: -0.03em;
+    }
     .footer-logo span { color: var(--orange); }
-    .footer-text { font-size: 13px; color: rgba(255,255,255,0.2); }
 
-    /* ── SCROLL REVEAL ── */
-    .reveal {
-      opacity: 0; transform: translateY(28px);
-      transition: opacity 0.6s ease, transform 0.6s ease;
+    .footer-links {
+      display: flex;
+      gap: 24px;
     }
-    .reveal.visible { opacity: 1; transform: none; }
-    .reveal-delay-1 { transition-delay: 0.1s; }
-    .reveal-delay-2 { transition-delay: 0.2s; }
-    .reveal-delay-3 { transition-delay: 0.3s; }
 
-    /* ── RESPONSIVE ── */
+    .footer-links a {
+      color: rgba(255,255,255,0.4);
+      text-decoration: none;
+      transition: color var(--transition);
+    }
+    .footer-links a:hover { color: rgba(255,255,255,0.8); }
+
+    /* ─── MOBILE ──────────────────────────────────────────── */
     @media (max-width: 768px) {
-      nav { padding: 14px 20px; }
-      section { padding: 72px 20px; }
-      #hero { padding: 120px 20px 72px; }
-      .value-grid, .learn-grid, .testimonials { grid-template-columns: 1fr; }
-      .transform-grid { grid-template-columns: 1fr; }
-      .transform-center { padding: 40px 20px; flex-direction: row; gap: 16px; }
-      .transform-vs, .transform-arrow { display: none; }
-      .transform-side { padding: 60px 30px; }
-      footer { flex-direction: column; gap: 8px; text-align: center; }
+      #webgl { display: none; }
+      body { background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%); }
+
+      nav { padding: 16px 24px; }
+      .nav-links { display: none; }
+
+      .hero-content {
+        grid-template-columns: 1fr;
+        padding: 0 24px;
+        padding-top: 80px;
+      }
+      .hero-visual { display: none; }
+      .hero-title { font-size: 40px; }
+      .hero-label,
+      .hero-title,
+      .hero-sub,
+      .hero-cta-wrap { opacity: 1 !important; transform: none !important; }
+
+      .transform-inner { padding: 0 24px; }
+      .split-container { height: 40vh; }
+
+      .surface-text { padding: 0 24px; }
+
+      .system-inner { grid-template-columns: 1fr; gap: 32px; }
+      .system-grid { flex-direction: column; }
+
+      .proof-grid { grid-template-columns: 1fr; }
+      .proof-card.result-card[style] { grid-column: span 1 !important; }
+
+      .offer-card { padding: 40px 24px; }
+      .offer-price { font-size: 44px; }
+
+      footer { flex-direction: column; gap: 16px; text-align: center; padding: 32px 24px; }
+      .footer-links { justify-content: center; }
+
+      .faq-inner { padding: 0 24px; }
     }
-    @media (max-width: 480px) {
-      .ba-wrapper { grid-template-columns: 1fr; }
-      .ba-side { aspect-ratio: 3/2; }
-      .ba-divider { display: none; }
-    }
+
+    /* ─── SCROLLBAR ───────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #bbb; }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
+  <!-- FIXED WEBGL CANVAS -->
+  <canvas id="webgl"></canvas>
+
+  <!-- ══ NAVIGATION ═══════════════════════════════════════════════ -->
   <nav>
-    <div class="nav-logo">Polish<span>Master</span></div>
-    <a href="#offer" class="nav-cta">Start Now →</a>
+    <a href="#" class="nav-logo">Polish<span>Master</span></a>
+    <ul class="nav-links">
+      <li><a href="#system">System</a></li>
+      <li><a href="#showcase">Results</a></li>
+      <li><a href="#social">Makers</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#offer" class="nav-cta">Join Now</a></li>
+    </ul>
   </nav>
 
-  <!-- ═══ SECTION 1: HERO ═══ -->
+  <!-- ══ SECTION 1 — HERO ══════════════════════════════════════════ -->
   <section id="hero">
-    <div class="container-sm">
-      <div class="hero-badge reveal"><span class="dot"></span> 3D Print Finishing System</div>
-      <h1 class="reveal">Your 3D Prints Don't Look <em>Premium.</em> Fix That.</h1>
-      <p class="hero-sub reveal reveal-delay-1">Turn cheap-looking prints into mirror-finish products people actually pay for.</p>
-    </div>
-
-    <div class="video-wrapper reveal reveal-delay-2">
-      <div class="video-stages">
-        <div class="stage stage-1">
-          <div class="stage-icon">🖨️</div>
-          <div class="stage-label">Raw</div>
-          <div class="stage-arrow"></div>
+    <div class="hero-sticky">
+      <div class="hero-content">
+        <div class="hero-text">
+          <p class="hero-label">The 3D Print Finishing System</p>
+          <h1 class="hero-title">
+            Your Prints Are<br>
+            <span>Holding You Back</span>
+          </h1>
+          <p class="hero-sub">
+            Turn cheap-looking prints into mirror-finish products people actually pay for.
+          </p>
+          <div class="hero-cta-wrap">
+            <a href="#offer" class="btn-primary">
+              Enter the System
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </a>
+            <span class="hero-trust">No experience needed &nbsp;·&nbsp; 200+ makers inside</span>
+          </div>
         </div>
-        <div class="stage stage-2">
-          <div class="stage-icon">🪵</div>
-          <div class="stage-label">Sanding</div>
-          <div class="stage-arrow"></div>
-        </div>
-        <div class="stage stage-3">
-          <div class="stage-icon">✨</div>
-          <div class="stage-label">Polish</div>
-          <div class="stage-arrow"></div>
-        </div>
-        <div class="stage stage-4">
-          <div class="stage-icon">💎</div>
-          <div class="stage-label">Mirror</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container-sm" style="text-align:center">
-      <a href="#offer" class="cta-btn reveal reveal-delay-3">
-        Join PolishMaster System
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-      <p class="hero-trust reveal reveal-delay-3" style="margin-top:14px"><span>No experience needed</span> — start from scratch, finish like a pro.</p>
-    </div>
-  </section>
-
-  <!-- ═══ SECTION 2: VISUAL PROOF ═══ -->
-  <section id="proof">
-    <div class="container">
-      <span class="section-label reveal">Visual Proof</span>
-      <h2 class="reveal">See the Difference.</h2>
-      <p class="section-desc reveal reveal-delay-1">No tricks. No filters. Same print — different result.</p>
-
-      <div class="ba-wrapper reveal reveal-delay-2">
-        <div class="ba-side ba-before">
-          <div class="ba-icon">🖨️</div>
-          <div class="ba-label">Before</div>
-          <div class="ba-title">Visible layer lines.<br/>Rough surface.</div>
-          <div class="ba-badge">Raw 3D Print</div>
-        </div>
-        <div class="ba-side ba-after">
-          <div class="ba-icon">💎</div>
-          <div class="ba-label">After</div>
-          <div class="ba-title">Mirror finish.<br/>Product quality.</div>
-          <div class="ba-badge">PolishMaster Result</div>
-        </div>
-        <div class="ba-divider">→</div>
-      </div>
-      <p class="ba-caption reveal reveal-delay-3"><strong>Same print.</strong> Different result.</p>
-    </div>
-  </section>
-
-  <!-- ═══ SECTION 3: VALUE STACK ═══ -->
-  <section id="value">
-    <div class="container">
-      <span class="section-label reveal">What You Get</span>
-      <h2 class="reveal">Everything You Need<br/>to Start Selling.</h2>
-      <div class="value-grid">
-        <div class="value-card reveal reveal-delay-1">
-          <div class="value-num">01</div>
-          <div class="value-title">Commercial SKU Designs</div>
-          <ul class="value-list">
-            <li>Ready-to-print models</li>
-            <li>Designed for sanding & selling</li>
-            <li>New drops every month</li>
-          </ul>
-        </div>
-        <div class="value-card reveal reveal-delay-2">
-          <div class="value-num">02</div>
-          <div class="value-title">PolishMaster System</div>
-          <ul class="value-list">
-            <li>Step-by-step polishing workflows</li>
-            <li>Repeatable results every time</li>
-            <li>From raw to mirror in hours</li>
-          </ul>
-        </div>
-        <div class="value-card reveal reveal-delay-3">
-          <div class="value-num">03</div>
-          <div class="value-title">Finish Recipes + Defect Fixes</div>
-          <ul class="value-list">
-            <li>Exact sanding & polishing settings</li>
-            <li>Fix mistakes fast</li>
-            <li>Material-specific guides</li>
-          </ul>
+        <div class="hero-visual">
+          <!-- Three.js object renders on the fixed canvas behind -->
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ SECTION 4: WHAT YOU'LL LEARN ═══ -->
-  <section id="learn">
-    <div class="container">
-      <span class="section-label reveal">Curriculum</span>
-      <h2 class="reveal">What You'll Master.</h2>
-      <p class="section-desc reveal reveal-delay-1">A complete skill set — from raw filament to a product on the shelf.</p>
-      <div class="learn-grid">
-        <div class="learn-item reveal reveal-delay-1">
-          <div class="learn-icon">🪵</div>
-          <div class="learn-text">
-            <h4>Remove Layer Lines Properly</h4>
-            <p>Systematic sanding sequences that eliminate visible FDM artifacts without warping geometry.</p>
+  <!-- ══ SECTION 2 — TRANSFORMATION ═══════════════════════════════ -->
+  <section id="transformation">
+    <div class="transform-sticky">
+      <div class="transform-inner">
+        <div class="transform-header">
+          <p class="section-label">The Difference</p>
+          <h2 class="section-title">Same print. Different result.</h2>
+        </div>
+        <div class="split-container">
+          <div class="split-left">
+            <span class="split-left-label">Raw Print</span>
+          </div>
+          <div class="split-right">
+            <span class="split-right-label">PolishMaster Finish</span>
+          </div>
+          <div class="split-line">
+            <div class="split-handle">⇔</div>
           </div>
         </div>
-        <div class="learn-item reveal reveal-delay-2">
-          <div class="learn-icon">💎</div>
-          <div class="learn-text">
-            <h4>Get Mirror Finish Consistently</h4>
-            <p>Repeatable polishing recipes dialed in for different materials and surface areas.</p>
-          </div>
+        <p class="transform-caption">
+          Left: straight off the printer.&nbsp;&nbsp;&nbsp;Right: PolishMaster System.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 3 — SURFACE DETAIL ════════════════════════════════ -->
+  <section id="surface">
+    <div class="surface-sticky">
+      <div class="surface-text">
+        <p class="section-label">Surface Science</p>
+        <h2 class="section-title">The difference is<br>in the surface.</h2>
+        <p class="section-sub">
+          Layer lines you can feel. Or a finish you can see yourself in.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 4 — SYSTEM BREAKDOWN ══════════════════════════════ -->
+  <section id="system">
+    <div class="system-sticky">
+      <div class="system-inner">
+        <div class="system-header">
+          <p class="section-label">What's Inside</p>
+          <h2 class="section-title">Everything you need.<br>Nothing you don't.</h2>
+          <p class="section-sub">
+            A complete workflow from raw print to finished product — built for makers who want results.
+          </p>
         </div>
-        <div class="learn-item reveal reveal-delay-1">
-          <div class="learn-icon">💰</div>
-          <div class="learn-text">
-            <h4>Price and Sell Your Prints</h4>
-            <p>Positioning, pricing frameworks, and channels that work for finished 3D printed products.</p>
+        <div class="system-grid">
+          <div class="system-card">
+            <div class="card-icon">🖨️</div>
+            <h3 class="card-title">Commercial STL Designs</h3>
+            <ul class="card-features">
+              <li>Ready-to-print models</li>
+              <li>Designed for sanding &amp; selling</li>
+            </ul>
           </div>
-        </div>
-        <div class="learn-item reveal reveal-delay-2">
-          <div class="learn-icon">🏆</div>
-          <div class="learn-text">
-            <h4>Create Premium-Looking Products</h4>
-            <p>The exact workflow that separates hobbyist output from sellable, premium goods.</p>
+          <div class="system-card">
+            <div class="card-icon">⚡</div>
+            <h3 class="card-title">PolishMaster System</h3>
+            <ul class="card-features">
+              <li>Step-by-step polishing workflows</li>
+              <li>Repeatable results every time</li>
+            </ul>
+          </div>
+          <div class="system-card">
+            <div class="card-icon">🔬</div>
+            <h3 class="card-title">Finish Recipes + Defect Fixes</h3>
+            <ul class="card-features">
+              <li>Exact sanding settings</li>
+              <li>Fix mistakes fast</li>
+            </ul>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ SECTION 5: SOCIAL PROOF ═══ -->
-  <section id="proof2">
-    <div class="container">
-      <span class="section-label reveal">Social Proof</span>
-      <h2 class="reveal">Results from the System.</h2>
-      <div class="proof-counter reveal reveal-delay-1">
-        <span>✦</span> 200+ makers inside
+  <!-- ══ SECTION 5 — PRODUCT SHOWCASE ══════════════════════════════ -->
+  <section id="showcase">
+    <div class="showcase-sticky">
+      <div class="showcase-text">
+        <p class="section-label">The Result</p>
+        <h2 class="showcase-title">This is what<br>people pay for.</h2>
+        <p class="showcase-sub">Mirror-finish quality. Every single time.</p>
       </div>
-      <div class="testimonials">
-        <div class="testi-card reveal reveal-delay-1">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"I went from giving prints away to charging $40 each. The polishing workflow is insane — no one believes they're 3D printed."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">MK</div>
-            <div>
-              <div class="testi-name">Marcus K.</div>
-              <div class="testi-meta">Etsy seller · 3 months in</div>
+    </div>
+  </section>
+
+  <!-- ══ SECTION 6 — SOCIAL PROOF ══════════════════════════════════ -->
+  <section id="social">
+    <div class="social-sticky">
+      <div class="social-inner">
+        <div class="social-header">
+          <div class="badge">⭐&nbsp; 200+ makers inside</div>
+          <h2 class="section-title" style="font-size: clamp(32px, 4vw, 52px);">Real makers.<br>Real results.</h2>
+        </div>
+        <div class="proof-grid">
+          <div class="proof-card">
+            <div class="testimonial-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
             </div>
+            <p class="proof-text">"I went from hobby prints to selling on Etsy in 3 weeks."</p>
+            <p class="proof-author">— Marcus K.</p>
           </div>
-        </div>
-        <div class="testi-card reveal reveal-delay-2">
-          <div class="testi-stars">★★★★★</div>
-          <p class="testi-text">"First weekend I made back the subscription cost 10x. The STL drops alone are worth it. Mirror finish on PLA is actually possible now."</p>
-          <div class="testi-author">
-            <div class="testi-avatar">SR</div>
-            <div>
-              <div class="testi-name">Sofia R.</div>
-              <div class="testi-meta">Maker & reseller</div>
+          <div class="proof-card">
+            <div class="testimonial-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
             </div>
+            <p class="proof-text">"The finish recipes alone are worth 10x the price."</p>
+            <p class="proof-author">— Sarah M.</p>
           </div>
-        </div>
-        <div class="testi-dm reveal reveal-delay-3">
-          <div class="dm-header">
-            <div class="dm-dot"></div>
-            <div class="dm-title">DM from community member</div>
+          <div class="proof-card result-card">
+            <p class="result-label">Real Result</p>
+            <h3 class="result-title">Sold first batch<br>in 48h</h3>
           </div>
-          <div class="dm-msg">"Just sold my first polished batch — 6 pieces at $35 each. The finish recipe worked perfectly on PETG 🔥"</div>
-          <div class="dm-msg-right">"That's exactly what the system is built for. Keep going!"</div>
+          <div class="proof-card">
+            <div class="testimonial-stars">
+              <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+            </div>
+            <p class="proof-text">"Finally a system that actually works for PLA."</p>
+            <p class="proof-author">— James R.</p>
+          </div>
+          <div class="proof-card result-card" style="grid-column: span 2;">
+            <p class="result-label">Transformation</p>
+            <h3 class="result-title">Before → After</h3>
+            <p class="result-desc">
+              Layer lines visible to the naked eye → showroom-ready mirror finish in under 2 hours.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ═══ SECTION 6: TRANSFORMATION ═══ -->
-  <section id="transform">
-    <div class="transform-grid">
-      <div class="transform-side transform-left reveal">
-        <div class="transform-big-icon">🖨️</div>
-        <div class="transform-side-label">Before</div>
-        <div class="transform-side-title">Hobby Output</div>
-        <div class="transform-side-desc">Layer lines. Rough edges. Priced at cost.</div>
-      </div>
-      <div class="transform-center">
-        <div class="transform-vs">vs</div>
-        <div class="transform-arrow">→</div>
-        <div class="transform-text">"This is the difference between <em>hobby</em> and <em>product.</em>"</div>
-      </div>
-      <div class="transform-side transform-right reveal">
-        <div class="transform-big-icon">💎</div>
-        <div class="transform-side-label">After</div>
-        <div class="transform-side-title">Premium Product</div>
-        <div class="transform-side-desc">Mirror finish. Sellable. Customers pay premium.</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ SECTION 7: OFFER ═══ -->
+  <!-- ══ SECTION 7 — OFFER ══════════════════════════════════════════ -->
   <section id="offer">
-    <div class="container">
-      <span class="section-label reveal">The Offer</span>
-      <h2 class="reveal">One Membership.<br/>Everything Included.</h2>
-      <p class="section-desc reveal reveal-delay-1" style="margin: 0 auto">Cancel anytime. No contracts. No hidden fees.</p>
-
-      <div class="offer-card reveal reveal-delay-2">
-        <div class="offer-badge">Most Popular</div>
-        <div class="offer-price"><sup>$</sup>19.99</div>
-        <div class="offer-period">/month</div>
-        <ul class="offer-features">
-          <li><div class="offer-check">✓</div> Monthly STL drops</li>
-          <li><div class="offer-check">✓</div> Full PolishMaster System</li>
-          <li><div class="offer-check">✓</div> Commercial use rights</li>
-          <li><div class="offer-check">✓</div> Community access</li>
-          <li><div class="offer-check">✓</div> Finish recipes + defect fixes</li>
-        </ul>
-        <button class="offer-cta" onclick="document.querySelector('#urgency').scrollIntoView({behavior:'smooth'})">
-          Start Now — $19.99/mo →
-        </button>
-        <p class="offer-note">Cancel anytime · Instant access after signup</p>
+    <div class="offer-card">
+      <p class="offer-label">Membership</p>
+      <h2 class="offer-name">PolishMaster</h2>
+      <div class="offer-price">$19<span class="offer-price-sub">.99 / mo</span></div>
+      <p class="offer-period">Billed monthly · Cancel anytime</p>
+      <ul class="offer-features">
+        <li>
+          <div class="check-icon">✓</div>
+          Monthly STL Drops
+        </li>
+        <li>
+          <div class="check-icon">✓</div>
+          Full PolishMaster System
+        </li>
+        <li>
+          <div class="check-icon">✓</div>
+          Commercial Use Rights
+        </li>
+        <li>
+          <div class="check-icon">✓</div>
+          Community Access
+        </li>
+      </ul>
+      <div class="offer-cta-wrap">
+        <a href="#" class="btn-primary">
+          Start Now
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="offer-cancel">Cancel anytime — no questions asked.</p>
       </div>
+      <p class="offer-trust">Joined by 200+ makers worldwide</p>
     </div>
   </section>
 
-  <!-- ═══ SECTION 8: URGENCY ═══ -->
-  <section id="urgency">
-    <div class="container-sm">
-      <h2 class="reveal">Your prints already cost you time.<br/><em>Stop making them look cheap.</em></h2>
-      <p class="urgency-sub reveal reveal-delay-1">Every day you wait = wasted potential.</p>
-      <a href="#offer" class="cta-btn-white reveal reveal-delay-2">
-        Join PolishMaster — $19.99/mo
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
-    </div>
-  </section>
-
-  <!-- ═══ SECTION 9: FAQ ═══ -->
-  <section id="faq">
-    <div class="container-sm">
-      <span class="section-label reveal">FAQ</span>
-      <h2 class="reveal">Common Questions.</h2>
-      <div class="faq-list reveal reveal-delay-1">
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">
-            Do I need experience?
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-a">No experience needed at all. The PolishMaster System starts from zero — we cover every tool, technique, and step in a beginner-friendly format. If you can 3D print, you can follow the system.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">
-            Does this work on PLA?
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-a">Yes. PLA is actually one of the easiest materials to achieve mirror finish on. We have specific recipes for PLA, PETG, ABS, and ASA — each with material-appropriate sanding grits, primers, and polishing compounds.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">
-            Can I sell what I make?
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-a">Absolutely. All STL designs included in your membership come with full commercial use rights. Print, finish, and sell — no royalties, no restrictions.</div>
-        </div>
-        <div class="faq-item">
-          <div class="faq-q" onclick="toggleFAQ(this)">
-            What tools do I need?
-            <div class="faq-icon">+</div>
-          </div>
-          <div class="faq-a">Sandpaper (80 to 3000 grit), a polishing compound, and optionally a rotary tool. Total startup cost is under $30. We provide a full tool list and recommended products inside the system.</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══ SECTION 10: FINAL CTA ═══ -->
+  <!-- ══ SECTION 8 — FINAL CTA ══════════════════════════════════════ -->
   <section id="final">
-    <div class="container-sm">
-      <h2 class="reveal">Make Your Prints<br/><em>Worth Selling.</em></h2>
-      <p class="section-desc reveal reveal-delay-1">Join 200+ makers who turned their 3D printer into a product machine.</p>
-      <a href="#offer" class="cta-btn reveal reveal-delay-2" style="font-size:17px; padding: 20px 48px">
-        Join PolishMaster
-        <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      </a>
+    <div class="final-content">
+      <p class="section-label" style="text-align:center; margin-bottom: 24px;">Ready?</p>
+      <h2 class="final-title">
+        Make Your Prints<br>Worth Selling
+      </h2>
+      <div class="final-cta-wrap">
+        <a href="#offer" class="btn-primary" style="font-size:18px; padding: 20px 48px;">
+          Join PolishMaster
+          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M3 8h10M9 4l4 4-4 4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <p class="final-sub">$19.99/month &nbsp;·&nbsp; Cancel anytime</p>
+      </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
+  <!-- ══ SECTION 9 — FAQ ════════════════════════════════════════════ -->
+  <section id="faq">
+    <div class="faq-inner">
+      <div class="faq-header">
+        <p class="section-label">FAQ</p>
+        <h2 class="section-title" style="font-size: clamp(32px, 4vw, 52px);">Frequently asked.</h2>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item">
+          <div class="faq-question">
+            Do I need experience?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">No. The system is designed for complete beginners. If you can press print, you can follow the PolishMaster workflow.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Does this work on PLA?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Yes. All workflows are optimized for PLA, PETG, and ABS — the three most common materials used by makers worldwide.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            Can I sell what I make?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Yes. Commercial use rights are included in your membership. Sell on Etsy, your own store, or wherever you want.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <div class="faq-question">
+            What tools do I need?
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            <p class="faq-answer-inner">Basic sanding papers, a polishing kit, and your printer. A full recommended tools list is provided inside the system.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════════════ -->
   <footer>
-    <div class="footer-logo">Polish<span>Master</span></div>
-    <div class="footer-text">© 2025 PolishMaster. All rights reserved.</div>
+    <span class="footer-logo">Polish<span>Master</span></span>
+    <span>© 2025 PolishMaster. All rights reserved.</span>
+    <div class="footer-links">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+    </div>
   </footer>
 
+  <!-- ══ SCRIPTS ════════════════════════════════════════════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/three@0.158.0/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/ScrollTrigger.min.js"></script>
   <script>
-    // ── Scroll reveal
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) {
-          e.target.classList.add('visible');
-          observer.unobserve(e.target);
-        }
-      });
-    }, { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  (function () {
+    'use strict';
 
-    // ── FAQ accordion
-    function toggleFAQ(el) {
-      const item = el.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
+    /* ────────────────────────────────────────────────────────────
+       GSAP + SCROLLTRIGGER SETUP
+    ──────────────────────────────────────────────────────────── */
+    gsap.registerPlugin(ScrollTrigger);
+
+    /* ────────────────────────────────────────────────────────────
+       THREE.JS SCENE INITIALIZATION
+    ──────────────────────────────────────────────────────────── */
+    var canvas = document.getElementById('webgl');
+
+    // Guard: if mobile, skip Three.js entirely
+    var isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      // Still run FAQ and nav logic below
+      setupFAQ();
+      setupNavLinks();
+      return;
     }
 
-    // ── Sticky nav shadow on scroll
-    const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.boxShadow = window.scrollY > 10
-        ? '0 4px 30px rgba(0,0,0,0.07)'
-        : 'none';
+    var scene = new THREE.Scene();
+    scene.background = null;
+
+    var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 100);
+    camera.position.set(0, 0, 5);
+
+    var renderer = new THREE.WebGLRenderer({
+      canvas: canvas,
+      alpha: true,
+      antialias: true
     });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.outputColorSpace = THREE.SRGBColorSpace;
+
+    /* ── LIGHTS ──────────────────────────────────────────────── */
+    var ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+    scene.add(ambientLight);
+
+    var dirLight = new THREE.DirectionalLight(0xffffff, 1.2);
+    dirLight.position.set(2, 3, 4);
+    scene.add(dirLight);
+
+    var orangeLight = new THREE.PointLight(0xFF6A00, 2, 20);
+    orangeLight.position.set(-3, 2, 2);
+    scene.add(orangeLight);
+
+    var blueLight = new THREE.PointLight(0x0066ff, 0.5, 20);
+    blueLight.position.set(3, -2, 1);
+    scene.add(blueLight);
+
+    /* ── LATHE GEOMETRY ──────────────────────────────────────── */
+    var points = [];
+    for (var i = 0; i < 20; i++) {
+      var t = i / 19;
+      var x = (Math.sin(t * Math.PI) * 1.2 + 0.2);
+      var y = t * 3.5 - 1.75;
+      points.push(new THREE.Vector2(x, y));
+    }
+    var geometry = new THREE.LatheGeometry(points, 64);
+
+    /* ── VERTEX SHADER ───────────────────────────────────────── */
+    var vertexShader = [
+      'varying vec3 vWorldPosition;',
+      'varying vec3 vNormal;',
+      'varying vec3 vViewPosition;',
+      '',
+      'void main() {',
+      '  vec4 worldPos = modelMatrix * vec4(position, 1.0);',
+      '  vWorldPosition = worldPos.xyz;',
+      '  vNormal = normalize(normalMatrix * normal);',
+      '  vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);',
+      '  vViewPosition = -mvPosition.xyz;',
+      '  gl_Position = projectionMatrix * mvPosition;',
+      '}'
+    ].join('\n');
+
+    /* ── FRAGMENT SHADER ─────────────────────────────────────── */
+    var fragmentShader = [
+      'uniform float blend;',
+      'uniform float time;',
+      'varying vec3 vWorldPosition;',
+      'varying vec3 vNormal;',
+      'varying vec3 vViewPosition;',
+      '',
+      'void main() {',
+      '  vec3 normal = normalize(vNormal);',
+      '  vec3 viewDir = normalize(vViewPosition);',
+      '',
+      '  // RAW STATE — horizontal layer lines',
+      '  float layer = sin(vWorldPosition.y * 22.0) * 0.5 + 0.5;',
+      '  float crease = smoothstep(0.35, 0.65, layer);',
+      '  vec3 rawBase = vec3(0.82, 0.75, 0.68);',
+      '  vec3 rawCrease = vec3(0.52, 0.45, 0.38);',
+      '  vec3 rawColor = mix(rawCrease, rawBase, crease);',
+      '  vec3 lightDir = normalize(vec3(1.0, 2.0, 1.5));',
+      '  float diff = max(dot(normal, lightDir), 0.0) * 0.6 + 0.4;',
+      '  rawColor *= diff;',
+      '',
+      '  // POLISHED STATE — mirror finish',
+      '  vec3 reflectDir = reflect(-viewDir, normal);',
+      '  float fresnel = pow(1.0 - max(dot(viewDir, normal), 0.0), 3.0);',
+      '  float envY = reflectDir.y * 0.5 + 0.5;',
+      '  vec3 envColor = mix(vec3(0.04, 0.04, 0.08), vec3(0.92, 0.96, 1.0), envY);',
+      '  vec3 polishedColor = mix(vec3(0.02), envColor, fresnel);',
+      '  float highlight = pow(max(dot(reflectDir, normalize(vec3(1.5, 1.2, 2.0))), 0.0), 48.0);',
+      '  polishedColor += vec3(1.0, 0.42, 0.0) * highlight * 2.0;',
+      '  polishedColor += vec3(1.0) * pow(fresnel, 5.0) * 0.4;',
+      '  float t = time * 0.4;',
+      '  vec3 movingLight = normalize(vec3(sin(t) * 2.0, 0.8, cos(t) * 2.0));',
+      '  float movingSpec = pow(max(dot(reflectDir, movingLight), 0.0), 80.0);',
+      '  polishedColor += vec3(1.0) * movingSpec;',
+      '',
+      '  // BLEND',
+      '  vec3 finalColor = mix(rawColor, polishedColor, blend);',
+      '  gl_FragColor = vec4(finalColor, 1.0);',
+      '}'
+    ].join('\n');
+
+    /* ── SHADER MATERIAL ─────────────────────────────────────── */
+    var material = new THREE.ShaderMaterial({
+      vertexShader: vertexShader,
+      fragmentShader: fragmentShader,
+      uniforms: {
+        blend: { value: 0.0 },
+        time:  { value: 0.0 }
+      },
+      side: THREE.DoubleSide
+    });
+
+    /* ── MESH ────────────────────────────────────────────────── */
+    var printObject = new THREE.Mesh(geometry, material);
+    printObject.position.x = 1.8;
+    scene.add(printObject);
+
+    /* ────────────────────────────────────────────────────────────
+       STATE
+    ──────────────────────────────────────────────────────────── */
+    var autoRotate = false;
+    var targetBlend = 0;
+    var currentSection = 'hero';
+
+    /* ────────────────────────────────────────────────────────────
+       HERO ENTRY ANIMATION
+    ──────────────────────────────────────────────────────────── */
+    gsap.timeline()
+      .to('.hero-label',    { opacity: 1, duration: 0.6, delay: 0.4 })
+      .to('.hero-title',    { opacity: 1, y: 0, duration: 0.9 }, '-=0.3')
+      .to('.hero-sub',      { opacity: 1, duration: 0.7 }, '-=0.4')
+      .to('.hero-cta-wrap', { opacity: 1, duration: 0.6 }, '-=0.3');
+
+    /* ────────────────────────────────────────────────────────────
+       SCROLLTRIGGER ANIMATIONS
+    ──────────────────────────────────────────────────────────── */
+
+    // HERO SCROLL
+    ScrollTrigger.create({
+      trigger: '#hero',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function (self) {
+        printObject.rotation.y = self.progress * Math.PI * 2;
+        material.uniforms.blend.value = self.progress * 0.3;
+        printObject.position.x = 1.8;
+        camera.position.z = 5;
+        autoRotate = false;
+        currentSection = 'hero';
+      }
+    });
+
+    // TRANSFORMATION SCROLL — blend + split line
+    ScrollTrigger.create({
+      trigger: '#transformation',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function (self) {
+        material.uniforms.blend.value = 0.3 + self.progress * 0.7;
+
+        var pct = self.progress * 100;
+        var splitLine = document.querySelector('.split-line');
+        var splitRight = document.querySelector('.split-right');
+        if (splitLine) splitLine.style.left = pct + '%';
+        if (splitRight) splitRight.style.clipPath = 'inset(0 0 0 ' + pct + '%)';
+
+        // Object slides from right to center
+        printObject.position.x = 1.8 - self.progress * 1.8;
+        camera.position.z = 5;
+        autoRotate = false;
+        currentSection = 'transformation';
+      }
+    });
+
+    // SURFACE DETAIL SCROLL — zoom in
+    ScrollTrigger.create({
+      trigger: '#surface',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function (self) {
+        camera.position.z = 5 - self.progress * 2.5;
+        printObject.rotation.x = self.progress * 0.3;
+        printObject.position.x = 0;
+        autoRotate = false;
+        currentSection = 'surface';
+      }
+    });
+
+    // SYSTEM BREAKDOWN SCROLL — object moves right
+    ScrollTrigger.create({
+      trigger: '#system',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function (self) {
+        printObject.position.x = 1.6;
+        printObject.rotation.x = 0.3 - self.progress * 0.3;
+        camera.position.z = 2.5 + self.progress * 2.5;
+        autoRotate = false;
+        currentSection = 'system';
+      }
+    });
+
+    // SYSTEM CARDS PARALLAX
+    gsap.utils.toArray('.system-card').forEach(function (card, i) {
+      gsap.to(card, {
+        y: -50 * (i + 1),
+        scrollTrigger: {
+          trigger: '#system',
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: 1
+        }
+      });
+    });
+
+    // SHOWCASE — fully polished, centered, auto-rotate
+    ScrollTrigger.create({
+      trigger: '#showcase',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function (self) {
+        material.uniforms.blend.value = 1.0;
+        printObject.position.x = 0;
+        camera.position.z = 5;
+        autoRotate = true;
+        currentSection = 'showcase';
+        renderer.domElement.style.opacity = '1';
+      }
+    });
+
+    // SOCIAL PROOF — fade canvas out gradually
+    ScrollTrigger.create({
+      trigger: '#social',
+      start: 'top top',
+      end: 'bottom bottom',
+      onUpdate: function (self) {
+        material.uniforms.blend.value = 1.0;
+        printObject.position.x = 0;
+        autoRotate = true;
+        currentSection = 'social';
+        renderer.domElement.style.opacity = String(1 - self.progress * 0.85);
+      }
+    });
+
+    // OFFER — hide 3D
+    ScrollTrigger.create({
+      trigger: '#offer',
+      start: 'top 80%',
+      end: 'top 20%',
+      onUpdate: function (self) {
+        renderer.domElement.style.opacity = String(1 - self.progress);
+        autoRotate = false;
+        currentSection = 'offer';
+      }
+    });
+
+    // FINAL CTA — bring 3D back, centered polished
+    ScrollTrigger.create({
+      trigger: '#final',
+      start: 'top 80%',
+      end: 'top 20%',
+      onUpdate: function (self) {
+        renderer.domElement.style.opacity = String(self.progress);
+        material.uniforms.blend.value = 1.0;
+        printObject.position.x = 0;
+        autoRotate = true;
+        currentSection = 'final';
+      }
+    });
+
+    /* ────────────────────────────────────────────────────────────
+       ANIMATION LOOP
+    ──────────────────────────────────────────────────────────── */
+    var clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      var elapsed = clock.getElapsedTime();
+
+      // Update time uniform for moving light
+      material.uniforms.time.value = elapsed;
+
+      // Auto-rotate on showcase/final sections
+      if (autoRotate) {
+        printObject.rotation.y += 0.005;
+      }
+
+      // Subtle idle float
+      printObject.position.y = Math.sin(elapsed * 0.7) * 0.06;
+
+      // Rotate orange light around object for dynamic reflections
+      orangeLight.position.x = Math.sin(elapsed * 0.5) * 3;
+      orangeLight.position.z = Math.cos(elapsed * 0.5) * 3;
+
+      renderer.render(scene, camera);
+    }
+
+    animate();
+
+    /* ────────────────────────────────────────────────────────────
+       WINDOW RESIZE
+    ──────────────────────────────────────────────────────────── */
+    window.addEventListener('resize', function () {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    });
+
+    /* ────────────────────────────────────────────────────────────
+       FAQ + NAV (always run)
+    ──────────────────────────────────────────────────────────── */
+    setupFAQ();
+    setupNavLinks();
+
+    /* ────────────────────────────────────────────────────────────
+       HELPERS
+    ──────────────────────────────────────────────────────────── */
+    function setupFAQ() {
+      document.querySelectorAll('.faq-item').forEach(function (item) {
+        item.querySelector('.faq-question').addEventListener('click', function () {
+          var isOpen = item.classList.contains('open');
+          document.querySelectorAll('.faq-item').forEach(function (other) {
+            other.classList.remove('open');
+          });
+          if (!isOpen) {
+            item.classList.add('open');
+          }
+        });
+      });
+    }
+
+    function setupNavLinks() {
+      document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+        anchor.addEventListener('click', function (e) {
+          var href = this.getAttribute('href');
+          if (href === '#') return;
+          var target = document.querySelector(href);
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: 'smooth' });
+          }
+        });
+      });
+    }
+
+  }());
   </script>
 </body>
 </html>
