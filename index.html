@@ -91,9 +91,31 @@
       position: absolute; left: 15%; right: 15%; bottom: 10%; height: 28px; border-radius: 999px;
       background: rgba(10, 10, 10, 0.13); filter: blur(30px);
     }
-    .hero-object {
-      position: relative; z-index: 1; width: min(44%, 420px); min-width: 210px;
+    .hero-object-wrap {
+      position: relative; z-index: 1; width: min(44%, 420px); min-width: 210px; aspect-ratio: 1 / 1.42;
+      transform: translateZ(0);
+    }
+    .hero-layer {
+      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+    }
+    .hero-layer img { width: 100%; height: 100%; object-fit: contain; }
+    .hero-layer.raw img { filter: grayscale(1) contrast(1.18) brightness(0.94); }
+    .hero-layer.raw::after {
+      content: ""; position: absolute; inset: 0;
+      background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.09) 0, rgba(0, 0, 0, 0.09) 2px, transparent 2px, transparent 8px);
+      mix-blend-mode: multiply; opacity: var(--raw-line-opacity, 0.42);
+    }
+    .hero-layer.polished {
+      clip-path: inset(100% 0 0 0);
+      opacity: 0;
+    }
+    .hero-layer.polished img {
       filter: drop-shadow(0 34px 46px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 34px rgba(255, 106, 0, 0.12));
+    }
+    .hero-glow {
+      position: absolute; inset: 12% 20% 18%; border-radius: 40%;
+      background: radial-gradient(circle, rgba(255, 106, 0, 0.2), transparent 68%);
+      filter: blur(22px); opacity: 0.08;
     }
     .head-row, .social-top {
       display: flex; justify-content: space-between; align-items: end; gap: 24px;
@@ -207,7 +229,7 @@
       .hero-wrap { min-height: 126vh; }
       .hero-card { margin-top: 28px; height: 420px; border-radius: 24px; }
       .hero-card-inner { border-radius: 22px; }
-      .hero-object { width: min(68%, 320px); }
+      .hero-object-wrap { width: min(68%, 320px); }
       .stage-visual { min-height: 300px; }
       .card, .quote, .message, .price-card, .stage { padding: 22px; }
       .faq-item summary { font-size: 18px; }
@@ -238,18 +260,26 @@
       <div class="shell hero-wrap" id="hero-scroll">
         <div class="hero-sticky">
           <div class="hero-copy" id="hero-copy">
-            <span class="eyebrow">No experience needed</span>
-            <h1 class="hero-title">Turn Raw Prints Into Premium Objects</h1>
-            <p class="hero-sub">The PolishMaster System helps you transform ordinary 3D prints into polished, sellable products.</p>
+            <span class="eyebrow">The difference is in the finish.</span>
+            <h1 class="hero-title">From Raw Print to Mirror Finish</h1>
+            <p class="hero-sub">Scroll to see how surface quality changes perceived value.</p>
             <div class="hero-actions">
               <a class="btn btn-primary" href="#offer">Join PolishMaster</a>
             </div>
-            <span class="hero-trust">No experience needed</span>
+            <span class="hero-trust">The difference is in the finish.</span>
           </div>
           <div class="hero-card" id="hero-card">
             <div class="hero-card-inner">
               <div class="hero-shadow"></div>
-              <img class="hero-object" src="king.png" alt="Glossy black chess king sculpture with subtle warm reflections" />
+              <div class="hero-object-wrap" id="hero-object-wrap">
+                <div class="hero-layer raw" id="hero-raw">
+                  <img src="king.png" alt="Raw 3D printed chess king object with visible layer lines" />
+                </div>
+                <div class="hero-layer polished" id="hero-polished">
+                  <div class="hero-glow" id="hero-glow"></div>
+                  <img src="king.png" alt="Polished glossy black chess king object with mirror finish" />
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -434,20 +464,35 @@
       var hero = document.getElementById("hero-scroll");
       var card = document.getElementById("hero-card");
       var copy = document.getElementById("hero-copy");
+      var polished = document.getElementById("hero-polished");
+      var raw = document.getElementById("hero-raw");
+      var glow = document.getElementById("hero-glow");
+      var objectWrap = document.getElementById("hero-object-wrap");
       var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!hero || !card || !copy || reduced) return;
+      if (!hero || !card || !copy || !polished || !raw || !glow || !objectWrap || reduced) return;
       function clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
       function animateHero() {
         var rect = hero.getBoundingClientRect();
         var total = Math.max(hero.offsetHeight - window.innerHeight, 1);
         var progress = clamp(-rect.top / total, 0, 1);
-        var rotateX = 20 - progress * 20;
-        var rotateY = -7 + progress * 14;
-        var scale = window.innerWidth <= 768 ? 0.9 + progress * 0.07 : 1.05 - progress * 0.05;
-        var translateY = -progress * 100;
+        var rotateX = 8 - progress * 8;
+        var rotateY = -4 + progress * 8;
+        var scale = window.innerWidth <= 768 ? 0.92 + progress * 0.06 : 1.02 - progress * 0.02;
+        var translateY = -progress * 84;
+        var polishedOpacity = Math.min(Math.max((progress - 0.08) / 0.62, 0), 1);
+        var rawOpacity = 1 - progress * 0.18;
+        var lineOpacity = Math.max(0.04, 0.42 - progress * 0.38);
+        var objectScale = 0.98 + progress * 0.04;
+        var objectY = 8 - progress * 14;
         copy.style.transform = "translate3d(0," + translateY + "px,0)";
         copy.style.opacity = String(1 - progress * 0.18);
         card.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(" + scale + ")";
+        objectWrap.style.transform = "translate3d(0," + objectY + "px,0) scale(" + objectScale + ")";
+        polished.style.clipPath = "inset(" + (100 - progress * 100) + "% 0 0 0)";
+        polished.style.opacity = String(polishedOpacity);
+        raw.style.opacity = String(rawOpacity);
+        raw.style.setProperty("--raw-line-opacity", String(lineOpacity));
+        glow.style.opacity = String(0.08 + progress * 0.2);
       }
       animateHero();
       window.addEventListener("scroll", animateHero, { passive: true });
