@@ -3,501 +3,187 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PolishMaster | Turn Raw Prints Into Premium Objects</title>
-  <meta name="description" content="PolishMaster helps makers transform ordinary 3D prints into polished, sellable premium products." />
+  <title>PolishMaster</title>
+  <meta
+    name="description"
+    content="Turn raw 3D prints into premium-looking products with a simple finishing system."
+  />
   <style>
     :root {
-      --bg: #fff;
-      --text: #0a0a0a;
-      --muted: rgba(10, 10, 10, 0.62);
-      --line: rgba(10, 10, 10, 0.08);
-      --panel: #fcfcfb;
+      --bg: #000000;
+      --panel: #0f0f10;
+      --line: rgba(255, 255, 255, 0.08);
+      --text: #f5f5f5;
+      --muted: rgba(255, 255, 255, 0.68);
       --accent: #ff6a00;
       --accent-dark: #e55e00;
-      --shadow: 0 24px 80px rgba(10, 10, 10, 0.08);
-      --radius: 28px;
-      --max: 1180px;
+      --shadow: 0 30px 80px rgba(0, 0, 0, 0.45);
     }
-    * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       margin: 0;
-      background: var(--bg);
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at top, rgba(255, 106, 0, 0.18), transparent 30%),
+        linear-gradient(180deg, #000000 0%, #050505 100%);
       color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      overflow-x: hidden;
     }
-    ::selection { background: rgba(255, 106, 0, 0.18); color: var(--text); }
-    a { color: inherit; text-decoration: none; }
-    img { display: block; max-width: 100%; }
-    .shell { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .card {
+      width: min(100%, 460px);
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(18, 18, 19, 0.96), rgba(9, 9, 10, 0.96));
+      box-shadow: var(--shadow);
+      text-align: center;
+    }
+
     .eyebrow {
-      display: inline-block; margin-bottom: 18px; color: var(--accent); font-size: 12px;
-      font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase;
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--accent);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
     }
-    .section { padding: 112px 0; }
-    .section-alt { background: var(--panel); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
-    .title { margin: 0; font-size: clamp(34px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.06em; font-weight: 700; }
-    .copy { margin: 18px 0 0; max-width: 700px; color: var(--muted); font-size: clamp(16px, 1.8vw, 19px); line-height: 1.7; }
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 28px;
-      border: 1px solid transparent; border-radius: 999px; font-size: 15px; font-weight: 700; transition: 0.2s ease;
+
+    h1 {
+      margin: 0;
+      font-size: clamp(2.3rem, 9vw, 4.6rem);
+      line-height: 0.95;
+      letter-spacing: -0.06em;
     }
-    .btn-primary { background: var(--accent); color: #fff; }
-    .btn-primary:hover { background: var(--accent-dark); transform: translateY(-1px); }
-    .btn-secondary { border-color: rgba(10, 10, 10, 0.14); background: transparent; }
-    .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
-    .nav {
-      position: sticky; top: 0; z-index: 20; background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(18px); border-bottom: 1px solid var(--line);
+
+    p {
+      margin: 16px auto 0;
+      max-width: 32ch;
+      color: var(--muted);
+      font-size: 0.98rem;
+      line-height: 1.7;
     }
-    .nav-inner { min-height: 78px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
-    .brand { font-size: 14px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; }
-    .nav-links { display: flex; gap: 28px; color: rgba(10, 10, 10, 0.58); font-size: 14px; }
-    .hero {
-      background: radial-gradient(circle at top, rgba(255, 106, 0, 0.14), transparent 36%), var(--bg);
-      overflow: hidden;
+
+    .visual {
+      margin: 28px auto 0;
+      padding: 18px;
+      border-radius: 22px;
+      background:
+        radial-gradient(circle at 50% 18%, rgba(255, 106, 0, 0.2), transparent 32%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.02));
+      border: 1px solid rgba(255, 255, 255, 0.06);
     }
-    .hero-wrap { min-height: 165vh; position: relative; }
-    .hero-sticky {
-      position: sticky; top: 0; min-height: 100vh; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; padding: 40px 0 32px; perspective: 1200px;
+
+    .visual img {
+      width: min(100%, 240px);
+      margin: 0 auto;
+      filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55));
     }
-    .hero-copy { width: min(900px, 100%); text-align: center; will-change: transform, opacity; }
-    .hero-title { margin: 0; font-size: clamp(42px, 7vw, 96px); line-height: 0.96; letter-spacing: -0.075em; font-weight: 700; }
-    .hero-sub { margin: 22px auto 0; max-width: 720px; color: var(--muted); font-size: clamp(17px, 2vw, 22px); line-height: 1.7; }
-    .hero-actions { display: flex; justify-content: center; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
-    .hero-trust { display: block; margin-top: 14px; font-size: 13px; color: rgba(10, 10, 10, 0.48); }
-    .hero-card {
-      position: relative; width: min(920px, 100%); height: min(54vh, 620px); margin-top: 34px; padding: 2px;
-      border-radius: 32px; background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(247,243,239,0.95));
-      border: 1px solid var(--line); box-shadow: var(--shadow); transform-origin: center center; will-change: transform; overflow: hidden;
+
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 160px;
+      margin-top: 28px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: #ffffff;
+      font-size: 0.95rem;
+      font-weight: 700;
+      transition: background 0.2s ease, transform 0.2s ease;
     }
-    .hero-card-inner {
-      position: relative; height: 100%; border-radius: 30px; overflow: hidden; display: flex; align-items: center; justify-content: center;
-      background: radial-gradient(circle at 50% 18%, rgba(255, 106, 0, 0.16), transparent 28%),
-                  radial-gradient(circle at 50% 78%, rgba(0, 0, 0, 0.08), transparent 32%),
-                  linear-gradient(180deg, #ffffff 0%, #f5f2ee 100%);
+
+    .cta:hover {
+      background: var(--accent-dark);
+      transform: translateY(-1px);
     }
-    .hero-card-inner::before, .hero-card-inner::after {
-      content: ""; position: absolute; top: 12%; bottom: 12%; width: 1px;
-      background: linear-gradient(180deg, transparent, rgba(10,10,10,0.08), transparent);
+
+    .note {
+      margin-top: 14px;
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.42);
     }
-    .hero-card-inner::before { left: 9%; }
-    .hero-card-inner::after { right: 9%; }
-    .hero-shadow {
-      position: absolute; left: 15%; right: 15%; bottom: 10%; height: 28px; border-radius: 999px;
-      background: rgba(10, 10, 10, 0.13); filter: blur(30px);
-    }
-    .hero-object-wrap {
-      position: relative; z-index: 1; width: min(44%, 420px); min-width: 210px; aspect-ratio: 1 / 1.42;
-      transform: translateZ(0);
-    }
-    .hero-layer {
-      position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
-    }
-    .hero-layer img { width: 100%; height: 100%; object-fit: contain; }
-    .hero-layer.raw img { filter: grayscale(1) contrast(1.18) brightness(0.94); }
-    .hero-layer.raw::after {
-      content: ""; position: absolute; inset: 0;
-      background: repeating-linear-gradient(180deg, rgba(0, 0, 0, 0.09) 0, rgba(0, 0, 0, 0.09) 2px, transparent 2px, transparent 8px);
-      mix-blend-mode: multiply; opacity: var(--raw-line-opacity, 0.42);
-    }
-    .hero-layer.polished {
-      clip-path: inset(100% 0 0 0);
-      opacity: 0;
-    }
-    .hero-layer.polished img {
-      filter: drop-shadow(0 34px 46px rgba(0, 0, 0, 0.28)) drop-shadow(0 0 34px rgba(255, 106, 0, 0.12));
-    }
-    .hero-glow {
-      position: absolute; inset: 12% 20% 18%; border-radius: 40%;
-      background: radial-gradient(circle, rgba(255, 106, 0, 0.2), transparent 68%);
-      filter: blur(22px); opacity: 0.08;
-    }
-    .head-row, .social-top {
-      display: flex; justify-content: space-between; align-items: end; gap: 24px;
-    }
-    .head-row .copy, .social-top .copy { max-width: 460px; margin-top: 0; }
-    .grid-2, .grid-3, .grid-4, .social-grid, .social-left, .identity-grid, .features, .faq-list {
-      display: grid; gap: 18px;
-    }
-    .grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 48px; }
-    .grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); margin-top: 48px; }
-    .grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-top: 48px; }
-    .social-grid { grid-template-columns: 1.05fr 0.95fr; margin-top: 44px; }
-    .social-left { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .identity-grid { grid-template-columns: 0.9fr 1.2fr 0.9fr; margin-top: 24px; }
-    .features { grid-template-columns: repeat(2, minmax(0, 1fr)); margin: 34px auto 0; max-width: 760px; }
-    .card, .stage, .quote, .message, .price-card, .faq-item, .identity-center {
-      border: 1px solid var(--line); border-radius: var(--radius); background: #fff; box-shadow: var(--shadow);
-    }
-    .card, .quote, .message, .price-card, .stage { padding: 28px; }
-    .icon {
-      width: 46px; height: 46px; border-radius: 16px; display: inline-flex; align-items: center; justify-content: center;
-      background: rgba(255, 106, 0, 0.1); color: var(--accent); font-weight: 700; margin-bottom: 22px;
-    }
-    .card h3, .quote h3 { margin: 0 0 10px; font-size: 22px; line-height: 1.2; letter-spacing: -0.03em; }
-    .card p, .quote p, .message p { margin: 0; color: var(--muted); line-height: 1.75; font-size: 15px; }
-    .center { text-align: center; }
-    .stage-meta {
-      display: flex; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 18px;
-      font-size: 11px; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; color: rgba(10, 10, 10, 0.42);
-    }
-    .stage-meta strong { color: var(--accent); letter-spacing: 0.18em; }
-    .stage-visual {
-      position: relative; min-height: 360px; border-radius: 24px; overflow: hidden; display: flex; align-items: center; justify-content: center;
-      background: radial-gradient(circle at top, rgba(255, 106, 0, 0.12), transparent 32%), linear-gradient(180deg, #ffffff 0%, #f3f3f1 100%);
-    }
-    .stage-visual::after {
-      content: ""; position: absolute; left: 14%; right: 14%; bottom: 10%; height: 24px; border-radius: 999px;
-      background: rgba(10, 10, 10, 0.12); filter: blur(26px);
-    }
-    .stage-visual.raw::before {
-      content: ""; position: absolute; inset: 0; opacity: 0.66;
-      background: repeating-linear-gradient(180deg, rgba(10, 10, 10, 0.05) 0, rgba(10, 10, 10, 0.05) 2px, transparent 2px, transparent 8px);
-    }
-    .stage-visual.polished::before {
-      content: ""; position: absolute; inset: 0;
-      background: radial-gradient(circle at 50% 18%, rgba(255, 106, 0, 0.18), transparent 25%);
-    }
-    .stage-object { position: relative; z-index: 1; width: 54%; max-width: 290px; filter: drop-shadow(0 26px 34px rgba(0,0,0,0.22)); }
-    .stage-visual.raw .stage-object { filter: grayscale(1) contrast(1.18) brightness(0.94); }
-    .proof-note { margin-top: 24px; text-align: center; font-size: clamp(24px, 3vw, 38px); line-height: 1.1; letter-spacing: -0.04em; font-weight: 700; }
-    .badge {
-      display: inline-flex; align-items: center; gap: 10px; padding: 10px 16px; margin-bottom: 20px; border-radius: 999px;
-      border: 1px solid rgba(255, 106, 0, 0.2); background: rgba(255, 106, 0, 0.08); color: var(--accent); font-size: 14px; font-weight: 700;
-    }
-    .chat { padding-top: 10px; }
-    .bubble {
-      max-width: 88%; padding: 14px 16px; border-radius: 18px; font-size: 14px; line-height: 1.7;
-      margin-bottom: 12px; box-shadow: 0 8px 18px rgba(0,0,0,0.05);
-    }
-    .bubble.left { background: #fff; }
-    .bubble.right { margin-left: auto; background: var(--accent); color: #fff; }
-    .quote footer { margin-top: 18px; font-size: 14px; color: rgba(10, 10, 10, 0.54); }
-    .quote strong { color: var(--text); }
-    .identity-center {
-      display: flex; align-items: center; justify-content: center; text-align: center; padding: 30px;
-      background: linear-gradient(180deg, #ffffff 0%, #fff7f0 100%);
-    }
-    .identity-center p { margin: 0; font-size: clamp(28px, 4.5vw, 52px); line-height: 1.06; letter-spacing: -0.05em; font-weight: 700; }
-    .price-card { text-align: center; padding: 44px; }
-    .price-label { font-size: 13px; text-transform: uppercase; letter-spacing: 0.24em; color: rgba(10, 10, 10, 0.44); font-weight: 700; }
-    .price { margin-top: 20px; display: flex; align-items: end; justify-content: center; gap: 8px; }
-    .price strong { font-size: clamp(60px, 9vw, 112px); line-height: 0.95; letter-spacing: -0.08em; }
-    .price span { padding-bottom: 16px; color: rgba(10, 10, 10, 0.52); font-size: 22px; }
-    .feature {
-      display: flex; align-items: center; gap: 12px; padding: 16px 18px; border: 1px solid var(--line);
-      border-radius: 20px; font-size: 15px; font-weight: 600;
-    }
-    .check {
-      width: 28px; height: 28px; border-radius: 50%; background: rgba(255, 106, 0, 0.1); color: var(--accent);
-      display: inline-flex; align-items: center; justify-content: center; font-size: 15px; font-weight: 700; flex: 0 0 auto;
-    }
-    .faq-list { margin-top: 40px; }
-    .faq-item { overflow: hidden; }
-    .faq-item summary {
-      list-style: none; cursor: pointer; padding: 24px 26px; font-weight: 700; font-size: 20px;
-      letter-spacing: -0.02em; display: flex; align-items: center; justify-content: space-between; gap: 18px;
-    }
-    .faq-item summary::-webkit-details-marker { display: none; }
-    .faq-item summary span:last-child { color: var(--accent); font-size: 28px; transition: transform 0.2s ease; }
-    .faq-item[open] summary span:last-child { transform: rotate(45deg); }
-    .faq-body { padding: 0 26px 24px; color: var(--muted); line-height: 1.8; font-size: 15px; }
-    .final {
-      padding: 70px 32px; border: 1px solid var(--line); border-radius: 36px; background: linear-gradient(180deg, #ffffff 0%, #fff7f0 100%);
-      box-shadow: 0 30px 100px rgba(17, 17, 17, 0.08); text-align: center;
-    }
-    .footer { padding: 26px 0 40px; color: rgba(10, 10, 10, 0.42); font-size: 13px; text-align: center; }
-    @media (max-width: 1100px) {
-      .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .social-grid { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 900px) {
-      .nav-links { display: none; }
-      .section { padding: 86px 0; }
-      .head-row, .social-top { display: block; }
-      .grid-2, .grid-3, .grid-4, .social-left, .identity-grid, .features { grid-template-columns: 1fr; }
-      .hero-wrap { min-height: 140vh; }
-      .hero-card { height: min(48vh, 480px); }
-    }
-    @media (max-width: 720px) {
-      .shell { width: min(var(--max), calc(100% - 28px)); }
-      .hero-wrap { min-height: 126vh; }
-      .hero-card { margin-top: 28px; height: 420px; border-radius: 24px; }
-      .hero-card-inner { border-radius: 22px; }
-      .hero-object-wrap { width: min(68%, 320px); }
-      .stage-visual { min-height: 300px; }
-      .card, .quote, .message, .price-card, .stage { padding: 22px; }
-      .faq-item summary { font-size: 18px; }
-      .final { padding: 56px 24px; }
-    }
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      .hero-copy, .hero-card { transform: none !important; }
-      .btn { transition: none; }
+
+    @media (min-width: 768px) {
+      .section {
+        padding: 40px;
+      }
+
+      .card {
+        width: min(100%, 980px);
+        padding: 40px;
+        display: grid;
+        grid-template-columns: 1.05fr 0.95fr;
+        gap: 32px;
+        text-align: left;
+        align-items: center;
+      }
+
+      p {
+        margin-left: 0;
+      }
+
+      .visual {
+        margin-top: 0;
+      }
+
+      .visual img {
+        width: min(100%, 320px);
+      }
     }
   </style>
 </head>
 <body>
-  <nav class="nav">
-    <div class="shell nav-inner">
-      <a class="brand" href="#top">PolishMaster</a>
-      <div class="nav-links">
-        <a href="#proof">Results</a>
-        <a href="#offer">Offer</a>
-        <a href="#faq">FAQ</a>
-      </div>
-      <a class="btn btn-primary" href="#offer">Join PolishMaster</a>
-    </div>
-  </nav>
-
-  <main id="top">
-    <section class="hero">
-      <div class="shell hero-wrap" id="hero-scroll">
-        <div class="hero-sticky">
-          <div class="hero-copy" id="hero-copy">
-            <span class="eyebrow">The difference is in the finish.</span>
-            <h1 class="hero-title">From Raw Print to Mirror Finish</h1>
-            <p class="hero-sub">Scroll to see how surface quality changes perceived value.</p>
-            <div class="hero-actions">
-              <a class="btn btn-primary" href="#offer">Join PolishMaster</a>
-            </div>
-            <span class="hero-trust">The difference is in the finish.</span>
-          </div>
-          <div class="hero-card" id="hero-card">
-            <div class="hero-card-inner">
-              <div class="hero-shadow"></div>
-              <div class="hero-object-wrap" id="hero-object-wrap">
-                <div class="hero-layer raw" id="hero-raw">
-                  <img src="king.png" alt="Raw 3D printed chess king object with visible layer lines" />
-                </div>
-                <div class="hero-layer polished" id="hero-polished">
-                  <div class="hero-glow" id="hero-glow"></div>
-                  <img src="king.png" alt="Polished glossy black chess king object with mirror finish" />
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="proof">
-      <div class="shell">
-        <div class="center">
-          <span class="eyebrow">Visual belief</span>
-          <h2 class="title">Same print. Different result.</h2>
-          <p class="copy" style="margin-left:auto;margin-right:auto;">The difference is not the printer. It is the finishing standard you apply after the print leaves the bed.</p>
-        </div>
-        <div class="grid-2">
-          <article class="stage">
-            <div class="stage-meta"><span>Before</span><strong>Raw surface</strong></div>
-            <div class="stage-visual raw"><img class="stage-object" src="king.png" alt="Raw 3D printed chess king object" /></div>
-          </article>
-          <article class="stage">
-            <div class="stage-meta"><span>After</span><strong>Premium finish</strong></div>
-            <div class="stage-visual polished"><img class="stage-object" src="king.png" alt="Polished premium chess king object" /></div>
-          </article>
-        </div>
-        <p class="proof-note">Same print. Different result.</p>
-      </div>
-    </section>
-
-    <section class="section section-alt">
-      <div class="shell">
-        <div class="head-row">
-          <div>
-            <span class="eyebrow">Value stack</span>
-            <h2 class="title">Built for makers who want objects that look finished, not merely printed.</h2>
-          </div>
-          <p class="copy">Each part of the membership removes a different source of hesitation: what to make, how to finish it, and how to fix mistakes fast.</p>
-        </div>
-        <div class="grid-3">
-          <article class="card"><div class="icon">01</div><h3>Commercial SKU Designs</h3><p>Print-ready products chosen for clean finishing, repeatable quality, and real shelf appeal.</p></article>
-          <article class="card"><div class="icon">02</div><h3>PolishMaster System</h3><p>A step-by-step finishing workflow that turns rough surfaces into controlled, premium-looking products.</p></article>
-          <article class="card"><div class="icon">03</div><h3>Finish Recipes + Defect Fixes</h3><p>Exact sanding sequences, polishing compounds, and repair moves for common print flaws.</p></article>
-        </div>
-      </div>
-    </section>
-
+  <main>
     <section class="section">
-      <div class="shell">
-        <span class="eyebrow">What you'll learn</span>
-        <h2 class="title">The practical skills that move your print from rough output to premium object.</h2>
-        <div class="grid-4">
-          <article class="card"><div class="icon">A</div><h3>Remove layer lines properly</h3><p>Eliminate surface noise without flattening the shape or softening sharp details.</p></article>
-          <article class="card"><div class="icon">B</div><h3>Achieve mirror finish consistently</h3><p>Follow a repeatable polish sequence instead of guessing your way through compounds.</p></article>
-          <article class="card"><div class="icon">C</div><h3>Build premium-looking 3D printed products</h3><p>Create objects that feel intentional, refined, and ready to represent your brand.</p></article>
-          <article class="card"><div class="icon">D</div><h3>Make objects worth selling</h3><p>Move from hobby output to products with the visual quality people actually pay for.</p></article>
+      <div class="card">
+        <div>
+          <span class="eyebrow">PolishMaster</span>
+          <h1>Make Your Prints Worth Selling</h1>
+          <p>
+            A simple finishing system that helps turn rough 3D prints into clean,
+            premium-looking products.
+          </p>
+          <a class="cta" href="#">Join Now</a>
+          <div class="note">$19.99 / month</div>
         </div>
-      </div>
-    </section>
 
-    <section class="section section-alt">
-      <div class="shell">
-        <div class="social-top">
-          <div>
-            <div class="badge">200+ makers inside</div>
-            <h2 class="title">Proof that polished presentation changes how your work is perceived.</h2>
-          </div>
-          <p class="copy">Results, quick wins, and direct feedback create social proof without turning the page into noise.</p>
-        </div>
-        <div class="social-grid">
-          <div class="social-left">
-            <article class="stage">
-              <div class="stage-meta"><span>Member result</span><strong>Before</strong></div>
-              <div class="stage-visual raw"><img class="stage-object" src="king.png" alt="Member raw result" /></div>
-            </article>
-            <article class="stage">
-              <div class="stage-meta"><span>Member result</span><strong>After</strong></div>
-              <div class="stage-visual polished"><img class="stage-object" src="king.png" alt="Member polished result" /></div>
-            </article>
-          </div>
-          <div>
-            <article class="message">
-              <span class="eyebrow" style="margin-bottom:8px;">DM screenshot</span>
-              <div class="chat">
-                <div class="bubble left">The first polished batch sold out faster than my raw versions ever did.</div>
-                <div class="bubble right">That is exactly the gap PolishMaster closes. Same print, stronger perceived value.</div>
-                <div class="bubble left">I finally feel like I am shipping products, not test pieces.</div>
-              </div>
-            </article>
-            <article class="quote" style="margin-top:18px;">
-              <h3>"I stopped apologizing for layer lines."</h3>
-              <p>My pieces finally look like products, not prototypes.</p>
-              <footer><strong>Emre K.</strong> · Turned a hobby shelf into a paid custom order stream in 3 weeks.</footer>
-            </article>
-            <article class="quote" style="margin-top:18px;">
-              <h3>"The finish recipes removed so much trial and error."</h3>
-              <p>I now know exactly what to do on PLA, and the results feel consistent instead of lucky.</p>
-              <footer><strong>Lina A.</strong> · Used the system to launch a polished desk-object collection.</footer>
-            </article>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="shell">
-        <span class="eyebrow">Identity shift</span>
-        <div class="identity-grid">
-          <article class="stage">
-            <div class="stage-meta"><span>Left</span><strong>Raw unfinished object</strong></div>
-            <div class="stage-visual raw"><img class="stage-object" src="king.png" alt="Raw unfinished object" /></div>
-          </article>
-          <div class="identity-center">
-            <p>This is the difference between printing something and creating something worth paying for.</p>
-          </div>
-          <article class="stage">
-            <div class="stage-meta"><span>Right</span><strong>Polished finished object</strong></div>
-            <div class="stage-visual polished"><img class="stage-object" src="king.png" alt="Polished finished object" /></div>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="offer">
-      <div class="shell center">
-        <span class="eyebrow">Offer</span>
-        <h2 class="title">One membership. A cleaner path from raw print to premium product.</h2>
-        <p class="copy" style="margin-left:auto;margin-right:auto;">Everything you need to finish better, move faster, and make your printed objects feel sellable.</p>
-        <article class="price-card" style="margin-top:44px;">
-          <div class="price-label">PolishMaster Membership</div>
-          <div class="price"><strong>$19.99</strong><span>/month</span></div>
-          <div class="features">
-            <div class="feature"><span class="check">✓</span>Monthly STL drops</div>
-            <div class="feature"><span class="check">✓</span>Full PolishMaster System</div>
-            <div class="feature"><span class="check">✓</span>Commercial use rights</div>
-            <div class="feature"><span class="check">✓</span>Community access</div>
-          </div>
-          <div style="margin-top:34px;"><a class="btn btn-primary" href="#final-cta">Start Now</a></div>
-        </article>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="shell center">
-        <span class="eyebrow">Why act now</span>
-        <h2 class="title">Every unfinished print is wasted potential.</h2>
-        <div class="grid-3">
-          <article class="card"><p>Every delay keeps your prints looking cheaper than they should.</p></article>
-          <article class="card"><p>Every rough finish weakens the perceived value of the same design.</p></article>
-          <article class="card"><p>The system exists to shorten the gap between raw output and premium result.</p></article>
-        </div>
-        <div style="margin-top:28px;"><a class="btn btn-secondary" href="#offer">Join PolishMaster</a></div>
-      </div>
-    </section>
-
-    <section class="section section-alt" id="faq">
-      <div class="shell">
-        <span class="eyebrow">FAQ</span>
-        <h2 class="title">Clear answers before you join.</h2>
-        <div class="faq-list">
-          <details class="faq-item"><summary><span>Do I need experience?</span><span>+</span></summary><div class="faq-body">No. The system is built to be practical for complete beginners. You get the order of operations, grit progressions, and finishing logic so you can start cleanly.</div></details>
-          <details class="faq-item"><summary><span>Does this work on PLA?</span><span>+</span></summary><div class="faq-body">Yes. PLA is one of the main materials covered, including how to smooth the surface, avoid overheating, and bring out a polished finish.</div></details>
-          <details class="faq-item"><summary><span>Can I sell what I make?</span><span>+</span></summary><div class="faq-body">Yes. The membership includes commercial use rights for the included designs, so you can print, finish, and sell your results.</div></details>
-          <details class="faq-item"><summary><span>What tools do I need?</span><span>+</span></summary><div class="faq-body">Basic sanding supplies, polishing compounds, cleaning materials, and a simple finishing setup. The point is to create premium results without expensive industrial equipment.</div></details>
-        </div>
-      </div>
-    </section>
-
-    <section class="section" id="final-cta">
-      <div class="shell">
-        <div class="final">
-          <span class="eyebrow">Final CTA</span>
-          <h2 class="title">Make Your Prints Worth Selling</h2>
-          <p class="copy" style="margin-left:auto;margin-right:auto;">Join PolishMaster and turn raw prints into objects that look refined, intentional, and ready to command attention.</p>
-          <div style="margin-top:30px;"><a class="btn btn-primary" href="#offer">Join PolishMaster</a></div>
+        <div class="visual">
+          <img src="king.png" alt="Polished 3D printed chess king" />
         </div>
       </div>
     </section>
   </main>
-
-  <footer class="footer">© 2026 PolishMaster</footer>
-
-  <script>
-    (function () {
-      var hero = document.getElementById("hero-scroll");
-      var card = document.getElementById("hero-card");
-      var copy = document.getElementById("hero-copy");
-      var polished = document.getElementById("hero-polished");
-      var raw = document.getElementById("hero-raw");
-      var glow = document.getElementById("hero-glow");
-      var objectWrap = document.getElementById("hero-object-wrap");
-      var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!hero || !card || !copy || !polished || !raw || !glow || !objectWrap || reduced) return;
-      function clamp(value, min, max) { return Math.min(Math.max(value, min), max); }
-      function animateHero() {
-        var rect = hero.getBoundingClientRect();
-        var total = Math.max(hero.offsetHeight - window.innerHeight, 1);
-        var progress = clamp(-rect.top / total, 0, 1);
-        var rotateX = 8 - progress * 8;
-        var rotateY = -4 + progress * 8;
-        var scale = window.innerWidth <= 768 ? 0.92 + progress * 0.06 : 1.02 - progress * 0.02;
-        var translateY = -progress * 84;
-        var polishedOpacity = Math.min(Math.max((progress - 0.08) / 0.62, 0), 1);
-        var rawOpacity = 1 - progress * 0.18;
-        var lineOpacity = Math.max(0.04, 0.42 - progress * 0.38);
-        var objectScale = 0.98 + progress * 0.04;
-        var objectY = 8 - progress * 14;
-        copy.style.transform = "translate3d(0," + translateY + "px,0)";
-        copy.style.opacity = String(1 - progress * 0.18);
-        card.style.transform = "rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg) scale(" + scale + ")";
-        objectWrap.style.transform = "translate3d(0," + objectY + "px,0) scale(" + objectScale + ")";
-        polished.style.clipPath = "inset(" + (100 - progress * 100) + "% 0 0 0)";
-        polished.style.opacity = String(polishedOpacity);
-        raw.style.opacity = String(rawOpacity);
-        raw.style.setProperty("--raw-line-opacity", String(lineOpacity));
-        glow.style.opacity = String(0.08 + progress * 0.2);
-      }
-      animateHero();
-      window.addEventListener("scroll", animateHero, { passive: true });
-      window.addEventListener("resize", animateHero);
-    })();
-  </script>
 </body>
 </html>
