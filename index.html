@@ -9,10 +9,9 @@
 
     :root {
       --orange: #FF6A00;
-      --black: #000000;
-      --white: #ffffff;
+      --black: #000;
+      --white: #fff;
       --gray: #888;
-      --card-bg: #0f0f0f;
     }
 
     html { scroll-behavior: smooth; }
@@ -34,7 +33,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      background: rgba(0,0,0,0.8);
+      background: rgba(0,0,0,0.75);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       border-bottom: 1px solid rgba(255,255,255,0.05);
@@ -51,12 +50,11 @@
       align-items: center;
       gap: 10px;
     }
-    .nav-logo img {
+    .nav-logo img.logo-img {
       width: 26px; height: 26px;
       object-fit: contain;
       border-radius: 5px;
     }
-    .nav-logo .king { font-size: 18px; line-height: 1; }
 
     .nav-cta {
       background: var(--orange);
@@ -73,10 +71,145 @@
     }
     .nav-cta:hover { opacity: .85; transform: scale(1.03); }
 
+    /* ── HERO ────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: #000;
+    }
+
+    /* Orange light orbs */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .orb-1 {
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(255,106,0,0.28) 0%, transparent 70%);
+      animation: orb1 10s ease-in-out infinite;
+    }
+    .orb-2 {
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(255,60,0,0.18) 0%, transparent 70%);
+      animation: orb2 15s ease-in-out infinite;
+    }
+
+    @keyframes orb1 {
+      0%,100% { transform: translate(-200px, -100px); }
+      33%      { transform: translate(180px,  -80px);  }
+      66%      { transform: translate(100px,  160px);  }
+    }
+    @keyframes orb2 {
+      0%,100% { transform: translate(220px, 140px);  }
+      50%     { transform: translate(-180px, -160px); }
+    }
+
+    /* Hero inner */
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 80px;
+      max-width: 1100px;
+      width: 100%;
+      padding: 100px 48px 60px;
+    }
+
+    /* Chess king */
+    .king-wrap {
+      position: relative;
+      flex-shrink: 0;
+      perspective: 800px;
+    }
+
+    .king-img {
+      width: clamp(220px, 28vw, 380px);
+      height: auto;
+      display: block;
+      /* Remove white background via multiply blend */
+      mix-blend-mode: multiply;
+      filter:
+        invert(1)
+        drop-shadow(0 0 60px rgba(255,106,0,0.35))
+        drop-shadow(0 0 120px rgba(255,60,0,0.15));
+      animation: king-float 6s ease-in-out infinite;
+      transform-origin: center bottom;
+    }
+
+    @keyframes king-float {
+      0%,100% { transform: translateY(0px)    rotateY(-6deg); }
+      25%     { transform: translateY(-14px)   rotateY(0deg);  }
+      50%     { transform: translateY(-18px)   rotateY(6deg);  }
+      75%     { transform: translateY(-8px)    rotateY(0deg);  }
+    }
+
+    /* Hero text */
+    .hero-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .hero-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 22px;
+    }
+
+    .hero-title {
+      font-size: clamp(38px, 5.5vw, 72px);
+      font-weight: 800;
+      line-height: 1.04;
+      letter-spacing: -0.04em;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .hero-title span { color: var(--orange); }
+
+    .hero-sub {
+      font-size: clamp(15px, 1.8vw, 18px);
+      color: var(--gray);
+      line-height: 1.65;
+      max-width: 420px;
+      margin-bottom: 36px;
+    }
+
+    .hero-cta {
+      display: inline-block;
+      background: var(--orange);
+      color: white;
+      padding: 16px 44px;
+      border-radius: 100px;
+      font-size: 16px;
+      font-weight: 700;
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: opacity .2s, transform .2s;
+    }
+    .hero-cta:hover { opacity: .88; transform: scale(1.03); }
+
+    .hero-trust {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #444;
+      letter-spacing: 0.05em;
+    }
+
     /* ── SCROLL ANIMATION SECTION ────────────────────────────── */
     #scroll-section {
       min-height: 160vh;
-      background: var(--black);
+      background: #000;
       display: flex;
       align-items: flex-start;
       justify-content: center;
@@ -109,40 +242,38 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--orange);
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .scroll-headline {
-      font-size: clamp(38px, 6vw, 80px);
+      font-size: clamp(32px, 5vw, 64px);
       font-weight: 800;
-      line-height: 1.04;
+      line-height: 1.05;
       letter-spacing: -0.04em;
       color: var(--white);
     }
     .scroll-headline span { color: var(--orange); }
 
     .scroll-sub {
-      margin-top: 18px;
-      font-size: clamp(15px, 1.8vw, 18px);
+      margin-top: 16px;
+      font-size: clamp(14px, 1.6vw, 17px);
       color: var(--gray);
-      max-width: 500px;
+      max-width: 480px;
       margin-left: auto;
       margin-right: auto;
       line-height: 1.65;
     }
 
-    /* 3D tilt card */
     .tilt-card {
       width: 100%;
       max-width: 860px;
-      height: clamp(280px, 44vh, 500px);
+      height: clamp(260px, 42vh, 480px);
       margin-top: -16px;
       border-radius: 26px;
-      border: 3px solid #2a2a2a;
-      background: #111;
+      border: 3px solid #222;
+      background: #0a0a0a;
       overflow: hidden;
       box-shadow:
-        0 0 0 0 #0000004d,
         0 9px 20px #0000004a,
         0 37px 37px #00000042,
         0 84px 50px #00000026;
@@ -153,19 +284,22 @@
     }
 
     .tilt-card-inner {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       border-radius: 20px;
       overflow: hidden;
-      background: #0a0a0a;
+      background: #050505;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
-    .tilt-card-inner img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 18%;
-      display: block;
+    /* King inside tilt card — same mix-blend trick */
+    .tilt-king {
+      height: 90%;
+      width: auto;
+      mix-blend-mode: multiply;
+      filter: invert(1) drop-shadow(0 0 40px rgba(255,106,0,0.4));
+      animation: king-float 6s ease-in-out infinite;
     }
 
     /* ── WHAT YOU GET ────────────────────────────────────────── */
@@ -185,13 +319,13 @@
     }
 
     .section-title {
-      font-size: clamp(32px, 4.5vw, 58px);
+      font-size: clamp(30px, 4vw, 56px);
       font-weight: 800;
       letter-spacing: -0.035em;
       line-height: 1.06;
       color: var(--white);
-      max-width: 680px;
-      margin-bottom: 56px;
+      max-width: 660px;
+      margin-bottom: 52px;
     }
 
     .cards-grid {
@@ -201,39 +335,30 @@
     }
 
     .card {
-      background: var(--card-bg);
+      background: #0f0f0f;
       border: 1px solid rgba(255,255,255,0.06);
       border-radius: 20px;
-      padding: 36px 30px;
+      padding: 34px 28px;
       transition: border-color .25s, transform .25s;
     }
-    .card:hover {
-      border-color: rgba(255,106,0,0.3);
-      transform: translateY(-4px);
-    }
+    .card:hover { border-color: rgba(255,106,0,0.3); transform: translateY(-4px); }
 
     .card-num {
       font-size: 11px;
       font-family: monospace;
       color: var(--orange);
       font-weight: 700;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
       letter-spacing: 0.1em;
     }
-
     .card-title {
-      font-size: 19px;
+      font-size: 18px;
       font-weight: 700;
       color: var(--white);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       letter-spacing: -0.02em;
     }
-
-    .card-desc {
-      font-size: 14px;
-      color: var(--gray);
-      line-height: 1.7;
-    }
+    .card-desc { font-size: 14px; color: var(--gray); line-height: 1.7; }
 
     /* ── PRICING ─────────────────────────────────────────────── */
     #offer {
@@ -245,133 +370,58 @@
     }
 
     .offer-label {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--orange);
-      margin-bottom: 28px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--orange); margin-bottom: 28px;
     }
-
     .offer-price {
       font-size: clamp(72px, 11vw, 128px);
-      font-weight: 800;
-      letter-spacing: -0.05em;
-      line-height: 1;
-      color: var(--white);
+      font-weight: 800; letter-spacing: -0.05em;
+      line-height: 1; color: var(--white);
     }
-
-    .offer-price-mo {
-      font-size: clamp(20px, 3vw, 30px);
-      font-weight: 400;
-      color: #555;
-      letter-spacing: 0;
-    }
-
-    .offer-period {
-      font-size: 14px;
-      color: #444;
-      margin-top: 12px;
-      margin-bottom: 52px;
-    }
+    .offer-price-mo { font-size: clamp(20px, 3vw, 30px); font-weight: 400; color: #555; }
+    .offer-period { font-size: 14px; color: #444; margin-top: 12px; margin-bottom: 48px; }
 
     .features {
       list-style: none;
-      display: inline-flex;
-      flex-direction: column;
-      gap: 16px;
-      text-align: left;
-      margin-bottom: 52px;
+      display: inline-flex; flex-direction: column; gap: 16px;
+      text-align: left; margin-bottom: 48px;
     }
-
-    .features li {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      font-size: 16px;
-      color: rgba(255,255,255,0.82);
-      font-weight: 500;
-    }
-
+    .features li { display: flex; align-items: center; gap: 14px; font-size: 16px; color: rgba(255,255,255,0.82); font-weight: 500; }
     .check {
-      width: 22px;
-      height: 22px;
+      width: 22px; height: 22px;
       background: rgba(255,106,0,0.12);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      color: var(--orange);
-      flex-shrink: 0;
-      font-weight: 800;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-size: 11px; color: var(--orange); flex-shrink: 0; font-weight: 800;
     }
 
     .btn-primary {
-      display: inline-block;
-      background: var(--orange);
-      color: white;
-      padding: 18px 52px;
-      border-radius: 100px;
-      font-size: 17px;
-      font-weight: 700;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      letter-spacing: 0.02em;
-      transition: opacity .2s, transform .2s;
+      display: inline-block; background: var(--orange); color: white;
+      padding: 18px 52px; border-radius: 100px; font-size: 17px; font-weight: 700;
+      text-decoration: none; border: none; cursor: pointer;
+      letter-spacing: 0.02em; transition: opacity .2s, transform .2s;
     }
     .btn-primary:hover { opacity: .88; transform: scale(1.03); }
-
-    .offer-fine {
-      margin-top: 16px;
-      font-size: 13px;
-      color: #444;
-    }
+    .offer-fine { margin-top: 16px; font-size: 13px; color: #444; }
 
     /* ── FAQ ─────────────────────────────────────────────────── */
-    #faq {
-      padding: 120px 48px;
-      max-width: 740px;
-      margin: 0 auto;
-    }
-
+    #faq { padding: 120px 48px; max-width: 740px; margin: 0 auto; }
     .faq-list { display: flex; flex-direction: column; }
-
-    .faq-row {
-      padding: 32px 0;
-      border-top: 1px solid rgba(255,255,255,0.06);
-    }
+    .faq-row { padding: 32px 0; border-top: 1px solid rgba(255,255,255,0.06); }
     .faq-row:last-child { border-bottom: 1px solid rgba(255,255,255,0.06); }
-
-    .faq-q {
-      font-size: 17px;
-      font-weight: 600;
-      color: var(--white);
-      margin-bottom: 10px;
-      letter-spacing: -0.01em;
-    }
-
-    .faq-a {
-      font-size: 15px;
-      color: var(--gray);
-      line-height: 1.7;
-    }
+    .faq-q { font-size: 17px; font-weight: 600; color: var(--white); margin-bottom: 10px; letter-spacing: -0.01em; }
+    .faq-a { font-size: 15px; color: var(--gray); line-height: 1.7; }
 
     /* ── FOOTER ──────────────────────────────────────────────── */
-    footer {
-      padding: 36px 48px;
-      text-align: center;
-      font-size: 13px;
-      color: #333;
-      border-top: 1px solid rgba(255,255,255,0.04);
-    }
+    footer { padding: 36px 48px; text-align: center; font-size: 13px; color: #333; border-top: 1px solid rgba(255,255,255,0.04); }
     footer span { color: var(--orange); }
 
     /* ── MOBILE ──────────────────────────────────────────────── */
     @media (max-width: 768px) {
       nav { padding: 14px 20px; }
-      .nav-logo .king { display: none; }
+      .hero-inner { flex-direction: column; gap: 40px; padding: 90px 24px 40px; text-align: center; }
+      .hero-sub { max-width: 100%; margin: 0 auto 28px; }
+      .king-img { width: 200px; }
       #system { padding: 80px 20px; }
       #offer { padding: 80px 20px; }
       #faq { padding: 80px 20px; }
@@ -390,38 +440,57 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="nav-logo">
-      <img src="logo.png" alt="" onerror="this.style.display='none'">
-      <span class="king">♔</span>
-      PolishMaster
+      <img class="logo-img" src="logo.png" alt="" onerror="this.style.display='none'">
+      ♔ PolishMaster
     </a>
     <a href="#offer" class="nav-cta">Join Now — $19.99/mo</a>
   </nav>
 
-  <!-- SCROLL ANIMATION SECTION -->
-  <div id="scroll-section">
-    <div class="scroll-sticky">
+  <!-- HERO -->
+  <section id="hero">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
 
-      <div class="scroll-title" id="scrollTitle">
-        <span class="scroll-label">3D Print Finishing System</span>
-        <h1 class="scroll-headline">
+    <div class="hero-inner">
+
+      <!-- Animated chess king -->
+      <div class="king-wrap">
+        <img class="king-img" src="king.png" alt="PolishMaster Chess King" />
+      </div>
+
+      <!-- Text -->
+      <div class="hero-text">
+        <p class="hero-label">3D Print Finishing System</p>
+        <h1 class="hero-title">
           Your Prints Are<br>
           <span>Holding You Back</span>
         </h1>
-        <p class="scroll-sub">
+        <p class="hero-sub">
           Turn cheap-looking prints into mirror-finish products people actually pay for.
         </p>
+        <a href="#offer" class="hero-cta">Enter the System →</a>
+        <p class="hero-trust">No experience needed &nbsp;·&nbsp; 200+ makers inside</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- SCROLL ANIMATION -->
+  <div id="scroll-section">
+    <div class="scroll-sticky">
+      <div class="scroll-title" id="scrollTitle">
+        <span class="scroll-label">The Transformation</span>
+        <h2 class="scroll-headline">
+          Same print.<br><span>Different result.</span>
+        </h2>
+        <p class="scroll-sub">Scroll to see the PolishMaster System in action.</p>
       </div>
 
       <div class="tilt-card" id="tiltCard">
         <div class="tilt-card-inner">
-          <img
-            src="https://images.unsplash.com/photo-1560174038-da43ac74f01b?w=1400&q=80"
-            alt="Polished black chess queen"
-            loading="eager"
-          />
+          <img class="tilt-king" src="king.png" alt="Polished chess king" />
         </div>
       </div>
-
     </div>
   </div>
 
@@ -501,17 +570,12 @@
       var title   = document.getElementById('scrollTitle');
 
       function onScroll() {
-        var rect     = section.getBoundingClientRect();
-        var total    = section.offsetHeight - window.innerHeight;
-        var scrolled = -rect.top;
-        var p        = Math.max(0, Math.min(1, scrolled / total));
+        var rect  = section.getBoundingClientRect();
+        var total = section.offsetHeight - window.innerHeight;
+        var p     = Math.max(0, Math.min(1, -rect.top / total));
 
-        var rotateX  = 20  - p * 20;
-        var scale    = 1.04 - p * 0.04;
-        var titleY   = p * -70;
-
-        card.style.transform  = 'rotateX(' + rotateX + 'deg) scale(' + scale + ')';
-        title.style.transform = 'translateY(' + titleY + 'px)';
+        card.style.transform  = 'rotateX(' + (20 - p * 20) + 'deg) scale(' + (1.04 - p * 0.04) + ')';
+        title.style.transform = 'translateY(' + (p * -70) + 'px)';
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
