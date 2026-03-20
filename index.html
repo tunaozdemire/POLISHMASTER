@@ -33,34 +33,52 @@
       min-height: 100vh;
       background-color: var(--bg);
       background-image:
-        radial-gradient(circle at 50% 50%, transparent 1.5px, #000 0 8px, transparent 8px),
-        radial-gradient(circle at 50% 50%, transparent 1.5px, #000 0 8px, transparent 8px),
-        radial-gradient(circle at 18% 18%, rgba(255, 106, 0, 0.18), transparent 26%),
-        radial-gradient(circle at 82% 22%, rgba(255, 106, 0, 0.14), transparent 24%),
-        radial-gradient(circle at 30% 82%, rgba(255, 106, 0, 0.12), transparent 26%),
-        radial-gradient(ellipse at 72% 72%, rgba(255, 106, 0, 0.16), transparent 30%),
+        radial-gradient(4px 100px at 0 235px, rgba(255, 106, 0, 0.22), transparent),
+        radial-gradient(4px 100px at 300px 235px, rgba(255, 106, 0, 0.18), transparent),
+        radial-gradient(1.5px 1.5px at 150px 117.5px, rgba(255, 106, 0, 0.95) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0 150px, rgba(255, 106, 0, 0.16), transparent),
+        radial-gradient(4px 100px at 300px 150px, rgba(255, 106, 0, 0.14), transparent),
+        radial-gradient(1.5px 1.5px at 150px 75px, rgba(255, 106, 0, 0.85) 100%, transparent 150%),
+        radial-gradient(4px 100px at 0 299px, rgba(255, 106, 0, 0.14), transparent),
+        radial-gradient(4px 100px at 300px 299px, rgba(255, 106, 0, 0.12), transparent),
+        radial-gradient(1.5px 1.5px at 150px 149.5px, rgba(255, 106, 0, 0.92) 100%, transparent 150%),
+        radial-gradient(circle at 20% 18%, rgba(255, 106, 0, 0.12), transparent 28%),
+        radial-gradient(circle at 78% 26%, rgba(255, 106, 0, 0.1), transparent 26%),
+        radial-gradient(ellipse at center, rgba(255, 106, 0, 0.05), transparent 44%),
         linear-gradient(180deg, #000000 0%, #050505 100%);
       background-size:
-        10px 17.32px,
-        10px 17.32px,
+        300px 235px,
+        300px 235px,
+        300px 235px,
+        300px 150px,
+        300px 150px,
+        300px 150px,
+        300px 299px,
+        300px 299px,
+        300px 299px,
         160% 160%,
         160% 160%,
-        180% 180%,
         180% 180%,
         100% 100%;
       background-position:
-        0 0,
-        5px 8.66px,
+        0 220px,
+        3px 220px,
+        151.5px 337.5px,
+        50px 16px,
+        53px 16px,
+        201.5px 91px,
+        175px 235px,
+        178px 235px,
+        326.5px 384.5px,
         0% 0%,
         100% 0%,
-        0% 100%,
-        100% 100%,
+        50% 50%,
         0 0;
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
-      animation: gradientShift 22s linear infinite;
+      animation: fallingPattern 150s linear infinite;
     }
 
     img {
@@ -161,13 +179,13 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      justify-content: center;
-      min-width: 190px;
+      justify-content: space-between;
+      min-width: 240px;
       margin-top: 28px;
-      padding: 15px 24px;
+      padding: 14px 16px 14px 20px;
       border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 999px;
-      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.03));
       color: #ffffff;
       font-size: 0.95rem;
       font-weight: 700;
@@ -200,9 +218,9 @@
       position: absolute;
       inset: 1px;
       z-index: -1;
-      border-radius: 999px;
+      border-radius: 21px;
       background:
-        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 42%, rgba(255, 106, 0, 0.18) 100%),
+        linear-gradient(135deg, rgba(255, 255, 255, 0.16), rgba(255, 255, 255, 0.02) 40%, rgba(255, 106, 0, 0.24) 100%),
         rgba(10, 10, 11, 0.94);
     }
 
@@ -218,10 +236,50 @@
     .cta-text {
       position: relative;
       z-index: 1;
-      background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.78) 100%);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 3px;
+      background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.82) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
+    }
+
+    .cta-label {
+      font-size: 0.98rem;
+      line-height: 1.05;
+    }
+
+    .cta-price {
+      font-size: 0.76rem;
+      letter-spacing: 0;
+      color: rgba(255, 255, 255, 0.62);
+      -webkit-text-fill-color: rgba(255, 255, 255, 0.62);
+    }
+
+    .cta-icon {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255, 106, 0, 0.24), rgba(255, 106, 0, 0.1));
+      border: 1px solid rgba(255, 106, 0, 0.18);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      flex: 0 0 auto;
+    }
+
+    .cta-icon svg {
+      width: 18px;
+      height: 18px;
+      stroke: #fff4ea;
+      stroke-width: 2.2;
+      fill: none;
+      animation: arrowPulse 1.5s ease-in-out infinite;
     }
 
     @keyframes spotlight {
@@ -239,25 +297,49 @@
       }
     }
 
-    @keyframes gradientShift {
+    @keyframes arrowPulse {
+      0%,
+      100% {
+        transform: translateX(0);
+        opacity: 0.88;
+      }
+      50% {
+        transform: translateX(3px);
+        opacity: 1;
+      }
+    }
+
+    @keyframes fallingPattern {
       0% {
         background-position:
-          0 0,
-          5px 8.66px,
+          0 220px,
+          3px 220px,
+          151.5px 337.5px,
+          50px 16px,
+          53px 16px,
+          201.5px 91px,
+          175px 235px,
+          178px 235px,
+          326.5px 384.5px,
           0% 0%,
           100% 0%,
-          0% 100%,
-          100% 100%,
+          50% 50%,
           0 0;
       }
       100% {
         background-position:
-          0 0,
-          5px 8.66px,
-          180% 80%,
-          -60% 120%,
-          120% -40%,
-          -40% 40%,
+          0 6800px,
+          3px 6800px,
+          151.5px 6917.5px,
+          50px 5416px,
+          53px 5416px,
+          201.5px 5491px,
+          175px 13391px,
+          178px 13391px,
+          326.5px 13540.5px,
+          10% 90%,
+          90% 10%,
+          50% 50%,
           0 0;
       }
     }
@@ -424,6 +506,9 @@
     .reviews {
       display: grid;
       gap: 10px;
+      max-height: min(68vh, 720px);
+      overflow: auto;
+      padding-right: 4px;
     }
 
     .review {
@@ -444,9 +529,15 @@
       width: 44px;
       height: 44px;
       border-radius: 50%;
-      object-fit: cover;
       border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.28);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, rgba(255, 106, 0, 0.2), rgba(255, 106, 0, 0.08));
+      color: #fff3ea;
+      font-size: 0.9rem;
+      font-weight: 700;
     }
 
     .reviewer {
@@ -485,6 +576,21 @@
       margin-top: 8px;
       font-size: 0.8rem;
       color: rgba(255, 255, 255, 0.46);
+    }
+
+    .review-tag {
+      margin-top: 8px;
+      display: inline-flex;
+      align-items: center;
+      padding: 5px 9px;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.56);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
 
     @media (min-width: 768px) {
@@ -546,7 +652,18 @@
             reviews, and ongoing updates.
           </div>
           <div class="actions">
-            <a class="cta" href="#"><span class="cta-text">Join Now</span></a>
+            <a class="cta" href="#">
+              <span class="cta-text">
+                <span class="cta-label">Join Now</span>
+                <span class="cta-price">$29.99 monthly</span>
+              </span>
+              <span class="cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24">
+                  <path d="M5 12h14"></path>
+                  <path d="m13 6 6 6-6 6"></path>
+                </svg>
+              </span>
+            </a>
             <button class="members-btn" id="members-trigger" type="button">Member Reviews</button>
           </div>
           <div class="note">$29.99 / month • $24.89 / month billed annually</div>
@@ -574,59 +691,316 @@
       <div class="social-proof" id="members">
         <div class="social-top">
           <span class="social-label">Member Reviews</span>
-          <span class="rating">4.9/5 from 200+ makers</span>
+          <span class="rating">4.9/5 from 200+ members</span>
         </div>
 
         <div class="reviews">
           <article class="review">
             <div class="review-head">
-              <img
-                class="avatar"
-                src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=160&q=80"
-                alt="Emre profile photo"
-              />
+              <span class="avatar" aria-hidden="true">EK</span>
               <div class="reviewer">
                 <div class="reviewer-name">Emre K.</div>
-                <div class="reviewer-role">Verified Patreon member</div>
+                <div class="reviewer-role">Member feedback sample</div>
               </div>
             </div>
             <p>"My prints finally look sellable instead of unfinished prototypes."</p>
             <div class="stars">★★★★★</div>
             <div class="review-meta">Started getting paid orders after improving finish quality.</div>
+            <div class="review-tag">Sample review</div>
           </article>
 
           <article class="review">
             <div class="review-head">
-              <img
-                class="avatar"
-                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=160&q=80"
-                alt="Lina profile photo"
-              />
+              <span class="avatar" aria-hidden="true">LA</span>
               <div class="reviewer">
                 <div class="reviewer-name">Lina A.</div>
-                <div class="reviewer-role">Verified Patreon member</div>
+                <div class="reviewer-role">Member feedback sample</div>
               </div>
             </div>
             <p>"The polishing steps are simple, clear, and made my results look premium fast."</p>
             <div class="stars">★★★★★</div>
             <div class="review-meta">Used the workflow to launch a cleaner-looking desk object line.</div>
+            <div class="review-tag">Sample review</div>
           </article>
 
           <article class="review">
             <div class="review-head">
-              <img
-                class="avatar"
-                src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=160&q=80"
-                alt="Marcus profile photo"
-              />
+              <span class="avatar" aria-hidden="true">MT</span>
               <div class="reviewer">
                 <div class="reviewer-name">Marcus T.</div>
-                <div class="reviewer-role">Verified Patreon member</div>
+                <div class="reviewer-role">Member feedback sample</div>
               </div>
             </div>
             <p>"This made it way easier to charge confidently for my finished pieces."</p>
             <div class="stars">★★★★★</div>
             <div class="review-meta">Says the same prints now feel premium enough to justify higher pricing.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">SR</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Sofia R.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"The material recommendations helped me avoid wasting prints on the wrong finish."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Practical advice was more useful than generic inspiration content.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">DH</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Daniel H.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"Good information overall, but I wanted more examples for curved surfaces."</p>
+            <div class="stars">★★★☆☆</div>
+            <div class="review-meta">Mixed feedback: liked the basics, wanted deeper examples.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">NP</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Nina P.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"I used the sequence on PLA test cubes first and the difference was immediate."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Easy to test before applying it to actual sellable pieces.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">JT</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Jon T.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"The finish looks great, but I think the membership could use a faster onboarding guide."</p>
+            <div class="stars">★★★☆☆</div>
+            <div class="review-meta">Critical on onboarding, positive on the actual finishing workflow.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">AK</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Aylin K.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"This gave me a clear path from raw prints to something I was proud to photograph."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Better finishes also improved product photos and listings.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">RB</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Ryan B.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"Helpful, but I underestimated how much patience sanding still takes."</p>
+            <div class="stars">★★★☆☆</div>
+            <div class="review-meta">Realistic downside: the system helps, but the work still takes time.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">CM</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Carla M.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"My product photos improved because the surfaces stopped catching ugly highlights."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Finishing quality translated directly to stronger visuals online.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">OS</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Ozan S.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"The mirror finish result is real, but I needed a few tries before getting it consistent."</p>
+            <div class="stars">★★★★☆</div>
+            <div class="review-meta">Positive review with a believable learning curve.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">EV</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Elif V.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"I finally have a process I can repeat instead of guessing grit progression every time."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Repeatability is the biggest win for this reviewer.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">PG</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Paul G.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"Some modules felt basic for me, but the premium presentation angle was still useful."</p>
+            <div class="stars">★★★☆☆</div>
+            <div class="review-meta">Balanced review from someone wanting more advanced content.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">ZY</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Zeynep Y.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"It helped me understand what actually makes a print feel expensive."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Strong perceived-value insight rather than just technique.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">LM</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Leo M.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"The content is solid, but I wish there were more examples for larger printed objects."</p>
+            <div class="stars">★★★☆☆</div>
+            <div class="review-meta">Constructive criticism focused on scope, not quality.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">HB</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Helin B.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"The before-and-after difference made it easier to explain my prices to customers."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Directly ties finish quality to pricing confidence.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">MS</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Mert S.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"I liked the polish workflow, but I had to source some supplies on my own."</p>
+            <div class="stars">★★★★☆</div>
+            <div class="review-meta">Mostly positive with a practical sourcing note.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">IA</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Ipek A.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"Even my first finished piece looked cleaner than anything I had sold before."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Strong positive first-result reaction.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">TD</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Tara D.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"Useful membership, but beginners should expect a bit of trial and error at first."</p>
+            <div class="stars">★★★★☆</div>
+            <div class="review-meta">Keeps expectations realistic without sounding negative.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">YK</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Yusuf K.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"The sales angle surprised me. Better finish changed how premium my products felt."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Great fit for visitors who care about product positioning.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">BR</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Bora R.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"I wanted more advanced finishing examples, but the core polish system is still strong."</p>
+            <div class="stars">★★★☆☆</div>
+            <div class="review-meta">Mildly critical review that still sounds fair.</div>
+            <div class="review-tag">Sample review</div>
+          </article>
+
+          <article class="review">
+            <div class="review-head">
+              <span class="avatar" aria-hidden="true">GC</span>
+              <div class="reviewer">
+                <div class="reviewer-name">Gizem C.</div>
+                <div class="reviewer-role">Member feedback sample</div>
+              </div>
+            </div>
+            <p>"This helped me stop shipping prints that still looked like rough prototypes."</p>
+            <div class="stars">★★★★★</div>
+            <div class="review-meta">Strong summary of the overall value proposition.</div>
+            <div class="review-tag">Sample review</div>
           </article>
         </div>
       </div>
