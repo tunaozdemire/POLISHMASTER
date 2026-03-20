@@ -31,13 +31,36 @@
     body {
       margin: 0;
       min-height: 100vh;
-      background:
-        radial-gradient(circle at top, rgba(255, 106, 0, 0.18), transparent 30%),
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(circle at 50% 50%, transparent 1.5px, #000 0 8px, transparent 8px),
+        radial-gradient(circle at 50% 50%, transparent 1.5px, #000 0 8px, transparent 8px),
+        radial-gradient(circle at 18% 18%, rgba(255, 0, 90, 0.2), transparent 26%),
+        radial-gradient(circle at 82% 22%, rgba(255, 220, 0, 0.16), transparent 24%),
+        radial-gradient(circle at 30% 82%, rgba(0, 255, 140, 0.14), transparent 26%),
+        radial-gradient(ellipse at 72% 72%, rgba(0, 110, 255, 0.18), transparent 30%),
         linear-gradient(180deg, #000000 0%, #050505 100%);
+      background-size:
+        10px 17.32px,
+        10px 17.32px,
+        160% 160%,
+        160% 160%,
+        180% 180%,
+        180% 180%,
+        100% 100%;
+      background-position:
+        0 0,
+        5px 8.66px,
+        0% 0%,
+        100% 0%,
+        0% 100%,
+        100% 100%,
+        0 0;
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
+      animation: gradientShift 22s linear infinite, hueSpin 10s linear infinite;
     }
 
     img {
@@ -110,23 +133,117 @@
     }
 
     .cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-width: 160px;
+      min-width: 190px;
       margin-top: 28px;
-      padding: 14px 20px;
+      padding: 15px 24px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
       border-radius: 999px;
-      background: var(--accent);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03));
       color: #ffffff;
       font-size: 0.95rem;
       font-weight: 700;
-      transition: background 0.2s ease, transform 0.2s ease;
+      letter-spacing: -0.01em;
+      overflow: hidden;
+      isolation: isolate;
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.08),
+        0 12px 28px rgba(0, 0, 0, 0.34);
+      transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
+    }
+
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: -140% -30%;
+      z-index: -2;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.24), transparent 34%);
+      opacity: 0.75;
+      transform: translate(-32%, -34%) scale(0.55);
+      animation: spotlight 3.2s ease-in-out infinite;
+    }
+
+    .cta::after {
+      content: "";
+      position: absolute;
+      inset: 1px;
+      z-index: -1;
+      border-radius: 999px;
+      background:
+        linear-gradient(135deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.02) 42%, rgba(255, 106, 0, 0.18) 100%),
+        rgba(10, 10, 11, 0.94);
     }
 
     .cta:hover {
-      background: var(--accent-dark);
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+      border-color: rgba(255, 255, 255, 0.22);
+      box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.12),
+        0 18px 40px rgba(0, 0, 0, 0.42),
+        0 0 28px rgba(255, 106, 0, 0.18);
+    }
+
+    .cta-text {
+      position: relative;
+      z-index: 1;
+      background: linear-gradient(180deg, #ffffff 0%, rgba(255, 255, 255, 0.78) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    @keyframes spotlight {
+      0% {
+        opacity: 0.22;
+        transform: translate(-38%, -38%) scale(0.5);
+      }
+      50% {
+        opacity: 0.92;
+        transform: translate(-8%, -18%) scale(1);
+      }
+      100% {
+        opacity: 0.22;
+        transform: translate(18%, -10%) scale(0.72);
+      }
+    }
+
+    @keyframes gradientShift {
+      0% {
+        background-position:
+          0 0,
+          5px 8.66px,
+          0% 0%,
+          100% 0%,
+          0% 100%,
+          100% 100%,
+          0 0;
+      }
+      100% {
+        background-position:
+          0 0,
+          5px 8.66px,
+          180% 80%,
+          -60% 120%,
+          120% -40%,
+          -40% 40%,
+          0 0;
+      }
+    }
+
+    @keyframes hueSpin {
+      0% {
+        filter: hue-rotate(0deg);
+      }
+      100% {
+        filter: hue-rotate(360deg);
+      }
     }
 
     .note {
@@ -175,7 +292,7 @@
             A simple finishing system that helps turn rough 3D prints into clean,
             premium-looking products.
           </p>
-          <a class="cta" href="#">Join Now</a>
+          <a class="cta" href="#"><span class="cta-text">Join Now</span></a>
           <div class="note">$19.99 / month</div>
         </div>
 
