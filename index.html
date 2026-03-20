@@ -92,8 +92,17 @@
       letter-spacing: -0.04em;
       color: var(--black);
       text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
     .nav-logo span { color: var(--orange); }
+    .nav-logo-img {
+      width: 32px;
+      height: 32px;
+      object-fit: contain;
+      border-radius: 6px;
+    }
 
     .nav-links {
       display: flex;
@@ -930,8 +939,8 @@
 
     /* ─── MOBILE ──────────────────────────────────────────── */
     @media (max-width: 768px) {
-      #webgl { display: none; }
-      body { background: linear-gradient(180deg, #fff 0%, #f5f5f5 100%); }
+      #webgl { display: block; opacity: 0.85; }
+      body { background: #ffffff; }
 
       nav { padding: 16px 24px; }
       .nav-links { display: none; }
@@ -941,12 +950,20 @@
         padding: 0 24px;
         padding-top: 80px;
       }
-      .hero-visual { display: none; }
+      .hero-visual { display: none; } /* 3D canvas handles the visual */
       .hero-title { font-size: 40px; }
       .hero-label,
       .hero-title,
       .hero-sub,
       .hero-cta-wrap { opacity: 1 !important; transform: none !important; }
+
+      /* mobile: text sits at bottom over the 3D canvas */
+      .hero-sticky {
+        justify-content: flex-end;
+        padding-bottom: 60px;
+        background: linear-gradient(to top, rgba(255,255,255,0.97) 50%, rgba(255,255,255,0) 100%);
+      }
+      .hero-text { text-align: center; align-items: center; }
 
       .transform-inner { padding: 0 24px; }
       .split-container { height: 40vh; }
@@ -982,7 +999,10 @@
 
   <!-- ══ NAVIGATION ═══════════════════════════════════════════════ -->
   <nav>
-    <a href="#" class="nav-logo">Polish<span>Master</span></a>
+    <a href="#" class="nav-logo">
+      <img src="logo.png" alt="" class="nav-logo-img" onerror="this.style.display='none'">
+      Polish<span>Master</span>
+    </a>
     <ul class="nav-links">
       <li><a href="#system">System</a></li>
       <li><a href="#showcase">Results</a></li>
@@ -1292,14 +1312,7 @@
     ──────────────────────────────────────────────────────────── */
     var canvas = document.getElementById('webgl');
 
-    // Guard: if mobile, skip Three.js entirely
     var isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-      // Still run FAQ and nav logic below
-      setupFAQ();
-      setupNavLinks();
-      return;
-    }
 
     var scene = new THREE.Scene();
     scene.background = null;
@@ -1313,7 +1326,7 @@
       antialias: true
     });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, isMobile ? 1.5 : 2));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
 
     /* ── LIGHTS ──────────────────────────────────────────────── */
@@ -1332,15 +1345,26 @@
     blueLight.position.set(3, -2, 1);
     scene.add(blueLight);
 
-    /* ── LATHE GEOMETRY ──────────────────────────────────────── */
-    var points = [];
-    for (var i = 0; i < 20; i++) {
-      var t = i / 19;
-      var x = (Math.sin(t * Math.PI) * 1.2 + 0.2);
-      var y = t * 3.5 - 1.75;
-      points.push(new THREE.Vector2(x, y));
-    }
-    var geometry = new THREE.LatheGeometry(points, 64);
+    /* ── CHESS KING GEOMETRY ─────────────────────────────────── */
+    // Profile points for chess king body (LatheGeometry — revolve around Y)
+    var segments = isMobile ? 32 : 64;
+    var kingPoints = [
+      new THREE.Vector2(0.00, -1.85),  // center base
+      new THREE.Vector2(1.28, -1.72),  // base flare outer
+      new THREE.Vector2(1.32, -1.55),  // base shelf
+      new THREE.Vector2(0.95, -1.40),  // base taper
+      new THREE.Vector2(0.82, -0.75),  // lower body
+      new THREE.Vector2(0.78,  0.00),  // mid body
+      new THREE.Vector2(0.72,  0.65),  // upper body
+      new THREE.Vector2(0.55,  0.92),  // shoulder
+      new THREE.Vector2(0.32,  1.05),  // neck taper
+      new THREE.Vector2(0.50,  1.16),  // collar bottom
+      new THREE.Vector2(0.48,  1.28),  // collar top
+      new THREE.Vector2(0.18,  1.33),  // pin bottom
+      new THREE.Vector2(0.18,  1.63),  // pin top
+      new THREE.Vector2(0.00,  1.65)   // tip center
+    ];
+    var geometry = new THREE.LatheGeometry(kingPoints, segments);
 
     /* ── VERTEX SHADER ───────────────────────────────────────── */
     var vertexShader = [
@@ -1411,15 +1435,39 @@
       side: THREE.DoubleSide
     });
 
-    /* ── MESH ────────────────────────────────────────────────── */
-    var printObject = new THREE.Mesh(geometry, material);
-    printObject.position.x = 1.8;
-    scene.add(printObject);
+    /* ── CHESS KING GROUP ────────────────────────────────────── */
+    var kingGroup = new THREE.Group();
+
+    // Body (lathe)
+    var bodyMesh = new THREE.Mesh(geometry, material);
+    kingGroup.add(bodyMesh);
+
+    // Cross — vertical bar
+    var crossVGeo = new THREE.BoxGeometry(0.13, 0.72, 0.13);
+    var crossV    = new THREE.Mesh(crossVGeo, material);
+    crossV.position.set(0, 2.01, 0);
+    kingGroup.add(crossV);
+
+    // Cross — horizontal bar
+    var crossHGeo = new THREE.BoxGeometry(0.56, 0.19, 0.13);
+    var crossH    = new THREE.Mesh(crossHGeo, material);
+    crossH.position.set(0, 2.10, 0);
+    kingGroup.add(crossH);
+
+    // Scale & position
+    kingGroup.scale.setScalar(isMobile ? 0.58 : 0.82);
+    kingGroup.position.x = isMobile ? 0 : 1.8;
+    kingGroup.position.y = isMobile ? -0.3 : 0;
+    scene.add(kingGroup);
+
+    // Alias so all scroll code works unchanged
+    var printObject = kingGroup;
 
     /* ────────────────────────────────────────────────────────────
        STATE
     ──────────────────────────────────────────────────────────── */
-    var autoRotate = false;
+    var autoRotate = true;   // always on — speed varies by section
+    var rotateSpeed = 0.003; // slow hero rotation
     var targetBlend = 0;
     var currentSection = 'hero';
 
@@ -1442,11 +1490,11 @@
       start: 'top top',
       end: 'bottom bottom',
       onUpdate: function (self) {
-        printObject.rotation.y = self.progress * Math.PI * 2;
         material.uniforms.blend.value = self.progress * 0.3;
-        printObject.position.x = 1.8;
-        camera.position.z = 5;
-        autoRotate = false;
+        printObject.position.x = isMobile ? 0 : 1.8;
+        camera.position.z = isMobile ? 4 : 5;
+        autoRotate = true;
+        rotateSpeed = 0.003; // slow hero spin
         currentSection = 'hero';
       }
     });
@@ -1524,6 +1572,7 @@
         printObject.position.x = 0;
         camera.position.z = 5;
         autoRotate = true;
+        rotateSpeed = 0.006; // slightly faster on showcase
         currentSection = 'showcase';
         renderer.domElement.style.opacity = '1';
       }
@@ -1581,9 +1630,9 @@
       // Update time uniform for moving light
       material.uniforms.time.value = elapsed;
 
-      // Auto-rotate on showcase/final sections
+      // Auto-rotate — slow in hero, faster in showcase
       if (autoRotate) {
-        printObject.rotation.y += 0.005;
+        printObject.rotation.y += rotateSpeed;
       }
 
       // Subtle idle float
