@@ -51,7 +51,14 @@
   a { color: inherit; text-decoration: none; }
   button { font: inherit; cursor: pointer; border: none; background: none; }
 
-  
+  /* ── PAGE WRAPPER ── */
+  .section {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 16px 14px 40px;
+  }
 
   /* ── CARD ── */
   .card {
@@ -202,160 +209,93 @@
     animation: arrowPulse 1.6s ease-in-out infinite;
   }
 
-  /* ── HERO SCROLL ── */
-
-  /* Outer scroll track - defines scroll distance */
-  .hero-scroll-section {
-    position: relative;
-    height: 250vh; /* scrollable distance */
-  }
-
-  /* Sticky viewport that stays fixed during scroll */
-  .hero-sticky {
-    position: sticky;
-    top: 0;
-    height: 100vh;
+  /* ── COMPARISON SLIDER ── */
+  .visual {
     width: 100%;
+    align-self: stretch;
+    margin-bottom: 20px;
+    position: relative;
+    padding: 10px;
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,106,0,0.18), transparent 34%),
+      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    border: 1px solid rgba(255,255,255,0.07);
     overflow: hidden;
-    display: flex;
-    align-items: flex-end;
   }
 
-  /* Full-bleed background images */
-  .hero-bg {
+  .comparison-slider {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #111;
+    cursor: ew-resize;
+    touch-action: none;
+    user-select: none;
+    -webkit-user-select: none;
+  }
+
+  .comparison-base,
+  .comparison-overlay {
     position: absolute;
     inset: 0;
-    z-index: 0;
   }
 
-  .hero-bg img {
+  .comparison-base img,
+  .comparison-overlay img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 20%;
-    display: block;
+    object-position: center;
+    pointer-events: none;
   }
 
-  .hero-bg-before { z-index: 1; }
-  .hero-bg-after  { z-index: 2; opacity: 0; }
+  .comparison-overlay {
+    overflow: hidden;
+    clip-path: inset(0 50% 0 0);
+  }
 
-  /* Dark gradient overlay for text readability */
-  .hero-overlay {
+  .comparison-divider {
     position: absolute;
-    inset: 0;
-    z-index: 3;
-    background: linear-gradient(
-      to bottom,
-      rgba(0,0,0,0.55) 0%,
-      rgba(0,0,0,0.2) 40%,
-      rgba(0,0,0,0.2) 60%,
-      rgba(0,0,0,0.82) 100%
-    );
+    top: 0; bottom: 0;
+    left: calc(50% - 1px);
+    width: 2px;
+    background: rgba(255,255,255,0.92);
+    box-shadow: 0 0 14px rgba(255,255,255,0.3);
+    pointer-events: none;
   }
 
-  /* Text content pinned at bottom */
-  .hero-text {
-    position: relative;
-    z-index: 4;
-    width: 100%;
-    padding: 0 20px 40px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: 0;
-  }
-
-  .hero-text .eyebrow  { margin-bottom: 10px; }
-  .hero-text .hero-headline { margin-bottom: 10px; }
-  .hero-text .hero-support  { margin-bottom: 6px; }
-  .hero-text .hero-proof    { margin-bottom: 16px; }
-  .hero-text .actions       { width: 100%; max-width: 360px; margin-bottom: 0; }
-
-  /* State labels (Raw / Polished) */
-  .hero-state-label {
+  .comparison-handle {
     position: absolute;
-    top: 18px;
-    z-index: 5;
-    padding: 6px 14px;
+    top: 50%; left: 50%;
+    width: 48px; height: 48px;
     border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: #fff;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.16);
-    transition: opacity .3s ease;
-    pointer-events: none;
-  }
-  .hero-label-raw      { left: 18px; }
-  .hero-label-polished { right: 18px; opacity: 0; }
-
-  /* Progress bar at top */
-  .hero-progress-bar {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    z-index: 6;
-    height: 2px;
-    background: rgba(255,255,255,0.1);
-    pointer-events: none;
-  }
-  .hero-progress-fill {
-    height: 100%;
-    width: 0%;
-    background: linear-gradient(90deg, #ff6a00, #ffb06e);
-    box-shadow: 0 0 10px rgba(255,106,0,0.7);
-  }
-
-  /* Scroll hint arrow */
-  .hero-scroll-hint {
-    position: absolute;
-    bottom: 110px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 5;
-    display: flex;
-    flex-direction: column;
+    transform: translate(-50%,-50%);
+    display: inline-flex;
     align-items: center;
-    gap: 6px;
-    color: rgba(255,255,255,0.52);
-    font-size: 0.68rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    pointer-events: none;
-    animation: hintBounce 2s ease-in-out infinite;
-    transition: opacity .4s ease;
-  }
-  .hero-scroll-hint svg {
-    width: 18px; height: 18px;
-    stroke: currentColor; stroke-width: 2;
-    fill: none; stroke-linecap: round;
-  }
-  @keyframes hintBounce {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50%      { transform: translateX(-50%) translateY(5px); }
-  }
-
-  /* Content section that follows the hero */
-  .content-section {
-    position: relative;
-    z-index: 2;
-    background: linear-gradient(180deg, #000 0%, #080808 100%);
-    padding: 28px 16px 40px;
-    display: flex;
     justify-content: center;
+    background: rgba(255,255,255,0.96);
+    color: #2e2a27;
+    box-shadow:
+      0 8px 20px rgba(0,0,0,0.24),
+      0 0 0 6px rgba(255,255,255,0.12);
+    pointer-events: none;
+    transition: transform .2s ease;
   }
 
-  @media (min-width: 540px) {
-    .hero-text { padding: 0 32px 48px; }
-    .hero-text .actions { max-width: 400px; }
+  .comparison-slider.is-dragging .comparison-handle {
+    transform: translate(-50%,-50%) scale(1.08);
   }
 
-/* ── FLOW SECTIONS ── */
+  .comparison-handle svg {
+    width: 22px; height: 22px;
+    stroke: currentColor; stroke-width: 2.2;
+    fill: none; stroke-linecap: round; stroke-linejoin: round;
+  }
+
+  /* ── FLOW SECTIONS ── */
   .flow-section { width: 100%; }
 
   /* ── SOCIAL PROOF ── */
@@ -428,10 +368,8 @@
 
   /* ── REVIEWS SECTION ── */
   .reviews-section {
-    position: relative;
     width: 100%;
     margin-bottom: 14px;
-    overflow: hidden;
   }
 
   .reviews-header {
@@ -592,196 +530,174 @@
     .col-b { display: block; }
   }
 
-  /* ── FAQ SECTION ── */
-  .faq-section {
-    width: 100%;
-    margin-top: 32px;
-  }
-
-  /* Header block */
-  .faq-header {
-    margin-bottom: 20px;
+  /* ── FAQ BRIDGE ── */
+  .faq-bridge {
+    margin: 14px 0 10px;
     text-align: center;
   }
-  .faq-header::before {
+
+  .faq-bridge::before {
     content: "";
     display: block;
     width: 100%;
     height: 1px;
-    margin-bottom: 20px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,106,0,0.28) 50%, transparent 100%);
-  }
-  .faq-title {
-    color: #fff4ea;
-    font-size: clamp(1.15rem, 4vw, 1.35rem);
-    font-weight: 800;
-    letter-spacing: -0.02em;
-    line-height: 1.2;
-    margin-bottom: 6px;
-  }
-  .faq-subtitle {
-    color: rgba(255,255,255,0.46);
-    font-size: 0.8rem;
-    line-height: 1.5;
+    margin-bottom: 10px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,106,0,0.22) 50%, transparent 100%);
   }
 
-  /* List container */
-  .faq-list {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
+  .faq-bridge span {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 10px;
+    color: rgba(255,255,255,0.48);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
   }
 
-  /* Each item */
+  /* ── INLINE FAQ ── */
+  .inline-faq-section {
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  
+
+  /* ── FAQ LIST ── */
+  .faq-list { display: grid; gap: 8px; }
+
   .faq-item {
-    border-bottom: 1px solid rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
+    background: rgba(255,255,255,0.025);
     overflow: hidden;
-    transition: background 0.22s ease;
-  }
-  .faq-item:first-child {
-    border-top: 1px solid rgba(255,255,255,0.07);
-    border-radius: 16px 16px 0 0;
-  }
-  .faq-item:last-child {
-    border-radius: 0 0 16px 16px;
-  }
-  .faq-item.is-open {
-    background: rgba(255,106,0,0.04);
+    transition: border-color .22s ease, background .22s ease;
   }
 
-  /* Toggle button */
+  .faq-item.is-open {
+    border-color: rgba(255,106,0,0.25);
+    box-shadow: inset 3px 0 0 rgba(255,106,0,0.55);
+  }
+
   .faq-toggle {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 14px;
-    padding: 17px 16px;
+    gap: 12px;
+    padding: 15px 16px;
     background: transparent;
     border: 0;
     color: inherit;
     text-align: left;
-    cursor: pointer;
     -webkit-tap-highlight-color: transparent;
-    transition: background 0.18s ease;
-  }
-  .faq-toggle:hover {
-    background: rgba(255,255,255,0.03);
-  }
-  .faq-toggle:focus-visible {
-    outline: 2px solid rgba(255,106,0,0.6);
-    outline-offset: -2px;
+    cursor: pointer;
   }
 
-  /* Question text */
   .faq-question {
     color: #fff3ea;
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     font-weight: 700;
     line-height: 1.45;
-    flex: 1;
   }
 
-  /* Icon wrapper */
   .faq-icon {
-    flex: 0 0 26px;
-    width: 26px;
-    height: 26px;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
+    color: rgba(255,255,255,0.5);
+    transition: transform .32s cubic-bezier(.4,0,.2,1), color .22s ease, background .22s ease;
     border-radius: 50%;
-    background: rgba(255,255,255,0.07);
+    background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
-    color: rgba(255,255,255,0.55);
-    font-size: 1.1rem;
-    line-height: 1;
-    font-weight: 400;
-    position: relative;
-    transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
-    user-select: none;
-  }
-  .faq-item.is-open .faq-icon {
-    background: rgba(255,106,0,0.14);
-    border-color: rgba(255,106,0,0.3);
-    color: rgba(255,106,0,0.95);
-  }
-
-  /* + and × symbols — toggle visibility */
-  .faq-icon-plus,
-  .faq-icon-x {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    line-height: 1;
-  }
-  .faq-icon-plus {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-  .faq-icon-x {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.6);
-    font-size: 1.2rem;
-  }
-  .faq-item.is-open .faq-icon-plus {
-    opacity: 0;
-    transform: translate(-50%, -50%) scale(0.6);
-  }
-  .faq-item.is-open .faq-icon-x {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1);
-  }
-
-  /* Collapsible content */
-  .faq-content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.26s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .faq-item.is-open .faq-content {
-    grid-template-rows: 1fr;
-  }
-  .faq-content-inner {
     overflow: hidden;
   }
 
-  /* Answer text */
-  .faq-answer {
-    padding: 0 16px 18px;
-    color: rgba(255,255,255,0.62);
-    font-size: 0.84rem;
-    line-height: 1.72;
-    text-align: left;
-    opacity: 0;
-    transform: translateY(-6px);
-    transition: opacity 0.24s ease 0.05s, transform 0.24s ease 0.05s;
+  .faq-icon svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    fill: none;
+    stroke-linecap: round;
+    display: block;
   }
+
+  .faq-item.is-open .faq-icon {
+    transform: rotate(45deg);
+    color: rgba(255,106,0,0.9);
+    background: rgba(255,106,0,0.12);
+  }
+
+  .faq-content {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1);
+  }
+
+  .faq-item.is-open .faq-content { grid-template-rows: 1fr; }
+
+  .faq-content-inner { overflow: hidden; }
+
+  .faq-answer {
+    padding: 4px 20px 24px 20px;
+    color: rgba(255,255,255,0.68);
+    font-size: 0.83rem;
+    line-height: 1.75;
+    text-align: left;
+    max-width: 94%;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .28s ease .06s, transform .28s ease .06s;
+  }
+
   .faq-item.is-open .faq-answer {
     opacity: 1;
     transform: translateY(0);
   }
-  .faq-answer strong {
-    color: rgba(255,255,255,0.88);
+  .faq-answer .faq-lead {
+    display: block;
+    color: rgba(255,255,255,0.92);
     font-weight: 700;
+    font-size: 0.855rem;
+    margin-bottom: 6px;
+    line-height: 1.5;
   }
 
-  /* Bottom CTA */
-  .faq-cta {
-    display: flex;
-    margin-top: 24px;
-    width: 100%;
-    background: linear-gradient(180deg, rgba(255,106,0,0.28), rgba(255,106,0,0.1)) !important;
-    border-color: rgba(255,106,0,0.45) !important;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),
-                0 12px 30px rgba(255,106,0,0.2),
-                0 0 36px rgba(255,106,0,0.14) !important;
+  .faq-answer ul {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+    display: grid;
+    gap: 6px;
   }
-  .faq-cta::after {
-    background: linear-gradient(135deg, rgba(255,106,0,0.25), rgba(255,106,0,0.08) 50%, rgba(255,106,0,0.2) 100%),
-                rgba(10,10,11,0.88) !important;
+
+  .faq-answer ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .faq-answer ul li::before {
+    content: "›";
+    color: rgba(255,106,0,0.8);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex: 0 0 auto;
+  }
+
+  .faq-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 8px 0;
   }
 
 /* ── FOOTER ── */
@@ -821,8 +737,41 @@
 
   /* ── TABLET+ ── */
   @media (min-width: 540px) {
+    .section { padding: 28px 20px 48px; }
     .card { padding: 30px 26px 34px; }
+    .hero-headline { font-size: clamp(2.4rem, 6vw, 3.2rem); }
+    .comparison-slider { aspect-ratio: 16 / 9; }
+    .reviews {
+      grid-auto-flow: initial;
+      grid-auto-columns: auto;
+      grid-template-columns: repeat(3, minmax(0,1fr));
+      overflow: visible;
+      padding: 0;
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
   }
+
+  /* ── SLIDER LABELS ── */
+  .slider-label-before,
+  .slider-label-after {
+    position: absolute;
+    bottom: 12px;
+    z-index: 4;
+    padding: 5px 10px;
+    border-radius: 999px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.14);
+    pointer-events: none;
+  }
+  .slider-label-before { left: 12px; }
+  .slider-label-after  { right: 12px; }
 
   /* ── FEATURED CARD ── */
   .tcard-featured {
@@ -857,54 +806,23 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.4;
+    opacity: 0.55;
   }
 
   /* ensure content is above canvas */
-  main, .site-footer {
+  main, .modal, .site-footer {
     position: relative;
     z-index: 1;
   }
-
-  .hero-scroll-section { z-index: 1; }
-  .content-section { z-index: 2; }
 </style>
 </head>
 <body>
   <canvas id="sparkles-canvas" aria-hidden="true"></canvas>
   <main>
-
-  <!-- ── HERO SCROLL SECTION ── -->
-  <div class="hero-scroll-section" id="hero-scroll-section">
-    <div class="hero-sticky" id="hero-sticky">
-
-      <!-- Background images -->
-      <div class="hero-bg hero-bg-before" id="hero-bg-before">
-        <img src="cross-before.png" alt="Raw 3D printed piece" />
-      </div>
-      <div class="hero-bg hero-bg-after" id="hero-bg-after">
-        <img src="cross-after.png" alt="Polished 3D printed piece" />
-      </div>
-
-      <!-- Gradient overlay -->
-      <div class="hero-overlay"></div>
-
-      <!-- Progress bar -->
-      <div class="hero-progress-bar"><div class="hero-progress-fill" id="hero-progress-fill"></div></div>
-
-      <!-- State labels -->
-      <div class="hero-state-label hero-label-raw" id="hero-label-raw">Raw</div>
-      <div class="hero-state-label hero-label-polished" id="hero-label-polished">Polished</div>
-
-      <!-- Scroll hint -->
-      <div class="hero-scroll-hint" id="hero-scroll-hint">
-        <span>Scroll</span>
-        <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
-      </div>
-
-      <!-- Text content -->
-      <div class="hero-text">
-        <span class="eyebrow">PolishMaster</span>
+    <section class="section">
+      <div class="card">
+        <div class="hero-content">
+          <span class="eyebrow">PolishMaster</span>
           <h1 class="hero-headline">Stop selling layer lines.<br />Start selling products.</h1>
           <p class="hero-support">Everything you need to turn raw prints into premium products.</p>
           <p class="hero-proof">Join 200+ makers already inside.</p>
@@ -920,15 +838,28 @@
               </span>
             </a>
           </div>
-      </div>
 
-    </div>
-  </div>
+          <div class="visual">
+            <div class="comparison-slider" data-comparison-slider>
+              <div class="comparison-base">
+                <img src="cross-before.png" alt="Raw 3D printed piece before polishing" draggable="false" />
+              </div>
+              <div class="comparison-overlay" data-comparison-overlay>
+                <img src="cross-after.png" alt="Polished 3D printed piece after finishing" draggable="false" />
+              </div>
+              <div class="comparison-divider" data-comparison-divider></div>
+              <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
+                <svg viewBox="0 0 24 24">
+                  <path d="m9 6-6 6 6 6"></path>
+                  <path d="m15 6 6 6-6 6"></path>
+                </svg>
+              </div>
+              <div class="slider-label-before">Before</div>
+              <div class="slider-label-after">After</div>
+            </div>
+          </div>
 
-  <!-- ── CONTENT SECTION ── -->
-  <div class="content-section">
-    <div class="card" style="padding-top:28px;">
-      <section class="flow-section reviews-section">
+          <section class="flow-section reviews-section">
             <div class="reviews-header">
               <span class="social-label">Member Reviews</span>
               <span class="rating-badge">4.7 ★ &nbsp;200+ members</span>
@@ -1177,132 +1108,131 @@
               </div>
             </div>
             <div class="reviews-more-label">Trusted by 200+ makers</div>
-    </section>
+          </section>
 
-    <!-- ── FAQ SECTION ── -->
-    <section class="flow-section faq-section" aria-labelledby="faq-heading">
+          <div class="faq-bridge"><span>Still have questions? Find your answers below ↓</span></div>
 
-      <div class="faq-header">
-        <h2 class="faq-title" id="faq-heading">Frequently Asked Questions</h2>
-        <p class="faq-subtitle">Still have questions? Find your answers below</p>
+          <section class="flow-section inline-faq-section">
+            <span class="social-label" style="display:block;margin-bottom:12px;">FAQ</span>
+            <div class="faq-list">
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">1. What do I get when I join?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Full access to the complete PolishMaster System — immediately.</span>You get a structured finishing system built for 3D print makers. <ul>
+                    <li>Full sanding sequence (grit by grit)</li>
+                    <li>Surface refinement techniques</li>
+                    <li>Polishing steps for gloss or matte</li>
+                    <li>Guidance on tool &amp; material types to use</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">2. Do you sell tools or physical products?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">We teach the method — no tools or products are sold here.</span>This is a knowledge system, not a store. <ul>
+                    <li>No physical products are sold</li>
+                    <li>You learn what types of tools work and why</li>
+                    <li>You source the tools yourself, locally</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">3. Can I learn this remotely?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes — the entire system is designed to be self-paced and remote.</span><ul>
+                    <li>Follow every step from home</li>
+                    <li>No in-person sessions required</li>
+                    <li>Works in any country or workshop setup</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">4. What materials does this work with?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Standard sanding and polishing supplies — nothing exotic.</span>Primarily designed for common FDM filaments. <ul>
+                    <li>Works best with PLA and PLA+</li>
+                    <li>Compatible with PETG and similar plastics</li>
+                    <li>Based on surface control, not a specific brand</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">5. What if I can't find the same tools in my country?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around categories, not brands — substitutions always work.</span>The method focuses on principles, not specific brands. <ul>
+                    <li>You'll learn what properties matter in each tool</li>
+                    <li>Local hardware-store alternatives work fine</li>
+                    <li>Contact available after joining for specific questions</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">6. Does this work for small, detailed figures?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints — highly detailed miniatures require more care.</span>The method works, but small parts require more patience. <ul>
+                    <li>Great results on regular-sized models</li>
+                    <li>Challenging on ultra-detailed miniatures</li>
+                    <li>Flat and curved surfaces both supported</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">7. Can I get a matte finish instead of glossy?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes — matte is simply an earlier stop in the same process.</span><ul>
+                    <li>Stop after sanding for a clean matte surface</li>
+                    <li>Continue to polishing for a mirror-gloss finish</li>
+                    <li>You control the final look at every step</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">8. What is the PolishMaster System?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">A two-layer system: learn the method, then apply it to sell.</span><ul>
+                    <li>Layer 1 — the finishing method, step by step</li>
+                    <li>Layer 2 — turn prints into sellable products</li>
+                    <li>Includes pricing guidance and where-to-sell ideas</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+            </div>
+          </section>
+          <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+            <span class="cta-text">Start the System</span>
+            <span class="cta-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+            </span>
+          </a>
+        </div>
       </div>
-
-      <div class="faq-list" role="list">
-
-        <!-- Q1 -->
-        <div class="faq-item" role="listitem">
-          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-1">
-            <span class="faq-question">What do I actually get when I join?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <span class="faq-icon-plus">+</span>
-              <span class="faq-icon-x">&times;</span>
-            </span>
-          </button>
-          <div class="faq-content" id="faq-answer-1" role="region">
-            <div class="faq-content-inner">
-              <p class="faq-answer">Access to the full PolishMaster System — a step-by-step method to turn raw 3D prints into clean, sale-ready, mirror-finish products, plus guidance on tools and materials.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Q2 -->
-        <div class="faq-item" role="listitem">
-          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-2">
-            <span class="faq-question">Do you sell the tools or just teach the method?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <span class="faq-icon-plus">+</span>
-              <span class="faq-icon-x">&times;</span>
-            </span>
-          </button>
-          <div class="faq-content" id="faq-answer-2" role="region">
-            <div class="faq-content-inner">
-              <p class="faq-answer"><strong>Tools are not sold.</strong><br>PolishMaster focuses on the process — how to choose and use the right tools to get consistent results.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Q3 -->
-        <div class="faq-item" role="listitem">
-          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-3">
-            <span class="faq-question">Can I really learn this online and get the same results?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <span class="faq-icon-plus">+</span>
-              <span class="faq-icon-x">&times;</span>
-            </span>
-          </button>
-          <div class="faq-content" id="faq-answer-3" role="region">
-            <div class="faq-content-inner">
-              <p class="faq-answer"><strong>Yes.</strong><br>The system is built to be followed remotely with a controlled, repeatable workflow.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Q4 -->
-        <div class="faq-item" role="listitem">
-          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-4">
-            <span class="faq-question">What tools and materials do you use exactly?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <span class="faq-icon-plus">+</span>
-              <span class="faq-icon-x">&times;</span>
-            </span>
-          </button>
-          <div class="faq-content" id="faq-answer-4" role="region">
-            <div class="faq-content-inner">
-              <p class="faq-answer"><strong>Standard sanding and polishing tools.</strong><br>The system shows what matters — not specific brands — so the process can be applied anywhere.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Q5 -->
-        <div class="faq-item" role="listitem">
-          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-5">
-            <span class="faq-question">What if I can't find those tools in my country?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <span class="faq-icon-plus">+</span>
-              <span class="faq-icon-x">&times;</span>
-            </span>
-          </button>
-          <div class="faq-content" id="faq-answer-5" role="region">
-            <div class="faq-content-inner">
-              <p class="faq-answer"><strong>Tools are region-specific.</strong><br>The system defines categories, allowing local alternatives. Support is available after joining if needed.</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- Q6 -->
-        <div class="faq-item" role="listitem">
-          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-6">
-            <span class="faq-question">Can this work on small, detailed 3D prints too?</span>
-            <span class="faq-icon" aria-hidden="true">
-              <span class="faq-icon-plus">+</span>
-              <span class="faq-icon-x">&times;</span>
-            </span>
-          </button>
-          <div class="faq-content" id="faq-answer-6" role="region">
-            <div class="faq-content-inner">
-              <p class="faq-answer"><strong>Yes, but highly detailed miniatures are more challenging.</strong><br>Sanding very small, complex geometries requires more control and may not be ideal for every model.</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
     </section>
-
-    <!-- ── BOTTOM CTA ── -->
-    <a class="cta faq-cta" href="https://www.patreon.com/15111337/join">
-      <span class="cta-text">Start the PolishMaster System</span>
-      <span class="cta-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24">
-          <path d="M5 12h14"></path>
-          <path d="m13 6 6 6-6 6"></path>
-        </svg>
-      </span>
-    </a>
-
-  </div>
-</div>
-
-</main>
+  </main>
 
   <footer class="site-footer">
     <div>© 2026 PolishMaster. All rights reserved.</div>
@@ -1315,82 +1245,71 @@
   </footer>
 
   <script>
-  (function () {
-
-    // ── FAQ ACCORDION ──
     (function () {
-      var items = document.querySelectorAll('.faq-item');
-      items.forEach(function (item) {
-        var toggle = item.querySelector('.faq-toggle');
-        if (!toggle) return;
-        toggle.addEventListener('click', function () {
-          var isOpen = item.classList.contains('is-open');
-          // Close all
-          items.forEach(function (i) {
-            i.classList.remove('is-open');
-            var t = i.querySelector('.faq-toggle');
-            if (t) t.setAttribute('aria-expanded', 'false');
-          });
-          // Open clicked if it was closed
-          if (!isOpen) {
-            item.classList.add('is-open');
-            toggle.setAttribute('aria-expanded', 'true');
-          }
+      var faqToggles = document.querySelectorAll(".faq-toggle");
+      var comparisonSliders = document.querySelectorAll("[data-comparison-slider]");
+
+      faqToggles.forEach(function (toggle) {
+        toggle.addEventListener("click", function () {
+          var item = toggle.closest(".faq-item");
+          if (!item) return;
+          item.classList.toggle("is-open");
         });
       });
-    })();    // ── HERO SCROLL TRANSFORM ──
-    var section   = document.getElementById("hero-scroll-section");
-    var afterBg   = document.getElementById("hero-bg-after");
-    var fill      = document.getElementById("hero-progress-fill");
-    var labelRaw  = document.getElementById("hero-label-raw");
-    var labelPol  = document.getElementById("hero-label-polished");
-    var hint      = document.getElementById("hero-scroll-hint");
 
-    if (!section || !afterBg) return;
+      comparisonSliders.forEach(function (slider) {
+        var overlay = slider.querySelector("[data-comparison-overlay]");
+        var divider = slider.querySelector("[data-comparison-divider]");
+        var handle  = slider.querySelector("[data-comparison-handle]");
+        var isDragging = false;
+        if (!overlay || !divider || !handle) return;
 
-    // Hard reset
-    afterBg.style.opacity  = "0";
-    if (fill)     fill.style.width      = "0%";
-    if (labelRaw) labelRaw.style.opacity  = "1";
-    if (labelPol) labelPol.style.opacity  = "0";
+        function setPosition(clientX) {
+          var rect = slider.getBoundingClientRect();
+          var percent = ((clientX - rect.left) / rect.width) * 100;
+          percent = Math.max(0, Math.min(100, percent));
+          overlay.style.clipPath = "inset(0 " + (100 - percent) + "% 0 0)";
+          divider.style.left = "calc(" + percent + "% - 1px)";
+          handle.style.left = percent + "%";
+        }
 
-    function easeInOut(t) {
-      return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
-    }
+        function stopDragging() {
+          isDragging = false;
+          slider.classList.remove("is-dragging");
+        }
 
-    function onScroll() {
-      var rect = section.getBoundingClientRect();
-      var sectionH = section.offsetHeight;
-      var vh = window.innerHeight;
+        slider.addEventListener("mousedown", function (e) {
+          isDragging = true;
+          slider.classList.add("is-dragging");
+          setPosition(e.clientX);
+        });
 
-      // scrolled = how far into the section we are
-      // rect.top starts at 0 (top of page) and goes negative as we scroll
-      // progress 0 when rect.top=0, progress 1 when rect.top = -(sectionH - vh)
-      var scrolled = -rect.top;
-      var maxScroll = sectionH - vh;
+        slider.addEventListener("touchstart", function (e) {
+          isDragging = true;
+          slider.classList.add("is-dragging");
+          if (e.touches[0]) setPosition(e.touches[0].clientX);
+        }, { passive: true });
 
-      if (scrolled < 0) scrolled = 0;
-      if (maxScroll <= 0) return;
+        window.addEventListener("mousemove", function (e) {
+          if (!isDragging) return;
+          setPosition(e.clientX);
+        });
 
-      // Transform completes in first 60% of scroll distance
-      var transformProgress = Math.min(1, scrolled / (maxScroll * 0.6));
-      var t = easeInOut(transformProgress);
+        window.addEventListener("touchmove", function (e) {
+          if (!isDragging || !e.touches[0]) return;
+          setPosition(e.touches[0].clientX);
+        }, { passive: true });
 
-      afterBg.style.opacity = t;
-      if (fill)     fill.style.width     = (t * 100) + "%";
-      if (labelRaw) labelRaw.style.opacity  = Math.max(0, 1 - t * 2);
-      if (labelPol) labelPol.style.opacity  = Math.min(1, t * 1.5 - 0.2);
+        window.addEventListener("mouseup", stopDragging);
+        window.addEventListener("touchend", stopDragging);
 
-      // Hide scroll hint after user starts scrolling
-      if (hint) hint.style.opacity = scrolled > 30 ? "0" : "1";
-    }
-
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    requestAnimationFrame(function(){ requestAnimationFrame(onScroll); });
-
-  })();
-</script>
+        slider.addEventListener("mouseleave", function () {
+          if (!isDragging) return;
+          stopDragging();
+        });
+      });
+    })();
+  </script>
 
   <script>
     (function () {
