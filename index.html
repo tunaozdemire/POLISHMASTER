@@ -171,11 +171,113 @@
       overflow: hidden;
     }
 
-    .visual img {
+    .comparison-slider {
+      position: relative;
       width: 100%;
+      aspect-ratio: 16 / 9;
       border-radius: 16px;
-      margin: 0 auto;
-      filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.55));
+      overflow: hidden;
+      background: #f4f1ec;
+      cursor: ew-resize;
+      touch-action: none;
+      user-select: none;
+    }
+
+    .comparison-base,
+    .comparison-overlay {
+      position: absolute;
+      inset: 0;
+    }
+
+    .comparison-base img,
+    .comparison-overlay img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      pointer-events: none;
+      filter: drop-shadow(0 24px 36px rgba(0, 0, 0, 0.28));
+    }
+
+    .comparison-overlay {
+      overflow: hidden;
+      clip-path: inset(0 50% 0 0);
+    }
+
+    .comparison-divider {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: calc(50% - 1px);
+      width: 2px;
+      background: rgba(255, 255, 255, 0.86);
+      box-shadow:
+        0 0 0 1px rgba(0, 0, 0, 0.08),
+        0 0 18px rgba(255, 255, 255, 0.28);
+      pointer-events: none;
+    }
+
+    .comparison-handle {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 54px;
+      height: 54px;
+      border: 0;
+      border-radius: 999px;
+      transform: translate(-50%, -50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(255, 255, 255, 0.96);
+      color: #2e2a27;
+      box-shadow:
+        0 10px 24px rgba(0, 0, 0, 0.22),
+        0 0 0 8px rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .comparison-slider.is-dragging .comparison-handle {
+      transform: translate(-50%, -50%) scale(1.06);
+      box-shadow:
+        0 14px 30px rgba(0, 0, 0, 0.26),
+        0 0 0 10px rgba(255, 255, 255, 0.12);
+    }
+
+    .comparison-handle svg {
+      width: 24px;
+      height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .comparison-chip {
+      position: absolute;
+      z-index: 2;
+      top: 14px;
+      padding: 7px 11px;
+      border-radius: 999px;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(0, 0, 0, 0.46);
+      color: #fff6ef;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      backdrop-filter: blur(10px);
+    }
+
+    .comparison-chip.before {
+      left: 14px;
+    }
+
+    .comparison-chip.after {
+      right: 14px;
     }
 
     .visual-badge {
@@ -416,6 +518,109 @@
       gap: 10px;
       justify-content: center;
       margin-top: 30px;
+    }
+
+    .flow-section {
+      width: 100%;
+      margin-top: 24px;
+    }
+
+    .flow-section .social-label {
+      display: inline-block;
+      margin-bottom: 12px;
+    }
+
+    .inline-reviews {
+      display: grid;
+      gap: 12px;
+    }
+
+    .inline-reviews .rating-summary {
+      margin-bottom: 0;
+    }
+
+    .inline-reviews .reviews {
+      display: grid;
+      grid-auto-flow: column;
+      grid-auto-columns: minmax(82%, 1fr);
+      gap: 12px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 0 18px 8px 0;
+      margin-right: -18px;
+      scroll-snap-type: x proximity;
+      mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 100%);
+      -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 86%, transparent 100%);
+      scrollbar-width: none;
+    }
+
+    .inline-reviews .reviews::-webkit-scrollbar {
+      display: none;
+    }
+
+    .inline-reviews .review {
+      scroll-snap-align: start;
+    }
+
+    .reviews-more {
+      margin-top: 2px;
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 0.84rem;
+      letter-spacing: 0.01em;
+      text-align: left;
+    }
+
+    .inline-faq {
+      display: grid;
+      gap: 12px;
+    }
+
+    .faq-bridge {
+      margin-top: 8px;
+      text-align: center;
+    }
+
+    .faq-bridge span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      color: rgba(255, 255, 255, 0.54);
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+    }
+
+    .faq-bridge::before {
+      content: "";
+      display: block;
+      width: 100%;
+      height: 1px;
+      margin-bottom: 10px;
+      background: linear-gradient(90deg, transparent 0%, rgba(255, 106, 0, 0.2) 50%, transparent 100%);
+    }
+
+    .faq-preview {
+      padding: 16px 18px;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.025);
+      text-align: left;
+    }
+
+    .faq-preview strong {
+      display: block;
+      margin-bottom: 8px;
+      color: #fff3ea;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .faq-preview p {
+      margin: 0;
+      max-width: none;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 0.92rem;
+      line-height: 1.65;
     }
 
     .members-btn {
@@ -957,6 +1162,17 @@
         grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
+      .inline-reviews .reviews {
+        grid-auto-flow: initial;
+        grid-auto-columns: auto;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        overflow: visible;
+        padding: 0;
+        margin-right: 0;
+        mask-image: none;
+        -webkit-mask-image: none;
+      }
+
       .modal-panel {
         padding: 28px;
       }
@@ -991,297 +1207,91 @@
           </div>
           <div class="visual">
             <div class="visual-badge">Raw to Mirror Finish</div>
-            <img src="surface-comparison.png" alt="Before and after surface finish comparison" />
+            <div class="comparison-slider" data-comparison-slider>
+              <div class="comparison-chip before">Before</div>
+              <div class="comparison-chip after">After</div>
+              <div class="comparison-base">
+                <img src="cross-before.png" alt="Raw 3D printed piece before polishing" draggable="false" />
+              </div>
+              <div class="comparison-overlay" data-comparison-overlay>
+                <img src="cross-after.png" alt="Polished 3D printed piece after finishing" draggable="false" />
+              </div>
+              <div class="comparison-divider" data-comparison-divider></div>
+              <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
+                <svg viewBox="0 0 24 24">
+                  <path d="m9 6-6 6 6 6"></path>
+                  <path d="m15 6 6 6-6 6"></path>
+                </svg>
+              </div>
+            </div>
           </div>
+          <section class="flow-section social-proof inline-reviews" aria-labelledby="reviews-title">
+            <div class="social-top">
+              <span class="social-label">Member Reviews</span>
+              <span class="rating">4.7/5 from 200+ members</span>
+            </div>
+            <div class="rating-summary">
+              <div class="rating-hero">
+                <div>
+                  <div class="rating-score">
+                    <strong>4.7</strong>
+                    <span>/ 5</span>
+                  </div>
+                  <div class="stars">★★★★★</div>
+                </div>
+              </div>
+            </div>
+            <div class="reviews">
+              <article class="review">
+                <div class="review-head">
+                  <span class="avatar avatar-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
+                  <div class="reviewer"><div class="reviewer-name">Ethan K.</div></div>
+                </div>
+                <p>"My prints finally look sellable instead of unfinished prototypes."</p>
+                <div class="stars">★★★★★</div>
+              </article>
+              <article class="review">
+                <div class="review-head">
+                  <span class="avatar avatar-2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
+                  <div class="reviewer"><div class="reviewer-name">Lina A.</div></div>
+                </div>
+                <p>"The polishing steps are simple, clear, and made my results look premium fast."</p>
+                <div class="stars">★★★★★</div>
+              </article>
+              <article class="review">
+                <div class="review-head">
+                  <span class="avatar avatar-5" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
+                  <div class="reviewer"><div class="reviewer-name">Daniel H.</div></div>
+                </div>
+                <p>"Good information overall, but I wanted more examples for curved surfaces."</p>
+                <div class="stars">★★★☆☆</div>
+              </article>
+            </div>
+            <div class="reviews-more">+200 reviews inside</div>
+          </section>
+          <div class="faq-bridge"><span>Questions? ↓</span></div>
+          <section class="flow-section social-proof inline-faq" aria-labelledby="faq-preview-title">
+            <span class="social-label">FAQ</span>
+            <div class="faq-preview">
+              <strong>What do I get when I join?</strong>
+              <p>You get the full PolishMaster method step-by-step: sanding sequence, surface refinement, and polishing, plus the types of tools and materials to use.</p>
+            </div>
+            <div class="faq-preview">
+              <strong>Can I learn this remotely?</strong>
+              <p>Yes. The system is built to be followed step-by-step from anywhere.</p>
+            </div>
+            <div class="faq-preview">
+              <strong>What materials does this work with?</strong>
+              <p>Mainly PLA and similar 3D printing plastics. The method is based on surface control, not a single material.</p>
+            </div>
+          </section>
           <div class="actions secondary-actions">
-            <button class="members-btn" id="members-trigger" type="button"><span>Member Reviews</span></button>
-            <button class="faq-btn" id="faq-trigger" type="button"><span>FAQ</span></button>
+            <button class="faq-btn" id="faq-trigger" type="button"><span>Full FAQ</span></button>
           </div>
         </div>
       </div>
     </section>
   </main>
-
-  <div class="modal" id="members-modal" aria-hidden="true">
-    <div class="modal-backdrop" data-close="true"></div>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="members-title">
-      <div class="modal-head">
-        <div>
-          <span class="social-label">Patreon Reviews</span>
-          <h2 class="modal-title" id="members-title">What members are saying</h2>
-        </div>
-        <button class="close-btn" id="members-close" type="button" aria-label="Close members popup">x</button>
-      </div>
-
-      <div class="social-proof" id="members">
-        <div class="social-top">
-          <span class="social-label">Member Reviews</span>
-          <span class="rating">4.7/5 from 200+ members</span>
-        </div>
-
-        <div class="rating-summary">
-          <div class="rating-hero">
-            <div>
-              <div class="rating-score">
-                <strong>4.7</strong>
-                <span>/ 5</span>
-              </div>
-              <div class="stars">★★★★★</div>
-            </div>
-            <div class="rating-sub">Based on mixed member feedback across finish quality, clarity, and results.</div>
-          </div>
-
-        </div>
-
-        <div class="reviews">
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Ethan K.</div>
-              </div>
-            </div>
-            <p>"My prints finally look sellable instead of unfinished prototypes."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Lina A.</div>
-              </div>
-            </div>
-            <p>"The polishing steps are simple, clear, and made my results look premium fast."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Marcus T.</div>
-              </div>
-            </div>
-            <p>"This made it way easier to charge confidently for my finished pieces."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-4" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Sofia R.</div>
-              </div>
-            </div>
-            <p>"The material recommendations helped me avoid wasting prints on the wrong finish."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-5" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Daniel H.</div>
-              </div>
-            </div>
-            <p>"Good information overall, but I wanted more examples for curved surfaces."</p>
-            <div class="stars">★★★☆☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-6" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Nina P.</div>
-              </div>
-            </div>
-            <p>"I used the sequence on PLA test cubes first and the difference was immediate."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-7" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Jason T.</div>
-              </div>
-            </div>
-            <p>"The finish looks great, but I think the membership could use a faster onboarding guide."</p>
-            <div class="stars">★★★☆☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-8" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Allison K.</div>
-              </div>
-            </div>
-            <p>"This gave me a clear path from raw prints to something I was proud to photograph."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Ryan B.</div>
-              </div>
-            </div>
-            <p>"Helpful, but I underestimated how much patience sanding still takes."</p>
-            <div class="stars">★★★☆☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Carla M.</div>
-              </div>
-            </div>
-            <p>"My product photos improved because the surfaces stopped catching ugly highlights."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Owen S.</div>
-              </div>
-            </div>
-            <p>"The mirror finish result is real, but I needed a few tries before getting it consistent."</p>
-            <div class="stars">★★★★☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-4" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Emma V.</div>
-              </div>
-            </div>
-            <p>"I finally have a process I can repeat instead of guessing grit progression every time."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-5" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Paul G.</div>
-              </div>
-            </div>
-            <p>"Some modules felt a little too basic for me, but the focus on premium presentation was still useful."</p>
-            <div class="stars">★★★☆☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-6" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Katarzyna N.</div>
-              </div>
-            </div>
-            <p>"This helped me understand what actually makes a print feel premium."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-7" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Leo M.</div>
-              </div>
-            </div>
-            <p>"The content is solid, but I wish there were more examples for larger printed objects."</p>
-            <div class="stars">★★★☆☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-8" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Fatima H.</div>
-              </div>
-            </div>
-            <p lang="ar" dir="rtl">هذا الاشتراك ساعدني أفهم كيف أخلي القطعة تبدو أغلى وأكثر احترافية.</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-1" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Mason S.</div>
-              </div>
-            </div>
-            <p>"I liked the polish workflow, but I had to source some supplies on my own."</p>
-            <div class="stars">★★★★☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-2" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Johanna K.</div>
-              </div>
-            </div>
-            <p>"My first finished piece already looked cleaner than anything I had sold before."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-3" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Mikolaj P.</div>
-              </div>
-            </div>
-            <p>"Useful overall, but beginners should still expect a bit of trial and error."</p>
-            <div class="stars">★★★★☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-4" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Omar A.</div>
-              </div>
-            </div>
-            <p lang="ar" dir="rtl">فكرة القيمة البيعية كانت مفاجئة بالنسبة لي. التشطيب الأفضل غيّر فعلاً إحساس المنتج.</p>
-            <div class="stars">★★★★★</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-5" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Markus B.</div>
-              </div>
-            </div>
-            <p>"I wanted more advanced examples, but the core polishing system is strong."</p>
-            <div class="stars">★★★☆☆</div>
-          </article>
-
-          <article class="review">
-            <div class="review-head">
-              <span class="avatar avatar-6" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg></span>
-              <div class="reviewer">
-                <div class="reviewer-name">Grace C.</div>
-              </div>
-            </div>
-            <p>"This helped me stop shipping prints that still looked like rough prototypes."</p>
-            <div class="stars">★★★★★</div>
-          </article>
-        </div>
-        <div class="popup-return">
-          <button type="button" data-return="true">Return to main page</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <div class="modal" id="faq-modal" aria-hidden="true">
     <div class="modal-backdrop" data-close="true"></div>
@@ -1348,14 +1358,12 @@
 
   <script>
     (function () {
-      var membersTrigger = document.getElementById("members-trigger");
-      var membersModal = document.getElementById("members-modal");
-      var membersClose = document.getElementById("members-close");
       var faqTrigger = document.getElementById("faq-trigger");
       var faqModal = document.getElementById("faq-modal");
       var faqClose = document.getElementById("faq-close");
       var returnButtons = document.querySelectorAll("[data-return='true']");
       var faqToggles = document.querySelectorAll(".faq-toggle");
+      var comparisonSliders = document.querySelectorAll("[data-comparison-slider]");
       var scrollTop = 0;
 
       function lockPageScroll() {
@@ -1391,19 +1399,12 @@
         if (!modal) return;
         modal.classList.remove("is-open");
         modal.setAttribute("aria-hidden", "true");
-        if (
-          (!membersModal || !membersModal.classList.contains("is-open")) &&
-          (!faqModal || !faqModal.classList.contains("is-open"))
-        ) {
+        if (!faqModal || !faqModal.classList.contains("is-open")) {
           unlockPageScroll();
         }
       }
 
       function closeAll() {
-        if (membersModal) {
-          membersModal.classList.remove("is-open");
-          membersModal.setAttribute("aria-hidden", "true");
-        }
         if (faqModal) {
           faqModal.classList.remove("is-open");
           faqModal.setAttribute("aria-hidden", "true");
@@ -1411,21 +1412,10 @@
         unlockPageScroll();
       }
 
-      if (membersTrigger && membersModal) {
-        membersTrigger.addEventListener("click", function () {
-          closeAll();
-          openModal(membersModal);
-        });
-      }
       if (faqTrigger && faqModal) {
         faqTrigger.addEventListener("click", function () {
           closeAll();
           openModal(faqModal);
-        });
-      }
-      if (membersClose && membersModal) {
-        membersClose.addEventListener("click", function () {
-          closeModal(membersModal);
         });
       }
       if (faqClose && faqModal) {
@@ -1433,7 +1423,7 @@
           closeModal(faqModal);
         });
       }
-      [membersModal, faqModal].forEach(function (modal) {
+      [faqModal].forEach(function (modal) {
         if (!modal) return;
         modal.addEventListener("click", function (event) {
           var target = event.target;
@@ -1454,6 +1444,62 @@
           item.classList.toggle("is-open");
         });
       });
+
+      comparisonSliders.forEach(function (slider) {
+        var overlay = slider.querySelector("[data-comparison-overlay]");
+        var divider = slider.querySelector("[data-comparison-divider]");
+        var handle = slider.querySelector("[data-comparison-handle]");
+        var isDragging = false;
+
+        if (!overlay || !divider || !handle) return;
+
+        function setPosition(clientX) {
+          var rect = slider.getBoundingClientRect();
+          var percent = ((clientX - rect.left) / rect.width) * 100;
+          percent = Math.max(0, Math.min(100, percent));
+
+          overlay.style.clipPath = "inset(0 " + (100 - percent) + "% 0 0)";
+          divider.style.left = "calc(" + percent + "% - 1px)";
+          handle.style.left = percent + "%";
+        }
+
+        function stopDragging() {
+          isDragging = false;
+          slider.classList.remove("is-dragging");
+        }
+
+        slider.addEventListener("mousedown", function (event) {
+          isDragging = true;
+          slider.classList.add("is-dragging");
+          setPosition(event.clientX);
+        });
+
+        slider.addEventListener("touchstart", function (event) {
+          isDragging = true;
+          slider.classList.add("is-dragging");
+          if (event.touches[0]) {
+            setPosition(event.touches[0].clientX);
+          }
+        }, { passive: true });
+
+        window.addEventListener("mousemove", function (event) {
+          if (!isDragging) return;
+          setPosition(event.clientX);
+        });
+
+        window.addEventListener("touchmove", function (event) {
+          if (!isDragging || !event.touches[0]) return;
+          setPosition(event.touches[0].clientX);
+        }, { passive: true });
+
+        window.addEventListener("mouseup", stopDragging);
+        window.addEventListener("touchend", stopDragging);
+        slider.addEventListener("mouseleave", function () {
+          if (!isDragging) return;
+          stopDragging();
+        });
+      });
+
       document.addEventListener("keydown", function (event) {
         if (event.key === "Escape") {
           closeAll();
