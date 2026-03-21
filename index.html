@@ -564,13 +564,19 @@
   
 
   /* ── FAQ LIST ── */
-  .faq-list { display: grid; gap: 10px; }
+  .faq-list { display: grid; gap: 8px; }
 
   .faq-item {
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 14px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px;
     background: rgba(255,255,255,0.025);
     overflow: hidden;
+    transition: border-color .22s ease, background .22s ease;
+  }
+
+  .faq-item.is-open {
+    border-color: rgba(255,106,0,0.25);
+    background: rgba(255,106,0,0.04);
   }
 
   .faq-toggle {
@@ -578,36 +584,56 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 10px;
-    padding: 14px 16px;
+    gap: 12px;
+    padding: 15px 16px;
     background: transparent;
     border: 0;
     color: inherit;
     text-align: left;
     -webkit-tap-highlight-color: transparent;
+    cursor: pointer;
   }
 
   .faq-question {
     color: #fff3ea;
     font-size: 0.88rem;
     font-weight: 700;
-    line-height: 1.4;
+    line-height: 1.45;
   }
 
   .faq-icon {
-    color: rgba(255,255,255,0.54);
-    transition: transform .22s ease;
-    flex: 0 0 auto;
-    font-size: 1.1rem;
-    line-height: 1;
+    flex: 0 0 24px;
+    width: 24px;
+    height: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.5);
+    transition: transform .3s cubic-bezier(.34,1.56,.64,1), color .22s ease;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
   }
 
-  .faq-item.is-open .faq-icon { transform: rotate(45deg); }
+  .faq-icon svg {
+    width: 14px;
+    height: 14px;
+    stroke: currentColor;
+    stroke-width: 2.4;
+    fill: none;
+    stroke-linecap: round;
+    display: block;
+  }
+
+  .faq-item.is-open .faq-icon {
+    transform: rotate(45deg);
+    color: rgba(255,106,0,0.9);
+    background: rgba(255,106,0,0.12);
+  }
 
   .faq-content {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows .22s ease;
+    transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1);
   }
 
   .faq-item.is-open .faq-content { grid-template-rows: 1fr; }
@@ -615,13 +641,56 @@
   .faq-content-inner { overflow: hidden; }
 
   .faq-answer {
-    padding: 0 16px 14px;
+    padding: 0 16px 16px 16px;
     color: rgba(255,255,255,0.68);
-    font-size: 0.84rem;
-    line-height: 1.68;
+    font-size: 0.83rem;
+    line-height: 1.72;
+    text-align: left;
+    max-width: 92%;
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity .28s ease .06s, transform .28s ease .06s;
   }
 
-  /* ── FOOTER ── */
+  .faq-item.is-open .faq-answer {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .faq-answer ul {
+    list-style: none;
+    padding: 0;
+    margin: 6px 0 0;
+    display: grid;
+    gap: 6px;
+  }
+
+  .faq-answer ul li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 0.82rem;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .faq-answer ul li::before {
+    content: "›";
+    color: rgba(255,106,0,0.8);
+    font-weight: 700;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    flex: 0 0 auto;
+  }
+
+  .faq-divider {
+    width: 100%;
+    height: 1px;
+    background: rgba(255,255,255,0.06);
+    margin: 8px 0;
+  }
+
+/* ── FOOTER ── */
   .site-footer {
     padding: 16px 20px 24px;
     color: rgba(255,255,255,0.34);
@@ -1040,65 +1109,122 @@
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">1. What do I get when I join?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">You get the full PolishMaster method step-by-step: sanding sequence, surface refinement, and polishing, plus the exact types of tools and materials to use.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  You get the complete PolishMaster method — a structured finishing system built for 3D print makers.
+                  <ul>
+                    <li>Full sanding sequence (grit by grit)</li>
+                    <li>Surface refinement techniques</li>
+                    <li>Polishing steps for gloss or matte</li>
+                    <li>Guidance on tool &amp; material types to use</li>
+                  </ul>
+                </div></div></div>
               </div>
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">2. Do you sell tools or physical products?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">No. This is not a product store. You learn the method and how to choose the right tools yourself.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  No — this is a knowledge system, not a store.
+                  <ul>
+                    <li>No physical products are sold</li>
+                    <li>You learn what types of tools work and why</li>
+                    <li>You source the tools yourself, locally</li>
+                  </ul>
+                </div></div></div>
               </div>
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">3. Can I learn this remotely?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. The system is built to be followed step-by-step from anywhere.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  Yes — the entire system is designed to be self-paced and remote.
+                  <ul>
+                    <li>Follow every step from home</li>
+                    <li>No in-person sessions required</li>
+                    <li>Works in any country or workshop setup</li>
+                  </ul>
+                </div></div></div>
               </div>
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">4. What materials does this work with?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Mainly PLA and similar 3D printing plastics. The method is based on surface control, not a single material.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  Primarily designed for common FDM filaments.
+                  <ul>
+                    <li>Works best with PLA and PLA+</li>
+                    <li>Compatible with PETG and similar plastics</li>
+                    <li>Based on surface control, not a specific brand</li>
+                  </ul>
+                </div></div></div>
               </div>
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">5. What if I can't find the same tools in my country?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Tools are region-specific. Inside, you'll learn what matters so you can use local alternatives. If needed, you can contact me after joining.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  Not a problem — the method focuses on principles, not specific brands.
+                  <ul>
+                    <li>You'll learn what properties matter in each tool</li>
+                    <li>Local hardware-store alternatives work fine</li>
+                    <li>Contact available after joining for specific questions</li>
+                  </ul>
+                </div></div></div>
               </div>
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">6. Does this work for small, detailed figures?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes, but very small, highly detailed models are harder to sand. If your focus is ultra-detailed miniatures, the process becomes more challenging.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  Partially — the method works, but small parts require more patience.
+                  <ul>
+                    <li>Great results on regular-sized models</li>
+                    <li>Challenging on ultra-detailed miniatures</li>
+                    <li>Flat and curved surfaces both supported</li>
+                  </ul>
+                </div></div></div>
               </div>
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">7. Can I get a matte finish instead of glossy?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. Matte comes from stopping before polishing, so the surface stays sanded rather than polished.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  Yes — matte is simply an earlier stop in the process.
+                  <ul>
+                    <li>Stop after sanding for a clean matte surface</li>
+                    <li>Continue to polishing for a mirror-gloss finish</li>
+                    <li>You control the final look at every step</li>
+                  </ul>
+                </div></div></div>
               </div>
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
                   <span class="faq-question">8. What is the PolishMaster System?</span>
-                  <span class="faq-icon">+</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">First you learn the method. Then the system layer helps you turn prints into sellable products with new models, pricing guidance, and ideas on where to sell.</div></div></div>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
+                  A two-layer system: learn the method, then apply it to sell.
+                  <ul>
+                    <li>Layer 1 — the finishing method, step by step</li>
+                    <li>Layer 2 — turn prints into sellable products</li>
+                    <li>Includes pricing guidance and where-to-sell ideas</li>
+                  </ul>
+                </div></div></div>
               </div>
 
             </div>
