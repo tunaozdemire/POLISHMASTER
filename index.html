@@ -259,40 +259,47 @@
 
   .comparison-divider {
     position: absolute;
-    top: 0; bottom: 0;
+    top: 0;
+    bottom: 0;
     left: calc(50% - 1px);
     width: 2px;
-    background: rgba(255,255,255,0.92);
-    box-shadow: 0 0 14px rgba(255,255,255,0.3);
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.7) 15%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 85%, transparent 100%);
     pointer-events: none;
   }
 
   .comparison-handle {
     position: absolute;
-    top: 50%; left: 50%;
-    width: 48px; height: 48px;
+    top: 50%;
+    left: 50%;
+    width: 44px;
+    height: 44px;
     border-radius: 999px;
     transform: translate(-50%,-50%);
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: rgba(255,255,255,0.96);
-    color: #2e2a27;
-    box-shadow:
-      0 8px 20px rgba(0,0,0,0.24),
-      0 0 0 6px rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.14);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.32);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.22);
     pointer-events: none;
-    transition: transform .2s ease;
+    animation: handlePulse 2.4s ease-in-out infinite;
+    transition: transform .2s ease, box-shadow .2s ease;
   }
-
   .comparison-slider.is-dragging .comparison-handle {
-    transform: translate(-50%,-50%) scale(1.08);
+    transform: translate(-50%,-50%) scale(1.1);
+    animation: none;
+    box-shadow: 0 6px 32px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.12), inset 0 1px 0 rgba(255,255,255,0.28);
   }
-
   .comparison-handle svg {
-    width: 22px; height: 22px;
-    stroke: currentColor; stroke-width: 2.2;
-    fill: none; stroke-linecap: round; stroke-linejoin: round;
+    width: 18px;
+    height: 18px;
+    stroke: rgba(255,255,255,0.9);
+    stroke-width: 2;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 
   /* ── FLOW SECTIONS ── */
@@ -609,7 +616,7 @@
     align-items: center;
     justify-content: center;
     color: rgba(255,255,255,0.5);
-    transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1), color 0.28s ease, background 0.28s ease;
+    transition: transform .32s cubic-bezier(.4,0,.2,1), color .22s ease, background .22s ease;
     border-radius: 50%;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
@@ -633,9 +640,9 @@
   }
 
   .faq-content {
-  display: grid;
-  grid-template-rows: 0fr;
-  transition: grid-template-rows 0.48s cubic-bezier(0.4, 0, 0.2, 1);
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1);
   }
 
   .faq-item.is-open .faq-content { grid-template-rows: 1fr; }
@@ -651,7 +658,7 @@
     max-width: 94%;
     opacity: 0;
     transform: translateY(-4px);
-    transition: opacity 0.38s ease 0.08s, transform 0.38s ease 0.08s;
+    transition: opacity .28s ease .06s, transform .28s ease .06s;
   }
 
   .faq-item.is-open .faq-answer {
@@ -730,6 +737,10 @@
     50%      { transform: translateX(3px); opacity:.7; }
   }
 
+  @keyframes handlePulse {
+    0%, 100% { transform: translate(-50%,-50%) scale(1); box-shadow: 0 4px 24px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.22); }
+    50% { transform: translate(-50%,-50%) scale(1.06); box-shadow: 0 6px 28px rgba(0,0,0,0.36), 0 0 0 6px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.22); }
+  }
   @keyframes returnFloat {
     0%,100% { transform: translateY(0); }
     50%      { transform: translateY(-3px); }
@@ -849,13 +860,14 @@
               </div>
               <div class="comparison-divider" data-comparison-divider></div>
               <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
-                <svg viewBox="0 0 24 24">
-                  <path d="m9 6-6 6 6 6"></path>
-                  <path d="m15 6 6 6-6 6"></path>
+                <svg viewBox="0 0 20 20">
+                  <polyline points="6,8 3,10 6,12" />
+                  <polyline points="14,8 17,10 14,12" />
+                  <line x1="3" y1="10" x2="17" y2="10" />
                 </svg>
               </div>
-              <div class="slider-label-before">Before</div>
-              <div class="slider-label-after">After</div>
+              <div class="slider-label slider-label-raw">RAW</div>
+              <div class="slider-label slider-label-polished">POLISHED</div>
             </div>
           </div>
 
@@ -1249,25 +1261,13 @@
       var faqToggles = document.querySelectorAll(".faq-toggle");
       var comparisonSliders = document.querySelectorAll("[data-comparison-slider]");
 
-      var faqItems = document.querySelectorAll(".faq-item");
-
-  faqToggles.forEach(function (toggle) {
-    toggle.addEventListener("click", function () {
-      var item = toggle.closest(".faq-item");
-      if (!item) return;
-      var isAlreadyOpen = item.classList.contains("is-open");
-
-      // Close all items
-      faqItems.forEach(function (el) {
-        el.classList.remove("is-open");
+      faqToggles.forEach(function (toggle) {
+        toggle.addEventListener("click", function () {
+          var item = toggle.closest(".faq-item");
+          if (!item) return;
+          item.classList.toggle("is-open");
+        });
       });
-
-      // Open clicked item only if it was closed
-      if (!isAlreadyOpen) {
-        item.classList.add("is-open");
-      }
-    });
-  });
 
       comparisonSliders.forEach(function (slider) {
         var overlay = slider.querySelector("[data-comparison-overlay]");
