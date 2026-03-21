@@ -592,164 +592,196 @@
     .col-b { display: block; }
   }
 
-  /* ── FAQ BRIDGE ── */
-  .faq-bridge {
-    margin: 14px 0 10px;
-    text-align: center;
+  /* ── FAQ SECTION ── */
+  .faq-section {
+    width: 100%;
+    margin-top: 32px;
   }
 
-  .faq-bridge::before {
+  /* Header block */
+  .faq-header {
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .faq-header::before {
     content: "";
     display: block;
     width: 100%;
     height: 1px;
-    margin-bottom: 10px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,106,0,0.22) 50%, transparent 100%);
+    margin-bottom: 20px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,106,0,0.28) 50%, transparent 100%);
+  }
+  .faq-title {
+    color: #fff4ea;
+    font-size: clamp(1.15rem, 4vw, 1.35rem);
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin-bottom: 6px;
+  }
+  .faq-subtitle {
+    color: rgba(255,255,255,0.46);
+    font-size: 0.8rem;
+    line-height: 1.5;
   }
 
-  .faq-bridge span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0 10px;
-    color: rgba(255,255,255,0.48);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
+  /* List container */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
   }
 
-  /* ── INLINE FAQ ── */
-  .inline-faq-section {
-    width: 100%;
-    margin-bottom: 4px;
-  }
-
-  
-
-  /* ── FAQ LIST ── */
-  .faq-list { display: grid; gap: 8px; }
-
+  /* Each item */
   .faq-item {
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 16px;
-    background: rgba(255,255,255,0.025);
+    border-bottom: 1px solid rgba(255,255,255,0.07);
     overflow: hidden;
-    transition: border-color .22s ease, background .22s ease;
+    transition: background 0.22s ease;
   }
-
+  .faq-item:first-child {
+    border-top: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px 16px 0 0;
+  }
+  .faq-item:last-child {
+    border-radius: 0 0 16px 16px;
+  }
   .faq-item.is-open {
-    border-color: rgba(255,106,0,0.25);
     background: rgba(255,106,0,0.04);
   }
 
+  /* Toggle button */
   .faq-toggle {
     width: 100%;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
-    padding: 15px 16px;
+    gap: 14px;
+    padding: 17px 16px;
     background: transparent;
     border: 0;
     color: inherit;
     text-align: left;
-    -webkit-tap-highlight-color: transparent;
     cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+    transition: background 0.18s ease;
+  }
+  .faq-toggle:hover {
+    background: rgba(255,255,255,0.03);
+  }
+  .faq-toggle:focus-visible {
+    outline: 2px solid rgba(255,106,0,0.6);
+    outline-offset: -2px;
   }
 
+  /* Question text */
   .faq-question {
     color: #fff3ea;
-    font-size: 0.88rem;
+    font-size: 0.9rem;
     font-weight: 700;
     line-height: 1.45;
+    flex: 1;
   }
 
+  /* Icon wrapper */
   .faq-icon {
-    flex: 0 0 24px;
-    width: 24px;
-    height: 24px;
+    flex: 0 0 26px;
+    width: 26px;
+    height: 26px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    color: rgba(255,255,255,0.5);
-    transition: transform .3s cubic-bezier(.34,1.56,.64,1), color .22s ease;
     border-radius: 50%;
-    background: rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: rgba(255,255,255,0.55);
+    font-size: 1.1rem;
+    line-height: 1;
+    font-weight: 400;
+    position: relative;
+    transition: background 0.22s ease, border-color 0.22s ease, color 0.22s ease;
+    user-select: none;
   }
-
-  .faq-icon svg {
-    width: 14px;
-    height: 14px;
-    stroke: currentColor;
-    stroke-width: 2.4;
-    fill: none;
-    stroke-linecap: round;
-    display: block;
-  }
-
   .faq-item.is-open .faq-icon {
-    transform: rotate(45deg);
-    color: rgba(255,106,0,0.9);
-    background: rgba(255,106,0,0.12);
+    background: rgba(255,106,0,0.14);
+    border-color: rgba(255,106,0,0.3);
+    color: rgba(255,106,0,0.95);
   }
 
+  /* + and × symbols — toggle visibility */
+  .faq-icon-plus,
+  .faq-icon-x {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    line-height: 1;
+  }
+  .faq-icon-plus {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .faq-icon-x {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+    font-size: 1.2rem;
+  }
+  .faq-item.is-open .faq-icon-plus {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.6);
+  }
+  .faq-item.is-open .faq-icon-x {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  /* Collapsible content */
   .faq-content {
     display: grid;
     grid-template-rows: 0fr;
-    transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1);
+    transition: grid-template-rows 0.26s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .faq-item.is-open .faq-content {
+    grid-template-rows: 1fr;
+  }
+  .faq-content-inner {
+    overflow: hidden;
   }
 
-  .faq-item.is-open .faq-content { grid-template-rows: 1fr; }
-
-  .faq-content-inner { overflow: hidden; }
-
+  /* Answer text */
   .faq-answer {
-    padding: 0 16px 16px 16px;
-    color: rgba(255,255,255,0.68);
-    font-size: 0.83rem;
+    padding: 0 16px 18px;
+    color: rgba(255,255,255,0.62);
+    font-size: 0.84rem;
     line-height: 1.72;
     text-align: left;
-    max-width: 92%;
     opacity: 0;
-    transform: translateY(-4px);
-    transition: opacity .28s ease .06s, transform .28s ease .06s;
+    transform: translateY(-6px);
+    transition: opacity 0.24s ease 0.05s, transform 0.24s ease 0.05s;
   }
-
   .faq-item.is-open .faq-answer {
     opacity: 1;
     transform: translateY(0);
   }
-
-  .faq-answer ul {
-    list-style: none;
-    padding: 0;
-    margin: 6px 0 0;
-    display: grid;
-    gap: 6px;
-  }
-
-  .faq-answer ul li {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    font-size: 0.82rem;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.65);
-  }
-
-  .faq-answer ul li::before {
-    content: "›";
-    color: rgba(255,106,0,0.8);
+  .faq-answer strong {
+    color: rgba(255,255,255,0.88);
     font-weight: 700;
-    font-size: 0.95rem;
-    line-height: 1.5;
-    flex: 0 0 auto;
   }
 
-  .faq-divider {
+  /* Bottom CTA */
+  .faq-cta {
+    display: flex;
+    margin-top: 24px;
     width: 100%;
-    height: 1px;
-    background: rgba(255,255,255,0.06);
-    margin: 8px 0;
+    background: linear-gradient(180deg, rgba(255,106,0,0.28), rgba(255,106,0,0.1)) !important;
+    border-color: rgba(255,106,0,0.45) !important;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.1),
+                0 12px 30px rgba(255,106,0,0.2),
+                0 0 36px rgba(255,106,0,0.14) !important;
+  }
+  .faq-cta::after {
+    background: linear-gradient(135deg, rgba(255,106,0,0.25), rgba(255,106,0,0.08) 50%, rgba(255,106,0,0.2) 100%),
+                rgba(10,10,11,0.88) !important;
   }
 
 /* ── FOOTER ── */
@@ -1147,89 +1179,108 @@
             <div class="reviews-more-label">Trusted by 200+ makers</div>
     </section>
 
-    <!-- ── FAQ BRIDGE ── -->
-    <div class="faq-bridge">
-      <span>Frequently Asked Questions</span>
-    </div>
-
     <!-- ── FAQ SECTION ── -->
-    <section class="flow-section inline-faq-section">
-      <div class="faq-list">
+    <section class="flow-section faq-section" aria-labelledby="faq-heading">
 
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <span class="faq-question">What exactly is included in PolishMaster?</span>
+      <div class="faq-header">
+        <h2 class="faq-title" id="faq-heading">Frequently Asked Questions</h2>
+        <p class="faq-subtitle">Still have questions? Find your answers below</p>
+      </div>
+
+      <div class="faq-list" role="list">
+
+        <!-- Q1 -->
+        <div class="faq-item" role="listitem">
+          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-1">
+            <span class="faq-question">What do I actually get when I join?</span>
             <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span class="faq-icon-plus">+</span>
+              <span class="faq-icon-x">&times;</span>
             </span>
           </button>
-          <div class="faq-content">
+          <div class="faq-content" id="faq-answer-1" role="region">
             <div class="faq-content-inner">
-              <p class="faq-answer">PolishMaster is a step-by-step finishing system for FDM 3D prints. You get the full sanding sequence, priming guides, paint and topcoat selection, and a polishing workflow that works on PLA, PETG, and ABS without any specialist tools.</p>
+              <p class="faq-answer">Access to the full PolishMaster System — a step-by-step method to turn raw 3D prints into clean, sale-ready, mirror-finish products, plus guidance on tools and materials.</p>
             </div>
           </div>
         </div>
 
-        <div class="faq-divider"></div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <span class="faq-question">Do I need expensive equipment?</span>
+        <!-- Q2 -->
+        <div class="faq-item" role="listitem">
+          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-2">
+            <span class="faq-question">Do you sell the tools or just teach the method?</span>
             <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span class="faq-icon-plus">+</span>
+              <span class="faq-icon-x">&times;</span>
             </span>
           </button>
-          <div class="faq-content">
+          <div class="faq-content" id="faq-answer-2" role="region">
             <div class="faq-content-inner">
-              <p class="faq-answer">No. The entire system is designed around affordable, widely available materials — sandpaper, filler primer, and basic finishing compounds. Most members spend under $20 on supplies to get started.</p>
+              <p class="faq-answer"><strong>Tools are not sold.</strong><br>PolishMaster focuses on the process — how to choose and use the right tools to get consistent results.</p>
             </div>
           </div>
         </div>
 
-        <div class="faq-divider"></div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <span class="faq-question">What filament materials does this work with?</span>
+        <!-- Q3 -->
+        <div class="faq-item" role="listitem">
+          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-3">
+            <span class="faq-question">Can I really learn this online and get the same results?</span>
             <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span class="faq-icon-plus">+</span>
+              <span class="faq-icon-x">&times;</span>
             </span>
           </button>
-          <div class="faq-content">
+          <div class="faq-content" id="faq-answer-3" role="region">
             <div class="faq-content-inner">
-              <p class="faq-answer">The system has been tested and proven on PLA, PLA+, PETG, and ABS. Each material has specific notes on sanding behaviour and primer compatibility so you always get the right finish.</p>
+              <p class="faq-answer"><strong>Yes.</strong><br>The system is built to be followed remotely with a controlled, repeatable workflow.</p>
             </div>
           </div>
         </div>
 
-        <div class="faq-divider"></div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <span class="faq-question">How is this delivered and how do I access it?</span>
+        <!-- Q4 -->
+        <div class="faq-item" role="listitem">
+          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-4">
+            <span class="faq-question">What tools and materials do you use exactly?</span>
             <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span class="faq-icon-plus">+</span>
+              <span class="faq-icon-x">&times;</span>
             </span>
           </button>
-          <div class="faq-content">
+          <div class="faq-content" id="faq-answer-4" role="region">
             <div class="faq-content-inner">
-              <p class="faq-answer">Everything is hosted on Patreon. Once you join, you get instant access to all guides, updates, and the member community. New content drops regularly as the system is refined.</p>
+              <p class="faq-answer"><strong>Standard sanding and polishing tools.</strong><br>The system shows what matters — not specific brands — so the process can be applied anywhere.</p>
             </div>
           </div>
         </div>
 
-        <div class="faq-divider"></div>
-
-        <div class="faq-item">
-          <button class="faq-toggle" aria-expanded="false">
-            <span class="faq-question">Is there a refund policy?</span>
+        <!-- Q5 -->
+        <div class="faq-item" role="listitem">
+          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-5">
+            <span class="faq-question">What if I can't find those tools in my country?</span>
             <span class="faq-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+              <span class="faq-icon-plus">+</span>
+              <span class="faq-icon-x">&times;</span>
             </span>
           </button>
-          <div class="faq-content">
+          <div class="faq-content" id="faq-answer-5" role="region">
             <div class="faq-content-inner">
-              <p class="faq-answer">Patreon memberships can be cancelled at any time before your next billing date. If you have any issues, reach out directly and we'll make it right.</p>
+              <p class="faq-answer"><strong>Tools are region-specific.</strong><br>The system defines categories, allowing local alternatives. Support is available after joining if needed.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item" role="listitem">
+          <button class="faq-toggle" aria-expanded="false" aria-controls="faq-answer-6">
+            <span class="faq-question">Can this work on small, detailed 3D prints too?</span>
+            <span class="faq-icon" aria-hidden="true">
+              <span class="faq-icon-plus">+</span>
+              <span class="faq-icon-x">&times;</span>
+            </span>
+          </button>
+          <div class="faq-content" id="faq-answer-6" role="region">
+            <div class="faq-content-inner">
+              <p class="faq-answer"><strong>Yes, but highly detailed miniatures are more challenging.</strong><br>Sanding very small, complex geometries requires more control and may not be ideal for every model.</p>
             </div>
           </div>
         </div>
@@ -1237,9 +1288,9 @@
       </div>
     </section>
 
-    <!-- ── SECONDARY CTA ── -->
-    <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join" style="margin-top:20px;">
-      <span class="cta-text">Access the System on Patreon</span>
+    <!-- ── BOTTOM CTA ── -->
+    <a class="cta faq-cta" href="https://www.patreon.com/15111337/join">
+      <span class="cta-text">Start the PolishMaster System</span>
       <span class="cta-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24">
           <path d="M5 12h14"></path>
@@ -1267,14 +1318,27 @@
   (function () {
 
     // ── FAQ ACCORDION ──
-    document.querySelectorAll(".faq-toggle").forEach(function (t) {
-      t.addEventListener("click", function () {
-        var item = t.closest(".faq-item");
-        if (item) item.classList.toggle("is-open");
+    (function () {
+      var items = document.querySelectorAll('.faq-item');
+      items.forEach(function (item) {
+        var toggle = item.querySelector('.faq-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', function () {
+          var isOpen = item.classList.contains('is-open');
+          // Close all
+          items.forEach(function (i) {
+            i.classList.remove('is-open');
+            var t = i.querySelector('.faq-toggle');
+            if (t) t.setAttribute('aria-expanded', 'false');
+          });
+          // Open clicked if it was closed
+          if (!isOpen) {
+            item.classList.add('is-open');
+            toggle.setAttribute('aria-expanded', 'true');
+          }
+        });
       });
-    });
-
-    // ── HERO SCROLL TRANSFORM ──
+    })();    // ── HERO SCROLL TRANSFORM ──
     var section   = document.getElementById("hero-scroll-section");
     var afterBg   = document.getElementById("hero-bg-after");
     var fill      = document.getElementById("hero-progress-fill");
