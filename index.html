@@ -51,14 +51,7 @@
   a { color: inherit; text-decoration: none; }
   button { font: inherit; cursor: pointer; border: none; background: none; }
 
-  /* ── PAGE WRAPPER ── */
-  .section {
-    min-height: 100vh;
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding: 16px 14px 40px;
-  }
+  
 
   /* ── CARD ── */
   .card {
@@ -209,105 +202,157 @@
     animation: arrowPulse 1.6s ease-in-out infinite;
   }
 
-  /* ── SCROLL TRANSFORM ── */
-  .visual {
-    width: 100%;
-    align-self: stretch;
-    margin-bottom: 20px;
+  /* ── HERO SCROLL ── */
+
+  /* Outer scroll track - defines scroll distance */
+  .hero-scroll-section {
     position: relative;
-    padding: 10px;
-    border-radius: 18px;
-    background:
-      radial-gradient(circle at 50% 18%, rgba(255,106,0,0.18), transparent 34%),
-      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
-    border: 1px solid rgba(255,255,255,0.07);
-    overflow: hidden;
+    height: 250vh; /* scrollable distance */
   }
 
-  .scroll-transform {
-    position: relative;
+  /* Sticky viewport that stays fixed during scroll */
+  .hero-sticky {
+    position: sticky;
+    top: 0;
+    height: 100vh;
     width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 12px;
     overflow: hidden;
-    background: #111;
-    user-select: none;
+    display: flex;
+    align-items: flex-end;
   }
 
-  .st-img {
+  /* Full-bleed background images */
+  .hero-bg {
     position: absolute;
     inset: 0;
-    width: 100%;
-    height: 100%;
+    z-index: 0;
   }
 
-  .st-img img {
+  .hero-bg img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
-    pointer-events: none;
+    object-position: center 20%;
     display: block;
   }
 
-  .st-before {
-    opacity: 1;
-    z-index: 1;
-  }
+  .hero-bg-before { z-index: 1; }
+  .hero-bg-after  { z-index: 2; opacity: 0; }
 
-  .st-after {
-    opacity: 0;
-    z-index: 2;
-    transition: opacity 0.08s linear;
-  }
-
-  /* Label chips */
-  .st-label {
+  /* Dark gradient overlay for text readability */
+  .hero-overlay {
     position: absolute;
-    bottom: 44px;
+    inset: 0;
+    z-index: 3;
+    background: linear-gradient(
+      to bottom,
+      rgba(0,0,0,0.55) 0%,
+      rgba(0,0,0,0.2) 40%,
+      rgba(0,0,0,0.2) 60%,
+      rgba(0,0,0,0.82) 100%
+    );
+  }
+
+  /* Text content pinned at bottom */
+  .hero-text {
+    position: relative;
     z-index: 4;
-    padding: 5px 10px;
+    width: 100%;
+    padding: 0 20px 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 0;
+  }
+
+  .hero-text .eyebrow  { margin-bottom: 10px; }
+  .hero-text .hero-headline { margin-bottom: 10px; }
+  .hero-text .hero-support  { margin-bottom: 6px; }
+  .hero-text .hero-proof    { margin-bottom: 16px; }
+  .hero-text .actions       { width: 100%; max-width: 360px; margin-bottom: 0; }
+
+  /* State labels (Raw / Polished) */
+  .hero-state-label {
+    position: absolute;
+    top: 18px;
+    z-index: 5;
+    padding: 6px 14px;
     border-radius: 999px;
-    font-size: 0.68rem;
+    font-size: 0.7rem;
     font-weight: 700;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.12em;
     text-transform: uppercase;
     color: #fff;
-    background: rgba(0,0,0,0.52);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.14);
-    pointer-events: none;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.16);
     transition: opacity .3s ease;
-  }
-
-  .st-label-raw      { left: 12px; }
-  .st-label-polished { right: 12px; opacity: 0; }
-
-  /* Progress bar */
-  .st-progress-bar {
-    position: absolute;
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
-    z-index: 5;
-    height: 3px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.12);
-    overflow: hidden;
     pointer-events: none;
   }
+  .hero-label-raw      { left: 18px; }
+  .hero-label-polished { right: 18px; opacity: 0; }
 
-  .st-progress-fill {
+  /* Progress bar at top */
+  .hero-progress-bar {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    z-index: 6;
+    height: 2px;
+    background: rgba(255,255,255,0.1);
+    pointer-events: none;
+  }
+  .hero-progress-fill {
     height: 100%;
     width: 0%;
-    border-radius: 999px;
     background: linear-gradient(90deg, #ff6a00, #ffb06e);
-    transition: width 0.04s linear;
-    box-shadow: 0 0 8px rgba(255,106,0,0.6);
+    box-shadow: 0 0 10px rgba(255,106,0,0.7);
+  }
+
+  /* Scroll hint arrow */
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 110px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 5;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.52);
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    pointer-events: none;
+    animation: hintBounce 2s ease-in-out infinite;
+    transition: opacity .4s ease;
+  }
+  .hero-scroll-hint svg {
+    width: 18px; height: 18px;
+    stroke: currentColor; stroke-width: 2;
+    fill: none; stroke-linecap: round;
+  }
+  @keyframes hintBounce {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(5px); }
+  }
+
+  /* Content section that follows the hero */
+  .content-section {
+    position: relative;
+    z-index: 2;
+    background: linear-gradient(180deg, #000 0%, #080808 100%);
+    padding: 28px 16px 40px;
+    display: flex;
+    justify-content: center;
   }
 
   @media (min-width: 540px) {
-    .scroll-transform { aspect-ratio: 16 / 9; }
+    .hero-text { padding: 0 32px 48px; }
+    .hero-text .actions { max-width: 400px; }
   }
 
 /* ── FLOW SECTIONS ── */
@@ -742,19 +787,7 @@
 
   /* ── TABLET+ ── */
   @media (min-width: 540px) {
-    .section { padding: 28px 20px 48px; }
     .card { padding: 30px 26px 34px; }
-    .hero-headline { font-size: clamp(2.4rem, 6vw, 3.2rem); }
-    .comparison-slider { aspect-ratio: 16 / 9; }
-    .reviews {
-      grid-auto-flow: initial;
-      grid-auto-columns: auto;
-      grid-template-columns: repeat(3, minmax(0,1fr));
-      overflow: visible;
-      padding: 0;
-      mask-image: none;
-      -webkit-mask-image: none;
-    }
   }
 
   /* ── FEATURED CARD ── */
@@ -790,23 +823,54 @@
     height: 100%;
     z-index: 0;
     pointer-events: none;
-    opacity: 0.55;
+    opacity: 0.4;
   }
 
   /* ensure content is above canvas */
-  main, .modal, .site-footer {
+  main, .site-footer {
     position: relative;
     z-index: 1;
   }
+
+  .hero-scroll-section { z-index: 1; }
+  .content-section { z-index: 2; }
 </style>
 </head>
 <body>
   <canvas id="sparkles-canvas" aria-hidden="true"></canvas>
   <main>
-    <section class="section">
-      <div class="card">
-        <div class="hero-content">
-          <span class="eyebrow">PolishMaster</span>
+
+  <!-- ── HERO SCROLL SECTION ── -->
+  <div class="hero-scroll-section" id="hero-scroll-section">
+    <div class="hero-sticky" id="hero-sticky">
+
+      <!-- Background images -->
+      <div class="hero-bg hero-bg-before" id="hero-bg-before">
+        <img src="cross-before.png" alt="Raw 3D printed piece" />
+      </div>
+      <div class="hero-bg hero-bg-after" id="hero-bg-after">
+        <img src="cross-after.png" alt="Polished 3D printed piece" />
+      </div>
+
+      <!-- Gradient overlay -->
+      <div class="hero-overlay"></div>
+
+      <!-- Progress bar -->
+      <div class="hero-progress-bar"><div class="hero-progress-fill" id="hero-progress-fill"></div></div>
+
+      <!-- State labels -->
+      <div class="hero-state-label hero-label-raw" id="hero-label-raw">Raw</div>
+      <div class="hero-state-label hero-label-polished" id="hero-label-polished">Polished</div>
+
+      <!-- Scroll hint -->
+      <div class="hero-scroll-hint" id="hero-scroll-hint">
+        <span>Scroll</span>
+        <svg viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+
+      <!-- Text content -->
+      <div class="hero-text">
+        <span class="eyebrow">PolishMaster</span>
           <h1 class="hero-headline">Stop selling layer lines.<br />Start selling products.</h1>
           <p class="hero-support">Everything you need to turn raw prints into premium products.</p>
           <p class="hero-proof">Join 200+ makers already inside.</p>
@@ -822,22 +886,15 @@
               </span>
             </a>
           </div>
+      </div>
 
-          <div class="visual">
-            <div class="scroll-transform" id="scroll-transform">
-              <div class="st-img st-before">
-                <img src="cross-before.png" alt="Raw 3D printed piece" draggable="false" />
-              </div>
-              <div class="st-img st-after">
-                <img src="cross-after.png" alt="Polished 3D printed piece" draggable="false" />
-              </div>
-              <div class="st-label st-label-raw">Raw</div>
-              <div class="st-label st-label-polished">Polished</div>
-              <div class="st-progress-bar"><div class="st-progress-fill" id="st-fill"></div></div>
-            </div>
-          </div>
+    </div>
+  </div>
 
-          <section class="flow-section reviews-section">
+  <!-- ── CONTENT SECTION ── -->
+  <div class="content-section">
+    <div class="card" style="padding-top:28px;">
+      <section class="flow-section reviews-section">
             <div class="reviews-header">
               <span class="social-label">Member Reviews</span>
               <span class="rating-badge">4.7 ★ &nbsp;200+ members</span>
@@ -1086,147 +1143,10 @@
               </div>
             </div>
             <div class="reviews-more-label">Trusted by 200+ makers</div>
-          </section>
+    </div>
+  </div>
 
-          <div class="faq-bridge"><span>Still have questions? Find your answers below ↓</span></div>
-
-          <section class="flow-section inline-faq-section">
-            <span class="social-label" style="display:block;margin-bottom:12px;">FAQ</span>
-            <div class="faq-list">
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">1. What do I get when I join?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  You get the complete PolishMaster method — a structured finishing system built for 3D print makers.
-                  <ul>
-                    <li>Full sanding sequence (grit by grit)</li>
-                    <li>Surface refinement techniques</li>
-                    <li>Polishing steps for gloss or matte</li>
-                    <li>Guidance on tool &amp; material types to use</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">2. Do you sell tools or physical products?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  No — this is a knowledge system, not a store.
-                  <ul>
-                    <li>No physical products are sold</li>
-                    <li>You learn what types of tools work and why</li>
-                    <li>You source the tools yourself, locally</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">3. Can I learn this remotely?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  Yes — the entire system is designed to be self-paced and remote.
-                  <ul>
-                    <li>Follow every step from home</li>
-                    <li>No in-person sessions required</li>
-                    <li>Works in any country or workshop setup</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">4. What materials does this work with?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  Primarily designed for common FDM filaments.
-                  <ul>
-                    <li>Works best with PLA and PLA+</li>
-                    <li>Compatible with PETG and similar plastics</li>
-                    <li>Based on surface control, not a specific brand</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">5. What if I can't find the same tools in my country?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  Not a problem — the method focuses on principles, not specific brands.
-                  <ul>
-                    <li>You'll learn what properties matter in each tool</li>
-                    <li>Local hardware-store alternatives work fine</li>
-                    <li>Contact available after joining for specific questions</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">6. Does this work for small, detailed figures?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  Partially — the method works, but small parts require more patience.
-                  <ul>
-                    <li>Great results on regular-sized models</li>
-                    <li>Challenging on ultra-detailed miniatures</li>
-                    <li>Flat and curved surfaces both supported</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">7. Can I get a matte finish instead of glossy?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  Yes — matte is simply an earlier stop in the process.
-                  <ul>
-                    <li>Stop after sanding for a clean matte surface</li>
-                    <li>Continue to polishing for a mirror-gloss finish</li>
-                    <li>You control the final look at every step</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">8. What is the PolishMaster System?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">
-                  A two-layer system: learn the method, then apply it to sell.
-                  <ul>
-                    <li>Layer 1 — the finishing method, step by step</li>
-                    <li>Layer 2 — turn prints into sellable products</li>
-                    <li>Includes pricing guidance and where-to-sell ideas</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-            </div>
-          </section>
-          <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-            <span class="cta-text">Start the System</span>
-            <span class="cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
-            </span>
-          </a>
-        </div>
-      </div>
-    </section>
-  </main>
+</main>
 
   <footer class="site-footer">
     <div>© 2026 PolishMaster. All rights reserved.</div>
@@ -1239,90 +1159,69 @@
   </footer>
 
   <script>
-    (function () {
+  (function () {
 
-      // FAQ ACCORDION
-      document.querySelectorAll(".faq-toggle").forEach(function (toggle) {
-        toggle.addEventListener("click", function () {
-          var item = toggle.closest(".faq-item");
-          if (item) item.classList.toggle("is-open");
-        });
+    // ── FAQ ACCORDION ──
+    document.querySelectorAll(".faq-toggle").forEach(function (t) {
+      t.addEventListener("click", function () {
+        var item = t.closest(".faq-item");
+        if (item) item.classList.toggle("is-open");
       });
+    });
 
-      // SCROLL TRANSFORM
-      var container = document.getElementById("scroll-transform");
-      var afterImg  = container ? container.querySelector(".st-after")          : null;
-      var fill      = container ? document.getElementById("st-fill")            : null;
-      var labelRaw  = container ? container.querySelector(".st-label-raw")      : null;
-      var labelPol  = container ? container.querySelector(".st-label-polished") : null;
+    // ── HERO SCROLL TRANSFORM ──
+    var section   = document.getElementById("hero-scroll-section");
+    var afterBg   = document.getElementById("hero-bg-after");
+    var fill      = document.getElementById("hero-progress-fill");
+    var labelRaw  = document.getElementById("hero-label-raw");
+    var labelPol  = document.getElementById("hero-label-polished");
+    var hint      = document.getElementById("hero-scroll-hint");
 
-      if (!container || !afterImg) return;
+    if (!section || !afterBg) return;
 
-      // Reset to before state on load
-      afterImg.style.opacity = "0";
-      if (fill)     fill.style.width         = "0%";
-      if (labelRaw) labelRaw.style.opacity   = "1";
-      if (labelPol) labelPol.style.opacity   = "0";
+    // Hard reset
+    afterBg.style.opacity  = "0";
+    if (fill)     fill.style.width      = "0%";
+    if (labelRaw) labelRaw.style.opacity  = "1";
+    if (labelPol) labelPol.style.opacity  = "0";
 
-      function applyProgress(t) {
-        afterImg.style.opacity = t;
-        if (fill)     fill.style.width         = (t * 100) + "%";
-        if (labelRaw) labelRaw.style.opacity   = 1 - t;
-        if (labelPol) labelPol.style.opacity   = t;
-      }
+    function easeInOut(t) {
+      return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+    }
 
-      function onScroll() {
-        var rect = container.getBoundingClientRect();
-        var vh   = window.innerHeight;
-        var elH  = rect.height;
+    function onScroll() {
+      var rect = section.getBoundingClientRect();
+      var sectionH = section.offsetHeight;
+      var vh = window.innerHeight;
 
-        // Animasyon element tamamen viewport icine girince baslar
-        // ve element viewport ortasini gecince biter
-        // startY: elementin alt kenari viewport altina girdigi an (rect.bottom = vh)
-        // endY:   elementin ust kenari viewport ustune ciktigi an (rect.top = 0)
-        // progress = scrolledPast / totalScrollRange
+      // scrolled = how far into the section we are
+      // rect.top starts at 0 (top of page) and goes negative as we scroll
+      // progress 0 when rect.top=0, progress 1 when rect.top = -(sectionH - vh)
+      var scrolled = -rect.top;
+      var maxScroll = sectionH - vh;
 
-        // element henuz gorunmuyorsa progress=0
-        if (rect.bottom <= 0 || rect.top >= vh) {
-          applyProgress(rect.top >= vh ? 0 : 1);
-          return;
-        }
+      if (scrolled < 0) scrolled = 0;
+      if (maxScroll <= 0) return;
 
-        // Element ne kadar gorunuyor: alt kenar vph altindayken basla
-        // Trigger zone: elementin tamamen gorunur olmasi (top>0) ile
-        // elementin ust kenarinin viewport ortasini gecmesi arasinda
-        var scrollZoneStart = vh;           // rect.bottom bu degerden kucuk olunca basla
-        var scrollZoneEnd   = elH * 0.5;   // rect.top bu kadar yukari gelince bitir
+      // Transform completes in first 60% of scroll distance
+      var transformProgress = Math.min(1, scrolled / (maxScroll * 0.6));
+      var t = easeInOut(transformProgress);
 
-        // rect.bottom: vh..0 arasi degisir asagidan yukari
-        // Ama biz rect.top kullanacagiz: pozitif (asagida) -> negatif (yukari gecti)
-        // Start: rect.top = vh*0.6 (element henuz girmemis)
-        // End:   rect.top = -elH*0.1 (element neredeyse gecti)
+      afterBg.style.opacity = t;
+      if (fill)     fill.style.width     = (t * 100) + "%";
+      if (labelRaw) labelRaw.style.opacity  = Math.max(0, 1 - t * 2);
+      if (labelPol) labelPol.style.opacity  = Math.min(1, t * 1.5 - 0.2);
 
-        var tStart = vh * 0.55;
-        var tEnd   = -elH * 0.05;
-        var raw    = (tStart - rect.top) / (tStart - tEnd);
-        var clamped = Math.max(0, Math.min(1, raw));
+      // Hide scroll hint after user starts scrolling
+      if (hint) hint.style.opacity = scrolled > 30 ? "0" : "1";
+    }
 
-        // ease-in-out cubic
-        var t = clamped < 0.5
-          ? 4 * clamped * clamped * clamped
-          : 1 - Math.pow(-2 * clamped + 2, 3) / 2;
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    requestAnimationFrame(function(){ requestAnimationFrame(onScroll); });
 
-        applyProgress(t);
-      }
-
-      window.addEventListener("scroll", onScroll, { passive: true });
-      window.addEventListener("resize", onScroll, { passive: true });
-
-      // Sayfa yuklendiginde ONCE sifirla, SONRA scroll pozisyonunu kontrol et
-      // requestAnimationFrame ile DOM render sonrasi calistir
-      requestAnimationFrame(function() {
-        requestAnimationFrame(onScroll);
-      });
-
-    })();
-  </script>
+  })();
+</script>
 
   <script>
     (function () {
