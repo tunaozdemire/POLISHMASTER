@@ -209,7 +209,7 @@
     animation: arrowPulse 1.6s ease-in-out infinite;
   }
 
-  /* ── COMPARISON SLIDER ── */
+  /* ── SCROLL TRANSFORM ── */
   .visual {
     width: 100%;
     align-self: stretch;
@@ -224,78 +224,93 @@
     overflow: hidden;
   }
 
-  .comparison-slider {
+  .scroll-transform {
     position: relative;
     width: 100%;
     aspect-ratio: 4 / 3;
     border-radius: 12px;
     overflow: hidden;
     background: #111;
-    cursor: ew-resize;
-    touch-action: none;
     user-select: none;
-    -webkit-user-select: none;
   }
 
-  .comparison-base,
-  .comparison-overlay {
+  .st-img {
     position: absolute;
     inset: 0;
+    width: 100%;
+    height: 100%;
   }
 
-  .comparison-base img,
-  .comparison-overlay img {
+  .st-img img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
     pointer-events: none;
+    display: block;
   }
 
-  .comparison-overlay {
-    overflow: hidden;
-    clip-path: inset(0 50% 0 0);
+  .st-before {
+    opacity: 1;
+    z-index: 1;
   }
 
-  .comparison-divider {
+  .st-after {
+    opacity: 0;
+    z-index: 2;
+    transition: opacity 0.08s linear;
+  }
+
+  /* Label chips */
+  .st-label {
     position: absolute;
-    top: 0; bottom: 0;
-    left: calc(50% - 1px);
-    width: 2px;
-    background: rgba(255,255,255,0.92);
-    box-shadow: 0 0 14px rgba(255,255,255,0.3);
-    pointer-events: none;
-  }
-
-  .comparison-handle {
-    position: absolute;
-    top: 50%; left: 50%;
-    width: 48px; height: 48px;
+    bottom: 44px;
+    z-index: 4;
+    padding: 5px 10px;
     border-radius: 999px;
-    transform: translate(-50%,-50%);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255,255,255,0.96);
-    color: #2e2a27;
-    box-shadow:
-      0 8px 20px rgba(0,0,0,0.24),
-      0 0 0 6px rgba(255,255,255,0.12);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #fff;
+    background: rgba(0,0,0,0.52);
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(255,255,255,0.14);
     pointer-events: none;
-    transition: transform .2s ease;
+    transition: opacity .3s ease;
   }
 
-  .comparison-slider.is-dragging .comparison-handle {
-    transform: translate(-50%,-50%) scale(1.08);
+  .st-label-raw      { left: 12px; }
+  .st-label-polished { right: 12px; opacity: 0; }
+
+  /* Progress bar */
+  .st-progress-bar {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+    z-index: 5;
+    height: 3px;
+    border-radius: 999px;
+    background: rgba(255,255,255,0.12);
+    overflow: hidden;
+    pointer-events: none;
   }
 
-  .comparison-handle svg {
-    width: 22px; height: 22px;
-    stroke: currentColor; stroke-width: 2.2;
-    fill: none; stroke-linecap: round; stroke-linejoin: round;
+  .st-progress-fill {
+    height: 100%;
+    width: 0%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #ff6a00, #ffb06e);
+    transition: width 0.04s linear;
+    box-shadow: 0 0 8px rgba(255,106,0,0.6);
   }
 
-  /* ── FLOW SECTIONS ── */
+  @media (min-width: 540px) {
+    .scroll-transform { aspect-ratio: 16 / 9; }
+  }
+
+/* ── FLOW SECTIONS ── */
   .flow-section { width: 100%; }
 
   /* ── SOCIAL PROOF ── */
@@ -742,27 +757,6 @@
     }
   }
 
-  /* ── SLIDER LABELS ── */
-  .slider-label-before,
-  .slider-label-after {
-    position: absolute;
-    bottom: 12px;
-    z-index: 4;
-    padding: 5px 10px;
-    border-radius: 999px;
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: #fff;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.14);
-    pointer-events: none;
-  }
-  .slider-label-before { left: 12px; }
-  .slider-label-after  { right: 12px; }
-
   /* ── FEATURED CARD ── */
   .tcard-featured {
     border-color: rgba(255,106,0,0.35) !important;
@@ -830,22 +824,16 @@
           </div>
 
           <div class="visual">
-            <div class="comparison-slider" data-comparison-slider>
-              <div class="comparison-base">
-                <img src="cross-before.png" alt="Raw 3D printed piece before polishing" draggable="false" />
+            <div class="scroll-transform" id="scroll-transform">
+              <div class="st-img st-before">
+                <img src="cross-before.png" alt="Raw 3D printed piece" draggable="false" />
               </div>
-              <div class="comparison-overlay" data-comparison-overlay>
-                <img src="cross-after.png" alt="Polished 3D printed piece after finishing" draggable="false" />
+              <div class="st-img st-after">
+                <img src="cross-after.png" alt="Polished 3D printed piece" draggable="false" />
               </div>
-              <div class="comparison-divider" data-comparison-divider></div>
-              <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
-                <svg viewBox="0 0 24 24">
-                  <path d="m9 6-6 6 6 6"></path>
-                  <path d="m15 6 6 6-6 6"></path>
-                </svg>
-              </div>
-              <div class="slider-label-before">Before</div>
-              <div class="slider-label-after">After</div>
+              <div class="st-label st-label-raw">Raw</div>
+              <div class="st-label st-label-polished">Polished</div>
+              <div class="st-progress-bar"><div class="st-progress-fill" id="st-fill"></div></div>
             </div>
           </div>
 
@@ -1252,9 +1240,9 @@
 
   <script>
     (function () {
-      var faqToggles = document.querySelectorAll(".faq-toggle");
-      var comparisonSliders = document.querySelectorAll("[data-comparison-slider]");
 
+      // ── FAQ ACCORDION ──
+      var faqToggles = document.querySelectorAll(".faq-toggle");
       faqToggles.forEach(function (toggle) {
         toggle.addEventListener("click", function () {
           var item = toggle.closest(".faq-item");
@@ -1263,57 +1251,46 @@
         });
       });
 
-      comparisonSliders.forEach(function (slider) {
-        var overlay = slider.querySelector("[data-comparison-overlay]");
-        var divider = slider.querySelector("[data-comparison-divider]");
-        var handle  = slider.querySelector("[data-comparison-handle]");
-        var isDragging = false;
-        if (!overlay || !divider || !handle) return;
+      // ── SCROLL TRANSFORM ──
+      var container = document.getElementById("scroll-transform");
+      var afterImg   = container ? container.querySelector(".st-after")          : null;
+      var fill       = container ? document.getElementById("st-fill")            : null;
+      var labelRaw   = container ? container.querySelector(".st-label-raw")      : null;
+      var labelPol   = container ? container.querySelector(".st-label-polished") : null;
 
-        function setPosition(clientX) {
-          var rect = slider.getBoundingClientRect();
-          var percent = ((clientX - rect.left) / rect.width) * 100;
-          percent = Math.max(0, Math.min(100, percent));
-          overlay.style.clipPath = "inset(0 " + (100 - percent) + "% 0 0)";
-          divider.style.left = "calc(" + percent + "% - 1px)";
-          handle.style.left = percent + "%";
+      if (container && afterImg) {
+
+        function lerp(a, b, t) { return a + (b - a) * t; }
+
+        function onScroll() {
+          var rect   = container.getBoundingClientRect();
+          var vh     = window.innerHeight;
+
+          // Trigger: start when top of element reaches 75% of viewport,
+          // finish when element center passes 35% of viewport
+          var triggerStart = vh * 0.75;
+          var triggerEnd   = vh * 0.25;
+
+          // Progress 0 (before) → 1 (after)
+          var raw = (triggerStart - rect.top) / (triggerStart - triggerEnd);
+          var progress = Math.max(0, Math.min(1, raw));
+
+          // Smooth easing: ease-in-out cubic
+          var t = progress < 0.5
+            ? 4 * progress * progress * progress
+            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+
+          // Apply
+          afterImg.style.opacity = t;
+          if (fill)     fill.style.width   = (t * 100) + "%";
+          if (labelRaw) labelRaw.style.opacity  = 1 - t;
+          if (labelPol) labelPol.style.opacity  = t;
         }
 
-        function stopDragging() {
-          isDragging = false;
-          slider.classList.remove("is-dragging");
-        }
+        window.addEventListener("scroll", onScroll, { passive: true });
+        onScroll(); // initial call
+      }
 
-        slider.addEventListener("mousedown", function (e) {
-          isDragging = true;
-          slider.classList.add("is-dragging");
-          setPosition(e.clientX);
-        });
-
-        slider.addEventListener("touchstart", function (e) {
-          isDragging = true;
-          slider.classList.add("is-dragging");
-          if (e.touches[0]) setPosition(e.touches[0].clientX);
-        }, { passive: true });
-
-        window.addEventListener("mousemove", function (e) {
-          if (!isDragging) return;
-          setPosition(e.clientX);
-        });
-
-        window.addEventListener("touchmove", function (e) {
-          if (!isDragging || !e.touches[0]) return;
-          setPosition(e.touches[0].clientX);
-        }, { passive: true });
-
-        window.addEventListener("mouseup", stopDragging);
-        window.addEventListener("touchend", stopDragging);
-
-        slider.addEventListener("mouseleave", function () {
-          if (!isDragging) return;
-          stopDragging();
-        });
-      });
     })();
   </script>
 
