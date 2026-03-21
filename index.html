@@ -1241,55 +1241,85 @@
   <script>
     (function () {
 
-      // ── FAQ ACCORDION ──
-      var faqToggles = document.querySelectorAll(".faq-toggle");
-      faqToggles.forEach(function (toggle) {
+      // FAQ ACCORDION
+      document.querySelectorAll(".faq-toggle").forEach(function (toggle) {
         toggle.addEventListener("click", function () {
           var item = toggle.closest(".faq-item");
-          if (!item) return;
-          item.classList.toggle("is-open");
+          if (item) item.classList.toggle("is-open");
         });
       });
 
-      // ── SCROLL TRANSFORM ──
+      // SCROLL TRANSFORM
       var container = document.getElementById("scroll-transform");
-      var afterImg   = container ? container.querySelector(".st-after")          : null;
-      var fill       = container ? document.getElementById("st-fill")            : null;
-      var labelRaw   = container ? container.querySelector(".st-label-raw")      : null;
-      var labelPol   = container ? container.querySelector(".st-label-polished") : null;
+      var afterImg  = container ? container.querySelector(".st-after")          : null;
+      var fill      = container ? document.getElementById("st-fill")            : null;
+      var labelRaw  = container ? container.querySelector(".st-label-raw")      : null;
+      var labelPol  = container ? container.querySelector(".st-label-polished") : null;
 
-      if (container && afterImg) {
+      if (!container || !afterImg) return;
 
-        function lerp(a, b, t) { return a + (b - a) * t; }
+      // Reset to before state on load
+      afterImg.style.opacity = "0";
+      if (fill)     fill.style.width         = "0%";
+      if (labelRaw) labelRaw.style.opacity   = "1";
+      if (labelPol) labelPol.style.opacity   = "0";
 
-        function onScroll() {
-          var rect   = container.getBoundingClientRect();
-          var vh     = window.innerHeight;
+      function applyProgress(t) {
+        afterImg.style.opacity = t;
+        if (fill)     fill.style.width         = (t * 100) + "%";
+        if (labelRaw) labelRaw.style.opacity   = 1 - t;
+        if (labelPol) labelPol.style.opacity   = t;
+      }
 
-          // Trigger: start when top of element reaches 75% of viewport,
-          // finish when element center passes 35% of viewport
-          var triggerStart = vh * 0.75;
-          var triggerEnd   = vh * 0.25;
+      function onScroll() {
+        var rect = container.getBoundingClientRect();
+        var vh   = window.innerHeight;
+        var elH  = rect.height;
 
-          // Progress 0 (before) → 1 (after)
-          var raw = (triggerStart - rect.top) / (triggerStart - triggerEnd);
-          var progress = Math.max(0, Math.min(1, raw));
+        // Animasyon element tamamen viewport icine girince baslar
+        // ve element viewport ortasini gecince biter
+        // startY: elementin alt kenari viewport altina girdigi an (rect.bottom = vh)
+        // endY:   elementin ust kenari viewport ustune ciktigi an (rect.top = 0)
+        // progress = scrolledPast / totalScrollRange
 
-          // Smooth easing: ease-in-out cubic
-          var t = progress < 0.5
-            ? 4 * progress * progress * progress
-            : 1 - Math.pow(-2 * progress + 2, 3) / 2;
-
-          // Apply
-          afterImg.style.opacity = t;
-          if (fill)     fill.style.width   = (t * 100) + "%";
-          if (labelRaw) labelRaw.style.opacity  = 1 - t;
-          if (labelPol) labelPol.style.opacity  = t;
+        // element henuz gorunmuyorsa progress=0
+        if (rect.bottom <= 0 || rect.top >= vh) {
+          applyProgress(rect.top >= vh ? 0 : 1);
+          return;
         }
 
-        window.addEventListener("scroll", onScroll, { passive: true });
-        onScroll(); // initial call
+        // Element ne kadar gorunuyor: alt kenar vph altindayken basla
+        // Trigger zone: elementin tamamen gorunur olmasi (top>0) ile
+        // elementin ust kenarinin viewport ortasini gecmesi arasinda
+        var scrollZoneStart = vh;           // rect.bottom bu degerden kucuk olunca basla
+        var scrollZoneEnd   = elH * 0.5;   // rect.top bu kadar yukari gelince bitir
+
+        // rect.bottom: vh..0 arasi degisir asagidan yukari
+        // Ama biz rect.top kullanacagiz: pozitif (asagida) -> negatif (yukari gecti)
+        // Start: rect.top = vh*0.6 (element henuz girmemis)
+        // End:   rect.top = -elH*0.1 (element neredeyse gecti)
+
+        var tStart = vh * 0.55;
+        var tEnd   = -elH * 0.05;
+        var raw    = (tStart - rect.top) / (tStart - tEnd);
+        var clamped = Math.max(0, Math.min(1, raw));
+
+        // ease-in-out cubic
+        var t = clamped < 0.5
+          ? 4 * clamped * clamped * clamped
+          : 1 - Math.pow(-2 * clamped + 2, 3) / 2;
+
+        applyProgress(t);
       }
+
+      window.addEventListener("scroll", onScroll, { passive: true });
+      window.addEventListener("resize", onScroll, { passive: true });
+
+      // Sayfa yuklendiginde ONCE sifirla, SONRA scroll pozisyonunu kontrol et
+      // requestAnimationFrame ile DOM render sonrasi calistir
+      requestAnimationFrame(function() {
+        requestAnimationFrame(onScroll);
+      });
 
     })();
   </script>
