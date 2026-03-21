@@ -554,149 +554,12 @@
   }
 
   /* ── INLINE FAQ ── */
-  .inline-faq { display: grid; gap: 10px; margin-bottom: 18px; }
-
-  .faq-preview {
-    padding: 14px 16px;
-    border: 1px solid rgba(255,255,255,0.06);
-    border-radius: 14px;
-    background: rgba(255,255,255,0.025);
-    text-align: left;
-  }
-
-  .faq-preview strong {
-    display: block;
-    margin-bottom: 6px;
-    color: #fff3ea;
-    font-size: 0.88rem;
-    line-height: 1.4;
-  }
-
-  .faq-preview p {
-    color: rgba(255,255,255,0.68);
-    font-size: 0.84rem;
-    line-height: 1.62;
-  }
-
-  /* ── SECONDARY ACTIONS ── */
-  .secondary-actions {
+  .inline-faq-section {
     width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    margin-top: 0;
+    margin-bottom: 4px;
   }
 
-  .faq-btn {
-    width: 100%;
-    padding: 15px 22px;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 999px;
-    background: rgba(10,10,11,0.78);
-    color: rgba(255,255,255,0.7);
-    font-size: 0.88rem;
-    font-weight: 700;
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.04),
-      0 8px 20px rgba(0,0,0,0.22);
-    -webkit-tap-highlight-color: transparent;
-    transition: transform .2s ease;
-  }
-
-  .faq-btn:active { transform: scale(0.98); }
-
-  /* ── MODAL ── */
-  .modal {
-    position: fixed;
-    inset: 0;
-    z-index: 30;
-    display: flex;
-    align-items: flex-end;
-    justify-content: center;
-    padding: 0;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity .25s ease;
-    overflow: hidden;
-    overscroll-behavior: contain;
-  }
-
-  .modal.is-open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-
-  .modal-backdrop {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.72);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-  }
-
-  .modal-panel {
-    position: relative;
-    z-index: 1;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-height: 90vh;
-    padding: 20px 18px 32px;
-    border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 24px 24px 0 0;
-    background:
-      radial-gradient(circle at top, rgba(255,106,0,0.12), transparent 34%),
-      linear-gradient(180deg, rgba(20,20,21,0.99), rgba(8,8,9,0.99));
-    box-shadow: 0 -20px 60px rgba(0,0,0,0.5);
-    text-align: left;
-    transform: translateY(24px) scale(.98);
-    transition: transform .3s ease;
-    overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior: contain;
-    -webkit-overflow-scrolling: touch;
-  }
-
-  .modal.is-open .modal-panel {
-    transform: translateY(0) scale(1);
-  }
-
-  /* Drag handle */
-  .modal-panel::before {
-    content: "";
-    display: block;
-    width: 40px;
-    height: 4px;
-    border-radius: 999px;
-    background: rgba(255,255,255,0.18);
-    margin: 0 auto 18px;
-  }
-
-  .modal-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-
-  .modal-title {
-    font-size: clamp(1.2rem, 5vw, 1.6rem);
-    line-height: 1.1;
-    letter-spacing: -0.04em;
-  }
-
-  .close-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px; height: 36px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 999px;
-    background: rgba(255,255,255,0.05);
-    color: rgba(255,255,255,0.8);
-    font-size: 1rem;
-  }
+  
 
   /* ── FAQ LIST ── */
   .faq-list { display: grid; gap: 10px; }
@@ -756,34 +619,6 @@
     line-height: 1.68;
   }
 
-  /* ── POPUP RETURN ── */
-  .popup-return {
-    position: sticky;
-    bottom: 12px;
-    display: flex;
-    justify-content: center;
-    margin-top: 16px;
-    padding-top: 8px;
-    pointer-events: none;
-  }
-
-  .popup-return button {
-    pointer-events: auto;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 12px 22px;
-    border: 1px solid rgba(255,255,255,0.1);
-    border-radius: 999px;
-    background: rgba(12,12,13,0.92);
-    color: rgba(255,255,255,0.88);
-    font-size: 0.86rem;
-    font-weight: 600;
-    box-shadow: 0 10px 24px rgba(0,0,0,0.3);
-    backdrop-filter: blur(10px);
-    animation: returnFloat 3.2s ease-in-out infinite;
-  }
-
   /* ── FOOTER ── */
   .site-footer {
     padding: 16px 20px 24px;
@@ -834,16 +669,6 @@
       mask-image: none;
       -webkit-mask-image: none;
     }
-    .modal {
-      align-items: center;
-      padding: 20px;
-    }
-    .modal-panel {
-      border-radius: 24px;
-      max-width: 480px;
-      max-height: calc(100vh - 40px);
-    }
-    .modal-panel::before { display: none; }
   }
 </style>
 </head>
@@ -1140,93 +965,80 @@
 
           <div class="faq-bridge"><span>Questions? ↓</span></div>
 
-          <section class="flow-section social-proof inline-faq">
-            <span class="social-label">FAQ</span>
+          <section class="flow-section inline-faq-section">
+            <span class="social-label" style="display:block;margin-bottom:12px;">FAQ</span>
+            <div class="faq-list">
 
-            <div class="faq-preview">
-              <strong>What do I get when I join?</strong>
-              <p>You get the full PolishMaster method step-by-step: sanding sequence, surface refinement, and polishing, plus the types of tools and materials to use.</p>
-            </div>
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">1. What do I get when I join?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">You get the full PolishMaster method step-by-step: sanding sequence, surface refinement, and polishing, plus the exact types of tools and materials to use.</div></div></div>
+              </div>
 
-            <div class="faq-preview">
-              <strong>Can I learn this remotely?</strong>
-              <p>Yes. The system is built to be followed step-by-step from anywhere.</p>
-            </div>
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">2. Do you sell tools or physical products?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">No. This is not a product store. You learn the method and how to choose the right tools yourself.</div></div></div>
+              </div>
 
-            <div class="faq-preview">
-              <strong>What materials does this work with?</strong>
-              <p>Mainly PLA and similar 3D printing plastics. The method is based on surface control, not a single material.</p>
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">3. Can I learn this remotely?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. The system is built to be followed step-by-step from anywhere.</div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">4. What materials does this work with?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Mainly PLA and similar 3D printing plastics. The method is based on surface control, not a single material.</div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">5. What if I can't find the same tools in my country?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Tools are region-specific. Inside, you'll learn what matters so you can use local alternatives. If needed, you can contact me after joining.</div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">6. Does this work for small, detailed figures?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes, but very small, highly detailed models are harder to sand. If your focus is ultra-detailed miniatures, the process becomes more challenging.</div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">7. Can I get a matte finish instead of glossy?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. Matte comes from stopping before polishing, so the surface stays sanded rather than polished.</div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">8. What is the PolishMaster System?</span>
+                  <span class="faq-icon">+</span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">First you learn the method. Then the system layer helps you turn prints into sellable products with new models, pricing guidance, and ideas on where to sell.</div></div></div>
+              </div>
+
             </div>
           </section>
-
-          <div class="actions secondary-actions">
-            <button class="faq-btn" id="faq-trigger" type="button"><span>Full FAQ</span></button>
-          </div>
         </div>
       </div>
     </section>
   </main>
-
-  <div class="modal" id="faq-modal" aria-hidden="true">
-    <div class="modal-backdrop" data-close="true"></div>
-    <div class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="faq-title">
-      <div class="modal-head">
-        <div>
-          <span class="social-label">FAQ</span>
-          <h2 class="modal-title" id="faq-title">Frequently asked questions</h2>
-        </div>
-        <button class="close-btn" id="faq-close" type="button" aria-label="Close FAQ popup">x</button>
-      </div>
-
-      <div class="social-proof">
-        <div class="faq-list">
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">1. What do I get when I join?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">You get the full PolishMaster method step-by-step: sanding sequence, surface refinement, and polishing, plus the exact types of tools and materials to use.</div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">2. Do you sell tools or physical products?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">No. This is not a product store. You learn the method and how to choose the right tools yourself.</div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">3. Can I learn this remotely?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. The system is built to be followed step-by-step from anywhere.</div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">4. What materials does this work with?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Mainly PLA and similar 3D printing plastics. The method is based on surface control, not a single material.</div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">5. What if I can't find the same tools in my country?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Tools are region-specific. Inside, you'll learn what matters so you can use local alternatives. If needed, you can contact me after joining.</div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">6. Does this work for small, detailed figures?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes, but very small, highly detailed models are harder to sand. If your focus is ultra-detailed miniatures, the process becomes more challenging.</div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">7. Can I get a matte finish instead of glossy?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">Yes. Matte comes from stopping before polishing, so the surface stays sanded rather than polished.</div></div></div>
-          </div>
-
-          <div class="faq-item">
-            <button class="faq-toggle" type="button"><span class="faq-question">8. What is the PolishMaster System?</span><span class="faq-icon">+</span></button>
-            <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer">First you learn the method. Then the system layer helps you turn prints into sellable products with new models, pricing guidance, and ideas on where to sell.</div></div></div>
-          </div>
-        </div>
-
-        <div class="popup-return">
-          <button type="button" data-return="true">Return to main page</button>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <footer class="site-footer">
     <div>© 2026 PolishMaster. All rights reserved.</div>
@@ -1240,88 +1052,8 @@
 
   <script>
     (function () {
-      var faqTrigger = document.getElementById("faq-trigger");
-      var faqModal = document.getElementById("faq-modal");
-      var faqClose = document.getElementById("faq-close");
-      var returnButtons = document.querySelectorAll("[data-return='true']");
       var faqToggles = document.querySelectorAll(".faq-toggle");
       var comparisonSliders = document.querySelectorAll("[data-comparison-slider]");
-      var scrollTop = 0;
-
-      function lockPageScroll() {
-        scrollTop = window.scrollY || window.pageYOffset || 0;
-        document.documentElement.classList.add("modal-open");
-        document.body.classList.add("modal-open");
-        document.body.style.position = "fixed";
-        document.body.style.top = "-" + scrollTop + "px";
-        document.body.style.left = "0";
-        document.body.style.right = "0";
-        document.body.style.width = "100%";
-      }
-
-      function unlockPageScroll() {
-        document.documentElement.classList.remove("modal-open");
-        document.body.classList.remove("modal-open");
-        document.body.style.position = "";
-        document.body.style.top = "";
-        document.body.style.left = "";
-        document.body.style.right = "";
-        document.body.style.width = "";
-        window.scrollTo(0, scrollTop);
-      }
-
-      function openModal(modal) {
-        if (!modal) return;
-        modal.classList.add("is-open");
-        modal.setAttribute("aria-hidden", "false");
-        lockPageScroll();
-      }
-
-      function closeModal(modal) {
-        if (!modal) return;
-        modal.classList.remove("is-open");
-        modal.setAttribute("aria-hidden", "true");
-        if (!faqModal || !faqModal.classList.contains("is-open")) {
-          unlockPageScroll();
-        }
-      }
-
-      function closeAll() {
-        if (faqModal) {
-          faqModal.classList.remove("is-open");
-          faqModal.setAttribute("aria-hidden", "true");
-        }
-        unlockPageScroll();
-      }
-
-      if (faqTrigger && faqModal) {
-        faqTrigger.addEventListener("click", function () {
-          closeAll();
-          openModal(faqModal);
-        });
-      }
-
-      if (faqClose && faqModal) {
-        faqClose.addEventListener("click", function () {
-          closeModal(faqModal);
-        });
-      }
-
-      [faqModal].forEach(function (modal) {
-        if (!modal) return;
-        modal.addEventListener("click", function (event) {
-          var target = event.target;
-          if (target instanceof HTMLElement && target.dataset.close === "true") {
-            closeModal(modal);
-          }
-        });
-      });
-
-      returnButtons.forEach(function (button) {
-        button.addEventListener("click", function () {
-          closeAll();
-        });
-      });
 
       faqToggles.forEach(function (toggle) {
         toggle.addEventListener("click", function () {
@@ -1334,9 +1066,8 @@
       comparisonSliders.forEach(function (slider) {
         var overlay = slider.querySelector("[data-comparison-overlay]");
         var divider = slider.querySelector("[data-comparison-divider]");
-        var handle = slider.querySelector("[data-comparison-handle]");
+        var handle  = slider.querySelector("[data-comparison-handle]");
         var isDragging = false;
-
         if (!overlay || !divider || !handle) return;
 
         function setPosition(clientX) {
@@ -1353,40 +1084,35 @@
           slider.classList.remove("is-dragging");
         }
 
-        slider.addEventListener("mousedown", function (event) {
+        slider.addEventListener("mousedown", function (e) {
           isDragging = true;
           slider.classList.add("is-dragging");
-          setPosition(event.clientX);
+          setPosition(e.clientX);
         });
 
-        slider.addEventListener("touchstart", function (event) {
+        slider.addEventListener("touchstart", function (e) {
           isDragging = true;
           slider.classList.add("is-dragging");
-          if (event.touches[0]) setPosition(event.touches[0].clientX);
+          if (e.touches[0]) setPosition(e.touches[0].clientX);
         }, { passive: true });
 
-        window.addEventListener("mousemove", function (event) {
+        window.addEventListener("mousemove", function (e) {
           if (!isDragging) return;
-          setPosition(event.clientX);
+          setPosition(e.clientX);
         });
 
-        window.addEventListener("touchmove", function (event) {
-          if (!isDragging || !event.touches[0]) return;
-          setPosition(event.touches[0].clientX);
+        window.addEventListener("touchmove", function (e) {
+          if (!isDragging || !e.touches[0]) return;
+          setPosition(e.touches[0].clientX);
         }, { passive: true });
 
         window.addEventListener("mouseup", stopDragging);
         window.addEventListener("touchend", stopDragging);
+
         slider.addEventListener("mouseleave", function () {
           if (!isDragging) return;
           stopDragging();
         });
-      });
-
-      document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-          closeAll();
-        }
       });
     })();
   </script>
