@@ -364,83 +364,172 @@
     letter-spacing: 0.1em;
   }
 
-  /* ── REVIEWS ── */
-  .inline-reviews { display: grid; gap: 10px; }
+  /* ── REVIEWS SECTION ── */
+  .reviews-section {
+    width: 100%;
+    margin-bottom: 14px;
+  }
 
-  .reviews {
-    display: grid;
+  .reviews-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     gap: 10px;
-    grid-auto-flow: column;
-    grid-auto-columns: minmax(80%, 1fr);
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding-bottom: 6px;
-    scroll-snap-type: x proximity;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, #000 0%, #000 84%, transparent 100%);
+    margin-bottom: 12px;
   }
 
-  .reviews::-webkit-scrollbar { display: none; }
+  .rating-badge {
+    color: #fff3ea;
+    font-size: 0.8rem;
+    font-weight: 700;
+    white-space: nowrap;
+    background: rgba(255,106,0,0.12);
+    border: 1px solid rgba(255,106,0,0.22);
+    border-radius: 999px;
+    padding: 4px 10px;
+  }
 
-  .review {
-    padding: 14px;
-    border: 1px solid rgba(255,255,255,0.06);
+  .reviews-rating-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border: 1px solid rgba(255,255,255,0.05);
+    border-radius: 14px;
+    background: rgba(255,255,255,0.02);
+    margin-bottom: 14px;
+  }
+
+  .reviews-big-score {
+    font-size: clamp(2rem, 8vw, 2.8rem);
+    line-height: 0.9;
+    letter-spacing: -0.06em;
+    color: #fff4ea;
+  }
+
+  .stars-lg {
+    color: rgba(255,106,0,0.95);
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 3px;
+  }
+
+  .reviews-count {
+    color: rgba(255,255,255,0.48);
+    font-size: 0.76rem;
+  }
+
+  /* Outer container with fade mask */
+  .testimonials-outer {
+    position: relative;
+    overflow: hidden;
+    height: 360px;
+    mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
     border-radius: 16px;
-    background: rgba(255,255,255,0.025);
-    scroll-snap-align: start;
+    margin-bottom: 10px;
   }
 
-  .review-head {
+  .testimonials-cols {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    height: 100%;
+  }
+
+  .col-b { display: none; }
+
+  .testimonials-col {
+    overflow: hidden;
+    height: 100%;
+  }
+
+  /* The scrolling track — contains cards duplicated for seamless loop */
+  .testimonials-track {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    will-change: transform;
+  }
+
+  .track-a { animation: scrollUp 28s linear infinite; }
+  .track-b { animation: scrollUp 22s linear infinite; }
+
+  .testimonials-track:hover,
+  .testimonials-track:focus-within {
+    animation-play-state: paused;
+  }
+
+  /* Review card */
+  .tcard {
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 18px;
+    background: linear-gradient(160deg, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+    box-shadow: 0 4px 20px rgba(0,0,0,0.28);
+    flex-shrink: 0;
+  }
+
+  .tcard-text {
+    font-size: 0.85rem;
+    line-height: 1.65;
+    color: rgba(255,255,255,0.82);
+    margin-bottom: 14px;
+    font-style: italic;
+  }
+
+  .tcard-author {
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
-  .avatar {
-    width: 40px; height: 40px;
+  .tcard-avatar {
+    width: 38px;
+    height: 38px;
     border-radius: 50%;
-    border: 1px solid rgba(255,255,255,0.08);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff3ea;
-    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.12);
+    object-fit: cover;
     flex: 0 0 auto;
   }
 
-  .avatar-1 { background: linear-gradient(180deg, #ff8a3d, #8c3a00); }
-  .avatar-2 { background: linear-gradient(180deg, #ffb36b, #7a3b00); }
-  .avatar-3 { background: linear-gradient(180deg, #ffcf8d, #7f4500); }
-
-  .avatar svg {
-    width: 16px; height: 16px;
-    stroke: rgba(255,244,234,0.96); stroke-width: 2;
-    fill: none; stroke-linecap: round; stroke-linejoin: round;
-  }
-
-  .reviewer-name {
+  .tcard-name {
     color: #fff3ea;
-    font-size: 0.86rem;
-    font-weight: 700;
-  }
-
-  .review p {
     font-size: 0.84rem;
-    line-height: 1.6;
-    color: rgba(255,255,255,0.78);
-    margin-bottom: 6px;
+    font-weight: 700;
+    line-height: 1.3;
   }
 
-  .review .stars { margin-top: 0; }
+  .tcard-role {
+    color: rgba(255,255,255,0.48);
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
 
-  .reviews-more {
-    margin-top: 4px;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.8rem;
-    text-align: left;
+  .tcard-stars {
+    color: rgba(255,106,0,0.9);
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+  }
+
+  .reviews-more-label {
+    color: rgba(255,255,255,0.44);
+    font-size: 0.78rem;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+
+  @keyframes scrollUp {
+    0%   { transform: translateY(0); }
+    100% { transform: translateY(-50%); }
+  }
+
+  /* Tablet: show 2 columns */
+  @media (min-width: 540px) {
+    .testimonials-outer { height: 420px; }
+    .testimonials-cols { grid-template-columns: 1fr 1fr; }
+    .col-b { display: block; }
   }
 
   /* ── FAQ BRIDGE ── */
@@ -802,58 +891,255 @@
             </div>
           </div>
 
-          <section class="flow-section social-proof inline-reviews">
-            <div class="social-top">
+          <section class="flow-section reviews-section">
+            <div class="reviews-header">
               <span class="social-label">Member Reviews</span>
-              <span class="rating">4.7/5 from 200+ members</span>
+              <span class="rating-badge">4.7 ★ &nbsp;200+ members</span>
             </div>
-
-            <div class="rating-summary">
+            <div class="reviews-rating-row">
+              <strong class="reviews-big-score">4.7</strong>
               <div>
-                <div class="rating-score">
-                  <strong>4.7</strong>
-                  <span>/ 5</span>
-                </div>
-                <div class="stars">★★★★★</div>
+                <div class="stars-lg">★★★★★</div>
+                <div class="reviews-count">Based on 200+ reviews</div>
               </div>
             </div>
-
-            <div class="reviews">
-              <article class="review">
-                <div class="review-head">
-                  <span class="avatar avatar-1" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg>
-                  </span>
-                  <div class="reviewer-name">Ethan K.</div>
+            <div class="testimonials-outer">
+              <div class="testimonials-cols">
+                <div class="testimonials-col col-a">
+                  <div class="testimonials-track track-a">
+                    <article class="tcard">
+                      <p class="tcard-text">"My prints finally look sellable. The layer lines are completely gone — clients think I outsourced the finishing."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan K." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Ethan K.</div>
+                          <div class="tcard-role">FDM Maker · Etsy Seller</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"The sanding sequence alone was worth the price. I went from gritty surfaces to mirror-level gloss in one afternoon."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Lina A." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Lina A.</div>
+                          <div class="tcard-role">Product Designer</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"I've tried other guides but nothing was this systematic. Step-by-step and it actually works on PLA without any special tools."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus T." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Marcus T.</div>
+                          <div class="tcard-role">Hobbyist · UK</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"Good information overall. I wanted more examples specifically for curved miniature surfaces, but the core method is solid."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Daniel H." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Daniel H.</div>
+                          <div class="tcard-role">Miniature Painter</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★☆☆</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"Finally charging proper prices for my prints. The finish quality convinced my first customer to order three more pieces."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Sara M." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Sara M.</div>
+                          <div class="tcard-role">Small Business Owner</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                  
+                    <article class="tcard">
+                      <p class="tcard-text">"My prints finally look sellable. The layer lines are completely gone — clients think I outsourced the finishing."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan K." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Ethan K.</div>
+                          <div class="tcard-role">FDM Maker · Etsy Seller</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"The sanding sequence alone was worth the price. I went from gritty surfaces to mirror-level gloss in one afternoon."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Lina A." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Lina A.</div>
+                          <div class="tcard-role">Product Designer</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"I've tried other guides but nothing was this systematic. Step-by-step and it actually works on PLA without any special tools."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus T." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Marcus T.</div>
+                          <div class="tcard-role">Hobbyist · UK</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"Good information overall. I wanted more examples specifically for curved miniature surfaces, but the core method is solid."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Daniel H." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Daniel H.</div>
+                          <div class="tcard-role">Miniature Painter</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★☆☆</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"Finally charging proper prices for my prints. The finish quality convinced my first customer to order three more pieces."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/22.jpg" alt="Sara M." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Sara M.</div>
+                          <div class="tcard-role">Small Business Owner</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                  
+                  </div>
                 </div>
-                <p>"My prints finally look sellable instead of unfinished prototypes."</p>
-                <div class="stars">★★★★★</div>
-              </article>
-
-              <article class="review">
-                <div class="review-head">
-                  <span class="avatar avatar-2" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg>
-                  </span>
-                  <div class="reviewer-name">Lina A.</div>
+                <div class="testimonials-col col-b">
+                  <div class="testimonials-track track-b">
+                    <article class="tcard">
+                      <p class="tcard-text">"I was skeptical but the before/after on my first test piece was shocking. Pure PLA, no special filament, just the method."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James R." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">James R.</div>
+                          <div class="tcard-role">Engineer · Side Hustle</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"The polishing steps are simple, clear, and made my results look premium within a single session. No guesswork."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Nour B." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Nour B.</div>
+                          <div class="tcard-role">Architect · Morocco</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"I print cosplay props and always struggled with the surface. This method works perfectly on large flat panels too."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/81.jpg" alt="Yuki T." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Yuki T.</div>
+                          <div class="tcard-role">Cosplay Creator · Japan</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"The matte finish guidance alone changed how I present my models. Clients now ask how I get such a clean surface."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos V." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Carlos V.</div>
+                          <div class="tcard-role">Freelance Modeller</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"Followed every step on a PETG piece. Took longer than PLA but the result was identical. Really glad I found this."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="Amira S." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Amira S.</div>
+                          <div class="tcard-role">Maker · UAE</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★☆</div>
+                    </article>
+                  
+                    <article class="tcard">
+                      <p class="tcard-text">"I was skeptical but the before/after on my first test piece was shocking. Pure PLA, no special filament, just the method."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James R." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">James R.</div>
+                          <div class="tcard-role">Engineer · Side Hustle</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"The polishing steps are simple, clear, and made my results look premium within a single session. No guesswork."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Nour B." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Nour B.</div>
+                          <div class="tcard-role">Architect · Morocco</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"I print cosplay props and always struggled with the surface. This method works perfectly on large flat panels too."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/81.jpg" alt="Yuki T." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Yuki T.</div>
+                          <div class="tcard-role">Cosplay Creator · Japan</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"The matte finish guidance alone changed how I present my models. Clients now ask how I get such a clean surface."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos V." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Carlos V.</div>
+                          <div class="tcard-role">Freelance Modeller</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"Followed every step on a PETG piece. Took longer than PLA but the result was identical. Really glad I found this."</p>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="Amira S." class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Amira S.</div>
+                          <div class="tcard-role">Maker · UAE</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★☆</div>
+                    </article>
+                  
+                  </div>
                 </div>
-                <p>"The polishing steps are simple, clear, and made my results look premium fast."</p>
-                <div class="stars">★★★★★</div>
-              </article>
-
-              <article class="review">
-                <div class="review-head">
-                  <span class="avatar avatar-3" aria-hidden="true">
-                    <svg viewBox="0 0 24 24"><path d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"></path><path d="M5.5 19a6.5 6.5 0 0 1 13 0"></path></svg>
-                  </span>
-                  <div class="reviewer-name">Daniel H.</div>
-                </div>
-                <p>"Good information overall, but I wanted more examples for curved surfaces."</p>
-                <div class="stars">★★★☆☆</div>
-              </article>
+              </div>
             </div>
-
-            <div class="reviews-more">+200 reviews inside</div>
+            <div class="reviews-more-label">+200 verified reviews</div>
           </section>
 
           <div class="faq-bridge"><span>Questions? ↓</span></div>
