@@ -609,7 +609,7 @@
     align-items: center;
     justify-content: center;
     color: rgba(255,255,255,0.5);
-    transition: transform .32s cubic-bezier(.4,0,.2,1), color .22s ease, background .22s ease;
+    transition: transform 0.42s cubic-bezier(0.4, 0, 0.2, 1), color 0.28s ease, background 0.28s ease;
     border-radius: 50%;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.1);
@@ -633,9 +633,9 @@
   }
 
   .faq-content {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows .3s cubic-bezier(.4,0,.2,1);
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.48s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .faq-item.is-open .faq-content { grid-template-rows: 1fr; }
@@ -651,7 +651,7 @@
     max-width: 94%;
     opacity: 0;
     transform: translateY(-4px);
-    transition: opacity .28s ease .06s, transform .28s ease .06s;
+    transition: opacity 0.38s ease 0.08s, transform 0.38s ease 0.08s;
   }
 
   .faq-item.is-open .faq-answer {
@@ -1249,13 +1249,25 @@
       var faqToggles = document.querySelectorAll(".faq-toggle");
       var comparisonSliders = document.querySelectorAll("[data-comparison-slider]");
 
-      faqToggles.forEach(function (toggle) {
-        toggle.addEventListener("click", function () {
-          var item = toggle.closest(".faq-item");
-          if (!item) return;
-          item.classList.toggle("is-open");
-        });
+      var faqItems = document.querySelectorAll(".faq-item");
+
+  faqToggles.forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      var item = toggle.closest(".faq-item");
+      if (!item) return;
+      var isAlreadyOpen = item.classList.contains("is-open");
+
+      // Close all items
+      faqItems.forEach(function (el) {
+        el.classList.remove("is-open");
       });
+
+      // Open clicked item only if it was closed
+      if (!isAlreadyOpen) {
+        item.classList.add("is-open");
+      }
+    });
+  });
 
       comparisonSliders.forEach(function (slider) {
         var overlay = slider.querySelector("[data-comparison-overlay]");
