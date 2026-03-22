@@ -54,7 +54,7 @@
   a { color: inherit; text-decoration: none; }
   button { font: inherit; cursor: pointer; border: none; background: none; }
 
-  /* ── PAGE WRAPPER ── */
+  /* ââ PAGE WRAPPER ââ */
   .section {
     min-height: 100vh;
     min-height: 100dvh;
@@ -64,7 +64,7 @@
     padding: 16px 14px 40px;
   }
 
-  /* ── CARD ── */
+  /* ââ CARD ââ */
   .card {
     width: 100%;
     max-width: 480px;
@@ -79,7 +79,7 @@
     -webkit-backdrop-filter: blur(16px);
   }
 
-  /* ── HERO CONTENT ── */
+  /* ââ HERO CONTENT ââ */
   .hero-content {
     display: flex;
     flex-direction: column;
@@ -123,7 +123,7 @@
     margin-bottom: 18px;
   }
 
-  /* ── CTA BUTTON ── */
+  /* ââ CTA BUTTON ââ */
   .actions {
     display: flex;
     flex-direction: column;
@@ -213,7 +213,7 @@
     animation: arrowPulse 1.6s ease-in-out infinite;
   }
 
-  /* ── COMPARISON SLIDER ── */
+  /* ââ COMPARISON SLIDER ââ */
   .visual {
     width: 100%;
     align-self: stretch;
@@ -306,10 +306,10 @@
     stroke-linejoin: round;
   }
 
-  /* ── FLOW SECTIONS ── */
+  /* ââ FLOW SECTIONS ââ */
   .flow-section { width: 100%; }
 
-  /* ── SOCIAL PROOF ── */
+  /* ââ SOCIAL PROOF ââ */
   .social-proof {
     padding: 16px;
     border: 1px solid rgba(255,255,255,0.07);
@@ -377,7 +377,7 @@
     letter-spacing: 0.1em;
   }
 
-  /* ── REVIEWS SECTION ── */
+  /* ââ REVIEWS SECTION ââ */
   .reviews-section {
     width: 100%;
     margin-bottom: 14px;
@@ -457,7 +457,7 @@
     height: 100%;
   }
 
-  /* The scrolling track — contains cards duplicated for seamless loop */
+  /* The scrolling track â contains cards duplicated for seamless loop */
   .testimonials-track {
     display: flex;
     flex-direction: column;
@@ -541,7 +541,7 @@
     .col-b { display: block; }
   }
 
-  /* ── FAQ BRIDGE ── */
+  /* ââ FAQ BRIDGE ââ */
   .faq-bridge {
     margin: 14px 0 10px;
     text-align: center;
@@ -566,7 +566,7 @@
     letter-spacing: 0.04em;
   }
 
-  /* ── INLINE FAQ ── */
+  /* ââ INLINE FAQ ââ */
   .inline-faq-section {
     width: 100%;
     margin-bottom: 4px;
@@ -574,7 +574,7 @@
 
   
 
-  /* ── FAQ LIST ── */
+  /* ââ FAQ LIST ââ */
   .faq-list { display: grid; gap: 8px; }
 
   .faq-item {
@@ -696,7 +696,7 @@
   }
 
   .faq-answer ul li::before {
-    content: "›";
+    content: "âº";
     color: rgba(255,106,0,0.8);
     font-weight: 700;
     font-size: 0.95rem;
@@ -711,7 +711,7 @@
     margin: 8px 0;
   }
 
-/* ── FOOTER ── */
+/* ââ FOOTER ââ */
   .site-footer {
     padding: 16px 20px calc(24px + env(safe-area-inset-bottom, 0px));
     color: rgba(255,255,255,0.34);
@@ -729,7 +729,7 @@
 
   .site-footer a { color: rgba(255,255,255,0.4); }
 
-  /* ── ANIMATIONS ── */
+  /* ââ ANIMATIONS ââ */
   @keyframes shimmerSweep {
     0%   { transform: rotate(16deg) translateX(-120%); }
     60%  { transform: rotate(16deg) translateX(260%); }
@@ -750,7 +750,7 @@
     50%      { transform: translateY(-3px); }
   }
 
-  /* ── TABLET+ ── */
+  /* ââ TABLET+ ââ */
   @media (min-width: 540px) {
     .section { padding: 28px 20px 48px; }
     .card { padding: 30px 26px 34px; }
@@ -767,7 +767,7 @@
     }
   }
 
-  /* ── SLIDER LABELS ── */
+  /* ââ SLIDER LABELS ââ */
   .slider-label-before,
   .slider-label-after {
     position: absolute;
@@ -788,14 +788,14 @@
   .slider-label-before { left: 12px; }
   .slider-label-after  { right: 12px; }
 
-  /* ── FEATURED CARD ── */
+  /* ââ FEATURED CARD ââ */
   .tcard-featured {
     border-color: rgba(255,106,0,0.35) !important;
     background: linear-gradient(160deg, rgba(255,106,0,0.1), rgba(255,255,255,0.03)) !important;
     box-shadow: 0 0 0 1px rgba(255,106,0,0.18), 0 8px 28px rgba(255,106,0,0.12) !important;
   }
 
-  /* ── SECONDARY CTA ── */
+  /* ââ SECONDARY CTA ââ */
   .cta-secondary {
     display: flex;
     margin-top: 16px;
@@ -813,7 +813,7 @@
       rgba(10,10,11,0.9) !important;
   }
 
-/* ── SPARKLES ── */
+/* ââ SPARKLES ââ */
   #sparkles-canvas {
     position: fixed;
     inset: 0;
@@ -829,6 +829,175 @@
     position: relative;
     z-index: 1;
   }
+
+  /* ── PM MODAL SYSTEM ── */
+  .pm-modal-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 9000;
+    background: rgba(0,0,0,0.72);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 280ms ease-out;
+  }
+  .pm-modal-overlay.is-open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .pm-modal {
+    position: relative;
+    width: 100%;
+    max-width: 680px;
+    min-height: 100vh;
+    background: #0e0e0f;
+    border-left: 1px solid rgba(255,255,255,0.07);
+    border-right: 1px solid rgba(255,255,255,0.07);
+    padding: 72px 40px 60px;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    transform: scale(0.98);
+    transition: transform 280ms ease-out;
+    box-sizing: border-box;
+  }
+  .pm-modal-overlay.is-open .pm-modal {
+    transform: scale(1);
+  }
+  .pm-modal-close {
+    position: fixed;
+    top: 22px;
+    right: 22px;
+    z-index: 9100;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.10);
+    color: rgba(255,255,255,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 180ms ease, color 180ms ease;
+  }
+  .pm-modal-close:hover {
+    background: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.9);
+  }
+  .pm-modal-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+  .pm-modal-sub {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.45);
+    margin: 0 0 36px;
+  }
+  .pm-modal-content h1 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 0 0 8px;
+    letter-spacing: -0.02em;
+  }
+  .pm-modal-content .pm-modal-date {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.3);
+    margin: 0 0 40px;
+    display: block;
+  }
+  .pm-modal-content h2 {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.85);
+    margin: 36px 0 10px;
+    letter-spacing: -0.01em;
+  }
+  .pm-modal-content p {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.75;
+    margin: 0 0 12px;
+  }
+  .pm-divider {
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    margin: 32px 0;
+  }
+  .pm-contact-modal {
+    max-width: 480px;
+    border-radius: 20px;
+    margin: auto 16px;
+    padding: 56px 32px 40px;
+    min-height: unset;
+    align-self: center;
+  }
+  .pm-contact-overlay {
+    align-items: center;
+  }
+  .pm-contact-inner { width: 100%; }
+  .pm-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .pm-field span {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .pm-field input, .pm-field textarea {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.09);
+    border-radius: 10px;
+    padding: 12px 14px;
+    color: var(--text);
+    font-size: 0.875rem;
+    font-family: inherit;
+    outline: none;
+    transition: border-color 180ms ease;
+    resize: none;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .pm-field input:focus, .pm-field textarea:focus {
+    border-color: rgba(255,106,0,0.5);
+  }
+  .pm-field input::placeholder, .pm-field textarea::placeholder {
+    color: rgba(255,255,255,0.2);
+  }
+  .pm-contact-submit {
+    width: 100%;
+    padding: 14px;
+    margin-top: 8px;
+    border-radius: 12px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: opacity 180ms ease;
+    font-family: inherit;
+  }
+  .pm-contact-submit:hover { opacity: 0.88; }
+  @media (max-width: 600px) {
+    .pm-modal { padding: 72px 24px 48px; }
+    .pm-modal-title, .pm-modal-content h1 { font-size: 1.4rem; }
+    .pm-contact-modal { padding: 56px 20px 32px; }
+  }
+
 </style>
 </head>
 <body>
@@ -878,12 +1047,12 @@
           <section class="flow-section reviews-section">
             <div class="reviews-header">
               <span class="social-label">Member Reviews</span>
-              <span class="rating-badge">4.7 ★ &nbsp;200+ members</span>
+              <span class="rating-badge">4.7 â &nbsp;200+ members</span>
             </div>
             <div class="reviews-rating-row">
               <strong class="reviews-big-score">4.7</strong>
               <div>
-                <div class="stars-lg">★★★★★</div>
+                <div class="stars-lg">âââââ</div>
                 <div class="reviews-count">Based on 200+ reviews</div>
               </div>
             </div>
@@ -892,15 +1061,15 @@
                 <div class="testimonials-col col-a">
                   <div class="testimonials-track track-a">
                     <article class="tcard tcard-featured">
-                      <p class="tcard-text">"My prints finally look sellable. The layer lines are completely gone — clients think I outsourced the finishing."</p>
+                      <p class="tcard-text">"My prints finally look sellable. The layer lines are completely gone â clients think I outsourced the finishing."</p>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan K." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Ethan K.</div>
-                          <div class="tcard-role">FDM Maker · Etsy Seller</div>
+                          <div class="tcard-role">FDM Maker Â· Etsy Seller</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The sanding sequence alone was worth the price. I went from gritty surfaces to mirror-level gloss in one afternoon."</p>
@@ -911,7 +1080,7 @@
                           <div class="tcard-role">Product Designer</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"I've tried other guides but nothing was this systematic. Step-by-step and it actually works on PLA without any special tools."</p>
@@ -919,10 +1088,10 @@
                         <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus T." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Marcus T.</div>
-                          <div class="tcard-role">Hobbyist · UK</div>
+                          <div class="tcard-role">Hobbyist Â· UK</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Good information overall. I wanted more examples specifically for curved miniature surfaces, but the core method is solid."</p>
@@ -933,7 +1102,7 @@
                           <div class="tcard-role">Miniature Painter</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★☆☆</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Finally charging proper prices for my prints. The finish quality convinced my first customer to order three more pieces."</p>
@@ -944,19 +1113,19 @@
                           <div class="tcard-role">Small Business Owner</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                   
                     <article class="tcard">
-                      <p class="tcard-text">"My prints finally look sellable. The layer lines are completely gone — clients think I outsourced the finishing."</p>
+                      <p class="tcard-text">"My prints finally look sellable. The layer lines are completely gone â clients think I outsourced the finishing."</p>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan K." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Ethan K.</div>
-                          <div class="tcard-role">FDM Maker · Etsy Seller</div>
+                          <div class="tcard-role">FDM Maker Â· Etsy Seller</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The sanding sequence alone was worth the price. I went from gritty surfaces to mirror-level gloss in one afternoon."</p>
@@ -967,7 +1136,7 @@
                           <div class="tcard-role">Product Designer</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"I've tried other guides but nothing was this systematic. Step-by-step and it actually works on PLA without any special tools."</p>
@@ -975,10 +1144,10 @@
                         <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus T." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Marcus T.</div>
-                          <div class="tcard-role">Hobbyist · UK</div>
+                          <div class="tcard-role">Hobbyist Â· UK</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Good information overall. I wanted more examples specifically for curved miniature surfaces, but the core method is solid."</p>
@@ -989,7 +1158,7 @@
                           <div class="tcard-role">Miniature Painter</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★☆☆</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Finally charging proper prices for my prints. The finish quality convinced my first customer to order three more pieces."</p>
@@ -1000,7 +1169,7 @@
                           <div class="tcard-role">Small Business Owner</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                   
                   </div>
@@ -1013,10 +1182,10 @@
                         <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James R." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">James R.</div>
-                          <div class="tcard-role">Engineer · Side Hustle</div>
+                          <div class="tcard-role">Engineer Â· Side Hustle</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The polishing steps are simple, clear, and made my results look premium within a single session. No guesswork."</p>
@@ -1024,10 +1193,10 @@
                         <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Nour B." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Nour B.</div>
-                          <div class="tcard-role">Architect · Morocco</div>
+                          <div class="tcard-role">Architect Â· Morocco</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"I print cosplay props and always struggled with the surface. This method works perfectly on large flat panels too."</p>
@@ -1035,10 +1204,10 @@
                         <img src="https://randomuser.me/api/portraits/women/81.jpg" alt="Yuki T." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Yuki T.</div>
-                          <div class="tcard-role">Cosplay Creator · Japan</div>
+                          <div class="tcard-role">Cosplay Creator Â· Japan</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The matte finish guidance alone changed how I present my models. Clients now ask how I get such a clean surface."</p>
@@ -1049,7 +1218,7 @@
                           <div class="tcard-role">Freelance Modeller</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Followed every step on a PETG piece. Took longer than PLA but the result was identical. Really glad I found this."</p>
@@ -1057,10 +1226,10 @@
                         <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="Amira S." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Amira S.</div>
-                          <div class="tcard-role">Maker · UAE</div>
+                          <div class="tcard-role">Maker Â· UAE</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★☆</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                   
                     <article class="tcard">
@@ -1069,10 +1238,10 @@
                         <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James R." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">James R.</div>
-                          <div class="tcard-role">Engineer · Side Hustle</div>
+                          <div class="tcard-role">Engineer Â· Side Hustle</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The polishing steps are simple, clear, and made my results look premium within a single session. No guesswork."</p>
@@ -1080,10 +1249,10 @@
                         <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Nour B." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Nour B.</div>
-                          <div class="tcard-role">Architect · Morocco</div>
+                          <div class="tcard-role">Architect Â· Morocco</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"I print cosplay props and always struggled with the surface. This method works perfectly on large flat panels too."</p>
@@ -1091,10 +1260,10 @@
                         <img src="https://randomuser.me/api/portraits/women/81.jpg" alt="Yuki T." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Yuki T.</div>
-                          <div class="tcard-role">Cosplay Creator · Japan</div>
+                          <div class="tcard-role">Cosplay Creator Â· Japan</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The matte finish guidance alone changed how I present my models. Clients now ask how I get such a clean surface."</p>
@@ -1105,7 +1274,7 @@
                           <div class="tcard-role">Freelance Modeller</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Followed every step on a PETG piece. Took longer than PLA but the result was identical. Really glad I found this."</p>
@@ -1113,10 +1282,10 @@
                         <img src="https://randomuser.me/api/portraits/women/37.jpg" alt="Amira S." class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Amira S.</div>
-                          <div class="tcard-role">Maker · UAE</div>
+                          <div class="tcard-role">Maker Â· UAE</div>
                         </div>
                       </div>
-                      <div class="tcard-stars">★★★★☆</div>
+                      <div class="tcard-stars">âââââ</div>
                     </article>
                   
                   </div>
@@ -1126,7 +1295,7 @@
             <div class="reviews-more-label">Trusted by 200+ makers</div>
           </section>
 
-          <div class="faq-bridge"><span>Still have questions? Find your answers below ↓</span></div>
+          <div class="faq-bridge"><span>Still have questions? Find your answers below â</span></div>
 
           <section class="flow-section inline-faq-section">
             <span class="social-label" style="display:block;margin-bottom:12px;">FAQ</span>
@@ -1137,7 +1306,7 @@
                   <span class="faq-question">1. What do I get when I join?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Full access to the complete PolishMaster System — immediately.</span>You get a structured finishing system built for 3D print makers. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Full access to the complete PolishMaster System â immediately.</span>You get a structured finishing system built for 3D print makers. <ul>
                     <li>Full sanding sequence (grit by grit)</li>
                     <li>Surface refinement techniques</li>
                     <li>Polishing steps for gloss or matte</li>
@@ -1151,7 +1320,7 @@
                   <span class="faq-question">2. Do you sell tools or physical products?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">We teach the method — no tools or products are sold here.</span>This is a knowledge system, not a store. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">We teach the method â no tools or products are sold here.</span>This is a knowledge system, not a store. <ul>
                     <li>No physical products are sold</li>
                     <li>You learn what types of tools work and why</li>
                     <li>You source the tools yourself, locally</li>
@@ -1164,7 +1333,7 @@
                   <span class="faq-question">3. Can I learn this remotely?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes — the entire system is designed to be self-paced and remote.</span><ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes â the entire system is designed to be self-paced and remote.</span><ul>
                     <li>Follow every step from home</li>
                     <li>No in-person sessions required</li>
                     <li>Works in any country or workshop setup</li>
@@ -1177,7 +1346,7 @@
                   <span class="faq-question">4. What materials does this work with?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Standard sanding and polishing supplies — nothing exotic.</span>Primarily designed for common FDM filaments. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Standard sanding and polishing supplies â nothing exotic.</span>Primarily designed for common FDM filaments. <ul>
                     <li>Works best with PLA and PLA+</li>
                     <li>Compatible with PETG and similar plastics</li>
                     <li>Based on surface control, not a specific brand</li>
@@ -1190,7 +1359,7 @@
                   <span class="faq-question">5. What if I can't find the same tools in my country?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around categories, not brands — substitutions always work.</span>The method focuses on principles, not specific brands. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around categories, not brands â substitutions always work.</span>The method focuses on principles, not specific brands. <ul>
                     <li>You'll learn what properties matter in each tool</li>
                     <li>Local hardware-store alternatives work fine</li>
                     <li>Contact available after joining for specific questions</li>
@@ -1203,7 +1372,7 @@
                   <span class="faq-question">6. Does this work for small, detailed figures?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints — highly detailed miniatures require more care.</span>The method works, but small parts require more patience. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints â highly detailed miniatures require more care.</span>The method works, but small parts require more patience. <ul>
                     <li>Great results on regular-sized models</li>
                     <li>Challenging on ultra-detailed miniatures</li>
                     <li>Flat and curved surfaces both supported</li>
@@ -1216,7 +1385,7 @@
                   <span class="faq-question">7. Can I get a matte finish instead of glossy?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes — matte is simply an earlier stop in the same process.</span><ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes â matte is simply an earlier stop in the same process.</span><ul>
                     <li>Stop after sanding for a clean matte surface</li>
                     <li>Continue to polishing for a mirror-gloss finish</li>
                     <li>You control the final look at every step</li>
@@ -1230,8 +1399,8 @@
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">A two-layer system: learn the method, then apply it to sell.</span><ul>
-                    <li>Layer 1 — the finishing method, step by step</li>
-                    <li>Layer 2 — turn prints into sellable products</li>
+                    <li>Layer 1 â the finishing method, step by step</li>
+                    <li>Layer 2 â turn prints into sellable products</li>
                     <li>Includes pricing guidance and where-to-sell ideas</li>
                   </ul>
                 </div></div></div>
@@ -1253,12 +1422,41 @@
   <footer class="site-footer">
     <div>© 2026 PolishMaster. All rights reserved.</div>
     <nav>
-      <a href="#">Privacy</a>
-      <a href="#">Security</a>
-      <a href="#">Terms</a>
-      <a href="#">Contact</a>
+      <a href="#" data-modal="privacy">Privacy</a>
+      <a href="#" data-modal="security">Security</a>
+      <a href="#" data-modal="terms">Terms</a>
+      <a href="#" data-contact>Contact</a>
     </nav>
   </footer>
+
+  <!-- LEGAL MODALS -->
+  <div class="pm-modal-overlay" id="pm-modal-overlay" aria-hidden="true">
+    <div class="pm-modal" id="pm-modal" role="dialog" aria-modal="true">
+      <button class="pm-modal-close" id="pm-modal-close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="pm-modal-content" id="pm-modal-content"></div>
+    </div>
+  </div>
+
+  <!-- CONTACT MODAL -->
+  <div class="pm-modal-overlay pm-contact-overlay" id="pm-contact-overlay" aria-hidden="true">
+    <div class="pm-modal pm-contact-modal" id="pm-contact-modal" role="dialog" aria-modal="true">
+      <button class="pm-modal-close" id="pm-contact-close" aria-label="Close">
+        <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 1L17 17M17 1L1 17" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
+      </button>
+      <div class="pm-contact-inner">
+        <h2 class="pm-modal-title">Get in Touch</h2>
+        <p class="pm-modal-sub">Send us a message and we'll get back to you.</p>
+        <form class="pm-contact-form" id="pm-contact-form">
+          <label class="pm-field"><span>Name</span><input type="text" name="name" placeholder="Your name" autocomplete="name" required /></label>
+          <label class="pm-field"><span>Email</span><input type="email" name="email" placeholder="your@email.com" autocomplete="email" required /></label>
+          <label class="pm-field"><span>Message</span><textarea name="body" rows="4" placeholder="What's on your mind?" required></textarea></label>
+          <button type="submit" class="pm-contact-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script>
     (function () {
@@ -1415,6 +1613,182 @@
         requestAnimationFrame(draw);
       }
       draw();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var MODAL_CONTENT = {
+        privacy: {
+          title: 'Privacy Policy',
+          date: 'Effective March 22, 2026',
+          body: [
+            { type: 'h2', text: '1. Information We Collect' },
+            { type: 'p', text: 'We collect information you provide directly, including your name and email when you register or contact us. We also automatically collect log data, device information, and usage patterns.' },
+            { type: 'h2', text: '2. How We Use Your Information' },
+            { type: 'p', text: 'We use collected information to provide, maintain, and improve our services, process transactions, send technical notices, and respond to your questions.' },
+            { type: 'h2', text: '3. Information Sharing' },
+            { type: 'p', text: 'We do not share your personal information with third parties except as described in this policy. We may share information with service providers under confidentiality agreements.' },
+            { type: 'h2', text: '4. Data Security' },
+            { type: 'p', text: 'We take reasonable measures to protect your information from loss, theft, misuse, and unauthorized access. No method of internet transmission is 100% secure.' },
+            { type: 'h2', text: '5. Cookies' },
+            { type: 'p', text: 'We use cookies and similar technologies to track activity and hold certain information. You can configure your browser to refuse all cookies.' },
+            { type: 'h2', text: '6. Your Rights' },
+            { type: 'p', text: 'You have the right to access, update, or delete the information we hold on you. Contact us at any time to exercise these rights.' },
+            { type: 'h2', text: '7. Contact' },
+            { type: 'p', text: 'Questions about this Privacy Policy? Email us at hello@polishmaster.com.' }
+          ]
+        },
+        security: {
+          title: 'Security',
+          date: 'Effective March 22, 2026',
+          body: [
+            { type: 'h2', text: 'Our Commitment' },
+            { type: 'p', text: 'Security is a top priority at PolishMaster. We use industry-standard practices and continuously updated protocols to keep your data protected.' },
+            { type: 'h2', text: 'Data Encryption' },
+            { type: 'p', text: 'All data in transit is encrypted with TLS 1.3. Data at rest is encrypted with AES-256, ensuring protection at every stage.' },
+            { type: 'h2', text: 'Access Controls' },
+            { type: 'p', text: 'Only authorized personnel access production systems. All access is logged, monitored, and reviewed regularly.' },
+            { type: 'h2', text: 'Payment Security' },
+            { type: 'p', text: 'Payments are handled through Patreon, a PCI-DSS compliant platform. We never store payment card data on our servers.' },
+            { type: 'h2', text: 'Vulnerability Disclosure' },
+            { type: 'p', text: 'Found a security issue? Please contact hello@polishmaster.com for responsible disclosure. We respond promptly.' },
+            { type: 'h2', text: 'Incident Response' },
+            { type: 'p', text: 'In the event of a breach, we notify affected users in accordance with applicable law, typically within 72 hours.' }
+          ]
+        },
+        terms: {
+          title: 'Terms of Service',
+          date: 'Effective March 22, 2026',
+          body: [
+            { type: 'h2', text: '1. Acceptance of Terms' },
+            { type: 'p', text: 'By using PolishMaster, you agree to be bound by these Terms. If you disagree, please do not use our services.' },
+            { type: 'h2', text: '2. Use of Service' },
+            { type: 'p', text: 'We grant you a limited, non-exclusive, non-transferable license to access our content for personal, non-commercial purposes.' },
+            { type: 'h2', text: '3. Intellectual Property' },
+            { type: 'p', text: 'All content available through PolishMaster is the exclusive property of PolishMaster or its content suppliers and is protected by applicable law.' },
+            { type: 'h2', text: '4. User Conduct' },
+            { type: 'p', text: 'You may not reproduce, sell, or exploit any portion of the service. You may not share membership access or credentials with others.' },
+            { type: 'h2', text: '5. Subscriptions and Payments' },
+            { type: 'p', text: 'Payments are processed through Patreon. By subscribing, you also agree to Patreon's terms. Refunds are handled case-by-case.' },
+            { type: 'h2', text: '6. Disclaimer' },
+            { type: 'p', text: 'Our service is provided "as is" without warranties of any kind. We do not warrant uninterrupted, error-free, or virus-free service.' },
+            { type: 'h2', text: '7. Limitation of Liability' },
+            { type: 'p', text: 'To the maximum extent permitted by law, PolishMaster is not liable for indirect, incidental, or consequential damages from your use of the service.' },
+            { type: 'h2', text: '8. Changes' },
+            { type: 'p', text: 'We may modify these terms at any time. Significant changes will be communicated by email or on the platform. Continued use constitutes acceptance.' },
+            { type: 'h2', text: '9. Contact' },
+            { type: 'p', text: 'For questions about these Terms, email hello@polishmaster.com.' }
+          ]
+        }
+      };
+
+      function buildContent(data) {
+        var html = '<h1>' + data.title + '</h1><span class="pm-modal-date">' + data.date + '</span><hr class="pm-divider">';
+        data.body.forEach(function(item) {
+          if (item.type === 'h2') html += '<h2>' + item.text + '</h2>';
+          else if (item.type === 'p') html += '<p>' + item.text + '</p>';
+        });
+        return html;
+      }
+
+      var overlay = document.getElementById('pm-modal-overlay');
+      var modal = document.getElementById('pm-modal');
+      var closeBtn = document.getElementById('pm-modal-close');
+      var contentEl = document.getElementById('pm-modal-content');
+      var contactOverlay = document.getElementById('pm-contact-overlay');
+      var contactCloseBtn = document.getElementById('pm-contact-close');
+      var contactForm = document.getElementById('pm-contact-form');
+
+      function lockScroll() {
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+      }
+
+      function unlockScroll() {
+        if (!overlay.classList.contains('is-open') && !contactOverlay.classList.contains('is-open')) {
+          document.documentElement.classList.remove('modal-open');
+          document.body.classList.remove('modal-open');
+        }
+      }
+
+      function openModal(key) {
+        var data = MODAL_CONTENT[key];
+        if (!data) return;
+        contentEl.innerHTML = buildContent(data);
+        modal.scrollTop = 0;
+        lockScroll();
+        overlay.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() { overlay.classList.add('is-open'); });
+        });
+      }
+
+      function closeModal() {
+        overlay.classList.remove('is-open');
+        overlay.addEventListener('transitionend', function handler() {
+          overlay.setAttribute('aria-hidden', 'true');
+          overlay.removeEventListener('transitionend', handler);
+          unlockScroll();
+        });
+      }
+
+      function openContact() {
+        lockScroll();
+        contactOverlay.setAttribute('aria-hidden', 'false');
+        requestAnimationFrame(function() {
+          requestAnimationFrame(function() { contactOverlay.classList.add('is-open'); });
+        });
+      }
+
+      function closeContact() {
+        contactOverlay.classList.remove('is-open');
+        contactOverlay.addEventListener('transitionend', function handler() {
+          contactOverlay.setAttribute('aria-hidden', 'true');
+          contactOverlay.removeEventListener('transitionend', handler);
+          unlockScroll();
+        });
+      }
+
+      document.querySelectorAll('[data-modal]').forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          openModal(link.getAttribute('data-modal'));
+        });
+      });
+
+      var contactLink = document.querySelector('[data-contact]');
+      if (contactLink) {
+        contactLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          openContact();
+        });
+      }
+
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          var name = contactForm.querySelector('[name="name"]').value;
+          var email = contactForm.querySelector('[name="email"]').value;
+          var body = contactForm.querySelector('[name="body"]').value;
+          var mailto = 'mailto:hello@polishmaster.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
+          window.location.href = mailto;
+          closeContact();
+        });
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (contactCloseBtn) contactCloseBtn.addEventListener('click', closeContact);
+
+      overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
+      contactOverlay.addEventListener('click', function(e) { if (e.target === contactOverlay) closeContact(); });
+
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          if (overlay.classList.contains('is-open')) closeModal();
+          if (contactOverlay.classList.contains('is-open')) closeContact();
+        }
+      });
     })();
   </script>
 </body>
