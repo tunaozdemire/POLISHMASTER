@@ -45,9 +45,10 @@
     overscroll-behavior-y: none;
   }
 
-  html.modal-open, body.modal-open {
+  body.modal-open {
     overflow: hidden;
-    height: 100%;
+    position: fixed;
+    width: 100%;
   }
 
   img { display: block; max-width: 100%; }
@@ -855,6 +856,7 @@
     width: 100%;
     max-width: 680px;
     min-height: 100vh;
+    max-height: 100vh;
     background: #0e0e0f;
     border-left: 1px solid rgba(255,255,255,0.07);
     border-right: 1px solid rgba(255,255,255,0.07);
@@ -1700,15 +1702,19 @@
       var contactCloseBtn = document.getElementById('pm-contact-close');
       var contactForm = document.getElementById('pm-contact-form');
 
+      var savedScrollPos = 0;
+
       function lockScroll() {
-        document.documentElement.classList.add('modal-open');
+        savedScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        document.body.style.top = '-' + savedScrollPos + 'px';
         document.body.classList.add('modal-open');
       }
 
       function unlockScroll() {
         if (!overlay.classList.contains('is-open') && !contactOverlay.classList.contains('is-open')) {
-          document.documentElement.classList.remove('modal-open');
           document.body.classList.remove('modal-open');
+          document.body.style.top = '';
+          window.scrollTo(0, savedScrollPos);
         }
       }
 
