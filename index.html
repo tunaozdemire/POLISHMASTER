@@ -46,89 +46,15 @@
     overflow: hidden;
   }
 
-  /* ── BACKGROUND GRADIENT ANIMATION ── */
-  #bg-anim {
+  /* ── DOTTED BACKGROUND ── */
+  #bg-canvas {
     position: fixed;
     inset: 0;
     z-index: -1;
-    overflow: hidden;
-    background: linear-gradient(40deg, #0d0300, #000000);
-  }
-  #bg-anim .g-container {
-    position: absolute;
-    inset: 0;
-    filter: url(#bg-goo) blur(40px);
-  }
-  @supports (-webkit-hyphens: none) {
-    #bg-anim .g-container { filter: blur(32px); }
-  }
-  #bg-anim .g1,
-  #bg-anim .g2,
-  #bg-anim .g3,
-  #bg-anim .g4,
-  #bg-anim .g5 {
-    position: absolute;
-    width: 80%;
-    height: 80%;
-    top: calc(50% - 40%);
-    left: calc(50% - 40%);
-    mix-blend-mode: hard-light;
-  }
-  #bg-anim .g1 {
-    background: radial-gradient(circle at center, rgba(255,106,0,1) 0, rgba(255,106,0,1) 50%) no-repeat;
-    transform-origin: center center;
-    animation: bgMoveVertical 30s ease infinite;
-    opacity: 0.68;
-  }
-  #bg-anim .g2 {
-    background: radial-gradient(circle at center, rgba(255,150,30,0.8) 0, rgba(255,150,30,0) 50%) no-repeat;
-    transform-origin: calc(50% - 400px);
-    animation: bgMoveInCircle 20s reverse infinite;
-    opacity: 1;
-  }
-  #bg-anim .g3 {
-    background: radial-gradient(circle at center, rgba(200,50,0,0.8) 0, rgba(200,50,0,0) 50%) no-repeat;
-    transform-origin: calc(50% + 400px);
-    animation: bgMoveInCircle 40s linear infinite;
-    opacity: 1;
-  }
-  #bg-anim .g4 {
-    background: radial-gradient(circle at center, rgba(160,35,0,0.8) 0, rgba(160,35,0,0) 50%) no-repeat;
-    transform-origin: calc(50% - 200px);
-    animation: bgMoveHorizontal 40s ease infinite;
-    opacity: 0.7;
-  }
-  #bg-anim .g5 {
-    background: radial-gradient(circle at center, rgba(255,185,55,0.8) 0, rgba(255,185,55,0) 50%) no-repeat;
-    transform-origin: calc(50% - 800px) calc(50% + 800px);
-    animation: bgMoveInCircle 20s ease infinite;
-    opacity: 1;
-  }
-  #bg-anim .g-pointer {
-    position: absolute;
     width: 100%;
     height: 100%;
-    top: -50%;
-    left: -50%;
-    background: radial-gradient(circle at center, rgba(255,130,20,0.7) 0, rgba(255,130,20,0) 50%) no-repeat;
-    mix-blend-mode: hard-light;
-    opacity: 0.7;
-    will-change: transform;
-  }
-  @keyframes bgMoveVertical {
-    0%   { transform: translateY(-50%); }
-    50%  { transform: translateY(50%); }
-    100% { transform: translateY(-50%); }
-  }
-  @keyframes bgMoveInCircle {
-    0%   { transform: rotate(0deg); }
-    50%  { transform: rotate(180deg); }
-    100% { transform: rotate(360deg); }
-  }
-  @keyframes bgMoveHorizontal {
-    0%   { transform: translateX(-50%) translateY(-10%); }
-    50%  { transform: translateX(50%) translateY(10%); }
-    100% { transform: translateX(-50%) translateY(-10%); }
+    pointer-events: none;
+    background: linear-gradient(40deg, #0d0300, #000000);
   }
 
   img { display: block; max-width: 100%; }
@@ -1073,27 +999,9 @@
 </style>
 </head>
 <body>
-  <!-- Animated gradient background -->
-  <div id="bg-anim" aria-hidden="true">
-    <svg style="display:none">
-      <defs>
-        <filter id="bg-goo">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-          <feColorMatrix in="blur" mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -5" result="goo" />
-          <feBlend in="SourceGraphic" in2="goo" />
-        </filter>
-      </defs>
-    </svg>
-    <div class="g-container">
-      <div class="g1"></div>
-      <div class="g2"></div>
-      <div class="g3"></div>
-      <div class="g4"></div>
-      <div class="g5"></div>
-      <div class="g-pointer" id="bg-pointer"></div>
-    </div>
-  </div>
+  <!-- Dotted background canvas -->
+  <canvas id="bg-canvas" aria-hidden="true"></canvas>
+  
   <main>
     <section class="section">
       <div class="card">
@@ -1622,230 +1530,47 @@
   </script>
 
   <script>
-    (function () {
-      var MODAL_CONTENT = {
-        privacy: {
-          title: 'Privacy Policy',
-          date: 'Effective March 22, 2026',
-          body: [
-            { type: 'h2', text: '1. Information We Collect' },
-            { type: 'p', text: 'We collect information you provide directly, including your name and email when you register or contact us. We also automatically collect log data, device information, and usage patterns.' },
-            { type: 'h2', text: '2. How We Use Your Information' },
-            { type: 'p', text: 'We use collected information to provide, maintain, and improve our services, process transactions, send technical notices, and respond to your questions.' },
-            { type: 'h2', text: '3. Information Sharing' },
-            { type: 'p', text: 'We do not share your personal information with third parties except as described in this policy. We may share information with service providers under confidentiality agreements.' },
-            { type: 'h2', text: '4. Data Security' },
-            { type: 'p', text: 'We take reasonable measures to protect your information from loss, theft, misuse, and unauthorized access. No method of internet transmission is 100% secure.' },
-            { type: 'h2', text: '5. Cookies' },
-            { type: 'p', text: 'We use cookies and similar technologies to track activity and hold certain information. You can configure your browser to refuse all cookies.' },
-            { type: 'h2', text: '6. Your Rights' },
-            { type: 'p', text: 'You have the right to access, update, or delete the information we hold on you. Contact us at any time to exercise these rights.' },
-            { type: 'h2', text: '7. Contact' },
-            { type: 'p', text: 'Questions about this Privacy Policy? Email us at hello@polishmaster.com.' }
-          ]
-        },
-        security: {
-          title: 'Security',
-          date: 'Effective March 22, 2026',
-          body: [
-            { type: 'h2', text: 'Our Commitment' },
-            { type: 'p', text: 'Security is a top priority at PolishMaster. We use industry-standard practices and continuously updated protocols to keep your data protected.' },
-            { type: 'h2', text: 'Data Encryption' },
-            { type: 'p', text: 'All data in transit is encrypted with TLS 1.3. Data at rest is encrypted with AES-256, ensuring protection at every stage.' },
-            { type: 'h2', text: 'Access Controls' },
-            { type: 'p', text: 'Only authorized personnel access production systems. All access is logged, monitored, and reviewed regularly.' },
-            { type: 'h2', text: 'Payment Security' },
-            { type: 'p', text: 'Payments are handled through Patreon, a PCI-DSS compliant platform. We never store payment card data on our servers.' },
-            { type: 'h2', text: 'Vulnerability Disclosure' },
-            { type: 'p', text: 'Found a security issue? Please contact hello@polishmaster.com for responsible disclosure. We respond promptly.' },
-            { type: 'h2', text: 'Incident Response' },
-            { type: 'p', text: 'In the event of a breach, we notify affected users in accordance with applicable law, typically within 72 hours.' }
-          ]
-        },
-        terms: {
-          title: 'Terms of Service',
-          date: 'Effective March 22, 2026',
-          body: [
-            { type: 'h2', text: '1. Acceptance of Terms' },
-            { type: 'p', text: 'By using PolishMaster, you agree to be bound by these Terms. If you disagree, please do not use our services.' },
-            { type: 'h2', text: '2. Use of Service' },
-            { type: 'p', text: 'We grant you a limited, non-exclusive, non-transferable license to access our content for personal, non-commercial purposes.' },
-            { type: 'h2', text: '3. Intellectual Property' },
-            { type: 'p', text: 'All content available through PolishMaster is the exclusive property of PolishMaster or its content suppliers and is protected by applicable law.' },
-            { type: 'h2', text: '4. User Conduct' },
-            { type: 'p', text: 'You may not reproduce, sell, or exploit any portion of the service. You may not share membership access or credentials with others.' },
-            { type: 'h2', text: '5. Subscriptions and Payments' },
-            { type: 'p', text: 'Payments are processed through Patreon. By subscribing, you also agree to Patreon’s terms. Refunds are handled case-by-case.' },
-            { type: 'h2', text: '6. Disclaimer' },
-            { type: 'p', text: 'Our service is provided "as is" without warranties of any kind. We do not warrant uninterrupted, error-free, or virus-free service.' },
-            { type: 'h2', text: '7. Limitation of Liability' },
-            { type: 'p', text: 'To the maximum extent permitted by law, PolishMaster is not liable for indirect, incidental, or consequential damages from your use of the service.' },
-            { type: 'h2', text: '8. Changes' },
-            { type: 'p', text: 'We may modify these terms at any time. Significant changes will be communicated by email or on the platform. Continued use constitutes acceptance.' },
-            { type: 'h2', text: '9. Contact' },
-            { type: 'p', text: 'For questions about these Terms, email hello@polishmaster.com.' }
-          ]
-        }
-      };
-
-      function buildContent(data) {
-        var html = '<h1>' + data.title + '</h1><span class="pm-modal-date">' + data.date + '</span><hr class="pm-divider">';
-        data.body.forEach(function(item) {
-          if (item.type === 'h2') html += '<h2>' + item.text + '</h2>';
-          else if (item.type === 'p') html += '<p>' + item.text + '</p>';
-        });
-        return html;
-      }
-
-      var overlay = document.getElementById('pm-modal-overlay');
-      var modal = document.getElementById('pm-modal');
-      var closeBtn = document.getElementById('pm-modal-close');
-      var contentEl = document.getElementById('pm-modal-content');
-      var contactOverlay = document.getElementById('pm-contact-overlay');
-      var contactCloseBtn = document.getElementById('pm-contact-close');
-      var contactForm = document.getElementById('pm-contact-form');
-
-      var savedScrollPos = 0;
-
-      function lockScroll() {
-        savedScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-        document.body.classList.add('modal-open');
-      }
-
-      function unlockScroll() {
-        if (!overlay.classList.contains('is-open') && !contactOverlay.classList.contains('is-open')) {
-          document.body.classList.remove('modal-open');
-          window.scrollTo(0, savedScrollPos);
+  (function () {
+    var canvas = document.getElementById('bg-canvas');
+    if (!canvas) return;
+    var ctx = canvas.getContext('2d');
+    var DOT_SPACING = 28;
+    var DOT_RADIUS = 1.6;
+    var WAVE_SPEED = 0.018;
+    var WAVE_SCALE_X = 0.09;
+    var WAVE_SCALE_Y = 0.13;
+    var MAX_OPACITY = 0.75;
+    var MIN_OPACITY = 0.08;
+    var cols, rows, count = 0, W, H;
+    function resize() {
+      W = canvas.width = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+      cols = Math.ceil(W / DOT_SPACING) + 2;
+      rows = Math.ceil(H / DOT_SPACING) + 2;
+    }
+    function draw() {
+      ctx.clearRect(0, 0, W, H);
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var x = c * DOT_SPACING;
+          var y = r * DOT_SPACING;
+          var wave = Math.sin(c * WAVE_SCALE_X + count) * Math.cos(r * WAVE_SCALE_Y + count * 0.7);
+          var t = (wave + 1) / 2;
+          var opacity = MIN_OPACITY + t * (MAX_OPACITY - MIN_OPACITY);
+          var radius = DOT_RADIUS * (0.5 + t * 0.85);
+          ctx.beginPath();
+          ctx.arc(x, y, radius, 0, Math.PI * 2);
+          ctx.fillStyle = 'rgba(255, 106, 0, ' + opacity.toFixed(3) + ')';
+          ctx.fill();
         }
       }
-
-      function openModal(key) {
-        var data = MODAL_CONTENT[key];
-        if (!data) return;
-        contentEl.innerHTML = buildContent(data);
-        modal.scrollTop = 0;
-        lockScroll();
-        overlay.setAttribute('aria-hidden', 'false');
-        requestAnimationFrame(function() {
-          requestAnimationFrame(function() { overlay.classList.add('is-open'); });
-        });
-      }
-
-      function closeModal() {
-        overlay.classList.remove('is-open');
-        overlay.addEventListener('transitionend', function handler() {
-          overlay.setAttribute('aria-hidden', 'true');
-          overlay.removeEventListener('transitionend', handler);
-          unlockScroll();
-        });
-      }
-
-      function openContact() {
-        lockScroll();
-        contactOverlay.setAttribute('aria-hidden', 'false');
-        requestAnimationFrame(function() {
-          requestAnimationFrame(function() { contactOverlay.classList.add('is-open'); });
-        });
-      }
-
-      function closeContact() {
-        contactOverlay.classList.remove('is-open');
-        contactOverlay.addEventListener('transitionend', function handler() {
-          contactOverlay.setAttribute('aria-hidden', 'true');
-          contactOverlay.removeEventListener('transitionend', handler);
-          unlockScroll();
-        });
-      }
-
-      document.querySelectorAll('[data-modal]').forEach(function(link) {
-        link.addEventListener('click', function(e) {
-          e.preventDefault();
-          openModal(link.getAttribute('data-modal'));
-        });
-      });
-
-      var contactLink = document.querySelector('[data-contact]');
-      if (contactLink) {
-        contactLink.addEventListener('click', function(e) {
-          e.preventDefault();
-          openContact();
-        });
-      }
-
-      if (contactForm) {
-        contactForm.addEventListener('submit', function(e) {
-          e.preventDefault();
-          var name = contactForm.querySelector('[name="name"]').value;
-          var email = contactForm.querySelector('[name="email"]').value;
-          var body = contactForm.querySelector('[name="body"]').value;
-          var mailto = 'mailto:hello@polishmaster.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
-          window.location.href = mailto;
-          closeContact();
-        });
-      }
-
-      if (closeBtn) closeBtn.addEventListener('click', closeModal);
-      if (contactCloseBtn) contactCloseBtn.addEventListener('click', closeContact);
-
-      overlay.addEventListener('click', function(e) { if (e.target === overlay) closeModal(); });
-      contactOverlay.addEventListener('click', function(e) { if (e.target === contactOverlay) closeContact(); });
-
-      document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          if (overlay.classList.contains('is-open')) closeModal();
-          if (contactOverlay.classList.contains('is-open')) closeContact();
-        }
-      });
-    })();
-
-    /* ── BACKGROUND POINTER TRACKING ── */
-    (function() {
-      var pointer = document.getElementById('bg-pointer');
-      if (!pointer) return;
-
-      var isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-
-      if (isMobile) {
-        /* Mobile: gradient drifts lazily with scroll direction */
-        var cx = window.innerWidth  / 2;  /* start centered */
-        var cy = window.innerHeight / 2;
-        var tx = cx;
-        var ty = cy;
-        var lastScroll = window.scrollY;
-        var cap = window.innerHeight * 0.38; /* max drift from center */
-
-        window.addEventListener('scroll', function() {
-          var now = window.scrollY;
-          var delta = now - lastScroll;
-          lastScroll = now;
-          ty += delta * 0.18;                          /* subtle multiplier */
-          ty = Math.max(cy - cap, Math.min(cy + cap, ty)); /* clamp */
-        }, { passive: true });
-
-        function movePointer() {
-          cx += (tx - cx) / 38;   /* heavy lag */
-          cy += (ty - cy) / 38;
-          pointer.style.transform = 'translate(' + Math.round(cx) + 'px, ' + Math.round(cy) + 'px)';
-          requestAnimationFrame(movePointer);
-        }
-        movePointer();
-
-      } else {
-        /* Desktop: follow mouse cursor */
-        var curX = 0, curY = 0, tgX = 0, tgY = 0;
-        document.addEventListener('mousemove', function(e) {
-          tgX = e.clientX;
-          tgY = e.clientY;
-        });
-        function movePointer() {
-          curX += (tgX - curX) / 20;
-          curY += (tgY - curY) / 20;
-          pointer.style.transform = 'translate(' + Math.round(curX) + 'px, ' + Math.round(curY) + 'px)';
-          requestAnimationFrame(movePointer);
-        }
-        movePointer();
-      }
-    })();
-  </script>
+      count += WAVE_SPEED;
+      requestAnimationFrame(draw);
+    }
+    resize();
+    window.addEventListener('resize', resize, { passive: true });
+    draw();
+  })();
+</script>
 </body>
 </html>
