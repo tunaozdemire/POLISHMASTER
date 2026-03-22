@@ -47,6 +47,8 @@
 
   body.modal-open {
     overflow: hidden;
+    position: fixed;
+    width: 100%;
   }
 
   img { display: block; max-width: 100%; }
@@ -1704,12 +1706,14 @@
 
       function lockScroll() {
         savedScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        document.body.style.top = '-' + savedScrollPos + 'px';
         document.body.classList.add('modal-open');
       }
 
       function unlockScroll() {
         if (!overlay.classList.contains('is-open') && !contactOverlay.classList.contains('is-open')) {
           document.body.classList.remove('modal-open');
+          document.body.style.top = '';
           window.scrollTo(0, savedScrollPos);
         }
       }
