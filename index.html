@@ -1802,18 +1802,49 @@
     (function() {
       var pointer = document.getElementById('bg-pointer');
       if (!pointer) return;
-      var curX = 0, curY = 0, tgX = 0, tgY = 0;
-      document.addEventListener('mousemove', function(e) {
-        tgX = e.clientX;
-        tgY = e.clientY;
-      });
-      function movePointer() {
-        curX += (tgX - curX) / 20;
-        curY += (tgY - curY) / 20;
-        pointer.style.transform = 'translate(' + Math.round(curX) + 'px, ' + Math.round(curY) + 'px)';
-        requestAnimationFrame(movePointer);
+
+      var isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+
+      if (isMobile) {
+        /* Mobile: gradient drifts lazily with scroll direction */
+        var cx = window.innerWidth  / 2;  /* start centered */
+        var cy = window.innerHeight / 2;
+        var tx = cx;
+        var ty = cy;
+        var lastScroll = window.scrollY;
+        var cap = window.innerHeight * 0.38; /* max drift from center */
+
+        window.addEventListener('scroll', function() {
+          var now = window.scrollY;
+          var delta = now - lastScroll;
+          lastScroll = now;
+          ty += delta * 0.18;                          /* subtle multiplier */
+          ty = Math.max(cy - cap, Math.min(cy + cap, ty)); /* clamp */
+        }, { passive: true });
+
+        function movePointer() {
+          cx += (tx - cx) / 38;   /* heavy lag */
+          cy += (ty - cy) / 38;
+          pointer.style.transform = 'translate(' + Math.round(cx) + 'px, ' + Math.round(cy) + 'px)';
+          requestAnimationFrame(movePointer);
+        }
+        movePointer();
+
+      } else {
+        /* Desktop: follow mouse cursor */
+        var curX = 0, curY = 0, tgX = 0, tgY = 0;
+        document.addEventListener('mousemove', function(e) {
+          tgX = e.clientX;
+          tgY = e.clientY;
+        });
+        function movePointer() {
+          curX += (tgX - curX) / 20;
+          curY += (tgY - curY) / 20;
+          pointer.style.transform = 'translate(' + Math.round(curX) + 'px, ' + Math.round(curY) + 'px)';
+          requestAnimationFrame(movePointer);
+        }
+        movePointer();
       }
-      movePointer();
     })();
   </script>
 </body>
