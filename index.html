@@ -390,6 +390,492 @@
   /* ── FLOW SECTIONS ── */
   .flow-section { width: 100%; }
 
+  /* ── SYSTEM ACCESS SECTION ── */
+  .system-access {
+    margin-bottom: 18px;
+    padding: 16px;
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 20px;
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,106,0,0.1), transparent 48%),
+      linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015));
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 18px 38px rgba(0,0,0,0.22);
+  }
+
+  .system-access a,
+  .system-access button,
+  .system-step,
+  .cycle-pill {
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease, opacity .22s ease;
+  }
+
+  .system-access a:hover,
+  .system-access button:hover,
+  .cycle-pill:hover {
+    transform: scale(1.02);
+  }
+
+  .system-flow {
+    position: relative;
+    overflow: hidden;
+    padding: 2px 0;
+    margin-bottom: 16px;
+    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+  }
+
+  .system-flow::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.04) 50%, transparent 100%);
+    opacity: 0;
+    pointer-events: none;
+    animation: flowSweep 7s ease-in-out infinite;
+    z-index: 1;
+  }
+
+  .system-flow-track {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+    animation: systemFlowLoop 20s linear infinite;
+  }
+
+  .system-step {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 168px;
+    padding: 15px 18px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015)),
+      rgba(10,10,11,0.72);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    overflow: hidden;
+    flex: 0 0 auto;
+  }
+
+  .system-step::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background:
+      linear-gradient(115deg, transparent 22%, rgba(255,255,255,0.02) 42%, rgba(255,214,171,0.16) 50%, rgba(255,255,255,0.04) 58%, transparent 76%);
+    opacity: 0;
+    transform: translateX(-135%) skewX(-16deg);
+    pointer-events: none;
+  }
+
+  .system-step::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: radial-gradient(circle at 50% 50%, rgba(255,106,0,0.12), transparent 68%);
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .system-step.step-a,
+  .system-step.step-b,
+  .system-step.step-c {
+    animation: activeStepPulse 12s cubic-bezier(.32,0,.18,1) infinite;
+  }
+
+  .system-step.step-a::before,
+  .system-step.step-b::before,
+  .system-step.step-c::before,
+  .system-step.step-a::after,
+  .system-step.step-b::after,
+  .system-step.step-c::after {
+    animation-duration: 12s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(.32,0,.18,1);
+  }
+
+  .system-step.step-a { animation-delay: 0s; }
+  .system-step.step-b { animation-delay: 3s; }
+  .system-step.step-c { animation-delay: 6s; }
+  .system-step.step-a::before,
+  .system-step.step-a::after { animation-delay: 0s; }
+  .system-step.step-b::before,
+  .system-step.step-b::after { animation-delay: 3s; }
+  .system-step.step-c::before,
+  .system-step.step-c::after { animation-delay: 6s; }
+  .system-step.step-a::before,
+  .system-step.step-b::before,
+  .system-step.step-c::before { animation-name: activeStepSweep; }
+  .system-step.step-a::after,
+  .system-step.step-b::after,
+  .system-step.step-c::after { animation-name: activeStepGlow; }
+
+  .system-step-label {
+    display: block;
+    color: #fff4ea;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .system-flow-arrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(255,255,255,0.24);
+    flex: 0 0 auto;
+  }
+
+  .system-flow-arrow svg {
+    width: 16px;
+    height: 16px;
+    stroke: currentColor;
+    stroke-width: 1.8;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .cycle-panel {
+    position: relative;
+    padding: 18px 16px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,106,0,0.12), transparent 42%),
+      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018)),
+      rgba(10,10,11,0.78);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 16px 34px rgba(0,0,0,0.22);
+    text-align: center;
+  }
+
+  .cycle-pill-row {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .cycle-pill-wrap {
+    position: relative;
+    padding-top: 12px;
+  }
+
+  .cycle-sold-out {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-9deg);
+    padding: 2px 7px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,106,0,0.2);
+    background: linear-gradient(180deg, rgba(145,41,14,0.94), rgba(93,22,8,0.92));
+    color: rgba(255,236,228,0.92);
+    font-size: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: 0 8px 18px rgba(0,0,0,0.24);
+    z-index: 1;
+    opacity: 0.82;
+    white-space: nowrap;
+  }
+
+  .cycle-status-current {
+    position: absolute;
+    top: -2px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-7deg);
+    padding: 2px 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,170,78,0.22);
+    background: linear-gradient(180deg, rgba(118,72,22,0.95), rgba(72,44,13,0.92));
+    color: rgba(255,241,225,0.94);
+    font-size: 0.5rem;
+    font-weight: 800;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.22), 0 0 18px rgba(255,106,0,0.08);
+    z-index: 1;
+    animation: currentPillBreath 3.1s ease-in-out infinite;
+    white-space: nowrap;
+  }
+
+  .cycle-pill {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    flex-direction: column;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
+      rgba(13,13,14,0.84);
+    color: #fff3ea;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
+  }
+
+  .cycle-pill.is-current {
+    border-color: rgba(255,170,78,0.24);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,145,48,0.12), transparent 58%),
+      linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)),
+      rgba(14,13,12,0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 0 0 1px rgba(255,170,78,0.08),
+      0 14px 28px rgba(0,0,0,0.18),
+      0 0 20px rgba(255,145,48,0.08);
+    animation: currentPillBreath 3.1s ease-in-out infinite;
+  }
+
+  .cycle-pill.is-muted {
+    opacity: 0.62;
+    border-color: rgba(255,255,255,0.06);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01)),
+      rgba(11,11,12,0.72);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+  }
+
+  .cycle-pill-text {
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .cycle-pill-subtext {
+    margin-top: 3px;
+    color: rgba(255,255,255,0.42);
+    font-size: 0.48rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  .cycle-label {
+    display: inline-block;
+    margin-bottom: 10px;
+    color: var(--accent);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .cycle-title {
+    color: #fff4ea;
+    font-size: clamp(1.55rem, 6.2vw, 2rem);
+    line-height: 1.02;
+    letter-spacing: -0.06em;
+    font-weight: 800;
+    margin-bottom: 8px;
+    text-wrap: balance;
+  }
+
+  .cycle-status-line {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 14px;
+    color: rgba(255,255,255,0.56);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .cycle-status-line strong {
+    color: rgba(255,241,228,0.88);
+    font-weight: 700;
+  }
+
+  .cycle-status-dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: rgba(255,161,76,0.72);
+    box-shadow: 0 0 8px rgba(255,106,0,0.16);
+  }
+
+  .cycle-capacity {
+    display: grid;
+    gap: 7px;
+    text-align: left;
+  }
+
+  .cycle-capacity-head {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 8px;
+    color: rgba(255,255,255,0.5);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  .cycle-progress {
+    position: relative;
+    height: 9px;
+    border-radius: 999px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.045);
+  }
+
+  .cycle-progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    width: 91%;
+    border-radius: inherit;
+    background:
+      linear-gradient(90deg, rgba(255,106,0,0.42) 0%, rgba(255,142,52,0.64) 68%, rgba(176,78,40,0.68) 86%, rgba(138,48,28,0.76) 100%);
+    box-shadow: 0 0 12px rgba(255,106,0,0.1), 0 0 20px rgba(255,145,48,0.04);
+    transform-origin: left center;
+    transform: scaleX(0);
+    animation: cycleBarFill 1.4s cubic-bezier(.2,.8,.2,1) forwards;
+  }
+
+  .cycle-progress-fill::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 14%;
+    height: 100%;
+    background:
+      linear-gradient(90deg, rgba(166,70,36,0.34), rgba(124,40,26,0.56));
+    opacity: 0.85;
+    animation: pressureBreath 3.1s ease-in-out infinite;
+  }
+
+  .cycle-progress-fill::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 14%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent 0%, rgba(255,221,188,0.08) 58%, transparent 100%);
+    transform: translateX(-140%);
+    animation: pressureSweep 5.6s ease-in-out infinite;
+  }
+
+  .system-access-cta {
+    margin-top: 16px;
+  }
+
+  .system-access-cta .cta {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 10px 26px rgba(255,106,0,0.18),
+      0 0 30px rgba(255,106,0,0.12);
+  }
+
+  @keyframes flowSweep {
+    0%, 100% { opacity: 0; transform: translateX(-8%); }
+    18%, 62% { opacity: 0.55; }
+    80% { opacity: 0; transform: translateX(8%); }
+  }
+
+  @keyframes systemFlowLoop {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-50% - 5px)); }
+  }
+
+  @keyframes activeStepPulse {
+    0%, 18%, 100% {
+      border-color: rgba(255,255,255,0.08);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.015)),
+        rgba(10,10,11,0.72);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.03),
+        0 0 0 1px rgba(255,255,255,0);
+    }
+    24%, 42% {
+      border-color: rgba(255,106,0,0.28);
+      background:
+        radial-gradient(circle at 50% -10%, rgba(255,106,0,0.1), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.018)),
+        rgba(12,11,11,0.82);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 0 1px rgba(255,106,0,0.08),
+        0 14px 30px rgba(0,0,0,0.22),
+        0 0 26px rgba(255,106,0,0.07);
+    }
+  }
+
+  @keyframes activeStepSweep {
+    0%, 20%, 100% {
+      opacity: 0;
+      transform: translateX(-135%) skewX(-16deg);
+    }
+    28% {
+      opacity: 0.16;
+    }
+    38% {
+      opacity: 0.34;
+      transform: translateX(145%) skewX(-16deg);
+    }
+    44% {
+      opacity: 0;
+      transform: translateX(145%) skewX(-16deg);
+    }
+  }
+
+  @keyframes activeStepGlow {
+    0%, 20%, 100% { opacity: 0; }
+    28% { opacity: 0.18; }
+    36% { opacity: 0.26; }
+    44% { opacity: 0; }
+  }
+
+  @keyframes currentPillBreath {
+    0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(255,170,78,0.08), 0 14px 28px rgba(0,0,0,0.18), 0 0 14px rgba(255,145,48,0.05); }
+    50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(255,170,78,0.1), 0 15px 30px rgba(0,0,0,0.18), 0 0 22px rgba(255,145,48,0.08); }
+  }
+
+  @keyframes cycleBarFill {
+    from { transform: scaleX(0); }
+    to { transform: scaleX(1); }
+  }
+
+  @keyframes pressureBreath {
+    0%, 100% { opacity: 0.85; }
+    50% { opacity: 1; }
+  }
+
+  @keyframes pressureSweep {
+    0%, 68%, 100% { transform: translateX(-150%); opacity: 0; }
+    80% { transform: translateX(8%); opacity: 0.16; }
+  }
+
   /* ── SOCIAL PROOF ── */
   .social-proof {
     padding: 16px;
@@ -617,11 +1103,25 @@
 
   /* Tablet: show 2 columns */
   @media (min-width: 540px) {
+    .system-step { min-width: 196px; padding: 16px 22px; }
+    .system-step-label { font-size: 0.84rem; }
     .testimonials-outer { height: 420px; }
     .testimonials-cols { gap: 12px; }
   }
 
   @media (max-width: 539px) {
+    .system-access { padding: 14px; }
+    .system-flow-track { gap: 8px; animation-duration: 18s; }
+    .system-step { min-width: 138px; padding: 13px 14px; }
+    .system-step-label { font-size: 0.62rem; letter-spacing: 0.04em; }
+    .system-flow-arrow svg { width: 13px; height: 13px; }
+    .cycle-panel { padding: 16px 14px 13px; }
+    .cycle-pill-row { gap: 8px; }
+    .cycle-pill { min-height: 44px; padding: 11px 8px; }
+    .cycle-pill-text { font-size: 0.52rem; letter-spacing: 0.08em; }
+    .cycle-pill-subtext { font-size: 0.42rem; letter-spacing: 0.12em; }
+    .cycle-sold-out,
+    .cycle-status-current { font-size: 0.46rem; letter-spacing: 0.12em; }
     .testimonials-outer { height: 340px; }
     .tcard { padding: 14px; border-radius: 16px; }
     .tcard-text { font-size: 0.78rem; line-height: 1.55; margin-bottom: 12px; }
@@ -1116,8 +1616,8 @@
           <p class="hero-proof">Join 200+ makers already inside.</p>
 
           <div class="actions">
-            <a class="cta" href="https://www.patreon.com/15111337/join">
-              <span class="cta-text">Access the System on Patreon</span>
+            <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+              <span class="cta-text">Secure Your Access on Patreon</span>
               <span class="cta-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24">
                   <path d="M5 12h14"></path>
@@ -1147,6 +1647,122 @@
               <div class="slider-label slider-label-polished">POLISHED</div>
             </div>
           </div>
+
+          <section class="flow-section system-access" aria-label="PolishMaster system access">
+            <div class="system-flow" aria-hidden="true">
+              <div class="system-flow-track">
+                <article class="system-step step-a">
+                  <span class="system-step-label">No Layer Lines</span>
+                </article>
+
+                <div class="system-flow-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </div>
+
+                <article class="system-step step-b">
+                  <span class="system-step-label">Sellable Products</span>
+                </article>
+
+                <div class="system-flow-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </div>
+
+                <article class="system-step step-c">
+                  <span class="system-step-label">Higher Prices</span>
+                </article>
+
+                <div class="system-flow-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </div>
+
+                <article class="system-step step-a">
+                  <span class="system-step-label">No Layer Lines</span>
+                </article>
+
+                <div class="system-flow-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </div>
+
+                <article class="system-step step-b">
+                  <span class="system-step-label">Sellable Products</span>
+                </article>
+
+                <div class="system-flow-arrow">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </div>
+
+                <article class="system-step step-c">
+                  <span class="system-step-label">Higher Prices</span>
+                </article>
+              </div>
+            </div>
+
+            <div class="cycle-panel">
+              <div class="cycle-pill-row">
+                <div class="cycle-pill-wrap">
+                  <span class="cycle-sold-out">Sold Out</span>
+                  <div class="cycle-pill is-muted">
+                    <span class="cycle-pill-text">Early Access</span>
+                  </div>
+                </div>
+
+                <div class="cycle-pill-wrap">
+                  <span class="cycle-sold-out">Sold Out</span>
+                  <div class="cycle-pill is-muted">
+                    <span class="cycle-pill-text">Private Access</span>
+                  </div>
+                </div>
+
+                <div class="cycle-pill-wrap">
+                  <span class="cycle-status-current">Current</span>
+                  <div class="cycle-pill is-current">
+                    <span class="cycle-pill-text">System Access</span>
+                  </div>
+                </div>
+              </div>
+
+              <h2 class="cycle-title">98% Full</h2>
+              <div class="cycle-status-line">
+                <strong>Final Spots Remaining</strong>
+              </div>
+
+              <div class="cycle-capacity" aria-label="Limited active access">
+                <div class="cycle-capacity-head">
+                  <span>Active</span>
+                </div>
+                <div class="cycle-progress" aria-hidden="true">
+                  <div class="cycle-progress-fill"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="system-access-cta actions">
+              <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+                <span class="cta-text">Secure Your Access on Patreon</span>
+                <span class="cta-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+              </a>
+            </div>
+          </section>
 
           <section class="flow-section reviews-section">
             <div class="reviews-header">
@@ -1513,7 +2129,7 @@
             </div>
           </section>
           <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-            <span class="cta-text">Start the System</span>
+            <span class="cta-text">Secure Your Access on Patreon</span>
             <span class="cta-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
             </span>
