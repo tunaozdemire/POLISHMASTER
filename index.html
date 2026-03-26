@@ -1574,6 +1574,53 @@
     font-family: inherit;
   }
   .pm-contact-submit:hover { opacity: 0.88; }
+  .pm-contact-note {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.42);
+    line-height: 1.6;
+    margin-top: 14px;
+  }
+  .pm-contact-status {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.78);
+    font-size: 0.84rem;
+    line-height: 1.65;
+  }
+  .pm-contact-status[hidden] {
+    display: none;
+  }
+  .pm-contact-status strong {
+    display: block;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .pm-contact-status a {
+    color: #ffd2ad;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .pm-contact-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .pm-contact-copy {
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    color: var(--text);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .pm-contact-copy:hover {
+    background: rgba(255,255,255,0.1);
+  }
   @media (max-width: 600px) {
     .pm-modal { padding: 72px 24px 48px; }
     .pm-modal-title, .pm-modal-content h1 { font-size: 1.4rem; }
@@ -2174,6 +2221,8 @@
           <label class="pm-field"><span>Message</span><textarea name="body" rows="4" placeholder="What's on your mind?" required></textarea></label>
           <button type="submit" class="pm-contact-submit">Send Message</button>
         </form>
+        <p class="pm-contact-note">Static site note: we'll prepare your message and give you a reliable email fallback if your device does not open a mail app automatically.</p>
+        <div class="pm-contact-status" id="pm-contact-status" hidden></div>
       </div>
     </div>
   </div>
@@ -2316,11 +2365,21 @@
         }
       };
 
+      function normalizeText(value) {
+        return String(value)
+          .replace(/â€”/g, ' - ')
+          .replace(/Â©/g, 'Copyright ')
+          .replace(/â€™/g, "'")
+          .replace(/Â·/g, ' - ')
+          .replace(/â˜…/g, '\u2605')
+          .replace(/â˜†/g, '\u2606');
+      }
+
       function buildContent(data) {
-        var html = '<h1>' + data.title + '</h1><span class="pm-modal-date">' + data.date + '</span><hr class="pm-divider">';
+        var html = '<h1>' + normalizeText(data.title) + '</h1><span class="pm-modal-date">' + normalizeText(data.date) + '</span><hr class="pm-divider">';
         data.body.forEach(function(item) {
-          if (item.type === 'h2') html += '<h2>' + item.text + '</h2>';
-          else if (item.type === 'p') html += '<p>' + item.text + '</p>';
+          if (item.type === 'h2') html += '<h2>' + normalizeText(item.text) + '</h2>';
+          else if (item.type === 'p') html += '<p>' + normalizeText(item.text) + '</p>';
         });
         return html;
       }
@@ -2332,6 +2391,7 @@
       var contactOverlay = document.getElementById('pm-contact-overlay');
       var contactCloseBtn = document.getElementById('pm-contact-close');
       var contactForm = document.getElementById('pm-contact-form');
+      var contactStatus = document.getElementById('pm-contact-status');
 
       var savedScrollPos = 0;
 
@@ -2385,6 +2445,85 @@
         });
       }
 
+      function escapeHtml(value) {
+        return String(value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+      }
+
+      function copyText(value) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          return navigator.clipboard.writeText(value);
+        }
+        return Promise.reject(new Error('Clipboard unavailable'));
+      }
+
+      function setContactStatus(name, email, body) {
+        if (!contactStatus) return;
+        var subject = 'Message from ' + name;
+        var emailAddress = 'hello@polishmaster.com';
+        var draftedMessage = body + '\n\nFrom: ' + email;
+        contactStatus.hidden = false;
+        contactStatus.innerHTML =
+          '<strong>Message prepared</strong>' +
+          '<span>Your email app should open. If it does not, send your message manually to <a href="mailto:' + emailAddress + '">' + emailAddress + '</a>.</span>' +
+          '<div class="pm-contact-actions">' +
+            '<button type="button" class="pm-contact-copy" data-copy="email">Copy email</button>' +
+            '<button type="button" class="pm-contact-copy" data-copy="subject">Copy subject</button>' +
+            '<button type="button" class="pm-contact-copy" data-copy="message">Copy message</button>' +
+          '</div>' +
+          '<div class="pm-contact-note">Subject: ' + escapeHtml(subject) + '</div>';
+
+        contactStatus.querySelectorAll('[data-copy]').forEach(function(button) {
+          button.addEventListener('click', function() {
+            var key = button.getAttribute('data-copy');
+            var value = key === 'email' ? emailAddress : key === 'subject' ? subject : draftedMessage;
+            copyText(value).then(function() {
+              var originalLabel = key === 'email' ? 'Copy email' : key === 'subject' ? 'Copy subject' : 'Copy message';
+              button.textContent = 'Copied';
+              window.setTimeout(function() {
+                button.textContent = originalLabel;
+              }, 1200);
+            }).catch(function() {
+              button.textContent = 'Copy unavailable';
+            });
+          });
+        });
+      }
+
+      function makeFallbackAvatar(name) {
+        var initials = (name || 'PM')
+          .split(/\s+/)
+          .filter(Boolean)
+          .slice(0, 2)
+          .map(function(part) { return part.charAt(0).toUpperCase(); })
+          .join('') || 'PM';
+        var svg =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" viewBox="0 0 96 96">' +
+            '<defs><linearGradient id="g" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ff8a3d"/><stop offset="1" stop-color="#7a2200"/></linearGradient></defs>' +
+            '<rect width="96" height="96" rx="48" fill="url(#g)"/>' +
+            '<text x="50%" y="54%" text-anchor="middle" font-family="Arial, sans-serif" font-size="32" font-weight="700" fill="#fff4ea">' + initials + '</text>' +
+          '</svg>';
+        return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
+      }
+
+      document.querySelectorAll('.tcard-avatar').forEach(function(image) {
+        image.addEventListener('error', function() {
+          var label = image.getAttribute('alt') || 'PolishMaster member';
+          image.src = makeFallbackAvatar(label);
+        }, { once: true });
+      });
+
+      document.querySelectorAll('body *:not(script)').forEach(function(node) {
+        node.childNodes.forEach(function(child) {
+          if (child.nodeType !== Node.TEXT_NODE || !child.nodeValue) return;
+          child.nodeValue = normalizeText(child.nodeValue);
+        });
+      });
+
       document.querySelectorAll('[data-modal]').forEach(function(link) {
         link.addEventListener('click', function(e) {
           e.preventDefault();
@@ -2403,12 +2542,12 @@
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
-          var name = contactForm.querySelector('[name="name"]').value;
-          var email = contactForm.querySelector('[name="email"]').value;
-          var body = contactForm.querySelector('[name="body"]').value;
+          var name = contactForm.querySelector('[name="name"]').value.trim();
+          var email = contactForm.querySelector('[name="email"]').value.trim();
+          var body = contactForm.querySelector('[name="body"]').value.trim();
           var mailto = 'mailto:hello@polishmaster.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
+          setContactStatus(name, email, body);
           window.location.href = mailto;
-          closeContact();
         });
       }
 
