@@ -376,6 +376,11 @@
     pointer-events: none;
     opacity: 0.9;
     animation: comparisonSeamPulse 3.2s ease-in-out infinite;
+    transition: none;
+  }
+
+  .comparison-slider.is-returning .comparison-divider {
+    transition: left .85s cubic-bezier(.22,1,.36,1);
   }
 
   .comparison-handle {
