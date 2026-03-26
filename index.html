@@ -300,18 +300,35 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 38px;
-    height: 38px;
-    border-radius: 12px;
-    background: linear-gradient(180deg, rgba(255,106,0,0.26), rgba(255,106,0,0.1));
-    border: 1px solid rgba(255,106,0,0.2);
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    background:
+      radial-gradient(circle at 50% 30%, rgba(255,194,148,0.16), transparent 55%),
+      linear-gradient(180deg, rgba(255,132,48,0.28), rgba(255,106,0,0.12)),
+      rgba(66,29,11,0.9);
+    border: 1px solid rgba(255,144,58,0.24);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 8px 18px rgba(0,0,0,0.2);
     flex: 0 0 auto;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
   }
 
   .cta-icon svg {
-    width: 16px; height: 16px;
+    width: 15px; height: 15px;
     stroke: #fff4ea; stroke-width: 2.2; fill: none;
-    animation: arrowPulse 1.6s ease-in-out infinite;
+    animation: arrowPulse 1.8s ease-in-out infinite;
+  }
+
+  .cta:hover .cta-icon,
+  .cta:focus-visible .cta-icon {
+    transform: translateX(2px);
+    border-color: rgba(255,168,92,0.34);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.09),
+      0 10px 22px rgba(0,0,0,0.22),
+      0 0 20px rgba(255,106,0,0.12);
   }
 
   /* ── COMPARISON SLIDER ── */
@@ -1586,14 +1603,15 @@
     }
 
     .hero-headline {
-      font-size: clamp(2rem, 9.4vw, 2.7rem);
-      line-height: 0.98;
+      font-size: clamp(1.76rem, 8.4vw, 2.3rem);
+      line-height: 1.02;
       margin-bottom: 10px;
       text-wrap: unset;
     }
 
     .hero-line {
       display: block;
+      white-space: nowrap;
     }
 
     .hero-support {
@@ -2037,7 +2055,7 @@
       <div class="card">
         <div class="hero-content">
           <span class="eyebrow">PolishMaster</span>
-          <h1 class="hero-headline"><span class="hero-line">Stop selling layer lines.</span> <span class="hero-line">Start selling products.</span></h1>
+          <h1 class="hero-headline"><span class="hero-line">Stop selling layer lines.</span><span class="hero-line">Start selling products.</span></h1>
           <p class="hero-support">Everything you need to turn raw prints into premium products.</p>
           <p class="hero-proof">Join 200+ makers already inside.</p>
 
@@ -2119,13 +2137,13 @@
           <section class="flow-section reviews-section">
             <div class="reviews-header">
               <span class="social-label">Member Reviews</span>
-              <span class="rating-badge">4.7 ★ &nbsp;200+ members</span>
+              <span class="rating-badge">4.7 ★ &nbsp;178 members</span>
             </div>
             <div class="reviews-rating-row">
               <strong class="reviews-big-score">4.7</strong>
               <div>
                 <div class="stars-lg">★★★★★</div>
-                <div class="reviews-count">Based on 200+ reviews</div>
+                <div class="reviews-count">Based on 178 reviews</div>
               </div>
             </div>
             <div class="testimonials-outer">
