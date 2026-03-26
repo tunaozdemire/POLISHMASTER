@@ -459,8 +459,12 @@
       inset 0 1px 0 rgba(255,255,255,0.08),
       0 8px 18px rgba(0,0,0,0.22),
       0 0 22px rgba(255,106,0,0.12);
-    transition: left .45s cubic-bezier(.22,1,.36,1), transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
     pointer-events: none;
+  }
+
+  .comparison-slider.is-returning + .comparison-hint .comparison-hint-thumb {
+    transition: left .85s cubic-bezier(.22,1,.36,1), transform .22s ease, box-shadow .22s ease, border-color .22s ease;
   }
 
   .comparison-slider.is-dragging + .comparison-hint .comparison-hint-track {
@@ -2516,6 +2520,12 @@
         var isDragging = false;
         if (!overlay || !divider) return;
 
+        function triggerHaptic(duration) {
+          if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+            navigator.vibrate(duration || 12);
+          }
+        }
+
         function setPosition(clientX, sourceEl) {
           var rect = (sourceEl || slider).getBoundingClientRect();
           var percent = ((clientX - rect.left) / rect.width) * 100;
@@ -2530,21 +2540,29 @@
           if (!isDragging) return;
           isDragging = false;
           slider.classList.remove("is-dragging");
+          slider.classList.add("is-returning");
+          triggerHaptic(10);
           window.setTimeout(function () {
             setPosition((hintTrack || slider).getBoundingClientRect().left + ((hintTrack || slider).getBoundingClientRect().width / 2), hintTrack || slider);
           }, 30);
+          window.setTimeout(function () {
+            slider.classList.remove("is-returning");
+          }, 920);
         }
 
         if (hintTrack) {
           hintTrack.addEventListener("mousedown", function (e) {
             isDragging = true;
+            slider.classList.remove("is-returning");
             slider.classList.add("is-dragging");
             setPosition(e.clientX, hintTrack);
           });
 
           hintTrack.addEventListener("touchstart", function (e) {
             isDragging = true;
+            slider.classList.remove("is-returning");
             slider.classList.add("is-dragging");
+            triggerHaptic();
             if (e.touches[0]) setPosition(e.touches[0].clientX, hintTrack);
           }, { passive: true });
         }
