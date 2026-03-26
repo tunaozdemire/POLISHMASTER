@@ -170,6 +170,10 @@
     gap: 0;
   }
 
+  .hero-content.is-return-target {
+    animation: heroReturnPulse 820ms cubic-bezier(.22,1,.36,1);
+  }
+
   body.is-ready .eyebrow,
   body.is-ready .hero-headline,
   body.is-ready .hero-proof,
@@ -1326,6 +1330,253 @@
     margin-bottom: 4px;
   }
 
+  .choice-section {
+    width: 100%;
+    margin: 18px 0 12px;
+  }
+
+  .choice-header {
+    display: grid;
+    justify-items: center;
+    gap: 6px;
+    margin-bottom: 14px;
+    text-align: center;
+  }
+
+  .choice-label {
+    color: rgba(255,185,125,0.72);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .choice-title {
+    color: #fff4ea;
+    font-size: clamp(1.6rem, 7vw, 2.2rem);
+    line-height: 0.98;
+    letter-spacing: -0.06em;
+    max-width: 14ch;
+  }
+
+  .choice-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .choice-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 18px 18px 16px;
+    border-radius: 22px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008)),
+      rgba(10,10,12,0.92);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.025);
+    overflow: hidden;
+  }
+
+  .choice-card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: none;
+    pointer-events: none;
+  }
+
+  .choice-card.is-action {
+    border-color: rgba(255,132,48,0.24);
+    background:
+      linear-gradient(180deg, rgba(255,190,138,0.08), rgba(255,106,0,0.02)),
+      linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+      rgba(33,22,17,0.96);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 18px 34px rgba(0,0,0,0.2),
+      0 0 36px rgba(255,106,0,0.1);
+  }
+
+  .choice-card.is-action::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 26px 26px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.42), transparent 86%);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .choice-kicker {
+    color: rgba(255,255,255,0.34);
+    font-size: 0.68rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .choice-card.is-action .choice-kicker {
+    color: rgba(255,198,163,0.72);
+  }
+
+  .choice-card-title {
+    color: rgba(255,245,236,0.78);
+    font-size: 1.48rem;
+    line-height: 0.98;
+    letter-spacing: -0.05em;
+    margin-bottom: 8px;
+  }
+
+  .choice-card-copy {
+    color: rgba(255,255,255,0.5);
+    font-size: 0.84rem;
+    line-height: 1.5;
+    margin-bottom: 14px;
+    max-width: 26ch;
+  }
+
+  .choice-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin: 0 0 14px;
+  }
+
+  .choice-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(255,255,255,0.64);
+    font-size: 0.92rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.02em;
+  }
+
+  .choice-list li::before {
+    content: "✓";
+    color: rgba(255,255,255,0.38);
+    flex: 0 0 auto;
+    font-size: 1rem;
+    line-height: 1.2;
+    transform: translateY(1px);
+  }
+
+  .choice-footer {
+    display: grid;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .choice-card.is-action .choice-card-title,
+  .choice-card.is-action .choice-list li {
+    color: #fff4ea;
+  }
+
+  .choice-card.is-action .choice-card-copy {
+    color: rgba(255,233,220,0.78);
+  }
+
+  .choice-card.is-action .choice-list li::before {
+    color: rgba(255,196,144,0.96);
+    text-shadow: 0 0 12px rgba(255,106,0,0.22);
+  }
+
+  .choice-caption {
+    color: rgba(255,255,255,0.46);
+    font-size: 0.76rem;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .choice-meta {
+    display: grid;
+    gap: 6px;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .choice-meta-line {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,241,231,0.88);
+    font-size: 0.79rem;
+    font-weight: 700;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  .choice-meta-line svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: 0 0 auto;
+  }
+
+  .choice-price {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: #ffb784;
+    font-size: 0.79rem;
+    font-weight: 800;
+    line-height: 1;
+    white-space: nowrap;
+  }
+
+  .choice-price svg {
+    width: 12px;
+    height: 12px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    flex: 0 0 auto;
+  }
+
+  .choice-lock {
+    color: rgba(255,229,212,0.58);
+    font-size: 0.7rem;
+    line-height: 1.2;
+    white-space: nowrap;
+  }
+
+  .choice-passive-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 56px;
+    margin-top: auto;
+    cursor: pointer;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.16);
+    background: linear-gradient(180deg, rgba(255,255,255,0.16), rgba(255,255,255,0.06));
+    color: rgba(255,255,255,0.88);
+    font-size: 1rem;
+    font-weight: 800;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 8px 18px rgba(0,0,0,0.16);
+    opacity: 0.78;
+  }
+
+  .choice-card:not(.is-action) .choice-passive-cta {
+    margin-bottom: 74px;
+  }
+
   @keyframes scrollUp {
     0%   { transform: translateY(0); }
     100% { transform: translateY(-50%); }
@@ -1337,6 +1588,8 @@
     .system-step-label { font-size: 0.84rem; }
     .testimonials-outer { height: 420px; }
     .testimonials-cols { gap: 12px; }
+    .choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .choice-title { max-width: none; }
   }
 
   @media (max-width: 539px) {
@@ -1360,6 +1613,46 @@
     .tcard-name { font-size: 0.78rem; }
     .tcard-role { font-size: 0.68rem; }
     .tcard-stars { font-size: 0.72rem; }
+    .choice-card {
+      padding: 16px;
+      border-radius: 20px;
+    }
+    .choice-list {
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+    .choice-card-title {
+      font-size: 1.28rem;
+    }
+    .choice-card-copy,
+    .choice-list li {
+      font-size: 0.82rem;
+      line-height: 1.38;
+    }
+    .choice-meta {
+      gap: 5px;
+    }
+    .choice-meta-line {
+      gap: 5px;
+      font-size: 0.72rem;
+    }
+    .choice-meta-line svg {
+      width: 11px;
+      height: 11px;
+    }
+    .choice-price {
+      font-size: 0.72rem;
+    }
+    .choice-price svg {
+      width: 11px;
+      height: 11px;
+    }
+    .choice-lock {
+      font-size: 0.64rem;
+    }
+    .choice-card:not(.is-action) .choice-passive-cta {
+      margin-bottom: 66px;
+    }
   }
 
   /* ── FAQ BRIDGE ── */
@@ -1635,6 +1928,21 @@
       opacity: 1;
       transform: translateY(0) scale(1);
       filter: blur(0);
+    }
+  }
+
+  @keyframes heroReturnPulse {
+    0% {
+      transform: translateY(0) scale(1);
+      filter: brightness(1);
+    }
+    35% {
+      transform: translateY(-4px) scale(1.012);
+      filter: brightness(1.08);
+    }
+    100% {
+      transform: translateY(0) scale(1);
+      filter: brightness(1);
     }
   }
 
@@ -2461,6 +2769,56 @@
             <div class="reviews-more-label">Trusted by 200+ makers</div>
           </section>
 
+          <section class="flow-section choice-section" aria-label="PolishMaster choice">
+            <div class="choice-header">
+              <span class="choice-label">Your Surface Choice</span>
+              <h2 class="choice-title">Choose What You Sell</h2>
+            </div>
+            <div class="choice-grid">
+              <article class="choice-card">
+                <div class="choice-kicker">Leave It Raw</div>
+                <h3 class="choice-card-title">Sell Layer Lines</h3>
+                <p class="choice-card-copy">They still see a hobby seller.</p>
+                <ul class="choice-list">
+                  <li>Lower perceived value</li>
+                  <li>More price resistance</li>
+                  <li>Buyers see a print, not a product</li>
+                </ul>
+                <div class="choice-passive-cta" role="button" tabindex="0" data-return-hero>Keep Selling Prints</div>
+              </article>
+
+              <article class="choice-card is-action">
+                <div class="choice-kicker">PolishMaster</div>
+                <h3 class="choice-card-title">Sell Products</h3>
+                <p class="choice-card-copy">Turn prints into products.</p>
+                <ul class="choice-list">
+                  <li>Premium perception</li>
+                  <li>Stronger product feel</li>
+                  <li>Confident pricing</li>
+                </ul>
+                <div class="choice-footer">
+                  <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+                    <span class="cta-text">Secure Your Access</span>
+                    <span class="cta-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+                    </span>
+                  </a>
+                  <div class="choice-meta">
+                    <div class="choice-meta-line">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
+                      <span>Cancel anytime, risk-free</span>
+                    </div>
+                    <div class="choice-price">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 6 5.5v5.7c0 4.1 2.5 7.9 6 9.8 3.5-1.9 6-5.7 6-9.8V5.5L12 3z"></path></svg>
+                      <span>$29/month forever</span>
+                    </div>
+                    <div class="choice-lock">Lock in your price before it increases</div>
+                  </div>
+                </div>
+              </article>
+            </div>
+          </section>
+
           <div class="faq-bridge"><span>Still have questions? Find your answers below ↓</span></div>
 
           <section class="flow-section inline-faq-section">
@@ -2496,20 +2854,7 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">3. Can I learn this remotely?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes — the entire system is designed to be self-paced and remote.</span><ul>
-                    <li>Follow every step from home</li>
-                    <li>No in-person sessions required</li>
-                    <li>Works in any country or workshop setup</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">4. What materials does this work with?</span>
+                  <span class="faq-question">3. What materials does this work with?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Standard sanding and polishing supplies — nothing exotic.</span>Primarily designed for common FDM filaments. <ul>
@@ -2522,7 +2867,7 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">5. What if I can't find the same tools in my country?</span>
+                  <span class="faq-question">4. What if I can't find the same tools in my country?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around categories, not brands — substitutions always work.</span>The method focuses on principles, not specific brands. <ul>
@@ -2535,39 +2880,13 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">6. Does this work for small, detailed figures?</span>
+                  <span class="faq-question">5. Does this work for small, detailed figures?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints — highly detailed miniatures require more care.</span>The method works, but small parts require more patience. <ul>
                     <li>Great results on regular-sized models</li>
                     <li>Challenging on ultra-detailed miniatures</li>
                     <li>Flat and curved surfaces both supported</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">7. Can I get a matte finish instead of glossy?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes — matte is simply an earlier stop in the same process.</span><ul>
-                    <li>Stop after sanding for a clean matte surface</li>
-                    <li>Continue to polishing for a mirror-gloss finish</li>
-                    <li>You control the final look at every step</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">8. What is the PolishMaster System?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">A two-layer system: learn the method, then apply it to sell.</span><ul>
-                    <li>Layer 1 — the finishing method, step by step</li>
-                    <li>Layer 2 — turn prints into sellable products</li>
-                    <li>Includes pricing guidance and where-to-sell ideas</li>
                   </ul>
                 </div></div></div>
               </div>
@@ -2651,6 +2970,33 @@
       if (!isAlreadyOpen) { item.classList.add("is-open"); }
     });
   });
+
+      var returnTrigger = document.querySelector("[data-return-hero]");
+      var heroTarget = document.querySelector(".hero-content");
+      var returnPulseTimer = null;
+
+      function runHeroReturn() {
+        if (!heroTarget) return;
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        heroTarget.classList.remove("is-return-target");
+        window.clearTimeout(returnPulseTimer);
+        requestAnimationFrame(function () {
+          heroTarget.classList.add("is-return-target");
+          returnPulseTimer = window.setTimeout(function () {
+            heroTarget.classList.remove("is-return-target");
+          }, 860);
+        });
+      }
+
+      if (returnTrigger) {
+        returnTrigger.addEventListener("click", runHeroReturn);
+        returnTrigger.addEventListener("keydown", function (e) {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            runHeroReturn();
+          }
+        });
+      }
 
       comparisonSliders.forEach(function (slider) {
         var overlay = slider.querySelector("[data-comparison-overlay]");
