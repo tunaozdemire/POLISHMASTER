@@ -276,6 +276,21 @@
     font-size: 0.91rem;
   }
 
+  .cta-stack {
+    display: grid;
+    gap: 8px;
+    width: 100%;
+  }
+
+  .cta-note {
+    color: rgba(255,234,217,0.62);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+  }
+
   .cta-icon {
     display: inline-flex;
     align-items: center;
@@ -296,30 +311,32 @@
 
   /* ── COMPARISON SLIDER ── */
   .visual {
-    width: 100%;
+    width: calc(100% + 36px);
     align-self: stretch;
-    margin-bottom: 20px;
+    margin: 0 -18px 24px;
     position: relative;
-    padding: 10px;
-    border-radius: 18px;
-    background:
-      radial-gradient(circle at 50% 20%, rgba(255,106,0,0.08), transparent 62%),
-      linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
-    border: 1px solid rgba(255,255,255,0.07);
-    overflow: hidden;
+    padding: 0;
+    border-radius: 0;
+    background: none;
+    border: 0;
+    overflow: visible;
   }
 
   .comparison-slider {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3;
-    border-radius: 12px;
+    aspect-ratio: 4 / 3.15;
+    border-radius: 26px;
+    border: 1px solid rgba(255,255,255,0.08);
     overflow: hidden;
     background: #111;
     cursor: ew-resize;
     touch-action: none;
     user-select: none;
     -webkit-user-select: none;
+    box-shadow:
+      0 24px 44px rgba(0,0,0,0.22),
+      0 0 40px rgba(255,106,0,0.08);
   }
 
   .comparison-base,
@@ -404,6 +421,93 @@
       0 18px 38px rgba(0,0,0,0.22);
   }
 
+  .outcome-track {
+    position: relative;
+    display: grid;
+    gap: 18px;
+    padding: 4px 0 0 56px;
+  }
+
+  .outcome-track::before {
+    content: "";
+    position: absolute;
+    left: 22px;
+    top: 10px;
+    bottom: 24px;
+    width: 2px;
+    background: linear-gradient(180deg, rgba(255,170,78,0.52), rgba(255,106,0,0.14));
+    box-shadow: 0 0 18px rgba(255,106,0,0.12);
+  }
+
+  .outcome-item {
+    position: relative;
+    padding: 20px 22px 20px 24px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+      rgba(12,11,12,0.66);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 12px 24px rgba(0,0,0,0.16);
+    overflow: hidden;
+    animation: outcomeGlowCycle 9s ease-in-out infinite;
+  }
+
+  .outcome-item::before {
+    content: "";
+    position: absolute;
+    left: -43px;
+    top: 28px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #ffd4a8, #ff8a3d 55%, #7a2200 100%);
+    box-shadow:
+      0 0 0 6px rgba(255,106,0,0.07),
+      0 0 18px rgba(255,106,0,0.2);
+    animation: outcomeDotCycle 9s ease-in-out infinite;
+  }
+
+  .outcome-item::after {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background: linear-gradient(115deg, transparent 18%, rgba(255,190,130,0.04) 42%, rgba(255,106,0,0.24) 50%, rgba(255,210,160,0.05) 58%, transparent 80%);
+    transform: translateX(-145%) skewX(-16deg);
+    opacity: 0;
+    pointer-events: none;
+    animation: outcomeSweep 9s ease-in-out infinite;
+  }
+
+  .outcome-item:nth-child(2),
+  .outcome-item:nth-child(2)::before,
+  .outcome-item:nth-child(2)::after {
+    animation-delay: 3s;
+  }
+
+  .outcome-item:nth-child(3),
+  .outcome-item:nth-child(3)::before,
+  .outcome-item:nth-child(3)::after {
+    animation-delay: 6s;
+  }
+
+  .outcome-title {
+    color: #fff4ea;
+    font-size: 1.18rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+  }
+
+  .outcome-copy {
+    margin-top: 10px;
+    color: rgba(255,255,255,0.6);
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
   .system-access a,
   .system-access button,
   .system-step,
@@ -418,12 +522,7 @@
   }
 
   .system-flow {
-    position: relative;
-    overflow: hidden;
-    padding: 2px 0;
-    margin-bottom: 16px;
-    mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
-    -webkit-mask-image: linear-gradient(90deg, transparent 0%, black 8%, black 92%, transparent 100%);
+    display: none;
   }
 
   .system-flow::before {
@@ -550,250 +649,156 @@
 
   .cycle-panel {
     position: relative;
-    padding: 18px 16px 14px;
+    padding: 8px 2px 2px;
     border-radius: 20px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background:
-      radial-gradient(circle at 50% 0%, rgba(255,106,0,0.12), transparent 42%),
-      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.018)),
-      rgba(10,10,11,0.78);
-    box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.04),
-      0 16px 34px rgba(0,0,0,0.22);
+    border: 0;
+    background: transparent;
+    box-shadow: none;
     text-align: center;
   }
 
-  .cycle-pill-row {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 10px;
-    margin-bottom: 14px;
-  }
-
-  .cycle-pill-wrap {
+  .cycle-availability {
     position: relative;
-    padding-top: 12px;
+    display: grid;
+    justify-items: center;
+    gap: 12px;
+    margin-bottom: 6px;
   }
 
-  .cycle-sold-out {
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-9deg);
-    padding: 2px 7px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,106,0,0.2);
-    background: linear-gradient(180deg, rgba(145,41,14,0.94), rgba(93,22,8,0.92));
-    color: rgba(255,236,228,0.92);
-    font-size: 0.5rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    box-shadow: 0 8px 18px rgba(0,0,0,0.24);
-    z-index: 1;
-    opacity: 0.82;
-    white-space: nowrap;
-  }
-
-  .cycle-status-current {
-    position: absolute;
-    top: -2px;
-    left: 50%;
-    transform: translateX(-50%) rotate(-7deg);
-    padding: 2px 8px;
-    border-radius: 999px;
-    border: 1px solid rgba(255,170,78,0.22);
-    background: linear-gradient(180deg, rgba(118,72,22,0.95), rgba(72,44,13,0.92));
-    color: rgba(255,241,225,0.94);
-    font-size: 0.5rem;
-    font-weight: 800;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.22), 0 0 18px rgba(255,106,0,0.08);
-    z-index: 1;
-    animation: currentPillBreath 3.1s ease-in-out infinite;
-    white-space: nowrap;
-  }
-
-  .cycle-pill {
-    display: flex;
+  .cycle-current-badge {
+    display: inline-flex;
     align-items: center;
-    justify-content: center;
-    gap: 0;
-    flex-direction: column;
-    width: 100%;
-    min-height: 48px;
-    padding: 12px 10px;
+    gap: 10px;
+    padding: 10px 18px;
     border-radius: 999px;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,170,78,0.28);
     background:
-      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
-      rgba(13,13,14,0.84);
-    color: #fff3ea;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-  }
-
-  .cycle-pill.is-current {
-    border-color: rgba(255,170,78,0.24);
-    background:
-      radial-gradient(circle at 50% 0%, rgba(255,145,48,0.12), transparent 58%),
-      linear-gradient(180deg, rgba(255,255,255,0.055), rgba(255,255,255,0.02)),
-      rgba(14,13,12,0.9);
+      radial-gradient(circle at 50% 0%, rgba(255,145,48,0.16), transparent 65%),
+      rgba(20,14,10,0.84);
+    color: rgba(255,241,225,0.94);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.06),
       0 0 0 1px rgba(255,170,78,0.08),
-      0 14px 28px rgba(0,0,0,0.18),
-      0 0 20px rgba(255,145,48,0.08);
+      0 0 32px rgba(255,106,0,0.12);
     animation: currentPillBreath 3.1s ease-in-out infinite;
   }
 
-  .cycle-pill.is-muted {
-    opacity: 0.62;
-    border-color: rgba(255,255,255,0.06);
-    background:
-      linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.01)),
-      rgba(11,11,12,0.72);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
-  }
-
-  .cycle-pill-text {
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    white-space: nowrap;
-  }
-
-  .cycle-pill-subtext {
-    margin-top: 3px;
-    color: rgba(255,255,255,0.42);
-    font-size: 0.48rem;
-    font-weight: 700;
+  .cycle-current-label {
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: rgba(255,170,78,0.14);
+    color: rgba(255,220,188,0.9);
+    font-size: 0.5rem;
+    font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     white-space: nowrap;
   }
 
-  .cycle-label {
-    display: inline-block;
-    margin-bottom: 10px;
-    color: var(--accent);
-    font-size: 0.66rem;
-    font-weight: 700;
-    letter-spacing: 0.22em;
-    text-transform: uppercase;
-  }
-
-  .cycle-title {
+  .cycle-current-text {
     color: #fff4ea;
-    font-size: clamp(1.55rem, 6.2vw, 2rem);
-    line-height: 1.02;
-    letter-spacing: -0.06em;
+    font-size: 0.76rem;
     font-weight: 800;
-    margin-bottom: 8px;
-    text-wrap: balance;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
-  .cycle-status-line {
-    display: inline-flex;
+  .ghost-access-row {
+    position: relative;
+    display: flex;
     align-items: center;
     justify-content: center;
     gap: 8px;
-    margin-bottom: 14px;
-    color: rgba(255,255,255,0.56);
-    font-size: 0.66rem;
-    font-weight: 700;
+    width: 100%;
+    opacity: 0.48;
+  }
+
+  .ghost-access {
+    min-width: 124px;
+    padding: 9px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.05);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.005)),
+      rgba(10,10,11,0.4);
+    color: rgba(255,239,229,0.28);
+    font-size: 0.56rem;
+    font-weight: 800;
     letter-spacing: 0.14em;
     text-transform: uppercase;
+    white-space: nowrap;
+    filter: blur(0.1px);
   }
 
-  .cycle-status-line strong {
-    color: rgba(255,241,228,0.88);
-    font-weight: 700;
+  .ghost-access.is-left {
+    transform: translateX(20px) scale(0.94);
   }
 
-  .cycle-status-dot {
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
-    background: rgba(255,161,76,0.72);
-    box-shadow: 0 0 8px rgba(255,106,0,0.16);
+  .ghost-access.is-right {
+    transform: translateX(-20px) scale(0.94);
   }
 
-  .cycle-capacity {
-    display: grid;
-    gap: 7px;
-    text-align: left;
-  }
-
-  .cycle-capacity-head {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 8px;
-    color: rgba(255,255,255,0.5);
-    font-size: 0.58rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-  }
-
-  .cycle-progress {
-    position: relative;
-    height: 9px;
+  .cycle-panel::before {
+    content: "";
+    position: absolute;
+    inset: 8px 18px 0;
     border-radius: 999px;
-    overflow: hidden;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.045);
+    border: 1px solid rgba(255,255,255,0.04);
+    opacity: 0.28;
+    pointer-events: none;
   }
 
-  .cycle-progress-fill {
-    position: absolute;
-    inset: 0 auto 0 0;
-    width: 91%;
-    border-radius: inherit;
-    background:
-      linear-gradient(90deg, rgba(255,106,0,0.42) 0%, rgba(255,142,52,0.64) 68%, rgba(176,78,40,0.68) 86%, rgba(138,48,28,0.76) 100%);
-    box-shadow: 0 0 12px rgba(255,106,0,0.1), 0 0 20px rgba(255,145,48,0.04);
-    transform-origin: left center;
-    transform: scaleX(0);
-    animation: cycleBarFill 1.4s cubic-bezier(.2,.8,.2,1) forwards;
-  }
-
-  .cycle-progress-fill::after {
+  .cycle-panel::after {
     content: "";
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 14%;
-    height: 100%;
-    background:
-      linear-gradient(90deg, rgba(166,70,36,0.34), rgba(124,40,26,0.56));
+    inset: 24px 12px 0;
+    background: radial-gradient(circle at 50% 40%, rgba(255,106,0,0.12), transparent 48%);
     opacity: 0.85;
-    animation: pressureBreath 3.1s ease-in-out infinite;
-  }
-
-  .cycle-progress-fill::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 14%;
-    height: 100%;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,221,188,0.08) 58%, transparent 100%);
-    transform: translateX(-140%);
-    animation: pressureSweep 5.6s ease-in-out infinite;
+    pointer-events: none;
   }
 
   .system-access-cta {
     margin-top: 16px;
   }
 
+  .system-access-cta .cta-stack {
+    gap: 10px;
+    padding: 0;
+  }
+
+  .cta-stack .cta,
   .system-access-cta .cta {
+    padding: 24px 24px 24px 28px;
+    border-radius: 28px;
+    border-color: rgba(255,128,32,0.34);
+    background:
+      radial-gradient(circle at 12% 50%, rgba(255,106,0,0.18), transparent 36%),
+      linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03)),
+      rgba(42,19,8,0.88);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.08),
-      0 10px 26px rgba(255,106,0,0.18),
-      0 0 30px rgba(255,106,0,0.12);
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      0 18px 42px rgba(255,106,0,0.18),
+      0 0 42px rgba(255,106,0,0.16),
+      0 0 0 1px rgba(255,128,32,0.08);
+    animation: currentPillBreath 3.1s ease-in-out infinite;
+  }
+
+  .cta-stack .cta-text,
+  .system-access-cta .cta-text {
+    font-size: 1.32rem;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+  }
+
+  .system-access-cta .cta-icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .system-access-cta .cta-note {
+    font-size: 0.82rem;
+    letter-spacing: 0.11em;
   }
 
   @keyframes flowSweep {
@@ -859,6 +864,56 @@
   @keyframes currentPillBreath {
     0%, 100% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(255,170,78,0.08), 0 14px 28px rgba(0,0,0,0.18), 0 0 14px rgba(255,145,48,0.05); }
     50% { box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 0 0 1px rgba(255,170,78,0.1), 0 15px 30px rgba(0,0,0,0.18), 0 0 22px rgba(255,145,48,0.08); }
+  }
+
+  @keyframes outcomeGlowCycle {
+    0%, 24%, 100% {
+      border-color: rgba(255,255,255,0.08);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 12px 24px rgba(0,0,0,0.16);
+    }
+    8%, 16% {
+      border-color: rgba(255,136,48,0.34);
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.07),
+        0 16px 34px rgba(0,0,0,0.2),
+        0 0 0 1px rgba(255,128,32,0.08),
+        0 0 28px rgba(255,106,0,0.12);
+    }
+  }
+
+  @keyframes outcomeDotCycle {
+    0%, 24%, 100% {
+      box-shadow:
+        0 0 0 6px rgba(255,106,0,0.07),
+        0 0 18px rgba(255,106,0,0.2);
+      transform: scale(1);
+    }
+    8%, 16% {
+      box-shadow:
+        0 0 0 8px rgba(255,106,0,0.11),
+        0 0 26px rgba(255,136,48,0.34);
+      transform: scale(1.12);
+    }
+  }
+
+  @keyframes outcomeSweep {
+    0%, 24%, 100% {
+      transform: translateX(-145%) skewX(-16deg);
+      opacity: 0;
+    }
+    6% {
+      opacity: 0;
+    }
+    10%, 14% {
+      transform: translateX(0%) skewX(-16deg);
+      opacity: 1;
+    }
+    18% {
+      transform: translateX(145%) skewX(-16deg);
+      opacity: 0;
+    }
   }
 
   @keyframes cycleBarFill {
@@ -1358,6 +1413,9 @@
     }
   }
 
+  @media (max-width: 720px) {
+  }
+
   /* ── SLIDER LABELS ── */
   .slider-label-before,
   .slider-label-after {
@@ -1663,15 +1721,18 @@
           <p class="hero-proof">Join 200+ makers already inside.</p>
 
           <div class="actions">
-            <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-              <span class="cta-text">Secure Your Access on Patreon</span>
-              <span class="cta-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24">
-                  <path d="M5 12h14"></path>
-                  <path d="m13 6 6 6-6 6"></path>
-                </svg>
-              </span>
-            </a>
+            <div class="cta-stack">
+              <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+                <span class="cta-text">Secure Your Access</span>
+                <span class="cta-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M5 12h14"></path>
+                    <path d="m13 6 6 6-6 6"></path>
+                  </svg>
+                </span>
+              </a>
+              <span class="cta-note">Join on Patreon before access closes</span>
+            </div>
           </div>
 
           <div class="visual">
@@ -1696,118 +1757,36 @@
           </div>
 
           <section class="flow-section system-access" aria-label="PolishMaster system access">
-            <div class="system-flow" aria-hidden="true">
-              <div class="system-flow-track">
-                <article class="system-step step-a">
-                  <span class="system-step-label">No Layer Lines</span>
-                </article>
+            <div class="outcome-track" aria-label="PolishMaster outcomes">
+              <article class="outcome-item">
+                <h3 class="outcome-title">Remove the amateur surface look.</h3>
+                <p class="outcome-copy">Your print stops looking cheap.</p>
+              </article>
 
-                <div class="system-flow-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 6 6 6-6 6"></path>
-                  </svg>
-                </div>
+              <article class="outcome-item">
+                <h3 class="outcome-title">Turn prints into sellable products.</h3>
+                <p class="outcome-copy">People read it as a product, not a print.</p>
+              </article>
 
-                <article class="system-step step-b">
-                  <span class="system-step-label">Sellable Products</span>
-                </article>
-
-                <div class="system-flow-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 6 6 6-6 6"></path>
-                  </svg>
-                </div>
-
-                <article class="system-step step-c">
-                  <span class="system-step-label">Higher Prices</span>
-                </article>
-
-                <div class="system-flow-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 6 6 6-6 6"></path>
-                  </svg>
-                </div>
-
-                <article class="system-step step-a">
-                  <span class="system-step-label">No Layer Lines</span>
-                </article>
-
-                <div class="system-flow-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 6 6 6-6 6"></path>
-                  </svg>
-                </div>
-
-                <article class="system-step step-b">
-                  <span class="system-step-label">Sellable Products</span>
-                </article>
-
-                <div class="system-flow-arrow">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 6 6 6-6 6"></path>
-                  </svg>
-                </div>
-
-                <article class="system-step step-c">
-                  <span class="system-step-label">Higher Prices</span>
-                </article>
-              </div>
-            </div>
-
-            <div class="cycle-panel">
-              <div class="cycle-pill-row">
-                <div class="cycle-pill-wrap">
-                  <span class="cycle-sold-out">Sold Out</span>
-                  <div class="cycle-pill is-muted">
-                    <span class="cycle-pill-text">Early Access</span>
-                  </div>
-                </div>
-
-                <div class="cycle-pill-wrap">
-                  <span class="cycle-sold-out">Sold Out</span>
-                  <div class="cycle-pill is-muted">
-                    <span class="cycle-pill-text">Private Access</span>
-                  </div>
-                </div>
-
-                <div class="cycle-pill-wrap">
-                  <span class="cycle-status-current">Current</span>
-                  <div class="cycle-pill is-current">
-                    <span class="cycle-pill-text">System Access</span>
-                  </div>
-                </div>
-              </div>
-
-              <h2 class="cycle-title">98% Full</h2>
-              <div class="cycle-status-line">
-                <strong>Final Spots Remaining</strong>
-              </div>
-
-              <div class="cycle-capacity" aria-label="Limited active access">
-                <div class="cycle-capacity-head">
-                  <span>Active</span>
-                </div>
-                <div class="cycle-progress" aria-hidden="true">
-                  <div class="cycle-progress-fill"></div>
-                </div>
-              </div>
+              <article class="outcome-item">
+                <h3 class="outcome-title">Charge with more confidence.</h3>
+                <p class="outcome-copy">Better finish. Better perception. Better price.</p>
+              </article>
             </div>
 
             <div class="system-access-cta actions">
-              <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                <span class="cta-text">Secure Your Access on Patreon</span>
-                <span class="cta-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 6 6 6-6 6"></path>
-                  </svg>
-                </span>
-              </a>
+              <div class="cta-stack">
+                <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+                  <span class="cta-text">Secure Your Access</span>
+                  <span class="cta-icon" aria-hidden="true">
+                    <svg viewBox="0 0 24 24">
+                      <path d="M5 12h14"></path>
+                      <path d="m13 6 6 6-6 6"></path>
+                    </svg>
+                  </span>
+                </a>
+                <span class="cta-note">Join on Patreon before access closes</span>
+              </div>
             </div>
           </section>
 
@@ -2175,12 +2154,15 @@
 
             </div>
           </section>
-          <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-            <span class="cta-text">Secure Your Access on Patreon</span>
-            <span class="cta-icon" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
-            </span>
-          </a>
+          <div class="cta-stack">
+            <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+              <span class="cta-text">Secure Your Access</span>
+              <span class="cta-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
+              </span>
+            </a>
+            <span class="cta-note">Join on Patreon before access closes</span>
+          </div>
         </div>
       </div>
     </section>
