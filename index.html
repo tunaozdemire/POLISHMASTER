@@ -1593,6 +1593,10 @@
   }
 
   @media (max-width: 539px) {
+    .choice-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
     .system-access { padding: 14px; }
     .system-flow-track { gap: 8px; animation-duration: 18s; }
     .system-step { min-width: 138px; padding: 13px 14px; }
@@ -1614,20 +1618,24 @@
     .tcard-role { font-size: 0.68rem; }
     .tcard-stars { font-size: 0.72rem; }
     .choice-card {
-      padding: 16px;
-      border-radius: 20px;
+      padding: 14px 12px;
+      border-radius: 18px;
     }
     .choice-list {
-      gap: 12px;
-      margin-bottom: 14px;
+      gap: 10px;
+      margin-bottom: 12px;
     }
     .choice-card-title {
-      font-size: 1.28rem;
+      font-size: 1.08rem;
     }
     .choice-card-copy,
     .choice-list li {
-      font-size: 0.82rem;
-      line-height: 1.38;
+      font-size: 0.72rem;
+      line-height: 1.32;
+    }
+    .choice-kicker {
+      font-size: 0.58rem;
+      margin-bottom: 6px;
     }
     .choice-meta {
       gap: 5px;
@@ -1652,6 +1660,10 @@
     }
     .choice-card:not(.is-action) .choice-passive-cta {
       margin-bottom: 66px;
+    }
+    .choice-passive-cta,
+    .choice-footer .cta {
+      min-height: 52px;
     }
   }
 
