@@ -1563,12 +1563,28 @@
     width: 100%;
     justify-self: stretch;
     align-self: start;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    padding-left: 18px;
+    padding-right: 18px;
   }
 
   .choice-footer .choice-meta-line,
   .choice-footer .choice-price,
   .choice-footer .choice-lock {
     justify-self: center;
+  }
+
+  .choice-footer .cta-secondary .cta-text {
+    grid-column: 2;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .choice-footer .cta-secondary .cta-icon {
+    grid-column: 3;
+    justify-self: end;
   }
 
   .choice-passive-cta {
@@ -1684,6 +1700,10 @@
     }
     .choice-footer {
       gap: 9px;
+    }
+    .choice-footer .cta-secondary {
+      padding-left: 14px;
+      padding-right: 14px;
     }
   }
 
