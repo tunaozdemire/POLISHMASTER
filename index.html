@@ -361,6 +361,11 @@
   .comparison-overlay {
     overflow: hidden;
     clip-path: inset(0 50% 0 0);
+    transition: none;
+  }
+
+  .comparison-slider.is-returning .comparison-overlay {
+    transition: clip-path .85s cubic-bezier(.22,1,.36,1);
   }
 
   .comparison-divider {
