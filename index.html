@@ -1671,25 +1671,40 @@
       margin-bottom: 6px;
     }
     .choice-meta {
-      gap: 5px;
+      gap: 6px;
+      padding-inline: 4px;
     }
     .choice-meta-line {
       gap: 5px;
-      font-size: 0.72rem;
+      font-size: 0.68rem;
+      line-height: 1.2;
+      white-space: normal;
+      text-align: center;
+      justify-content: center;
     }
     .choice-meta-line svg {
       width: 11px;
       height: 11px;
+      flex-shrink: 0;
     }
     .choice-price {
-      font-size: 0.72rem;
+      gap: 5px;
+      font-size: 0.68rem;
+      white-space: normal;
+      text-align: center;
+      justify-content: center;
     }
     .choice-price svg {
       width: 11px;
       height: 11px;
+      flex-shrink: 0;
     }
     .choice-lock {
-      font-size: 0.64rem;
+      font-size: 0.58rem;
+      line-height: 1.25;
+      white-space: normal;
+      text-align: center;
+      max-width: 15ch;
     }
     .choice-card:not(.is-action) .choice-passive-cta {
       margin-bottom: 66px;
@@ -1699,11 +1714,28 @@
       min-height: 52px;
     }
     .choice-footer {
-      gap: 9px;
+      gap: 8px;
     }
     .choice-footer .cta-secondary {
+      grid-template-columns: minmax(0, 1fr) auto;
       padding-left: 14px;
       padding-right: 14px;
+    }
+    .choice-footer .cta-secondary .cta-text {
+      grid-column: 1;
+      max-width: 8ch;
+      font-size: 0.82rem;
+      line-height: 1.05;
+    }
+    .choice-footer .cta-secondary .cta-icon {
+      grid-column: 2;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
+    }
+    .choice-footer .cta-secondary .cta-icon svg {
+      width: 13px;
+      height: 13px;
     }
   }
 
