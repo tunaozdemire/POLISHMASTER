@@ -1473,6 +1473,9 @@
     margin-top: auto;
     padding-top: 14px;
     border-top: 1px solid rgba(255,255,255,0.08);
+    width: 100%;
+    justify-items: stretch;
+    align-items: start;
   }
 
   .choice-card.is-action .choice-card-title,
@@ -1499,6 +1502,7 @@
   .choice-meta {
     display: grid;
     gap: 6px;
+    width: 100%;
     justify-items: center;
     text-align: center;
   }
@@ -1552,6 +1556,19 @@
     font-size: 0.7rem;
     line-height: 1.2;
     white-space: nowrap;
+  }
+
+  .choice-footer .cta-secondary {
+    margin-top: 0;
+    width: 100%;
+    justify-self: stretch;
+    align-self: start;
+  }
+
+  .choice-footer .choice-meta-line,
+  .choice-footer .choice-price,
+  .choice-footer .choice-lock {
+    justify-self: center;
   }
 
   .choice-passive-cta {
@@ -1664,6 +1681,9 @@
     .choice-passive-cta,
     .choice-footer .cta {
       min-height: 52px;
+    }
+    .choice-footer {
+      gap: 9px;
     }
   }
 
