@@ -1478,6 +1478,11 @@
     align-items: start;
   }
 
+  .choice-footer-passive .choice-meta {
+    visibility: hidden;
+    pointer-events: none;
+  }
+
   .choice-card.is-action .choice-card-title,
   .choice-card.is-action .choice-list li {
     color: #fff4ea;
@@ -1627,8 +1632,8 @@
 
   @media (max-width: 539px) {
     .choice-grid {
-      grid-template-columns: 1fr;
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
     }
     .system-access { padding: 14px; }
     .system-flow-track { gap: 8px; animation-duration: 18s; }
@@ -1651,32 +1656,32 @@
     .tcard-role { font-size: 0.68rem; }
     .tcard-stars { font-size: 0.72rem; }
     .choice-card {
-      padding: 16px 14px;
-      border-radius: 20px;
+      padding: 14px 12px;
+      border-radius: 18px;
     }
     .choice-list {
       gap: 10px;
       margin-bottom: 12px;
     }
     .choice-card-title {
-      font-size: 1.3rem;
+      font-size: 1.08rem;
     }
     .choice-card-copy,
     .choice-list li {
-      font-size: 0.8rem;
-      line-height: 1.34;
+      font-size: 0.72rem;
+      line-height: 1.32;
     }
     .choice-kicker {
       font-size: 0.58rem;
       margin-bottom: 6px;
     }
     .choice-meta {
-      gap: 6px;
-      padding-inline: 4px;
+      gap: 5px;
+      padding-inline: 0;
     }
     .choice-meta-line {
       gap: 5px;
-      font-size: 0.76rem;
+      font-size: 0.62rem;
       line-height: 1.2;
       white-space: nowrap;
       text-align: center;
@@ -1689,7 +1694,7 @@
     }
     .choice-price {
       gap: 5px;
-      font-size: 0.76rem;
+      font-size: 0.64rem;
       white-space: nowrap;
       text-align: center;
       justify-content: center;
@@ -1700,7 +1705,7 @@
       flex-shrink: 0;
     }
     .choice-lock {
-      font-size: 0.66rem;
+      font-size: 0.54rem;
       line-height: 1.25;
       white-space: nowrap;
       text-align: center;
@@ -1723,19 +1728,19 @@
     }
     .choice-footer .cta-secondary .cta-text {
       grid-column: 2;
-      max-width: none;
-      font-size: 0.9rem;
-      line-height: 1.08;
+      max-width: 8ch;
+      font-size: 0.82rem;
+      line-height: 1.05;
     }
     .choice-footer .cta-secondary .cta-icon {
       grid-column: 3;
-      width: 40px;
-      height: 40px;
-      border-radius: 13px;
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
     }
     .choice-footer .cta-secondary .cta-icon svg {
-      width: 14px;
-      height: 14px;
+      width: 13px;
+      height: 13px;
     }
   }
 
@@ -2868,7 +2873,20 @@
                   <li>More price resistance</li>
                   <li>Buyers see a print, not a product</li>
                 </ul>
-                <div class="choice-passive-cta" role="button" tabindex="0" data-return-hero>Keep Selling Prints</div>
+                <div class="choice-footer choice-footer-passive">
+                  <div class="choice-passive-cta" role="button" tabindex="0" data-return-hero>Keep Selling Prints</div>
+                  <div class="choice-meta" aria-hidden="true">
+                    <div class="choice-meta-line">
+                      <svg viewBox="0 0 24 24"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
+                      <span>Cancel anytime</span>
+                    </div>
+                    <div class="choice-price">
+                      <svg viewBox="0 0 24 24"><path d="M12 3 6 5.5v5.7c0 4.1 2.5 7.9 6 9.8 3.5-1.9 6-5.7 6-9.8V5.5L12 3z"></path></svg>
+                      <span>$29/month</span>
+                    </div>
+                    <div class="choice-lock">Keep launch price.</div>
+                  </div>
+                </div>
               </article>
 
               <article class="choice-card is-action">
@@ -2890,13 +2908,13 @@
                   <div class="choice-meta">
                     <div class="choice-meta-line">
                       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
-                      <span>Cancel anytime, risk free</span>
+                      <span>Cancel anytime</span>
                     </div>
                     <div class="choice-price">
                       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 6 5.5v5.7c0 4.1 2.5 7.9 6 9.8 3.5-1.9 6-5.7 6-9.8V5.5L12 3z"></path></svg>
-                      <span>$29/month forever</span>
+                      <span>$29/month</span>
                     </div>
-                    <div class="choice-lock">Keep your launch price.</div>
+                    <div class="choice-lock">Keep launch price.</div>
                   </div>
                 </div>
               </article>
