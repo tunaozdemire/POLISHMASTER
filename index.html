@@ -39,6 +39,7 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     background: transparent;
     overflow-x: hidden;
+    overflow-y: auto;
     overscroll-behavior-y: none;
   }
 
@@ -1553,7 +1554,15 @@
   @media (min-width: 540px) {
     .section { padding: 28px 20px 48px; }
     .card { padding: 30px 26px 34px; }
-    .hero-headline { font-size: clamp(2.7rem, 6vw, 3.55rem); }
+    .hero-headline {
+      font-size: clamp(2.48rem, 5.4vw, 3.22rem);
+      line-height: 0.96;
+      text-wrap: unset;
+    }
+    .hero-line {
+      display: block;
+      white-space: nowrap;
+    }
     .comparison-slider { aspect-ratio: 16 / 8.2; }
     .reviews {
       grid-auto-flow: initial;
