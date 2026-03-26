@@ -1483,6 +1483,11 @@
     pointer-events: none;
   }
 
+  .choice-footer-passive {
+    border-top: 0;
+    padding-top: 0;
+  }
+
   .choice-card.is-action .choice-card-title,
   .choice-card.is-action .choice-list li {
     color: #fff4ea;
@@ -1593,9 +1598,9 @@
   }
 
   .choice-passive-cta {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
     align-items: center;
-    justify-content: center;
     min-height: 56px;
     margin-top: auto;
     cursor: pointer;
@@ -1609,6 +1614,22 @@
       inset 0 1px 0 rgba(255,255,255,0.08),
       0 8px 18px rgba(0,0,0,0.16);
     opacity: 0.78;
+  }
+
+  .choice-passive-text {
+    grid-column: 2;
+    justify-self: center;
+    text-align: center;
+  }
+
+  .choice-passive-icon {
+    grid-column: 3;
+    justify-self: end;
+    width: 42px;
+    height: 42px;
+    border-radius: 14px;
+    opacity: 0;
+    pointer-events: none;
   }
 
   .choice-card:not(.is-action) .choice-passive-cta {
@@ -1741,6 +1762,11 @@
     .choice-footer .cta-secondary .cta-icon svg {
       width: 13px;
       height: 13px;
+    }
+    .choice-passive-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 12px;
     }
   }
 
@@ -2874,7 +2900,10 @@
                   <li>Buyers see a print, not a product</li>
                 </ul>
                 <div class="choice-footer choice-footer-passive">
-                  <div class="choice-passive-cta" role="button" tabindex="0" data-return-hero>Keep Selling Prints</div>
+                  <div class="choice-passive-cta" role="button" tabindex="0" data-return-hero>
+                    <span class="choice-passive-text">Keep Selling Prints</span>
+                    <span class="choice-passive-icon" aria-hidden="true"></span>
+                  </div>
                   <div class="choice-meta" aria-hidden="true">
                     <div class="choice-meta-line">
                       <svg viewBox="0 0 24 24"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
