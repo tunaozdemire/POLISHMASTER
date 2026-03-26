@@ -189,6 +189,10 @@
     margin-bottom: 12px;
   }
 
+  .hero-line {
+    display: inline;
+  }
+
   .hero-support {
     max-width: 30ch;
     color: rgba(255,255,255,0.78);
@@ -330,8 +334,8 @@
     border: 1px solid rgba(255,255,255,0.08);
     overflow: hidden;
     background: #111;
-    cursor: ew-resize;
-    touch-action: none;
+    cursor: default;
+    touch-action: auto;
     user-select: none;
     -webkit-user-select: none;
     box-shadow:
@@ -365,8 +369,13 @@
     bottom: 0;
     left: calc(50% - 1px);
     width: 2px;
-    background: linear-gradient(to bottom, transparent 0%, rgba(255,255,255,0.7) 15%, rgba(255,255,255,0.9) 50%, rgba(255,255,255,0.7) 85%, transparent 100%);
+    background: linear-gradient(to bottom, transparent 0%, rgba(255,167,92,0.22) 12%, rgba(255,196,144,0.9) 34%, rgba(255,126,36,0.92) 50%, rgba(255,196,144,0.9) 66%, rgba(255,167,92,0.22) 88%, transparent 100%);
+    box-shadow:
+      0 0 10px rgba(255,106,0,0.22),
+      0 0 26px rgba(255,106,0,0.12);
     pointer-events: none;
+    opacity: 0.9;
+    animation: comparisonSeamPulse 3.2s ease-in-out infinite;
   }
 
   .comparison-handle {
@@ -388,6 +397,7 @@
     pointer-events: none;
     animation: handlePulse 2.4s ease-in-out infinite;
     transition: transform .2s ease, box-shadow .2s ease;
+    opacity: 0;
   }
   .comparison-slider.is-dragging .comparison-handle {
     transform: translate(-50%,-50%) scale(1.1);
@@ -402,6 +412,94 @@
     fill: none;
     stroke-linecap: round;
     stroke-linejoin: round;
+  }
+
+  .comparison-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 12px auto 0;
+    width: min(100%, 220px);
+  }
+
+  .comparison-hint-track {
+    position: relative;
+    flex: 1 1 auto;
+    height: 8px;
+    width: 100%;
+    border-radius: 999px;
+    background:
+      linear-gradient(90deg, rgba(255,255,255,0.05), rgba(255,255,255,0.14) 50%, rgba(255,255,255,0.05)),
+      rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 0 20px rgba(255,106,0,0.08);
+    overflow: visible;
+    cursor: ew-resize;
+    touch-action: none;
+    animation: comparisonHintBreath 3.8s ease-in-out infinite;
+    transition: box-shadow .25s ease, border-color .25s ease, transform .25s ease;
+  }
+
+  .comparison-hint-thumb {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 42px;
+    height: 22px;
+    border-radius: 999px;
+    transform: translate(-50%, -50%);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(255,191,138,0.18), transparent 56%),
+      linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)),
+      rgba(57,27,12,0.92);
+    border: 1px solid rgba(255,136,48,0.28);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 8px 18px rgba(0,0,0,0.22),
+      0 0 22px rgba(255,106,0,0.12);
+    transition: left .45s cubic-bezier(.22,1,.36,1), transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    pointer-events: none;
+  }
+
+  .comparison-slider.is-dragging + .comparison-hint .comparison-hint-track {
+    border-color: rgba(255,136,48,0.24);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 0 28px rgba(255,106,0,0.16);
+    transform: scaleX(1.02);
+    animation: none;
+  }
+
+  .comparison-slider.is-dragging + .comparison-hint .comparison-hint-thumb {
+    transform: translate(-50%, -50%) scale(1.14);
+    border-color: rgba(255,160,92,0.42);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.1),
+      0 12px 24px rgba(0,0,0,0.24),
+      0 0 28px rgba(255,106,0,0.2);
+  }
+
+  .comparison-hint-thumb::before,
+  .comparison-hint-thumb::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    border-top: 1.6px solid rgba(255,238,224,0.78);
+    border-right: 1.6px solid rgba(255,238,224,0.78);
+  }
+
+  .comparison-hint-thumb::before {
+    left: 11px;
+    transform: translateY(-50%) rotate(-135deg);
+  }
+
+  .comparison-hint-thumb::after {
+    right: 11px;
+    transform: translateY(-50%) rotate(45deg);
   }
 
   /* ── FLOW SECTIONS ── */
@@ -1386,6 +1484,34 @@
     0%, 100% { transform: translate(-50%,-50%) scale(1); box-shadow: 0 4px 24px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,255,255,0.08), inset 0 1px 0 rgba(255,255,255,0.22); }
     50% { transform: translate(-50%,-50%) scale(1.06); box-shadow: 0 6px 28px rgba(0,0,0,0.36), 0 0 0 6px rgba(255,255,255,0.06), inset 0 1px 0 rgba(255,255,255,0.22); }
   }
+  @keyframes comparisonSeamPulse {
+    0%, 100% {
+      box-shadow:
+        0 0 10px rgba(255,106,0,0.18),
+        0 0 22px rgba(255,106,0,0.1);
+      opacity: 0.82;
+    }
+    50% {
+      box-shadow:
+        0 0 14px rgba(255,136,48,0.28),
+        0 0 32px rgba(255,106,0,0.16);
+      opacity: 1;
+    }
+  }
+  @keyframes comparisonHintBreath {
+    0%, 100% {
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 0 14px rgba(255,106,0,0.05);
+      border-color: rgba(255,255,255,0.06);
+    }
+    50% {
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.05),
+        0 0 22px rgba(255,106,0,0.12);
+      border-color: rgba(255,136,48,0.14);
+    }
+  }
   @keyframes returnFloat {
     0%,100% { transform: translateY(0); }
     50%      { transform: translateY(-3px); }
@@ -1422,6 +1548,11 @@
       font-size: clamp(2rem, 9.4vw, 2.7rem);
       line-height: 0.98;
       margin-bottom: 10px;
+      text-wrap: unset;
+    }
+
+    .hero-line {
+      display: block;
     }
 
     .hero-support {
@@ -1454,9 +1585,14 @@
       border-radius: 22px;
     }
 
-    .comparison-handle {
-      width: 40px;
-      height: 40px;
+    .comparison-hint {
+      width: min(100%, 180px);
+      margin-top: 10px;
+    }
+
+    .comparison-hint-thumb {
+      width: 34px;
+      height: 19px;
     }
 
     .slider-label {
@@ -1856,7 +1992,7 @@
       <div class="card">
         <div class="hero-content">
           <span class="eyebrow">PolishMaster</span>
-          <h1 class="hero-headline">Stop selling layer lines.<br />Start selling products.</h1>
+          <h1 class="hero-headline"><span class="hero-line">Stop selling layer lines.</span> <span class="hero-line">Start selling products.</span></h1>
           <p class="hero-support">Everything you need to turn raw prints into premium products.</p>
           <p class="hero-proof">Join 200+ makers already inside.</p>
 
@@ -1893,6 +2029,11 @@
               </div>
               <div class="slider-label slider-label-raw">RAW</div>
               <div class="slider-label slider-label-polished">POLISHED</div>
+            </div>
+            <div class="comparison-hint" aria-hidden="true">
+              <div class="comparison-hint-track" data-comparison-track>
+                <span class="comparison-hint-thumb" data-comparison-thumb></span>
+              </div>
             </div>
           </div>
 
@@ -2370,52 +2511,58 @@
         var overlay = slider.querySelector("[data-comparison-overlay]");
         var divider = slider.querySelector("[data-comparison-divider]");
         var handle  = slider.querySelector("[data-comparison-handle]");
+        var hintThumb = slider.parentElement ? slider.parentElement.querySelector("[data-comparison-thumb]") : null;
+        var hintTrack = slider.parentElement ? slider.parentElement.querySelector("[data-comparison-track]") : null;
         var isDragging = false;
-        if (!overlay || !divider || !handle) return;
+        if (!overlay || !divider) return;
 
-        function setPosition(clientX) {
-          var rect = slider.getBoundingClientRect();
+        function setPosition(clientX, sourceEl) {
+          var rect = (sourceEl || slider).getBoundingClientRect();
           var percent = ((clientX - rect.left) / rect.width) * 100;
           percent = Math.max(0, Math.min(100, percent));
           overlay.style.clipPath = "inset(0 " + (100 - percent) + "% 0 0)";
           divider.style.left = "calc(" + percent + "% - 1px)";
-          handle.style.left = percent + "%";
+          if (handle) handle.style.left = percent + "%";
+          if (hintThumb) hintThumb.style.left = percent + "%";
         }
 
         function stopDragging() {
+          if (!isDragging) return;
           isDragging = false;
           slider.classList.remove("is-dragging");
+          window.setTimeout(function () {
+            setPosition((hintTrack || slider).getBoundingClientRect().left + ((hintTrack || slider).getBoundingClientRect().width / 2), hintTrack || slider);
+          }, 30);
         }
 
-        slider.addEventListener("mousedown", function (e) {
-          isDragging = true;
-          slider.classList.add("is-dragging");
-          setPosition(e.clientX);
-        });
+        if (hintTrack) {
+          hintTrack.addEventListener("mousedown", function (e) {
+            isDragging = true;
+            slider.classList.add("is-dragging");
+            setPosition(e.clientX, hintTrack);
+          });
 
-        slider.addEventListener("touchstart", function (e) {
-          isDragging = true;
-          slider.classList.add("is-dragging");
-          if (e.touches[0]) setPosition(e.touches[0].clientX);
-        }, { passive: true });
+          hintTrack.addEventListener("touchstart", function (e) {
+            isDragging = true;
+            slider.classList.add("is-dragging");
+            if (e.touches[0]) setPosition(e.touches[0].clientX, hintTrack);
+          }, { passive: true });
+        }
 
         window.addEventListener("mousemove", function (e) {
           if (!isDragging) return;
-          setPosition(e.clientX);
+          setPosition(e.clientX, hintTrack || slider);
         });
 
         window.addEventListener("touchmove", function (e) {
           if (!isDragging || !e.touches[0]) return;
-          setPosition(e.touches[0].clientX);
+          setPosition(e.touches[0].clientX, hintTrack || slider);
         }, { passive: true });
 
         window.addEventListener("mouseup", stopDragging);
         window.addEventListener("touchend", stopDragging);
 
-        slider.addEventListener("mouseleave", function () {
-          if (!isDragging) return;
-          stopDragging();
-        });
+        setPosition((hintTrack || slider).getBoundingClientRect().left + ((hintTrack || slider).getBoundingClientRect().width / 2), hintTrack || slider);
       });
     })();
   </script>
