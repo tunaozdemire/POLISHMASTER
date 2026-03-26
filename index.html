@@ -187,11 +187,15 @@
     letter-spacing: -0.05em;
     font-weight: 800;
     text-wrap: balance;
-    margin-bottom: 12px;
+    margin-bottom: 0;
   }
 
   .hero-line {
     display: inline;
+  }
+
+  .hero-line + .hero-line {
+    margin-top: 0.24em;
   }
 
   .hero-proof {
@@ -207,7 +211,7 @@
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.01em;
-    margin: 10px 0 20px;
+    margin: 20px 0 20px;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.035);
   }
 
@@ -1575,12 +1579,15 @@
     .card { padding: 30px 26px 34px; }
     .hero-headline {
       font-size: clamp(2.48rem, 5.4vw, 3.22rem);
-      line-height: 0.96;
+      line-height: 0.94;
       text-wrap: unset;
     }
     .hero-line {
       display: block;
       white-space: nowrap;
+    }
+    .hero-line + .hero-line {
+      margin-top: 0.34em;
     }
     .comparison-slider { aspect-ratio: 16 / 8.2; }
     .reviews {
@@ -1607,7 +1614,7 @@
     .hero-headline {
       font-size: clamp(1.76rem, 8.4vw, 2.3rem);
       line-height: 1.02;
-      margin-bottom: 10px;
+      margin-bottom: 0;
       text-wrap: unset;
     }
 
@@ -1616,11 +1623,15 @@
       white-space: nowrap;
     }
 
+    .hero-line + .hero-line {
+      margin-top: 0.28em;
+    }
+
     .hero-proof {
       font-size: 0.74rem;
       min-height: 32px;
       padding: 7px 11px;
-      margin-top: 12px;
+      margin-top: 18px;
       margin-bottom: 16px;
     }
 
