@@ -181,7 +181,7 @@
 
   .hero-headline {
     color: #fff4ea;
-    font-size: clamp(2rem, 8vw, 2.8rem);
+    font-size: clamp(2.18rem, 8.8vw, 3.05rem);
     line-height: 1.0;
     letter-spacing: -0.05em;
     font-weight: 800;
@@ -325,7 +325,7 @@
   .comparison-slider {
     position: relative;
     width: 100%;
-    aspect-ratio: 4 / 3.15;
+    aspect-ratio: 4 / 2.85;
     border-radius: 26px;
     border: 1px solid rgba(255,255,255,0.08);
     overflow: hidden;
@@ -424,23 +424,15 @@
   .outcome-track {
     position: relative;
     display: grid;
-    gap: 18px;
-    padding: 4px 0 0 56px;
-  }
-
-  .outcome-track::before {
-    content: "";
-    position: absolute;
-    left: 22px;
-    top: 10px;
-    bottom: 24px;
-    width: 2px;
-    background: linear-gradient(180deg, rgba(255,170,78,0.52), rgba(255,106,0,0.14));
-    box-shadow: 0 0 18px rgba(255,106,0,0.12);
+    justify-items: center;
+    gap: 20px;
+    padding: 8px 0 0;
   }
 
   .outcome-item {
     position: relative;
+    width: 100%;
+    max-width: 520px;
     padding: 20px 22px 20px 24px;
     border-radius: 24px;
     border: 1px solid rgba(255,255,255,0.08);
@@ -452,21 +444,24 @@
       0 12px 24px rgba(0,0,0,0.16);
     overflow: hidden;
     animation: outcomeGlowCycle 9s ease-in-out infinite;
+    text-align: center;
   }
 
-  .outcome-item::before {
+.outcome-item::before {
     content: "";
     position: absolute;
-    left: -43px;
-    top: 28px;
+    left: 50%;
+    top: -10px;
     width: 16px;
     height: 16px;
     border-radius: 50%;
+    transform: translateX(-50%);
     background: radial-gradient(circle at 35% 35%, #ffd4a8, #ff8a3d 55%, #7a2200 100%);
     box-shadow:
       0 0 0 6px rgba(255,106,0,0.07),
       0 0 18px rgba(255,106,0,0.2);
     animation: outcomeDotCycle 9s ease-in-out infinite;
+    display: none;
   }
 
   .outcome-item::after {
@@ -797,8 +792,8 @@
   }
 
   .system-access-cta .cta-note {
-    font-size: 0.82rem;
-    letter-spacing: 0.11em;
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
   }
 
   @keyframes flowSweep {
@@ -1400,8 +1395,8 @@
   @media (min-width: 540px) {
     .section { padding: 28px 20px 48px; }
     .card { padding: 30px 26px 34px; }
-    .hero-headline { font-size: clamp(2.4rem, 6vw, 3.2rem); }
-    .comparison-slider { aspect-ratio: 16 / 9; }
+    .hero-headline { font-size: clamp(2.7rem, 6vw, 3.55rem); }
+    .comparison-slider { aspect-ratio: 16 / 8.2; }
     .reviews {
       grid-auto-flow: initial;
       grid-auto-columns: auto;
@@ -1414,6 +1409,151 @@
   }
 
   @media (max-width: 720px) {
+    .section {
+      padding: 14px 10px 36px;
+    }
+
+    .card {
+      padding: 18px 14px 24px;
+      border-radius: 28px;
+    }
+
+    .hero-headline {
+      font-size: clamp(2rem, 9.4vw, 2.7rem);
+      line-height: 0.98;
+      margin-bottom: 10px;
+    }
+
+    .hero-support {
+      max-width: 26ch;
+      font-size: 0.86rem;
+      line-height: 1.58;
+    }
+
+    .hero-proof {
+      font-size: 0.82rem;
+      margin-bottom: 16px;
+    }
+
+    .cta-stack {
+      gap: 7px;
+    }
+
+    .cta-note {
+      font-size: 0.68rem;
+      letter-spacing: 0.075em;
+    }
+
+    .visual {
+      width: calc(100% + 28px);
+      margin: 0 -14px 20px;
+    }
+
+    .comparison-slider {
+      aspect-ratio: 4 / 3.05;
+      border-radius: 22px;
+    }
+
+    .comparison-handle {
+      width: 40px;
+      height: 40px;
+    }
+
+    .slider-label {
+      padding: 4px 8px;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+    }
+
+    .system-access {
+      padding: 14px 12px 12px;
+      border-radius: 24px;
+    }
+
+    .outcome-track {
+      gap: 16px;
+      padding-top: 6px;
+    }
+
+    .outcome-item {
+      max-width: none;
+      padding: 22px 18px 18px;
+      border-radius: 22px;
+    }
+
+    .outcome-title {
+      font-size: 1.08rem;
+      line-height: 1.16;
+      max-width: 14ch;
+      margin: 0 auto;
+      text-wrap: balance;
+    }
+
+    .outcome-copy {
+      margin-top: 9px;
+      font-size: 0.86rem;
+      line-height: 1.48;
+      max-width: 24ch;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .system-access-cta .cta {
+      padding: 22px 20px 22px 22px;
+      border-radius: 24px;
+    }
+
+    .system-access-cta .cta-text {
+      font-size: 1.18rem;
+    }
+
+    .system-access-cta .cta-icon {
+      width: 50px;
+      height: 50px;
+    }
+
+    .reviews-header {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    .reviews-rating-row {
+      padding: 10px 12px;
+      gap: 10px;
+    }
+
+    .reviews-big-score {
+      font-size: 2.2rem;
+    }
+
+    .testimonials-outer {
+      height: 320px;
+    }
+
+    .faq-toggle {
+      padding: 14px 14px;
+    }
+
+    .faq-question {
+      font-size: 0.84rem;
+      line-height: 1.38;
+    }
+
+    .faq-answer {
+      padding: 2px 16px 20px 16px;
+      max-width: 100%;
+      font-size: 0.8rem;
+      line-height: 1.68;
+    }
+
+    .faq-answer .faq-lead {
+      font-size: 0.83rem;
+    }
+
+    .site-footer {
+      padding: 14px 16px calc(22px + env(safe-area-inset-bottom, 0px));
+      font-size: 0.7rem;
+    }
   }
 
   /* ── SLIDER LABELS ── */
