@@ -170,6 +170,41 @@
     gap: 0;
   }
 
+  body.is-ready .eyebrow,
+  body.is-ready .hero-headline,
+  body.is-ready .hero-proof,
+  body.is-ready .actions,
+  body.is-ready .visual {
+    animation-duration: 900ms;
+    animation-timing-function: cubic-bezier(.22,1,.36,1);
+    animation-fill-mode: both;
+  }
+
+  body.is-ready .eyebrow {
+    animation-name: heroFadeLift;
+    animation-delay: 60ms;
+  }
+
+  body.is-ready .hero-headline {
+    animation-name: heroHeadlineRise;
+    animation-delay: 130ms;
+  }
+
+  body.is-ready .hero-proof {
+    animation-name: heroFadeLift;
+    animation-delay: 250ms;
+  }
+
+  body.is-ready .actions {
+    animation-name: heroFadeLift;
+    animation-delay: 330ms;
+  }
+
+  body.is-ready .visual {
+    animation-name: heroVisualIn;
+    animation-delay: 180ms;
+  }
+
   .eyebrow {
     display: inline-block;
     margin-bottom: 10px;
@@ -211,7 +246,7 @@
     font-size: 0.78rem;
     font-weight: 700;
     letter-spacing: 0.01em;
-    margin: 20px 0 20px;
+    margin: 38px 0 28px;
     box-shadow: inset 0 1px 0 rgba(255,255,255,0.035);
   }
 
@@ -1573,6 +1608,45 @@
     50%      { transform: translateY(-3px); }
   }
 
+  @keyframes heroFadeLift {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+      filter: blur(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes heroHeadlineRise {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.985);
+      filter: blur(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  @keyframes heroVisualIn {
+    from {
+      opacity: 0;
+      transform: translateY(24px) scale(0.97);
+      filter: blur(14px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
   /* ── TABLET+ ── */
   @media (min-width: 540px) {
     .section { padding: 28px 20px 48px; }
@@ -1631,8 +1705,8 @@
       font-size: 0.74rem;
       min-height: 32px;
       padding: 7px 11px;
-      margin-top: 18px;
-      margin-bottom: 16px;
+      margin-top: 30px;
+      margin-bottom: 22px;
     }
 
     .cta-stack {
@@ -2561,6 +2635,12 @@
       </div>
     </div>
   </div>
+
+  <script>
+    window.addEventListener('load', function () {
+      document.body.classList.add('is-ready');
+    });
+  </script>
 
   <script>
     (function () {
