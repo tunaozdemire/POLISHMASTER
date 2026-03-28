@@ -245,6 +245,100 @@
     margin: 0 0 30px;
   }
 
+  .founder-block {
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 82px;
+    gap: 16px;
+    align-items: start;
+    width: 100%;
+    margin: 0 0 20px;
+    padding: 18px 18px 16px 20px;
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px;
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)),
+      rgba(12,11,12,0.74);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 16px 32px rgba(0,0,0,0.18);
+  }
+
+  .founder-block::before {
+    content: "";
+    position: absolute;
+    left: 12px;
+    top: 18px;
+    bottom: 18px;
+    width: 2px;
+    border-radius: 999px;
+    background: linear-gradient(180deg, rgba(255,184,131,0.94), rgba(255,106,0,0.14));
+    box-shadow: 0 0 16px rgba(255,106,0,0.18);
+  }
+
+  .founder-photo {
+    order: 2;
+    justify-self: end;
+    width: 82px;
+    height: 82px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(255,255,255,0.03);
+    box-shadow:
+      0 12px 28px rgba(0,0,0,0.22),
+      0 0 0 1px rgba(255,255,255,0.04);
+  }
+
+  .founder-body {
+    order: 1;
+    min-width: 0;
+    padding-left: 10px;
+  }
+
+  .founder-tag {
+    display: inline-flex;
+    align-items: center;
+    min-height: 24px;
+    padding: 0 10px;
+    margin-bottom: 10px;
+    color: rgba(255,222,199,0.84);
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,184,131,0.18);
+    border-radius: 999px;
+    background: rgba(255,106,0,0.08);
+  }
+
+  .founder-quote {
+    color: rgba(255,245,237,0.78);
+    font-size: 0.8rem;
+    line-height: 1.6;
+    margin-bottom: 12px;
+  }
+
+  .founder-meta {
+    display: grid;
+    gap: 2px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .founder-name {
+    color: #fff4ea;
+    font-size: 0.9rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  .founder-role {
+    color: rgba(255,255,255,0.48);
+    font-size: 0.73rem;
+    line-height: 1.35;
+  }
+
   /* ── CTA BUTTON ── */
   .actions {
     display: flex;
@@ -324,12 +418,23 @@
   }
 
   .cta-note {
-    color: rgba(255,234,217,0.62);
-    font-size: 0.72rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    display: grid;
+    gap: 4px;
     text-align: center;
+    color: rgba(255,234,217,0.62);
+  }
+
+  .cta-note-primary {
+    color: rgba(255,234,217,0.82);
+    font-size: 0.74rem;
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  .cta-note-secondary {
+    color: rgba(255,234,217,0.56);
+    font-size: 0.69rem;
+    line-height: 1.45;
   }
 
   .cta-icon {
@@ -1569,7 +1674,17 @@
     color: rgba(255,229,212,0.58);
     font-size: 0.7rem;
     line-height: 1.2;
-    white-space: nowrap;
+    white-space: normal;
+    max-width: 24ch;
+    text-align: center;
+  }
+
+  .choice-anchor {
+    color: rgba(255,236,224,0.6);
+    font-size: 0.67rem;
+    line-height: 1.45;
+    max-width: 28ch;
+    text-align: center;
   }
 
   .choice-footer .cta-secondary {
@@ -1588,7 +1703,8 @@
 
   .choice-footer .choice-meta-line,
   .choice-footer .choice-price,
-  .choice-footer .choice-lock {
+  .choice-footer .choice-lock,
+  .choice-footer .choice-anchor {
     justify-self: center;
   }
 
@@ -1660,6 +1776,12 @@
     .testimonials-cols { gap: 12px; }
     .choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .choice-title { max-width: none; }
+  }
+
+  @media (min-width: 900px) {
+    .card {
+      max-width: 780px;
+    }
   }
 
   @media (max-width: 539px) {
@@ -1737,12 +1859,16 @@
       height: 11px;
       flex-shrink: 0;
     }
+    .choice-anchor {
+      font-size: 0.56rem;
+      line-height: 1.38;
+      max-width: 18ch;
+    }
     .choice-lock {
       font-size: 0.54rem;
       line-height: 1.25;
-      white-space: nowrap;
       text-align: center;
-      max-width: none;
+      max-width: 14ch;
     }
     .choice-card:not(.is-action) .choice-passive-cta {
       margin-bottom: 0;
@@ -1778,6 +1904,54 @@
       width: 100%;
       padding-left: 16px;
       padding-right: 16px;
+    }
+    .founder-block {
+      grid-template-columns: minmax(0, 1fr) 58px;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 14px 12px 12px 16px;
+      border-radius: 18px;
+    }
+    .founder-block::before {
+      left: 9px;
+      top: 14px;
+      bottom: 14px;
+    }
+    .founder-photo {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+    }
+    .founder-quote {
+      font-size: 0.74rem;
+      line-height: 1.56;
+      margin-bottom: 8px;
+    }
+    .founder-tag {
+      min-height: 22px;
+      padding: 0 8px;
+      font-size: 0.52rem;
+      margin-bottom: 6px;
+    }
+    .founder-body {
+      padding-left: 6px;
+    }
+    .founder-name {
+      font-size: 0.8rem;
+    }
+    .founder-role {
+      font-size: 0.66rem;
+    }
+    .cta-note {
+      gap: 3px;
+    }
+    .cta-note-primary {
+      font-size: 0.69rem;
+    }
+    .cta-note-secondary {
+      font-size: 0.64rem;
+      max-width: 32ch;
+      margin: 0 auto;
     }
   }
 
@@ -2580,9 +2754,24 @@
                   </svg>
                 </span>
               </a>
-              <span class="cta-note">Join on Patreon before access closes</span>
+              <span class="cta-note">
+                <span class="cta-note-primary">Open enrollment closes March 31.</span>
+                <span class="cta-note-secondary">No Patreon account? Takes 30 seconds to create - or log in with Google.</span>
+              </span>
             </div>
           </div>
+
+          <section class="founder-block" aria-label="Founder story">
+            <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Hugo M." class="founder-photo" loading="lazy" />
+            <div class="founder-body">
+              <span class="founder-tag">From the creator</span>
+              <p class="founder-quote">The PolishMaster process is the repeatable system I built to turn raw prints into product-ready surfaces. Sanding order, finish protocols, and pricing logic all live inside one process.</p>
+              <div class="founder-meta">
+                <div class="founder-name">Hugo M.</div>
+                <div class="founder-role">Founder of PolishMaster</div>
+              </div>
+            </div>
+          </section>
 
           <div class="visual">
             <div class="comparison-slider" data-comparison-slider>
@@ -2639,7 +2828,10 @@
                     </svg>
                   </span>
                 </a>
-                <span class="cta-note">Join on Patreon before access closes</span>
+                <span class="cta-note">
+                  <span class="cta-note-primary">Open enrollment closes March 31.</span>
+                  <span class="cta-note-secondary">No Patreon account? Takes 30 seconds to create - or log in with Google.</span>
+                </span>
               </div>
             </div>
           </section>
@@ -2920,6 +3112,7 @@
                       <svg viewBox="0 0 24 24"><path d="M12 3 6 5.5v5.7c0 4.1 2.5 7.9 6 9.8 3.5-1.9 6-5.7 6-9.8V5.5L12 3z"></path></svg>
                       <span>$29/month</span>
                     </div>
+                    <div class="choice-anchor">The average maker underprices by $8-15 per print. One session with this system pays for 6 months.</div>
                     <div class="choice-lock">Keep launch price.</div>
                   </div>
                   <a class="cta cta-secondary cta-secondary-passive" href="#top" data-return-hero>
@@ -2933,9 +3126,9 @@
                 <h3 class="choice-card-title">Sell Products</h3>
                 <p class="choice-card-copy">Turn prints into products.</p>
                 <ul class="choice-list">
-                  <li>Premium perception</li>
-                  <li>Stronger product feel</li>
-                  <li>Confident pricing</li>
+                  <li>7-step sanding sequence (grit-by-grit, no guessing)</li>
+                  <li>Gloss &amp; matte finish protocols - separate guides for each</li>
+                  <li>PLA, PLA+ and PETG - material-specific adjustments included</li>
                 </ul>
                 <div class="choice-footer">
                   <div class="choice-meta">
@@ -2947,6 +3140,7 @@
                       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 6 5.5v5.7c0 4.1 2.5 7.9 6 9.8 3.5-1.9 6-5.7 6-9.8V5.5L12 3z"></path></svg>
                       <span>$29/month</span>
                     </div>
+                    <div class="choice-anchor">The average maker underprices by $8-15 per print. One session with this system pays for 6 months.</div>
                     <div class="choice-lock">Keep launch price.</div>
                   </div>
                   <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
@@ -3038,7 +3232,10 @@
                 <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
               </span>
             </a>
-            <span class="cta-note">Join on Patreon before access closes</span>
+            <span class="cta-note">
+              <span class="cta-note-primary">Open enrollment closes March 31.</span>
+              <span class="cta-note-secondary">No Patreon account? Takes 30 seconds to create - or log in with Google.</span>
+            </span>
           </div>
         </div>
       </div>
@@ -3413,7 +3610,7 @@
         return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
       }
 
-      document.querySelectorAll('.tcard-avatar').forEach(function(image) {
+      document.querySelectorAll('.tcard-avatar, .founder-photo').forEach(function(image) {
         image.addEventListener('error', function() {
           var label = image.getAttribute('alt') || 'PolishMaster member';
           image.src = makeFallbackAvatar(label);
