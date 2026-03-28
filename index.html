@@ -129,6 +129,63 @@
     100% { transform: translateX(-50%) translateY(-10%); }
   }
 
+  /* â”€â”€ BACKGROUND OVERRIDE â”€â”€ */
+  #bg-anim {
+    background:
+      linear-gradient(180deg, rgba(10,7,6,0.96), rgba(5,5,5,1) 46%, rgba(12,7,4,0.98) 100%);
+  }
+  #bg-anim .bg-gradient-core,
+  #bg-anim .bg-grid,
+  #bg-anim .bg-vignette {
+    position: absolute;
+    inset: 0;
+  }
+  #bg-anim .bg-gradient-core {
+    inset: -14%;
+    opacity: 0;
+    transform: scale(1.16);
+    will-change: background, transform, opacity;
+    animation: bgGradientReveal 1.8s cubic-bezier(.25,.1,.25,1) forwards;
+  }
+  #bg-anim .bg-grid {
+    background:
+      linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px);
+    background-size: 108px 108px;
+    opacity: 0.26;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.12), rgba(0,0,0,0.4) 25%, rgba(0,0,0,0.78) 100%);
+    pointer-events: none;
+  }
+  #bg-anim .bg-vignette {
+    background:
+      radial-gradient(circle at 50% 16%, rgba(255,176,102,0.12), transparent 28%),
+      radial-gradient(circle at 50% 120%, rgba(255,116,20,0.18), transparent 42%),
+      linear-gradient(90deg, rgba(255,132,32,0.4), transparent 11%, transparent 89%, rgba(255,98,12,0.36)),
+      linear-gradient(180deg, rgba(0,0,0,0.08), rgba(0,0,0,0.46) 52%, rgba(0,0,0,0.74) 100%);
+    mix-blend-mode: screen;
+    opacity: 0.72;
+    pointer-events: none;
+  }
+  #bg-anim .g-container,
+  #bg-anim .g1,
+  #bg-anim .g2,
+  #bg-anim .g3,
+  #bg-anim .g4,
+  #bg-anim .g5,
+  #bg-anim .g-pointer {
+    display: none;
+  }
+  @keyframes bgGradientReveal {
+    0% {
+      opacity: 0;
+      transform: scale(1.24);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
   img { display: block; max-width: 100%; }
   a { color: inherit; text-decoration: none; }
   button { font: inherit; cursor: pointer; border: none; background: none; }
@@ -3022,24 +3079,9 @@
 <body>
   <!-- Animated gradient background -->
   <div id="bg-anim" aria-hidden="true">
-    <svg style="display:none">
-      <defs>
-        <filter id="bg-goo">
-          <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
-          <feColorMatrix in="blur" mode="matrix"
-            values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 11 -5" result="goo" />
-          <feBlend in="SourceGraphic" in2="goo" />
-        </filter>
-      </defs>
-    </svg>
-    <div class="g-container">
-      <div class="g1"></div>
-      <div class="g2"></div>
-      <div class="g3"></div>
-      <div class="g4"></div>
-      <div class="g5"></div>
-      <div class="g-pointer" id="bg-pointer"></div>
-    </div>
+    <div class="bg-gradient-core" id="bg-gradient-core"></div>
+    <div class="bg-grid"></div>
+    <div class="bg-vignette"></div>
   </div>
   <main>
     <section class="section">
@@ -4091,6 +4133,53 @@
         }
         movePointer();
       }
+    })();
+
+    (function() {
+      var gradientCore = document.getElementById('bg-gradient-core');
+      if (!gradientCore) return;
+
+      var baseWidth = 126;
+      var width = baseWidth;
+      var direction = 1;
+      var range = 4.8;
+      var speed = 0.018;
+      var topOffset = 10;
+      var animationFrame = 0;
+      var gradientColors = [
+        '#050505',
+        '#0f0906',
+        '#241108',
+        '#5b2f12',
+        '#b95a1d',
+        '#ff8b2a',
+        '#ffd8b0'
+      ];
+      var gradientStops = [24, 42, 58, 72, 84, 93, 100];
+
+      function renderGradient() {
+        if (width >= baseWidth + range) direction = -1;
+        if (width <= baseWidth - range) direction = 1;
+
+        width += direction * speed;
+
+        var stopsString = gradientStops
+          .map(function(stop, index) {
+            return gradientColors[index] + ' ' + stop + '%';
+          })
+          .join(', ');
+
+        gradientCore.style.background =
+          'radial-gradient(' + width + '% ' + (width + topOffset) + '% at 50% 20%, ' + stopsString + ')';
+
+        animationFrame = requestAnimationFrame(renderGradient);
+      }
+
+      animationFrame = requestAnimationFrame(renderGradient);
+
+      window.addEventListener('beforeunload', function() {
+        cancelAnimationFrame(animationFrame);
+      });
     })();
   </script>
 </body>
