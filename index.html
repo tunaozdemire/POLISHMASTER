@@ -30,7 +30,6 @@
     overflow-x: hidden;
     -webkit-text-size-adjust: 100%;
     background: #000;
-    overscroll-behavior: none;
   }
 
   body {
@@ -39,8 +38,6 @@
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
     background: transparent;
     overflow-x: hidden;
-    overflow-y: auto;
-    overscroll-behavior-y: none;
   }
 
   body.modal-open {
@@ -502,7 +499,7 @@
     overflow: hidden;
     background: #111;
     cursor: default;
-    touch-action: auto;
+    touch-action: pan-y;
     user-select: none;
     -webkit-user-select: none;
     box-shadow:
@@ -610,7 +607,7 @@
     box-shadow: none;
     overflow: visible;
     cursor: ew-resize;
-    touch-action: none;
+    touch-action: pan-y;
     transition: transform .25s ease;
   }
 
@@ -1443,6 +1440,233 @@
     margin-bottom: 4px;
   }
 
+  .inside-section {
+    width: 100%;
+    margin: 24px 0 18px;
+  }
+
+  .inside-header {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    margin-bottom: 16px;
+    text-align: center;
+  }
+
+  .inside-label {
+    color: rgba(255,185,125,0.72);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+  }
+
+  .inside-title {
+    color: #fff4ea;
+    font-size: clamp(1.7rem, 7.2vw, 2.35rem);
+    line-height: 0.97;
+    letter-spacing: -0.06em;
+    max-width: 13ch;
+  }
+
+  .inside-copy {
+    max-width: 36ch;
+    color: rgba(255,255,255,0.56);
+    font-size: 0.82rem;
+    line-height: 1.58;
+  }
+
+  .inside-stack {
+    display: grid;
+    gap: 14px;
+  }
+
+  .inside-feature {
+    --feature-accent: rgba(255,132,48,0.18);
+    position: relative;
+    display: grid;
+    grid-template-columns: minmax(0, 1.05fr) minmax(250px, 0.95fr);
+    gap: 18px;
+    align-items: stretch;
+    min-height: 362px;
+    padding: 16px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background:
+      radial-gradient(circle at 50% 118%, var(--feature-accent), transparent 36%),
+      linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)),
+      rgba(10,10,12,0.94);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.03),
+      0 18px 34px rgba(0,0,0,0.22);
+    overflow: hidden;
+  }
+
+  .inside-feature::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(rgba(255,255,255,0.016) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.012) 1px, transparent 1px);
+    background-size: 28px 28px;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.42), transparent 88%);
+    opacity: 0.42;
+    pointer-events: none;
+  }
+
+  .inside-feature--process { --feature-accent: rgba(255,132,48,0.2); }
+  .inside-feature--finish { --feature-accent: rgba(255,173,94,0.16); }
+  .inside-feature--materials { --feature-accent: rgba(255,106,0,0.14); }
+
+  .inside-feature-media {
+    position: relative;
+    min-height: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.01)),
+      rgba(14,14,16,0.92);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.03),
+      0 12px 24px rgba(0,0,0,0.18);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .inside-feature-media::after {
+    content: "";
+    position: absolute;
+    left: 12%;
+    right: 12%;
+    bottom: -16px;
+    height: 52px;
+    border-radius: 999px;
+    background: radial-gradient(circle at 50% 0%, rgba(255,132,48,0.42), transparent 72%);
+    filter: blur(12px);
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  .inside-feature-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    min-height: 26px;
+    padding: 0 10px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,184,131,0.18);
+    background: rgba(0,0,0,0.42);
+    color: rgba(255,232,214,0.84);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  .inside-feature-media img {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+
+  .inside-feature-media--surface img {
+    object-fit: cover;
+    object-position: center;
+  }
+
+  .inside-feature-media--contain img {
+    object-fit: contain;
+    padding: 14px;
+    background: rgba(255,255,255,0.02);
+  }
+
+  .inside-feature-body {
+    position: relative;
+    z-index: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .inside-feature-kicker {
+    color: rgba(255,198,163,0.72);
+    font-size: 0.66rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .inside-feature-title {
+    color: #fff4ea;
+    font-size: 1.38rem;
+    line-height: 1.02;
+    letter-spacing: -0.05em;
+    min-height: 2.08em;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 8px;
+  }
+
+  .inside-feature-copy {
+    color: rgba(255,255,255,0.52);
+    font-size: 0.8rem;
+    line-height: 1.55;
+    min-height: 4.7em;
+    margin-bottom: 12px;
+    margin-inline: auto;
+    max-width: 28ch;
+  }
+
+  .inside-feature-list {
+    list-style: none;
+    display: grid;
+    gap: 10px;
+    margin-top: auto;
+    width: 100%;
+  }
+
+  .inside-feature-list li {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 44px;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background: rgba(255,255,255,0.04);
+    color: rgba(255,247,240,0.86);
+    font-size: 0.84rem;
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .inside-feature-list li::before {
+    content: "✓";
+    flex: 0 0 auto;
+    color: rgba(255,198,144,0.96);
+    font-size: 0.98rem;
+    line-height: 1.15;
+    transform: translateY(1px);
+  }
+
   .choice-section {
     width: 100%;
     margin: 18px 0 12px;
@@ -1783,6 +2007,7 @@
     .system-step-label { font-size: 0.84rem; }
     .testimonials-outer { height: 420px; }
     .testimonials-cols { gap: 12px; }
+    .inside-title { max-width: none; }
     .choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .choice-title { max-width: none; }
   }
@@ -1794,6 +2019,78 @@
   }
 
   @media (max-width: 539px) {
+    .inside-section {
+      margin: 20px 0 16px;
+    }
+    .inside-header {
+      gap: 7px;
+      margin-bottom: 12px;
+    }
+    .inside-label {
+      font-size: 0.6rem;
+      letter-spacing: 0.22em;
+    }
+    .inside-title {
+      max-width: none;
+      font-size: 1.5rem;
+      line-height: 0.98;
+    }
+    .inside-copy {
+      font-size: 0.74rem;
+      line-height: 1.52;
+      max-width: 29ch;
+    }
+    .inside-stack {
+      gap: 10px;
+    }
+    .inside-feature {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      min-height: auto;
+      padding: 12px;
+      border-radius: 20px;
+    }
+    .inside-feature-media {
+      min-height: 0;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      border-radius: 16px;
+    }
+    .inside-feature-badge {
+      top: 10px;
+      left: 10px;
+      min-height: 24px;
+      padding: 0 8px;
+      font-size: 0.56rem;
+    }
+    .inside-feature-media--contain img {
+      padding: 10px;
+    }
+    .inside-feature-kicker {
+      font-size: 0.56rem;
+      margin-bottom: 6px;
+    }
+    .inside-feature-title {
+      font-size: 1.1rem;
+      min-height: 0;
+      display: block;
+      margin-bottom: 6px;
+    }
+    .inside-feature-copy {
+      font-size: 0.72rem;
+      min-height: 0;
+      margin-bottom: 10px;
+    }
+    .inside-feature-list {
+      gap: 8px;
+      margin-top: 0;
+    }
+    .inside-feature-list li {
+      min-height: 38px;
+      padding: 8px 12px;
+      font-size: 0.72rem;
+      line-height: 1.3;
+    }
     .choice-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
       gap: 10px;
@@ -3096,6 +3393,67 @@
             <div class="reviews-more-label">Trusted by 200+ makers</div>
           </section>
 
+          <section class="flow-section inside-section" aria-label="What you get inside PolishMaster">
+            <div class="inside-header">
+              <span class="inside-label">LIMITED ACCESS</span>
+              <h2 class="inside-title">What you unlock inside</h2>
+              <p class="inside-copy">Not public. Not explained outside.</p>
+            </div>
+
+            <div class="inside-stack">
+              <article class="inside-feature inside-feature--process">
+                <div class="inside-feature-media inside-feature-media--surface">
+                  <span class="inside-feature-badge">Core process</span>
+                  <img src="surface-comparison.png" alt="Raw versus polished surface comparison" loading="lazy" />
+                </div>
+                <div class="inside-feature-body">
+                  <div class="inside-feature-kicker">The PolishMaster process</div>
+                  <h3 class="inside-feature-title">Finish system</h3>
+                  <p class="inside-feature-copy">The exact standard behind every product-ready surface</p>
+                  <ul class="inside-feature-list">
+                    <li>3-step sanding sequence</li>
+                    <li>Exact grit order</li>
+                    <li>No-guesswork workflow</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="inside-feature inside-feature--finish">
+                <div class="inside-feature-media inside-feature-media--contain">
+                  <span class="inside-feature-badge">Finish paths</span>
+                  <img src="cross-after.png" alt="Polished gloss-ready sample" loading="lazy" />
+                </div>
+                <div class="inside-feature-body">
+                  <div class="inside-feature-kicker">End-result control</div>
+                  <h3 class="inside-feature-title">Surface control paths</h3>
+                  <p class="inside-feature-copy">Different finishes. Same system. No improvisation</p>
+                  <ul class="inside-feature-list">
+                    <li>Gloss finish guide</li>
+                    <li>Matte finish guide</li>
+                    <li>Built around the final look</li>
+                  </ul>
+                </div>
+              </article>
+
+              <article class="inside-feature inside-feature--materials">
+                <div class="inside-feature-media inside-feature-media--contain">
+                  <span class="inside-feature-badge">Material adjustments</span>
+                  <img src="king.png" alt="Finished PolishMaster sample piece" loading="lazy" />
+                </div>
+                <div class="inside-feature-body">
+                  <div class="inside-feature-kicker">Material-specific</div>
+                  <h3 class="inside-feature-title">Material adjustments</h3>
+                  <p class="inside-feature-copy">PLA and PETG don't behave the same. This accounts for it</p>
+                  <ul class="inside-feature-list">
+                    <li>PLA, PLA+ and PETG</li>
+                    <li>Material-specific tweaks</li>
+                    <li>Product-ready finish standard</li>
+                  </ul>
+                </div>
+              </article>
+            </div>
+          </section>
+
           <section class="flow-section choice-section" aria-label="PolishMaster choice">
             <div class="choice-header">
               <span class="choice-label">Your Surface Choice</span>
@@ -3108,7 +3466,7 @@
                 <p class="choice-card-copy">They still see a hobby seller.</p>
                 <ul class="choice-list">
                   <li>Lower perceived value</li>
-                  <li>More price resistance</li>
+                  <li>Less pricing power</li>
                   <li>Buyers see a print, not a product</li>
                 </ul>
                 <div class="choice-footer choice-footer-passive">
@@ -3135,9 +3493,9 @@
                 <h3 class="choice-card-title">Sell Products</h3>
                 <p class="choice-card-copy">Turn prints into products.</p>
                 <ul class="choice-list">
-                  <li>3-step sanding sequence</li>
-                  <li>Gloss &amp; matte finish guides</li>
-                  <li>PLA, PLA+ and PETG included</li>
+                  <li>Higher perceived value</li>
+                  <li>Higher price confidence</li>
+                  <li>Buyers see a product, not a print</li>
                 </ul>
                 <div class="choice-footer">
                   <div class="choice-meta">
@@ -3367,6 +3725,14 @@
           if (hintThumb) hintThumb.style.left = percent + "%";
         }
 
+        function forwardWheelScroll(e) {
+          if (isDragging) return;
+          if (document.body.classList.contains("modal-open")) return;
+          if (Math.abs(e.deltaY) <= Math.abs(e.deltaX)) return;
+          e.preventDefault();
+          window.scrollBy({ top: e.deltaY, behavior: "auto" });
+        }
+
         function stopDragging() {
           if (!isDragging) return;
           isDragging = false;
@@ -3383,16 +3749,20 @@
 
         if (hintTrack) {
           hintTrack.addEventListener("pointerdown", function (e) {
+            if (typeof e.button === "number" && e.button !== 0) return;
             isDragging = true;
             slider.classList.remove("is-returning");
             slider.classList.add("is-dragging");
             if (e.pointerType && e.pointerType !== "mouse") triggerHaptic(14);
-            if (typeof hintTrack.setPointerCapture === "function" && typeof e.pointerId === "number") {
+            if (e.pointerType && e.pointerType !== "mouse" && typeof hintTrack.setPointerCapture === "function" && typeof e.pointerId === "number") {
               hintTrack.setPointerCapture(e.pointerId);
             }
             setPosition(e.clientX, hintTrack);
           });
+          hintTrack.addEventListener("wheel", forwardWheelScroll, { passive: false });
         }
+
+        slider.addEventListener("wheel", forwardWheelScroll, { passive: false });
 
         window.addEventListener("pointermove", function (e) {
           if (!isDragging) return;
