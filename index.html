@@ -5,11 +5,88 @@
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PolishMaster</title>
+  <title>Stop Selling Layer Lines | PolishMaster 3D Print Finishing System</title>
   <meta
     name="description"
-    content="Turn raw 3D prints into premium-looking products with a simple finishing system."
+    content="Learn the PolishMaster 3D print finishing system for PLA, PLA+ and PETG. Remove layer lines, improve sanding and polishing, and create product-ready surfaces."
   />
+  <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
+  <meta name="author" content="PolishMaster" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="PolishMaster" />
+  <meta property="og:locale" content="en_US" />
+  <meta property="og:title" content="Stop Selling Layer Lines | PolishMaster 3D Print Finishing System" />
+  <meta property="og:description" content="Learn the PolishMaster 3D print finishing system for PLA, PLA+ and PETG. Remove layer lines, improve sanding and polishing, and create product-ready surfaces." />
+  <meta property="og:image" content="surface-comparison.png" />
+  <meta property="og:image:alt" content="Raw versus polished 3D printed surface finished with the PolishMaster system" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Stop Selling Layer Lines | PolishMaster 3D Print Finishing System" />
+  <meta name="twitter:description" content="Learn the PolishMaster 3D print finishing system for PLA, PLA+ and PETG. Remove layer lines, improve sanding and polishing, and create product-ready surfaces." />
+  <meta name="twitter:image" content="surface-comparison.png" />
+  <link rel="icon" type="image/png" href="logo.png.png" />
+  <link rel="preload" as="image" href="cross-before.png" />
+  <link rel="preload" as="image" href="cross-after.png" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "PolishMaster",
+    "description": "PolishMaster is a 3D print finishing system for PLA, PLA+ and PETG that helps makers remove layer lines and create product-ready gloss or matte surfaces.",
+    "category": "3D print finishing system",
+    "brand": {
+      "@type": "Brand",
+      "name": "PolishMaster"
+    },
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "3D print makers"
+    },
+    "image": [
+      "surface-comparison.png",
+      "surface-control-paths.png",
+      "review-orange-closeup.png"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "price": "29",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "reviewCount": "178"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Ethan"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."
+      },
+      {
+        "@type": "Review",
+        "author": {
+          "@type": "Person",
+          "name": "Nabil"
+        },
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "reviewBody": "The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."
+      }
+    ]
+  }
+  </script>
   <style>
   :root {
     --bg: #050505;
@@ -1628,20 +1705,6 @@
     pointer-events: none;
   }
 
-  .tcard::after {
-    content: "";
-    display: none;
-    order: 3;
-    width: 100%;
-    border-radius: 16px;
-    border: 1px solid rgba(255,255,255,0.08);
-    background-color: rgba(15,11,10,0.98);
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.04);
-  }
-
   .tcard-head {
     position: relative;
     z-index: 1;
@@ -1827,41 +1890,6 @@
     color: rgba(255,180,107,0.94);
     font-size: 0.76rem;
     letter-spacing: 0.16em;
-  }
-
-  .testimonials-track.track-a .tcard:nth-child(1)::after,
-  .testimonials-track.track-a .tcard:nth-child(6)::after {
-    display: block;
-    aspect-ratio: 16 / 10;
-    background-image: url("review-orange-closeup.png");
-  }
-
-  .testimonials-track.track-a .tcard:nth-child(2)::after,
-  .testimonials-track.track-a .tcard:nth-child(7)::after {
-    display: block;
-    aspect-ratio: 16 / 10;
-    background-image: url("review-blue-gloss.png");
-  }
-
-  .testimonials-track.track-a .tcard:nth-child(5)::after,
-  .testimonials-track.track-a .tcard:nth-child(10)::after {
-    display: block;
-    aspect-ratio: 16 / 10;
-    background-image: url("review-car-mount.png");
-  }
-
-  .testimonials-track.track-b .tcard:nth-child(1)::after,
-  .testimonials-track.track-b .tcard:nth-child(6)::after {
-    display: block;
-    aspect-ratio: 16 / 10;
-    background-image: url("review-pla-planter.png");
-  }
-
-  .testimonials-track.track-b .tcard:nth-child(2)::after,
-  .testimonials-track.track-b .tcard:nth-child(7)::after {
-    display: block;
-    aspect-ratio: 16 / 10;
-    background-image: url("review-candle-holder.png");
   }
 
   .reviews-more-label {
@@ -3580,7 +3608,7 @@
         <div class="hero-content">
           <span class="eyebrow">PolishMaster</span>
           <h1 class="hero-headline"><span class="hero-line">Stop selling layer lines.</span><span class="hero-line">Start selling products.</span></h1>
-          <p class="hero-proof">Join 200+ makers already inside.</p>
+          <p class="hero-proof">3D print finishing system for PLA, PLA+ and PETG makers.</p>
 
           <div class="actions">
             <div class="cta-stack">
@@ -3607,7 +3635,7 @@
               </div>
               <p class="founder-quote">"I built <strong>PolishMaster</strong> to turn raw prints into product-ready finishes without guesswork."</p>
               <div class="founder-meta">
-                <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Hugo M." class="founder-photo" loading="lazy" />
+                <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Portrait of Hugo M., founder of PolishMaster" class="founder-photo" loading="lazy" />
                 <div class="founder-meta-copy">
                   <div class="founder-name">Hugo M.</div>
                   <div class="founder-role">Founder, PolishMaster</div>
@@ -3619,10 +3647,10 @@
           <div class="visual">
             <div class="comparison-slider" data-comparison-slider>
               <div class="comparison-base">
-                <img src="cross-before.png" alt="Raw 3D printed piece before polishing" draggable="false" />
+                <img src="cross-before.png" alt="Raw 3D printed cross before sanding and polishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
               </div>
               <div class="comparison-overlay" data-comparison-overlay>
-                <img src="cross-after.png" alt="Polished 3D printed piece after finishing" draggable="false" />
+                <img src="cross-after.png" alt="Polished 3D printed cross after layer-line removal and finishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
               </div>
               <div class="comparison-divider" data-comparison-divider></div>
               <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
@@ -3707,6 +3735,9 @@
                   <div class="testimonials-track track-a">
                     <article class="tcard tcard-featured">
                       <p class="tcard-text">"My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-orange-closeup.png" alt="Close-up of a polished orange 3D printed part with a high-gloss finish" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan" class="tcard-avatar" />
                         <div>
@@ -3718,6 +3749,9 @@
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The sanding sequence paid for itself fast. I went from a dull surface to a clean mirror gloss in one session."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-blue-gloss.png" alt="Blue polished 3D printed object with mirror gloss on a wooden table" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Liam" class="tcard-avatar" />
                         <div>
@@ -3751,6 +3785,9 @@
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Better finish quality helped me charge more. My first customer came back for three more pieces."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-car-mount.png" alt="Gloss-finished blue 3D printed car phone mount installed on a dashboard" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Sam" class="tcard-avatar" />
                         <div>
@@ -3763,6 +3800,9 @@
                   
                     <article class="tcard">
                       <p class="tcard-text">"My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-orange-closeup.png" alt="Close-up of a polished orange 3D printed part with a high-gloss finish" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan" class="tcard-avatar" />
                         <div>
@@ -3774,6 +3814,9 @@
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The sanding sequence paid for itself fast. I went from a dull surface to a clean mirror gloss in one session."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-blue-gloss.png" alt="Blue polished 3D printed object with mirror gloss on a wooden table" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Liam" class="tcard-avatar" />
                         <div>
@@ -3807,6 +3850,9 @@
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"Better finish quality helped me charge more. My first customer came back for three more pieces."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-car-mount.png" alt="Gloss-finished blue 3D printed car phone mount installed on a dashboard" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Sam" class="tcard-avatar" />
                         <div>
@@ -3823,6 +3869,9 @@
                   <div class="testimonials-track track-b">
                     <article class="tcard">
                       <p class="tcard-text">"I was skeptical, but the first before-and-after sold me. Pure PLA, completely different finish."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-pla-planter.png" alt="Polished orange PLA planter holding a succulent on a windowsill" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James" class="tcard-avatar" />
                         <div>
@@ -3834,6 +3883,9 @@
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-candle-holder.png" alt="Polished geometric candle holder photographed as a finished home product" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/63.jpg" alt="Nabil" class="tcard-avatar" />
                         <div>
@@ -3879,6 +3931,9 @@
                   
                     <article class="tcard">
                       <p class="tcard-text">"I was skeptical, but the first before-and-after sold me. Pure PLA, completely different finish."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-pla-planter.png" alt="Polished orange PLA planter holding a succulent on a windowsill" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James" class="tcard-avatar" />
                         <div>
@@ -3890,6 +3945,9 @@
                     </article>
                     <article class="tcard">
                       <p class="tcard-text">"The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-candle-holder.png" alt="Polished geometric candle holder photographed as a finished home product" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/63.jpg" alt="Nabil" class="tcard-avatar" />
                         <div>
@@ -3968,7 +4026,7 @@
               <article class="inside-feature inside-feature--process">
                 <div class="inside-feature-media inside-feature-media--surface">
                   <span class="inside-feature-badge">Core process</span>
-                  <img src="surface-comparison.png" alt="Raw versus polished surface comparison" loading="lazy" />
+                  <img src="surface-comparison.png" alt="Raw versus polished 3D printed surface comparison" loading="lazy" decoding="async" />
                 </div>
                 <div class="inside-feature-body">
                   <div class="inside-feature-kicker">The PolishMaster process</div>
@@ -3985,7 +4043,7 @@
               <article class="inside-feature inside-feature--finish">
                 <div class="inside-feature-media inside-feature-media--surface">
                   <span class="inside-feature-badge">Finish paths</span>
-                  <img src="surface-control-paths.png" alt="Raw-to-finished surface control sample" loading="lazy" />
+                  <img src="surface-control-paths.png" alt="3D printed sample showing controlled finish paths from raw to refined surface" loading="lazy" decoding="async" />
                 </div>
                 <div class="inside-feature-body">
                   <div class="inside-feature-kicker">End-result control</div>
@@ -4002,7 +4060,7 @@
               <article class="inside-feature inside-feature--materials">
                 <div class="inside-feature-media inside-feature-media--surface">
                   <span class="inside-feature-badge">Premium model drops</span>
-                  <img src="king.png" alt="Weekly PolishMaster premium model lineup" loading="lazy" />
+                  <img src="king.png" alt="Premium polished 3D printed model showcased inside PolishMaster" loading="lazy" decoding="async" />
                 </div>
                 <div class="inside-feature-body">
                   <div class="inside-feature-kicker">Designed for makers</div>
@@ -4107,10 +4165,10 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">1. What do I get when I join?</span>
+                  <span class="faq-question">1. What is PolishMaster and what do I get when I join?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Full access to the complete PolishMaster System — immediately.</span>You get a structured finishing system built for 3D print makers. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Full access to the PolishMaster 3D print finishing system — immediately.</span>You get a structured finishing system built for 3D print makers. <ul>
                     <li>Full sanding sequence (grit by grit)</li>
                     <li>Surface refinement techniques</li>
                     <li>Polishing steps for gloss or matte</li>
@@ -4121,10 +4179,10 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">2. Do you sell tools or physical products?</span>
+                  <span class="faq-question">2. Do you sell 3D printing tools or teach the finishing method?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">We teach the method — no tools or products are sold here.</span>This is a knowledge system, not a store. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">PolishMaster teaches the method — no tools or physical products are sold here.</span>This is a knowledge system, not a store. <ul>
                     <li>No physical products are sold</li>
                     <li>You learn what types of tools work and why</li>
                     <li>You source the tools yourself, locally</li>
@@ -4134,10 +4192,10 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">3. What materials does this work with?</span>
+                  <span class="faq-question">3. Does PolishMaster work with PLA, PLA+ and PETG?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Standard sanding and polishing supplies — nothing exotic.</span>Primarily designed for common FDM filaments. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Built for common FDM filaments with standard sanding and polishing supplies.</span>Primarily designed for common FDM filaments. <ul>
                     <li>Works best with PLA and PLA+</li>
                     <li>Compatible with PETG and similar plastics</li>
                     <li>Based on surface control, not a specific brand</li>
@@ -4147,10 +4205,10 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">4. What if I can't find the same tools in my country?</span>
+                  <span class="faq-question">4. Can I follow PolishMaster with tools from my local store?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around categories, not brands — substitutions always work.</span>The method focuses on principles, not specific brands. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around tool categories, not brands — substitutions work.</span>The method focuses on principles, not specific brands. <ul>
                     <li>You'll learn what properties matter in each tool</li>
                     <li>Local hardware-store alternatives work fine</li>
                     <li>Contact available after joining for specific questions</li>
@@ -4160,10 +4218,10 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">5. Does this work for small, detailed figures?</span>
+                  <span class="faq-question">5. Does PolishMaster work for miniatures, figures and cosplay props?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints — highly detailed miniatures require more care.</span>The method works, but small parts require more patience. <ul>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints — highly detailed miniatures just require more care.</span>The method works, but small parts require more patience. <ul>
                     <li>Great results on regular-sized models</li>
                     <li>Challenging on ultra-detailed miniatures</li>
                     <li>Flat and curved surfaces both supported</li>
