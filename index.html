@@ -3083,7 +3083,7 @@
     <div class="bg-grid"></div>
     <div class="bg-vignette"></div>
   </div>
-  <main>
+  <main id="top">
     <section class="section">
       <div class="card">
         <div class="hero-content">
@@ -3461,9 +3461,9 @@
               </article>
 
               <article class="inside-feature inside-feature--finish">
-                <div class="inside-feature-media inside-feature-media--contain">
+                <div class="inside-feature-media inside-feature-media--surface">
                   <span class="inside-feature-badge">Finish paths</span>
-                  <img src="cross-after.png" alt="Polished gloss-ready sample" loading="lazy" />
+                  <img src="surface-control-paths.png" alt="Raw-to-finished surface control sample" loading="lazy" />
                 </div>
                 <div class="inside-feature-body">
                   <div class="inside-feature-kicker">End-result control</div>
@@ -3749,6 +3749,7 @@
         var hintThumb = slider.parentElement ? slider.parentElement.querySelector("[data-comparison-thumb]") : null;
         var hintTrack = slider.parentElement ? slider.parentElement.querySelector("[data-comparison-track]") : null;
         var isDragging = false;
+        var activeDragSurface = hintTrack || slider;
         if (!overlay || !divider) return;
 
         function triggerHaptic(duration) {
@@ -3778,6 +3779,7 @@
         function stopDragging() {
           if (!isDragging) return;
           isDragging = false;
+          activeDragSurface = hintTrack || slider;
           slider.classList.remove("is-dragging");
           slider.classList.add("is-returning");
           triggerHaptic(10);
@@ -3789,26 +3791,34 @@
           }, 920);
         }
 
+        function startDragging(e, sourceEl) {
+          if (typeof e.button === "number" && e.button !== 0) return;
+          activeDragSurface = sourceEl || slider;
+          isDragging = true;
+          slider.classList.remove("is-returning");
+          slider.classList.add("is-dragging");
+          if (e.pointerType && e.pointerType !== "mouse") triggerHaptic(14);
+          if (e.pointerType && e.pointerType !== "mouse" && typeof activeDragSurface.setPointerCapture === "function" && typeof e.pointerId === "number") {
+            activeDragSurface.setPointerCapture(e.pointerId);
+          }
+          setPosition(e.clientX, activeDragSurface);
+        }
+
         if (hintTrack) {
           hintTrack.addEventListener("pointerdown", function (e) {
-            if (typeof e.button === "number" && e.button !== 0) return;
-            isDragging = true;
-            slider.classList.remove("is-returning");
-            slider.classList.add("is-dragging");
-            if (e.pointerType && e.pointerType !== "mouse") triggerHaptic(14);
-            if (e.pointerType && e.pointerType !== "mouse" && typeof hintTrack.setPointerCapture === "function" && typeof e.pointerId === "number") {
-              hintTrack.setPointerCapture(e.pointerId);
-            }
-            setPosition(e.clientX, hintTrack);
+            startDragging(e, hintTrack);
           });
           hintTrack.addEventListener("wheel", forwardWheelScroll, { passive: false });
         }
 
+        slider.addEventListener("pointerdown", function (e) {
+          startDragging(e, slider);
+        });
         slider.addEventListener("wheel", forwardWheelScroll, { passive: false });
 
         window.addEventListener("pointermove", function (e) {
           if (!isDragging) return;
-          setPosition(e.clientX, hintTrack || slider);
+          setPosition(e.clientX, activeDragSurface);
         });
 
         window.addEventListener("pointerup", stopDragging);
