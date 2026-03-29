@@ -3152,16 +3152,21 @@
 
     .visual {
       width: calc(100% + 28px);
-      margin: 0 -14px 18px;
+      margin: 0 -14px 22px;
     }
 
     .comparison-slider {
-      aspect-ratio: 4 / 3.05;
+      aspect-ratio: 4 / 3.32;
       border-radius: 22px;
     }
 
+    .comparison-base img,
+    .comparison-overlay img {
+      object-position: center 54%;
+    }
+
     .comparison-hint {
-      margin-top: 10px;
+      margin-top: 12px;
     }
 
     .comparison-hint-track::before {
