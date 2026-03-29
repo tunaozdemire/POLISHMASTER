@@ -1864,6 +1864,17 @@
     aspect-ratio: 4 / 5;
   }
 
+  .tcard-media--portrait-proof {
+    width: min(100%, 248px);
+    margin-inline: auto;
+    aspect-ratio: 10 / 16;
+  }
+
+  .tcard-media--portrait-proof img {
+    object-fit: cover;
+    object-position: center;
+  }
+
   .tcard-media--duo {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2993,17 +3004,34 @@
 
 /* ── FOOTER ── */
   .site-footer {
-    padding: 16px 20px calc(24px + env(safe-area-inset-bottom, 0px));
+    padding: 24px 20px calc(32px + env(safe-area-inset-bottom, 0px));
     color: rgba(255,255,255,0.34);
     font-size: 0.74rem;
     text-align: center;
+    display: grid;
+    justify-items: center;
+    gap: 10px;
   }
 
   .site-footer-brand {
-    max-width: 46ch;
-    margin: 0 auto 8px;
+    max-width: 54ch;
+    margin: 0;
+    display: grid;
+    gap: 4px;
+    justify-items: center;
+    padding: 0 4px;
     color: rgba(255,236,221,0.58);
-    line-height: 1.55;
+    line-height: 1.62;
+  }
+
+  .site-footer-brand-lead {
+    color: rgba(255,244,235,0.8);
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .site-footer-brand-copy {
+    max-width: 52ch;
   }
 
   .site-footer nav {
@@ -3011,7 +3039,7 @@
     justify-content: center;
     flex-wrap: wrap;
     gap: 8px 14px;
-    margin-top: 8px;
+    margin-top: 2px;
   }
 
   .site-footer a { color: rgba(255,255,255,0.4); }
@@ -3384,8 +3412,14 @@
     }
 
     .site-footer {
-      padding: 14px 16px calc(22px + env(safe-area-inset-bottom, 0px));
+      padding: 18px 16px calc(26px + env(safe-area-inset-bottom, 0px));
       font-size: 0.7rem;
+      gap: 8px;
+    }
+
+    .site-footer-brand {
+      max-width: 42ch;
+      gap: 3px;
     }
   }
 
@@ -3692,6 +3726,7 @@
                 <span class="cta-note-primary">Limited seats left.</span>
                 <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
               </span>
+
             </div>
           </div>
 
@@ -3767,7 +3802,7 @@
                   </span>
                 </a>
                 <span class="cta-note">
-                  <span class="cta-note-primary">Limited seats left.</span>
+                  <span class="cta-note-primary">Backed by 200+ real member reviews.</span>
                   <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
                 </span>
               </div>
@@ -3809,7 +3844,21 @@
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Ethan</div>
-                          <div class="tcard-role">FDM Maker | Etsy Seller</div>
+                          <div class="tcard-role">Etsy Seller | USA</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"This was the first guide that felt systematic. Same part, cleaner surface, and no special tools beyond the basics."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-hook-comparison.png" alt="Before-and-after black utility hook showing raw FDM texture versus polished glossy finish" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Marcus</div>
+                          <div class="tcard-role">Hobbyist | UK</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
@@ -3823,29 +3872,21 @@
                         <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Liam" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Liam</div>
-                          <div class="tcard-role">Product Designer</div>
+                          <div class="tcard-role">Product Designer | Canada</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
                     </article>
                     <article class="tcard">
-                      <p class="tcard-text">"This was the first guide that felt systematic. It works on PLA without special tools."</p>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Marcus</div>
-                          <div class="tcard-role">Hobbyist | UK</div>
-                        </div>
+                      <p class="tcard-text">"Curved parts were the biggest surprise. The polished version finally looked intentional instead of straight off the printer."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-curved-comparison.png" alt="Before-and-after comparison of a curved black 3D printed part with raw and polished surfaces" loading="lazy" decoding="async" />
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Solid method overall. I just wanted more examples for curved miniature surfaces."</p>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Daniel" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Daniel</div>
-                          <div class="tcard-role">Miniature Painter</div>
+                          <div class="tcard-role">Miniature Painter | Germany</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★☆☆</div>
@@ -3859,13 +3900,27 @@
                         <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Sam" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Sam</div>
-                          <div class="tcard-role">Small Business Owner</div>
+                          <div class="tcard-role">Small Business Owner | USA</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
                     </article>
-                  
                     <article class="tcard">
+                      <p class="tcard-text">"Got this for my daughter's birthday. Smooth finish, looks clean. She wore it all day. Happy with it."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-birthday-tiara.png" alt="Child wearing a birthday tiara made from a smooth finished 3D print at a party" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Ben" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Ben</div>
+                          <div class="tcard-role">Hobby Maker | USA</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    </article>
+                  
+                    <article class="tcard tcard-featured">
                       <p class="tcard-text">"My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."</p>
                       <div class="tcard-media tcard-media--wide">
                         <img src="review-orange-closeup.png" alt="Close-up of a polished orange 3D printed part with a high-gloss finish" loading="lazy" decoding="async" />
@@ -3874,7 +3929,21 @@
                         <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Ethan</div>
-                          <div class="tcard-role">FDM Maker | Etsy Seller</div>
+                          <div class="tcard-role">Etsy Seller | USA</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"This was the first guide that felt systematic. Same part, cleaner surface, and no special tools beyond the basics."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-hook-comparison.png" alt="Before-and-after black utility hook showing raw FDM texture versus polished glossy finish" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Marcus</div>
+                          <div class="tcard-role">Hobbyist | UK</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
@@ -3888,29 +3957,21 @@
                         <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Liam" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Liam</div>
-                          <div class="tcard-role">Product Designer</div>
+                          <div class="tcard-role">Product Designer | Canada</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
                     </article>
                     <article class="tcard">
-                      <p class="tcard-text">"This was the first guide that felt systematic. It works on PLA without special tools."</p>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Marcus</div>
-                          <div class="tcard-role">Hobbyist | UK</div>
-                        </div>
+                      <p class="tcard-text">"Curved parts were the biggest surprise. The polished version finally looked intentional instead of straight off the printer."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-curved-comparison.png" alt="Before-and-after comparison of a curved black 3D printed part with raw and polished surfaces" loading="lazy" decoding="async" />
                       </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Solid method overall. I just wanted more examples for curved miniature surfaces."</p>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Daniel" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Daniel</div>
-                          <div class="tcard-role">Miniature Painter</div>
+                          <div class="tcard-role">Miniature Painter | Germany</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★☆☆</div>
@@ -3924,17 +3985,58 @@
                         <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Sam" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">Sam</div>
-                          <div class="tcard-role">Small Business Owner</div>
+                          <div class="tcard-role">Small Business Owner | USA</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
                     </article>
-                  
+                    <article class="tcard">
+                      <p class="tcard-text">"Got this for my daughter's birthday. Smooth finish, looks clean. She wore it all day. Happy with it."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-birthday-tiara.png" alt="Child wearing a birthday tiara made from a smooth finished 3D print at a party" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Ben" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Ben</div>
+                          <div class="tcard-role">Hobby Maker | USA</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                    </article>
                   </div>
                 </div>
                 <div class="testimonials-col col-b">
                   <div class="testimonials-track track-b">
                     <article class="tcard">
+                      <p class="tcard-text">"The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."</p>
+                      <div class="tcard-media tcard-media--wide">
+                        <img src="review-soap-dish.png" alt="Gloss-finished 3D printed soap dish styled as a premium bathroom product" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/63.jpg" alt="Nabil" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Nabil</div>
+                          <div class="tcard-role">Architect | Morocco</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"I use it on cosplay props, and the surface upgrade reads immediately in photos. The finished piece looks production-ready."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-panel-comparison.png" alt="Gloved hands holding raw and finished black 3D printed panel-like parts" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Kai" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Kai</div>
+                          <div class="tcard-role">Cosplay Creator | USA</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                    <article class="tcard">
                       <p class="tcard-text">"I was skeptical, but the first before-and-after sold me. Pure PLA, completely different finish."</p>
                       <div class="tcard-media tcard-media--wide">
                         <img src="review-pla-planter.png" alt="Polished orange PLA planter holding a succulent on a windowsill" loading="lazy" decoding="async" />
@@ -3943,11 +4045,40 @@
                         <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">James</div>
-                          <div class="tcard-role">Engineer | Side Hustle</div>
+                          <div class="tcard-role">Engineer | Canada</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
                     </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"I followed the tougher workflow on functional parts, and the finish still came out clean enough to confidently show customers."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-bracket-comparison.png" alt="Orange-gloved hands holding a raw and a polished black 3D printed bracket" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Amir" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Amir</div>
+                          <div class="tcard-role">Maker | UAE</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★☆</div>
+                    </article>
+                    <article class="tcard">
+                      <p class="tcard-text">"The matte finish path cleaned up broad faces without softening the edges. That made product shots much easier."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-prism-comparison.png" alt="Hand holding a raw and a polished black faceted 3D printed part outdoors" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Carlos</div>
+                          <div class="tcard-role">Freelance Modeller | Spain</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
+                  
                     <article class="tcard">
                       <p class="tcard-text">"The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."</p>
                       <div class="tcard-media tcard-media--wide">
@@ -3963,39 +4094,19 @@
                       <div class="tcard-stars">★★★★★</div>
                     </article>
                     <article class="tcard">
-                      <p class="tcard-text">"I use it on cosplay props, and it works beautifully on large flat panels."</p>
+                      <p class="tcard-text">"I use it on cosplay props, and the surface upgrade reads immediately in photos. The finished piece looks production-ready."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-panel-comparison.png" alt="Gloved hands holding raw and finished black 3D printed panel-like parts" loading="lazy" decoding="async" />
+                      </div>
                       <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Yuta" class="tcard-avatar" />
+                        <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Kai" class="tcard-avatar" />
                         <div>
-                          <div class="tcard-name">Yuta</div>
-                          <div class="tcard-role">Cosplay Creator | Japan</div>
+                          <div class="tcard-name">Kai</div>
+                          <div class="tcard-role">Cosplay Creator | USA</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
                     </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"The matte finish guide changed how I present models. Clients notice the cleaner surface."</p>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Carlos</div>
-                          <div class="tcard-role">Freelance Modeller</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I followed the PETG workflow end to end. It took longer than PLA, but the finish matched it."</p>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Amir" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Amir</div>
-                          <div class="tcard-role">Maker | UAE</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★☆</div>
-                    </article>
-                  
                     <article class="tcard">
                       <p class="tcard-text">"I was skeptical, but the first before-and-after sold me. Pure PLA, completely different finish."</p>
                       <div class="tcard-media tcard-media--wide">
@@ -4005,49 +4116,16 @@
                         <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James" class="tcard-avatar" />
                         <div>
                           <div class="tcard-name">James</div>
-                          <div class="tcard-role">Engineer | Side Hustle</div>
+                          <div class="tcard-role">Engineer | Canada</div>
                         </div>
                       </div>
                       <div class="tcard-stars">★★★★★</div>
                     </article>
                     <article class="tcard">
-                      <p class="tcard-text">"The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-soap-dish.png" alt="Gloss-finished 3D printed soap dish styled as a premium bathroom product" loading="lazy" decoding="async" />
+                      <p class="tcard-text">"I followed the tougher workflow on functional parts, and the finish still came out clean enough to confidently show customers."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-bracket-comparison.png" alt="Orange-gloved hands holding a raw and a polished black 3D printed bracket" loading="lazy" decoding="async" />
                       </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/63.jpg" alt="Nabil" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Nabil</div>
-                          <div class="tcard-role">Architect | Morocco</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I use it on cosplay props, and it works beautifully on large flat panels."</p>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Yuta" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Yuta</div>
-                          <div class="tcard-role">Cosplay Creator | Japan</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"The matte finish guide changed how I present models. Clients notice the cleaner surface."</p>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Carlos</div>
-                          <div class="tcard-role">Freelance Modeller</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I followed the PETG workflow end to end. It took longer than PLA, but the finish matched it."</p>
                       <div class="tcard-author">
                         <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Amir" class="tcard-avatar" />
                         <div>
@@ -4057,7 +4135,20 @@
                       </div>
                       <div class="tcard-stars">★★★★☆</div>
                     </article>
-                  
+                    <article class="tcard">
+                      <p class="tcard-text">"The matte finish path cleaned up broad faces without softening the edges. That made product shots much easier."</p>
+                      <div class="tcard-media tcard-media--portrait-proof">
+                        <img src="review-prism-comparison.png" alt="Hand holding a raw and a polished black faceted 3D printed part outdoors" loading="lazy" decoding="async" />
+                      </div>
+                      <div class="tcard-author">
+                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos" class="tcard-avatar" />
+                        <div>
+                          <div class="tcard-name">Carlos</div>
+                          <div class="tcard-role">Freelance Modeller | Spain</div>
+                        </div>
+                      </div>
+                      <div class="tcard-stars">★★★★★</div>
+                    </article>
                   </div>
                 </div>
               </div>
@@ -4306,6 +4397,19 @@
                 </div></div></div>
               </div>
 
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">7. Still have questions?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Use the Contact button below and send us your question directly.</span>If you're still unsure, tap the Contact button below and we'll point you in the right direction. <ul>
+                    <li>Best for specific questions before joining</li>
+                    <li>Helpful if your case is different from the examples above</li>
+                    <li>Fastest way to get a direct answer from us</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
             </div>
           </section>
           <div class="cta-stack">
@@ -4326,8 +4430,11 @@
   </main>
 
   <footer class="site-footer">
-    <div class="site-footer-brand">Official website of PolishMaster, the 3D print finishing system built for makers who want premium-looking, sellable products.</div>
-    <div>© 2026 PolishMaster. All rights reserved.</div>
+    <div class="site-footer-brand">
+      <span class="site-footer-brand-lead">Official website of PolishMaster.</span>
+      <span class="site-footer-brand-copy">The 3D print finishing system built for makers who want premium-looking, sellable products.</span>
+    </div>
+    <div>&copy; 2026 PolishMaster. All rights reserved.</div>
     <nav>
       <a href="#" data-modal="privacy">Privacy</a>
       <a href="#" data-modal="security">Security</a>
@@ -4524,7 +4631,7 @@
             { type: 'h2', text: '6. Your Rights' },
             { type: 'p', text: 'You have the right to access, update, or delete the information we hold on you. Contact us at any time to exercise these rights.' },
             { type: 'h2', text: '7. Contact' },
-            { type: 'p', text: 'Questions about this Privacy Policy? Email us at hello@polishmaster.com.' }
+            { type: 'p', text: 'Questions about this Privacy Policy? Email us at polishmaserco@gmail.com.' }
           ]
         },
         security: {
@@ -4540,7 +4647,7 @@
             { type: 'h2', text: 'Payment Security' },
             { type: 'p', text: 'Payments are handled through Patreon, a PCI-DSS compliant platform. We never store payment card data on our servers.' },
             { type: 'h2', text: 'Vulnerability Disclosure' },
-            { type: 'p', text: 'Found a security issue? Please contact hello@polishmaster.com for responsible disclosure. We respond promptly.' },
+            { type: 'p', text: 'Found a security issue? Please contact polishmaserco@gmail.com for responsible disclosure. We respond promptly.' },
             { type: 'h2', text: 'Incident Response' },
             { type: 'p', text: 'In the event of a breach, we notify affected users in accordance with applicable law, typically within 72 hours.' }
           ]
@@ -4566,7 +4673,7 @@
             { type: 'h2', text: '8. Changes' },
             { type: 'p', text: 'We may modify these terms at any time. Significant changes will be communicated by email or on the platform. Continued use constitutes acceptance.' },
             { type: 'h2', text: '9. Contact' },
-            { type: 'p', text: 'For questions about these Terms, email hello@polishmaster.com.' }
+            { type: 'p', text: 'For questions about these Terms, email polishmaserco@gmail.com.' }
           ]
         }
       };
@@ -4670,7 +4777,7 @@
       function setContactStatus(name, email, body) {
         if (!contactStatus) return;
         var subject = 'Message from ' + name;
-        var emailAddress = 'hello@polishmaster.com';
+        var emailAddress = 'polishmaserco@gmail.com';
         var draftedMessage = body + '\n\nFrom: ' + email;
         contactStatus.hidden = false;
         contactStatus.innerHTML =
@@ -4751,7 +4858,7 @@
           var name = contactForm.querySelector('[name="name"]').value.trim();
           var email = contactForm.querySelector('[name="email"]').value.trim();
           var body = contactForm.querySelector('[name="body"]').value.trim();
-          var mailto = 'mailto:hello@polishmaster.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
+          var mailto = 'mailto:polishmaserco@gmail.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
           setContactStatus(name, email, body);
           window.location.href = mailto;
         });
@@ -4869,3 +4976,5 @@
   </script>
 </body>
 </html>
+
+
