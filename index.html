@@ -5,25 +5,27 @@
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stop Selling Layer Lines | PolishMaster 3D Print Finishing System</title>
+  <title>PolishMaster Official Site | 3D Print Finishing System</title>
   <meta
     name="description"
-    content="Learn the PolishMaster 3D print finishing system for PLA, PLA+ and PETG. Remove layer lines, improve sanding and polishing, and create product-ready surfaces."
+    content="Official website of PolishMaster, the 3D print finishing system that helps makers turn raw prints into premium-looking, sellable products."
   />
   <link rel="canonical" href="https://www.polishmaster.co/" />
   <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
   <meta name="author" content="PolishMaster" />
+  <meta name="application-name" content="PolishMaster" />
+  <meta name="apple-mobile-web-app-title" content="PolishMaster" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PolishMaster" />
   <meta property="og:locale" content="en_US" />
   <meta property="og:url" content="https://www.polishmaster.co/" />
-  <meta property="og:title" content="Stop Selling Layer Lines | PolishMaster 3D Print Finishing System" />
-  <meta property="og:description" content="Learn the PolishMaster 3D print finishing system for PLA, PLA+ and PETG. Remove layer lines, improve sanding and polishing, and create product-ready surfaces." />
+  <meta property="og:title" content="PolishMaster Official Site | 3D Print Finishing System" />
+  <meta property="og:description" content="Official website of PolishMaster, the 3D print finishing system that helps makers turn raw prints into premium-looking, sellable products." />
   <meta property="og:image" content="https://www.polishmaster.co/surface-comparison.png" />
   <meta property="og:image:alt" content="Raw versus polished 3D printed surface finished with the PolishMaster system" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Stop Selling Layer Lines | PolishMaster 3D Print Finishing System" />
-  <meta name="twitter:description" content="Learn the PolishMaster 3D print finishing system for PLA, PLA+ and PETG. Remove layer lines, improve sanding and polishing, and create product-ready surfaces." />
+  <meta name="twitter:title" content="PolishMaster Official Site | 3D Print Finishing System" />
+  <meta name="twitter:description" content="Official website of PolishMaster, the 3D print finishing system that helps makers turn raw prints into premium-looking, sellable products." />
   <meta name="twitter:image" content="https://www.polishmaster.co/surface-comparison.png" />
   <link rel="icon" type="image/png" href="logo.png.png" />
   <link rel="preload" as="image" href="cross-before.png" />
@@ -31,62 +33,95 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "Product",
-    "name": "PolishMaster",
-    "url": "https://www.polishmaster.co/",
-    "description": "PolishMaster is a 3D print finishing system for PLA, PLA+ and PETG that helps makers remove layer lines and create product-ready gloss or matte surfaces.",
-    "category": "3D print finishing system",
-    "brand": {
-      "@type": "Brand",
-      "name": "PolishMaster"
-    },
-    "audience": {
-      "@type": "Audience",
-      "audienceType": "3D print makers"
-    },
-    "image": [
-      "https://www.polishmaster.co/surface-comparison.png",
-      "https://www.polishmaster.co/surface-control-paths.png",
-      "https://www.polishmaster.co/review-orange-closeup.png"
-    ],
-    "offers": {
-      "@type": "Offer",
-      "url": "https://www.polishmaster.co/",
-      "price": "29",
-      "priceCurrency": "USD",
-      "availability": "https://schema.org/InStock"
-    },
-    "aggregateRating": {
-      "@type": "AggregateRating",
-      "ratingValue": "4.7",
-      "reviewCount": "178"
-    },
-    "review": [
+    "@graph": [
       {
-        "@type": "Review",
-        "author": {
-          "@type": "Person",
-          "name": "Ethan"
+        "@type": "WebSite",
+        "@id": "https://www.polishmaster.co/#website",
+        "url": "https://www.polishmaster.co/",
+        "name": "PolishMaster",
+        "alternateName": "PolishMaster Official Site",
+        "description": "Official website of PolishMaster, the 3D print finishing system that helps makers turn raw prints into premium-looking, sellable products.",
+        "publisher": {
+          "@id": "https://www.polishmaster.co/#organization"
         },
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
-        },
-        "reviewBody": "My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."
+        "inLanguage": "en"
       },
       {
-        "@type": "Review",
-        "author": {
-          "@type": "Person",
-          "name": "Nabil"
+        "@type": "Organization",
+        "@id": "https://www.polishmaster.co/#organization",
+        "name": "PolishMaster",
+        "url": "https://www.polishmaster.co/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.polishmaster.co/logo.png.png"
         },
-        "reviewRating": {
-          "@type": "Rating",
-          "ratingValue": "5",
-          "bestRating": "5"
+        "sameAs": [
+          "https://www.patreon.com/cw/PolishMaster",
+          "https://www.patreon.com/15111337/join"
+        ]
+      },
+      {
+        "@type": "Product",
+        "@id": "https://www.polishmaster.co/#product",
+        "name": "PolishMaster",
+        "url": "https://www.polishmaster.co/",
+        "mainEntityOfPage": {
+          "@id": "https://www.polishmaster.co/#website"
         },
-        "reviewBody": "The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."
+        "description": "PolishMaster is a 3D print finishing system created for makers who want product-ready, premium-looking, sellable surfaces.",
+        "category": "3D print finishing system",
+        "brand": {
+          "@id": "https://www.polishmaster.co/#organization"
+        },
+        "audience": {
+          "@type": "Audience",
+          "audienceType": "3D print makers"
+        },
+        "image": [
+          "https://www.polishmaster.co/surface-comparison.png",
+          "https://www.polishmaster.co/surface-control-paths.png",
+          "https://www.polishmaster.co/review-orange-closeup.png"
+        ],
+        "offers": {
+          "@type": "Offer",
+          "url": "https://www.polishmaster.co/",
+          "price": "29",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.7",
+          "reviewCount": "178"
+        },
+        "review": [
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Ethan"
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
+            "reviewBody": "My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."
+          },
+          {
+            "@type": "Review",
+            "author": {
+              "@type": "Person",
+              "name": "Nabil"
+            },
+            "reviewRating": {
+              "@type": "Rating",
+              "ratingValue": "5",
+              "bestRating": "5"
+            },
+            "reviewBody": "The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."
+          }
+        ]
       }
     ]
   }
@@ -2964,6 +2999,13 @@
     text-align: center;
   }
 
+  .site-footer-brand {
+    max-width: 46ch;
+    margin: 0 auto 8px;
+    color: rgba(255,236,221,0.58);
+    line-height: 1.55;
+  }
+
   .site-footer nav {
     display: flex;
     justify-content: center;
@@ -4201,7 +4243,20 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">2. Do you sell 3D printing tools or teach the finishing method?</span>
+                  <span class="faq-question">2. Is this the official PolishMaster website?</span>
+                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
+                </button>
+                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes. polishmaster.co is the official website of PolishMaster.</span>This site is the official home of the PolishMaster 3D print finishing system. <ul>
+                    <li>Official brand site for PolishMaster</li>
+                    <li>Official access point to the member system and Patreon</li>
+                    <li>Focused specifically on 3D print finishing and sellable surfaces</li>
+                  </ul>
+                </div></div></div>
+              </div>
+
+              <div class="faq-item">
+                <button class="faq-toggle" type="button">
+                  <span class="faq-question">3. Do you sell 3D printing tools or teach the finishing method?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">PolishMaster teaches the method — no tools or physical products are sold here.</span>This is a knowledge system, not a store. <ul>
@@ -4214,7 +4269,7 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">3. Does PolishMaster work with PLA, PLA+ and PETG?</span>
+                  <span class="faq-question">4. Does PolishMaster work with PLA, PLA+ and PETG?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Built for common FDM filaments with standard sanding and polishing supplies.</span>Primarily designed for common FDM filaments. <ul>
@@ -4227,7 +4282,7 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">4. Can I follow PolishMaster with tools from my local store?</span>
+                  <span class="faq-question">5. Can I follow PolishMaster with tools from my local store?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around tool categories, not brands — substitutions work.</span>The method focuses on principles, not specific brands. <ul>
@@ -4240,7 +4295,7 @@
 
               <div class="faq-item">
                 <button class="faq-toggle" type="button">
-                  <span class="faq-question">5. Does PolishMaster work for miniatures, figures and cosplay props?</span>
+                  <span class="faq-question">6. Does PolishMaster work for miniatures, figures and cosplay props?</span>
                   <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
                 </button>
                 <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints — highly detailed miniatures just require more care.</span>The method works, but small parts require more patience. <ul>
@@ -4271,6 +4326,7 @@
   </main>
 
   <footer class="site-footer">
+    <div class="site-footer-brand">Official website of PolishMaster, the 3D print finishing system built for makers who want premium-looking, sellable products.</div>
     <div>© 2026 PolishMaster. All rights reserved.</div>
     <nav>
       <a href="#" data-modal="privacy">Privacy</a>
