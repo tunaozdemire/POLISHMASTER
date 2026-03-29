@@ -543,8 +543,8 @@
     isolation: isolate;
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.1),
-      0 12px 28px rgba(0,0,0,0.36),
-      0 0 24px rgba(255,106,0,0.14);
+      0 10px 22px rgba(0,0,0,0.28),
+      0 0 16px rgba(255,106,0,0.08);
     transition: transform .2s ease, box-shadow .2s ease;
     -webkit-tap-highlight-color: transparent;
   }
@@ -585,7 +585,7 @@
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    font-size: 0.91rem;
+    font-size: 0.88rem;
   }
 
   .cta-stack {
@@ -620,9 +620,9 @@
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 14px;
+    width: 38px;
+    height: 38px;
+    border-radius: 12px;
     background:
       radial-gradient(circle at 50% 30%, rgba(255,194,148,0.16), transparent 55%),
       linear-gradient(180deg, rgba(255,132,48,0.28), rgba(255,106,0,0.12)),
@@ -630,7 +630,7 @@
     border: 1px solid rgba(255,144,58,0.24);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.08),
-      0 8px 18px rgba(0,0,0,0.2);
+      0 6px 14px rgba(0,0,0,0.16);
     flex: 0 0 auto;
     transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
   }
@@ -1232,36 +1232,38 @@
 
   .cta-stack .cta,
   .system-access-cta .cta {
-    padding: 24px 24px 24px 28px;
-    border-radius: 28px;
-    border-color: rgba(255,128,32,0.34);
+    padding: 18px 18px 18px 20px;
+    border-radius: 22px;
+    border-color: rgba(255,128,32,0.24);
     background:
-      radial-gradient(circle at 12% 50%, rgba(255,106,0,0.18), transparent 36%),
-      linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.03)),
-      rgba(42,19,8,0.88);
+      radial-gradient(circle at 12% 50%, rgba(255,106,0,0.12), transparent 34%),
+      linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.025)),
+      rgba(34,18,10,0.9);
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.1),
-      0 18px 42px rgba(255,106,0,0.18),
-      0 0 42px rgba(255,106,0,0.16),
-      0 0 0 1px rgba(255,128,32,0.08);
-    animation: currentPillBreath 3.1s ease-in-out infinite;
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 12px 28px rgba(255,106,0,0.12),
+      0 0 24px rgba(255,106,0,0.08),
+      0 0 0 1px rgba(255,128,32,0.05);
+    animation: none;
   }
 
   .cta-stack .cta-text,
   .system-access-cta .cta-text {
-    font-size: 1.32rem;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-size: 1.04rem;
+    font-weight: 780;
+    letter-spacing: -0.015em;
   }
 
+  .cta-stack .cta-icon,
   .system-access-cta .cta-icon {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
   }
 
+  .cta-stack .cta-note,
   .system-access-cta .cta-note {
-    font-size: 0.72rem;
-    letter-spacing: 0.08em;
+    font-size: 0.68rem;
+    letter-spacing: 0.04em;
   }
 
   @keyframes flowSweep {
@@ -2409,7 +2411,7 @@
     text-align: center;
     white-space: nowrap;
     max-width: none;
-    font-size: 0.88rem;
+    font-size: 0.84rem;
     line-height: 1;
   }
 
@@ -2584,9 +2586,16 @@
     .cycle-pill-subtext { font-size: 0.42rem; letter-spacing: 0.12em; }
     .cycle-sold-out,
     .cycle-status-current { font-size: 0.46rem; letter-spacing: 0.12em; }
-    .testimonials-outer { height: 340px; }
+    .testimonials-outer { height: 420px; }
     .tcard { padding: 14px; border-radius: 16px; }
-    .tcard-text { font-size: 0.78rem; line-height: 1.55; margin-bottom: 12px; }
+    .tcard-text {
+      font-size: 0.78rem;
+      line-height: 1.55;
+      margin-bottom: 12px;
+      display: block;
+      -webkit-line-clamp: unset;
+      overflow: visible;
+    }
     .tcard-author { gap: 8px; margin-bottom: 8px; }
     .tcard-avatar { width: 32px; height: 32px; }
     .tcard-name { font-size: 0.78rem; }
@@ -3204,17 +3213,17 @@
     }
 
     .system-access-cta .cta {
-      padding: 22px 20px 22px 22px;
-      border-radius: 24px;
+      padding: 16px 16px 16px 18px;
+      border-radius: 20px;
     }
 
     .system-access-cta .cta-text {
-      font-size: 1.18rem;
+      font-size: 0.96rem;
     }
 
     .system-access-cta .cta-icon {
-      width: 50px;
-      height: 50px;
+      width: 40px;
+      height: 40px;
     }
 
     .reviews-section {
@@ -3278,7 +3287,7 @@
     }
 
     .testimonials-outer {
-      height: 400px;
+      height: 460px;
       padding: 8px;
     }
 
@@ -3295,6 +3304,9 @@
     .tcard-text {
       font-size: 0.76rem;
       line-height: 1.5;
+      display: block;
+      -webkit-line-clamp: unset;
+      overflow: visible;
     }
 
     .tcard-stars {
@@ -3356,20 +3368,20 @@
   }
 
   /* ── SECONDARY CTA ── */
-  .cta-secondary {
+  .cta-secondary:not(.cta-secondary-passive) {
     display: flex;
-    margin-top: 16px;
+    margin-top: 12px;
     width: 100%;
-    background: linear-gradient(180deg, rgba(255,106,0,0.22), rgba(255,106,0,0.08)) !important;
-    border-color: rgba(255,106,0,0.4) !important;
+    background: linear-gradient(180deg, rgba(255,106,0,0.16), rgba(255,106,0,0.06)) !important;
+    border-color: rgba(255,106,0,0.28) !important;
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.08),
-      0 10px 26px rgba(255,106,0,0.18),
-      0 0 30px rgba(255,106,0,0.12) !important;
+      0 8px 18px rgba(255,106,0,0.12),
+      0 0 20px rgba(255,106,0,0.08) !important;
   }
-  .cta-secondary::after {
+  .cta-secondary:not(.cta-secondary-passive)::after {
     background:
-      linear-gradient(135deg, rgba(255,106,0,0.22), rgba(255,106,0,0.06) 50%, rgba(255,106,0,0.18) 100%),
+      linear-gradient(135deg, rgba(255,106,0,0.16), rgba(255,106,0,0.05) 50%, rgba(255,106,0,0.12) 100%),
       rgba(10,10,11,0.9) !important;
   }
 
@@ -3613,7 +3625,7 @@
         <div class="hero-content">
           <span class="eyebrow">PolishMaster</span>
           <h1 class="hero-headline"><span class="hero-line">Stop selling layer lines.</span><span class="hero-line">Start selling products.</span></h1>
-          <p class="hero-proof">3D print finishing system for PLA, PLA+ and PETG makers.</p>
+          <p class="hero-proof">Made for makers who want prints they can confidently sell.</p>
 
           <div class="actions">
             <div class="cta-stack">
