@@ -2622,15 +2622,28 @@
       margin-bottom: 18px;
       padding: 16px 14px 14px;
     }
-    .system-flow-track { gap: 8px; animation-duration: 18s; }
-    .system-step { min-width: 138px; padding: 13px 14px; }
-    .system-step-label { font-size: 0.62rem; letter-spacing: 0.04em; }
+    .system-flow {
+      mask-image: none;
+      -webkit-mask-image: none;
+    }
+    .system-flow-track { gap: 6px; animation-duration: 22s; }
+    .system-step { min-width: 124px; padding: 12px 12px; }
+    .system-step-label { font-size: 0.58rem; letter-spacing: 0.03em; }
     .system-flow-arrow svg { width: 13px; height: 13px; }
     .cycle-panel { padding: 16px 14px 13px; }
-    .cycle-pill-row { gap: 8px; }
-    .cycle-pill { min-height: 44px; padding: 11px 8px; }
-    .cycle-pill-text { font-size: 0.52rem; letter-spacing: 0.08em; }
-    .cycle-pill-subtext { font-size: 0.42rem; letter-spacing: 0.12em; }
+    .cycle-pill-row {
+      grid-template-columns: repeat(3, minmax(104px, 1fr));
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      margin: 0 -2px 14px;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .cycle-pill-row::-webkit-scrollbar { display: none; }
+    .cycle-pill { min-height: 46px; padding: 11px 10px; }
+    .cycle-pill-text { font-size: 0.56rem; letter-spacing: 0.08em; }
+    .cycle-pill-subtext { font-size: 0.44rem; letter-spacing: 0.1em; }
     .cycle-sold-out,
     .cycle-status-current { font-size: 0.46rem; letter-spacing: 0.12em; }
     .testimonials-outer { height: 440px; }
