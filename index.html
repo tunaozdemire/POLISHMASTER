@@ -1952,6 +1952,262 @@
     margin-bottom: 4px;
   }
 
+  .reviews-bridge {
+    position: relative;
+    width: 100%;
+    margin: 0 0 18px;
+    padding: clamp(22px, 4vw, 32px);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 22% 18%, rgba(255,132,48,0.14), transparent 26%),
+      radial-gradient(circle at 78% 82%, rgba(255,106,0,0.1), transparent 28%),
+      linear-gradient(180deg, rgba(255,255,255,0.035), rgba(255,255,255,0.01)),
+      rgba(8,7,8,0.98);
+    overflow: hidden;
+    isolation: isolate;
+  }
+
+  .reviews-bridge::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(130deg, rgba(255,255,255,0.028), transparent 34%),
+      linear-gradient(180deg, rgba(255,255,255,0.012) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+    background-size: auto, 34px 34px, 34px 34px;
+    opacity: 0.22;
+    mask-image: linear-gradient(180deg, rgba(0,0,0,0.44), rgba(0,0,0,0.04));
+    pointer-events: none;
+  }
+
+  .reviews-bridge-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+    gap: clamp(18px, 4vw, 34px);
+    align-items: center;
+  }
+
+  .reviews-bridge-copy {
+    display: grid;
+    gap: 14px;
+    min-width: 0;
+  }
+
+  .reviews-bridge-label {
+    color: rgba(255,198,163,0.76);
+    font-size: 0.72rem;
+    line-height: 1;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+  }
+
+  .reviews-bridge-title {
+    max-width: 11ch;
+    color: #fff4ea;
+    font-size: clamp(1.95rem, 4.5vw, 3.35rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+    text-wrap: balance;
+  }
+
+  .reviews-bridge-lead {
+    max-width: 34ch;
+    color: #fff4ea;
+    font-size: 1.02rem;
+    line-height: 1.38;
+    font-weight: 700;
+  }
+
+  .reviews-bridge-body {
+    max-width: 43ch;
+    color: rgba(255,240,228,0.58);
+    font-size: 0.9rem;
+    line-height: 1.68;
+  }
+
+  .reviews-bridge-body strong {
+    color: rgba(255,244,234,0.94);
+    font-weight: 700;
+  }
+
+  .reviews-bridge-punch {
+    max-width: 30ch;
+    color: rgba(255,244,234,0.94);
+    font-size: 0.98rem;
+    line-height: 1.42;
+    font-weight: 700;
+  }
+
+  .reviews-bridge-actions {
+    max-width: 360px;
+    margin: 6px 0 0;
+  }
+
+  .reviews-bridge-actions .cta-note-primary {
+    color: rgba(255,234,217,0.86);
+  }
+
+  .reviews-bridge-stage {
+    position: relative;
+    min-height: 430px;
+    border-radius: 28px;
+    background:
+      radial-gradient(circle at 50% 18%, rgba(255,255,255,0.08), transparent 28%),
+      radial-gradient(circle at 50% 86%, rgba(255,106,0,0.1), transparent 24%),
+      linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.012)),
+      rgba(7,6,7,0.92);
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.05);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      0 22px 44px rgba(0,0,0,0.24);
+  }
+
+  .reviews-bridge-stage::before {
+    content: "";
+    position: absolute;
+    inset: auto 9% 8% 9%;
+    height: 24%;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,106,0,0.22), transparent 68%);
+    filter: blur(14px);
+    opacity: 0.75;
+  }
+
+  .reviews-bridge-stage::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(255,255,255,0.03), transparent 36%),
+      linear-gradient(180deg, transparent 62%, rgba(0,0,0,0.28) 100%);
+    pointer-events: none;
+  }
+
+  .reviews-bridge-badge {
+    position: absolute;
+    top: 18px;
+    left: 18px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 0 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,184,131,0.16);
+    background: rgba(16,13,13,0.78);
+    color: rgba(255,232,214,0.84);
+    font-size: 0.64rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    backdrop-filter: blur(10px);
+  }
+
+  .reviews-bridge-device {
+    position: absolute;
+    top: 52px;
+    width: min(232px, 40%);
+    aspect-ratio: 0.54;
+    padding: 10px 10px 44px;
+    border-radius: 34px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: linear-gradient(180deg, rgba(41,38,40,0.96), rgba(10,9,10,0.98));
+    box-shadow:
+      0 24px 44px rgba(0,0,0,0.34),
+      inset 0 1px 0 rgba(255,255,255,0.08);
+    overflow: hidden;
+  }
+
+  .reviews-bridge-device::before {
+    content: "";
+    position: absolute;
+    top: 11px;
+    left: 50%;
+    width: 34%;
+    height: 16px;
+    border-radius: 999px;
+    background: rgba(4,4,4,0.88);
+    transform: translateX(-50%);
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    z-index: 2;
+  }
+
+  .reviews-bridge-device--left {
+    left: 9%;
+    transform: rotate(-14deg);
+  }
+
+  .reviews-bridge-device--right {
+    right: 8%;
+    top: 28px;
+    transform: rotate(11deg);
+  }
+
+  .reviews-bridge-screen {
+    position: relative;
+    height: 100%;
+    border-radius: 26px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.05),
+      inset 0 0 0 1px rgba(255,255,255,0.03);
+  }
+
+  .reviews-bridge-screen img {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+    object-position: center;
+    filter: saturate(0.92) contrast(1.04);
+  }
+
+  .reviews-bridge-device-label {
+    position: absolute;
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 30px;
+    padding: 6px 12px;
+    border-radius: 999px;
+    border: 1px solid rgba(255,255,255,0.12);
+    background: rgba(15,13,14,0.82);
+    color: rgba(255,244,234,0.88);
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-align: center;
+    backdrop-filter: blur(12px);
+  }
+
+  .reviews-bridge-stage-copy {
+    position: absolute;
+    right: 18px;
+    bottom: 16px;
+    z-index: 2;
+    max-width: 24ch;
+    color: rgba(255,231,214,0.58);
+    font-size: 0.72rem;
+    line-height: 1.5;
+    text-align: right;
+  }
+
+  .reviews-bridge-stage-copy strong {
+    color: rgba(255,244,234,0.84);
+    font-weight: 700;
+  }
+
   .inside-section {
     width: 100%;
     margin: 20px 0;
@@ -2179,15 +2435,53 @@
 
   .choice-section {
     width: 100%;
-    margin: 20px 0 14px;
+    margin: 24px 0 16px;
+    position: relative;
+    padding: clamp(20px, 4vw, 28px);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,132,48,0.1), transparent 34%),
+      linear-gradient(180deg, rgba(255,255,255,0.032), rgba(255,255,255,0.01)),
+      rgba(15,11,10,0.9);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 20px 40px rgba(0,0,0,0.18);
+    overflow: hidden;
+  }
+
+  .choice-section::before {
+    content: "";
+    position: absolute;
+    inset: 1px;
+    border-radius: 29px;
+    border: 1px solid rgba(255,255,255,0.025);
+    pointer-events: none;
+  }
+
+  .choice-section::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: -16%;
+    width: 58%;
+    height: 42%;
+    transform: translateX(-50%);
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255,106,0,0.14), transparent 68%);
+    filter: blur(22px);
+    opacity: 0.75;
+    pointer-events: none;
   }
 
   .choice-header {
     display: grid;
     justify-items: center;
-    gap: 7px;
-    margin-bottom: 16px;
+    gap: 8px;
+    margin-bottom: 20px;
     text-align: center;
+    position: relative;
+    z-index: 1;
   }
 
   .choice-label {
@@ -2200,16 +2494,25 @@
 
   .choice-title {
     color: #fff4ea;
-    font-size: clamp(1.6rem, 7vw, 2.2rem);
-    line-height: 0.98;
+    font-size: clamp(1.68rem, 7vw, 2.3rem);
+    line-height: 0.96;
     letter-spacing: -0.06em;
-    max-width: 14ch;
+    max-width: 12ch;
+  }
+
+  .choice-copy {
+    max-width: 48ch;
+    color: rgba(255,239,228,0.58);
+    font-size: 0.92rem;
+    line-height: 1.6;
   }
 
   .choice-grid {
     display: grid;
-    gap: 10px;
+    gap: 14px;
     align-items: stretch;
+    position: relative;
+    z-index: 1;
   }
 
   .choice-card {
@@ -2217,13 +2520,16 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    padding: 16px 16px 14px;
-    border-radius: 22px;
-    border: 1px solid rgba(255,255,255,0.06);
+    padding: 18px 18px 16px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.07);
     background:
-      linear-gradient(180deg, rgba(255,255,255,0.025), rgba(255,255,255,0.008)),
-      rgba(10,10,12,0.92);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.025);
+      radial-gradient(circle at 0% 0%, rgba(255,255,255,0.055), transparent 30%),
+      linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
+      rgba(12,10,11,0.92);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.03),
+      0 10px 26px rgba(0,0,0,0.12);
     overflow: hidden;
   }
 
@@ -2231,20 +2537,28 @@
     content: "";
     position: absolute;
     inset: 0;
-    background: none;
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent 26%);
     pointer-events: none;
+  }
+
+  .choice-card:not(.is-action) {
+    background:
+      radial-gradient(circle at 100% 0%, rgba(255,255,255,0.025), transparent 36%),
+      linear-gradient(180deg, rgba(255,255,255,0.028), rgba(255,255,255,0.008)),
+      rgba(13,12,14,0.92);
   }
 
   .choice-card.is-action {
     border-color: rgba(255,132,48,0.24);
     background:
-      linear-gradient(180deg, rgba(255,190,138,0.08), rgba(255,106,0,0.02)),
+      radial-gradient(circle at 100% 0%, rgba(255,182,121,0.12), transparent 38%),
+      linear-gradient(180deg, rgba(255,190,138,0.1), rgba(255,106,0,0.028)),
       linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-      rgba(33,22,17,0.96);
+      rgba(31,22,17,0.96);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.06),
       0 18px 34px rgba(0,0,0,0.2),
-      0 0 36px rgba(255,106,0,0.1);
+      0 0 36px rgba(255,106,0,0.08);
   }
 
   .choice-card.is-action::before {
@@ -2266,7 +2580,7 @@
     font-weight: 700;
     letter-spacing: 0.16em;
     text-transform: uppercase;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .choice-card.is-action .choice-kicker {
@@ -2275,25 +2589,25 @@
 
   .choice-card-title {
     color: rgba(255,245,236,0.78);
-    font-size: 1.48rem;
+    font-size: 1.54rem;
     line-height: 0.98;
     letter-spacing: -0.05em;
-    margin-bottom: 8px;
+    margin-bottom: 10px;
   }
 
   .choice-card-copy {
     color: rgba(255,255,255,0.5);
-    font-size: 0.84rem;
-    line-height: 1.5;
-    margin-bottom: 14px;
-    max-width: 26ch;
+    font-size: 0.86rem;
+    line-height: 1.55;
+    margin-bottom: 16px;
+    max-width: 28ch;
   }
 
   .choice-list {
     list-style: none;
     display: grid;
-    gap: 10px;
-    margin: 0 0 14px;
+    gap: 11px;
+    margin: 0 0 16px;
   }
 
   .choice-list li {
@@ -2320,8 +2634,8 @@
     display: grid;
     gap: 10px;
     margin-top: auto;
-    padding-top: 14px;
-    border-top: 1px solid rgba(255,255,255,0.08);
+    padding-top: 16px;
+    border-top: 1px solid rgba(255,255,255,0.075);
     width: 100%;
     justify-items: stretch;
     align-items: start;
@@ -2333,8 +2647,8 @@
   }
 
   .choice-footer-passive {
-    border-top: 1px solid transparent;
-    padding-top: 14px;
+    border-top: 1px solid rgba(255,255,255,0.04);
+    padding-top: 16px;
   }
 
   .choice-card.is-action .choice-card-title,
@@ -2478,6 +2792,10 @@
       0 6px 14px rgba(0,0,0,0.12) !important;
   }
 
+  .choice-footer-passive .cta-secondary-passive .cta-text {
+    color: rgba(255,245,238,0.78);
+  }
+
   .choice-footer-passive .cta-secondary-passive::before {
     opacity: 0;
     animation: none;
@@ -2520,6 +2838,7 @@
     .inside-title { max-width: none; }
     .choice-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .choice-title { max-width: none; }
+    .choice-copy { max-width: 42ch; }
   }
 
   @media (min-width: 900px) {
@@ -2662,20 +2981,25 @@
     .tcard-role { font-size: 0.68rem; }
     .tcard-stars { font-size: 0.72rem; }
     .choice-card {
-      padding: 14px 12px 12px;
-      border-radius: 18px;
+      padding: 15px 13px 13px;
+      border-radius: 20px;
     }
     .choice-list {
       gap: 10px;
       margin-bottom: 12px;
     }
     .choice-card-title {
-      font-size: 1.08rem;
+      font-size: 1.12rem;
+    }
+    .choice-copy {
+      font-size: 0.78rem;
+      line-height: 1.5;
+      max-width: 30ch;
     }
     .choice-card-copy,
     .choice-list li {
-      font-size: 0.72rem;
-      line-height: 1.32;
+      font-size: 0.74rem;
+      line-height: 1.36;
     }
     .choice-kicker {
       font-size: 0.58rem;
@@ -2730,7 +3054,7 @@
       min-height: 52px;
     }
     .choice-footer {
-      gap: 8px;
+      gap: 9px;
     }
     .choice-footer-passive,
     .choice-footer {
@@ -2846,28 +3170,164 @@
   }
 
   /* ── FAQ BRIDGE ── */
-  .faq-bridge {
-    margin: 14px 0 10px;
+  .faq-shell {
+    width: 100%;
+    display: grid;
+    gap: 16px;
+    margin-bottom: 4px;
+  }
+
+  .faq-promo {
+    position: relative;
+    padding: clamp(22px, 4vw, 30px);
+    border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.06);
+    background:
+      radial-gradient(circle at 50% 0%, rgba(255,132,48,0.12), transparent 34%),
+      linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)),
+      rgba(14,11,11,0.92);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.04),
+      0 18px 34px rgba(0,0,0,0.16);
+    overflow: hidden;
     text-align: center;
   }
 
-  .faq-bridge::before {
+  .faq-promo::before {
     content: "";
-    display: block;
-    width: 100%;
-    height: 1px;
-    margin-bottom: 10px;
-    background: linear-gradient(90deg, transparent 0%, rgba(255,106,0,0.22) 50%, transparent 100%);
+    position: absolute;
+    inset: 1px;
+    border-radius: 29px;
+    border: 1px solid rgba(255,255,255,0.025);
+    pointer-events: none;
   }
 
-  .faq-bridge span {
+  .faq-promo::after {
+    content: "";
+    position: absolute;
+    inset: auto 10% -28% 10%;
+    height: 62%;
+    border-radius: 999px;
+    background: radial-gradient(circle, rgba(255,106,0,0.16), transparent 68%);
+    filter: blur(24px);
+    opacity: 0.55;
+    pointer-events: none;
+  }
+
+  .faq-promo-label,
+  .faq-section-kicker {
+    color: rgba(255,190,144,0.72);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.26em;
+    text-transform: uppercase;
+  }
+
+  .faq-promo-label {
+    position: relative;
+    z-index: 1;
+    display: inline-block;
+    margin-bottom: 14px;
+  }
+
+  .faq-promo-mark {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 14px;
+  }
+
+  .faq-promo-icon {
+    width: 52px;
+    height: 52px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    padding: 0 10px;
-    color: rgba(255,255,255,0.48);
-    font-size: 0.78rem;
-    letter-spacing: 0.04em;
+    border-radius: 18px;
+    color: rgba(255,199,160,0.92);
+    background:
+      linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.015)),
+      rgba(34,21,15,0.92);
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.06),
+      0 8px 18px rgba(0,0,0,0.16);
+    flex: 0 0 auto;
+  }
+
+  .faq-promo-icon svg {
+    width: 24px;
+    height: 24px;
+    stroke: currentColor;
+    fill: none;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .faq-promo-title {
+    max-width: 12ch;
+    color: #fff4ea;
+    font-size: clamp(1.8rem, 6vw, 3rem);
+    line-height: 0.94;
+    letter-spacing: -0.06em;
+  }
+
+  .faq-promo-lead {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto 10px;
+    max-width: 34ch;
+    color: rgba(255,245,237,0.92);
+    font-size: clamp(1rem, 2.3vw, 1.35rem);
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  .faq-promo-copy {
+    position: relative;
+    z-index: 1;
+    margin: 0 auto;
+    max-width: 48ch;
+    color: rgba(255,236,224,0.58);
+    font-size: 0.92rem;
+    line-height: 1.65;
+  }
+
+  .faq-promo-actions {
+    position: relative;
+    z-index: 1;
+    max-width: 430px;
+    margin: 18px auto 0;
+  }
+
+  .faq-promo-note {
+    display: block;
+    color: rgba(255,245,236,0.82);
+    font-size: 0.88rem;
+    font-weight: 700;
+    line-height: 1.4;
+    margin-bottom: 10px;
+  }
+
+  .faq-header {
+    display: grid;
+    justify-items: center;
+    gap: 8px;
+    text-align: center;
+    margin-top: 2px;
+  }
+
+  .faq-section-title {
+    max-width: 12ch;
+    color: #fff4ea;
+    font-size: clamp(1.72rem, 6vw, 2.7rem);
+    line-height: 0.98;
+    letter-spacing: -0.06em;
   }
 
   /* ── INLINE FAQ ── */
@@ -3404,6 +3864,107 @@
       font-size: 0.7rem;
     }
 
+    .reviews-bridge {
+      margin-bottom: 18px;
+      padding: 18px 12px 14px;
+      border-radius: 24px;
+    }
+
+    .reviews-bridge-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+
+    .reviews-bridge-copy {
+      gap: 11px;
+      text-align: center;
+      justify-items: center;
+    }
+
+    .reviews-bridge-title {
+      max-width: 11ch;
+      font-size: clamp(1.65rem, 8vw, 2.3rem);
+    }
+
+    .reviews-bridge-lead {
+      max-width: 27ch;
+      font-size: 0.92rem;
+      line-height: 1.34;
+    }
+
+    .reviews-bridge-body {
+      max-width: 31ch;
+      font-size: 0.78rem;
+      line-height: 1.58;
+    }
+
+    .reviews-bridge-punch {
+      max-width: 24ch;
+      font-size: 0.84rem;
+      line-height: 1.4;
+    }
+
+    .reviews-bridge-actions {
+      width: 100%;
+      max-width: none;
+      margin-top: 4px;
+    }
+
+    .reviews-bridge-stage {
+      min-height: 286px;
+      border-radius: 24px;
+    }
+
+    .reviews-bridge-badge {
+      top: 12px;
+      left: 12px;
+      min-height: 26px;
+      padding: 0 10px;
+      font-size: 0.56rem;
+      letter-spacing: 0.1em;
+    }
+
+    .reviews-bridge-device {
+      top: 38px;
+      width: min(162px, 44%);
+      padding: 8px 8px 36px;
+      border-radius: 25px;
+    }
+
+    .reviews-bridge-device::before {
+      top: 9px;
+      height: 12px;
+    }
+
+    .reviews-bridge-device--left {
+      left: 7%;
+      transform: rotate(-10deg);
+    }
+
+    .reviews-bridge-device--right {
+      top: 28px;
+      right: 6%;
+      transform: rotate(9deg);
+    }
+
+    .reviews-bridge-screen {
+      border-radius: 18px;
+    }
+
+    .reviews-bridge-device-label {
+      left: 10px;
+      right: 10px;
+      bottom: 10px;
+      min-height: 24px;
+      padding: 5px 8px;
+      font-size: 0.52rem;
+      letter-spacing: 0.05em;
+    }
+
+    .reviews-bridge-stage-copy {
+      display: none;
+    }
+
     .faq-toggle {
       padding: 14px 14px;
     }
@@ -3422,6 +3983,67 @@
 
     .faq-answer .faq-lead {
       font-size: 0.83rem;
+    }
+
+    .faq-shell {
+      gap: 14px;
+    }
+
+    .faq-promo {
+      padding: 20px 14px 18px;
+      border-radius: 24px;
+    }
+
+    .faq-promo::before {
+      border-radius: 23px;
+    }
+
+    .faq-promo-mark {
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .faq-promo-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+    }
+
+    .faq-promo-icon svg {
+      width: 21px;
+      height: 21px;
+    }
+
+    .faq-promo-title {
+      max-width: 11ch;
+      font-size: clamp(1.5rem, 9vw, 2rem);
+    }
+
+    .faq-promo-lead {
+      max-width: 26ch;
+      font-size: 0.96rem;
+      line-height: 1.3;
+    }
+
+    .faq-promo-copy {
+      max-width: 31ch;
+      font-size: 0.8rem;
+      line-height: 1.58;
+    }
+
+    .faq-promo-actions {
+      max-width: none;
+      margin-top: 16px;
+    }
+
+    .faq-promo-note {
+      font-size: 0.78rem;
+      margin-bottom: 8px;
+    }
+
+    .faq-section-title {
+      max-width: 12ch;
+      font-size: clamp(1.44rem, 8.8vw, 2rem);
     }
 
     .site-footer {
@@ -3706,8 +4328,17 @@
   }
 
 </style>
-  <script defer src="/_vercel/insights/script.js"></script>
-  <script defer src="/_vercel/speed-insights/script.js"></script>
+  <script>
+    (function () {
+      if (window.location.protocol === "file:") return;
+      ["/_vercel/insights/script.js", "/_vercel/speed-insights/script.js"].forEach(function (src) {
+        var script = document.createElement("script");
+        script.defer = true;
+        script.src = src;
+        document.head.appendChild(script);
+      });
+    })();
+  </script>
 </head>
 <body>
   <!-- Animated gradient background -->
@@ -4186,6 +4817,56 @@
             </div>
           </section>
 
+          <section class="flow-section reviews-bridge" aria-label="Why makers step inside PolishMaster">
+            <div class="reviews-bridge-grid">
+              <div class="reviews-bridge-copy">
+                <span class="reviews-bridge-label">Ask Yourself</span>
+                <h2 class="reviews-bridge-title">Ready to sell cleaner products?</h2>
+                <p class="reviews-bridge-lead">Cleaner results do not come from luck. They come from a finish system you can repeat.</p>
+                <p class="reviews-bridge-body"><strong>The makers above are not improvising.</strong> They are following a surface workflow that turns rough prints into parts that look calmer, cleaner, and easier to sell.</p>
+                <p class="reviews-bridge-body">Inside PolishMaster, you get the exact finish paths, proof-backed process, and premium model drops behind that shift.</p>
+                <p class="reviews-bridge-punch">If you want buyers to read it like a product, start with the surface.</p>
+                <div class="reviews-bridge-actions system-access-cta actions">
+                  <div class="cta-stack">
+                    <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+                      <span class="cta-text">Secure Your Access</span>
+                      <span class="cta-icon" aria-hidden="true">
+                        <svg viewBox="0 0 24 24">
+                          <path d="M5 12h14"></path>
+                          <path d="m13 6 6 6-6 6"></path>
+                        </svg>
+                      </span>
+                    </a>
+                    <span class="cta-note">
+                      <span class="cta-note-primary">Built around the results you just saw above.</span>
+                      <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="reviews-bridge-stage" aria-hidden="true">
+                <span class="reviews-bridge-badge">Inside PolishMaster</span>
+
+                <article class="reviews-bridge-device reviews-bridge-device--left">
+                  <div class="reviews-bridge-screen">
+                    <img src="review-panel-comparison.png" alt="Raw and polished black 3D printed panel parts held side by side" loading="lazy" decoding="async" />
+                  </div>
+                  <span class="reviews-bridge-device-label">Before / After Finish</span>
+                </article>
+
+                <article class="reviews-bridge-device reviews-bridge-device--right">
+                  <div class="reviews-bridge-screen">
+                    <img src="review-bracket-comparison.png" alt="Raw and polished black functional bracket shown side by side" loading="lazy" decoding="async" />
+                  </div>
+                  <span class="reviews-bridge-device-label">Cleaner Parts. Sell-Ready Look.</span>
+                </article>
+
+                <p class="reviews-bridge-stage-copy"><strong>Same print.</strong> Different read. That is the gap PolishMaster is built to close.</p>
+              </div>
+            </div>
+          </section>
+
           <section class="flow-section inside-section" aria-label="What you get inside PolishMaster">
             <div class="inside-header">
               <span class="inside-label">LIMITED ACCESS</span>
@@ -4265,6 +4946,7 @@
             <div class="choice-header">
               <span class="choice-label">Your Surface Choice</span>
               <h2 class="choice-title">Choose What You Sell</h2>
+              <p class="choice-copy">One finish keeps the work in hobby territory. The other makes buyers read it like a product.</p>
             </div>
             <div class="choice-grid">
               <article class="choice-card">
@@ -4325,10 +5007,43 @@
             </div>
           </section>
 
-          <div class="faq-bridge"><span>Still have questions? Find your answers below ↓</span></div>
-
-          <section class="flow-section inline-faq-section">
-            <span class="social-label" style="display:block;margin-bottom:12px;">FAQ</span>
+          <section class="flow-section faq-shell inline-faq-section">
+            <div class="faq-promo" aria-label="Lock in current access">
+              <span class="faq-promo-label">Lock In Current Access</span>
+              <div class="faq-promo-mark">
+                <span class="faq-promo-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24">
+                    <path d="M12 16v-3"></path>
+                    <path d="M9.5 9.5V8.8a2.5 2.5 0 1 1 5 0v.7"></path>
+                    <path d="M7 11.5h10v7H7z"></path>
+                  </svg>
+                </span>
+                <h2 class="faq-promo-title">Current pricing is still available</h2>
+              </div>
+              <p class="faq-promo-lead">Join now and keep the same rate as PolishMaster grows.</p>
+              <p class="faq-promo-copy">Get the full finishing system, premium model drops, and future updates without waiting.</p>
+              <div class="faq-promo-actions system-access-cta actions">
+                <div class="cta-stack">
+                  <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
+                    <span class="cta-text">Secure Your Access</span>
+                    <span class="cta-icon" aria-hidden="true">
+                      <svg viewBox="0 0 24 24">
+                        <path d="M5 12h14"></path>
+                        <path d="m13 6 6 6-6 6"></path>
+                      </svg>
+                    </span>
+                  </a>
+                  <span class="cta-note">
+                    <span class="cta-note-primary">Secure your access while the launch rate is still live.</span>
+                    <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="faq-header">
+              <span class="faq-section-kicker">Still Thinking?</span>
+              <h2 class="faq-section-title">Frequently Asked Questions</h2>
+            </div>
             <div class="faq-list">
 
               <div class="faq-item">
