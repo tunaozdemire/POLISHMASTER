@@ -2008,27 +2008,27 @@
   }
 
   .reviews-bridge-title {
-    max-width: 8ch;
+    max-width: none;
     color: #fff4ea;
-    font-size: clamp(1.9rem, 4.2vw, 3.05rem);
-    line-height: 0.96;
+    font-size: clamp(1.76rem, 3.6vw, 2.7rem);
+    line-height: 1;
     letter-spacing: -0.06em;
-    text-wrap: balance;
+    text-wrap: nowrap;
   }
 
   .reviews-bridge-lead {
-    max-width: 26ch;
+    max-width: 28ch;
     color: #fff4ea;
-    font-size: 1rem;
-    line-height: 1.34;
+    font-size: 0.95rem;
+    line-height: 1.32;
     font-weight: 700;
   }
 
   .reviews-bridge-body {
     max-width: 30ch;
     color: rgba(255,240,228,0.58);
-    font-size: 0.86rem;
-    line-height: 1.58;
+    font-size: 0.82rem;
+    line-height: 1.52;
   }
 
   .reviews-bridge-body strong {
@@ -2037,6 +2037,7 @@
   }
 
   .reviews-bridge-punch {
+    display: none;
     max-width: 18ch;
     color: rgba(255,244,234,0.94);
     font-size: 0.9rem;
@@ -2057,11 +2058,14 @@
   }
 
   .reviews-bridge-stage {
+    --bridge-device-rotate: 8deg;
+    --bridge-device-lift: 28px;
+    --bridge-device-scale: 0.92;
     grid-column: 2;
     grid-row: 1 / span 2;
     align-self: stretch;
     position: relative;
-    min-height: 520px;
+    min-height: 540px;
     border-radius: 30px;
     background:
       radial-gradient(circle at 50% 18%, rgba(255,255,255,0.07), transparent 26%),
@@ -2073,13 +2077,15 @@
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.05),
       0 22px 44px rgba(0,0,0,0.24);
+    perspective: 1400px;
+    perspective-origin: 50% 20%;
   }
 
   .reviews-bridge-stage::before {
     content: "";
     position: absolute;
-    inset: auto 18% 5% 18%;
-    height: 30%;
+    inset: auto 16% 4% 16%;
+    height: 32%;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(255,106,0,0.22), transparent 68%);
     filter: blur(24px);
@@ -2099,7 +2105,7 @@
   .reviews-bridge-badge {
     position: absolute;
     top: 18px;
-    left: 18px;
+    left: 50%;
     z-index: 2;
     display: inline-flex;
     align-items: center;
@@ -2114,12 +2120,13 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     backdrop-filter: blur(10px);
+    transform: translateX(-50%);
   }
 
   .reviews-bridge-device {
     position: absolute;
     left: 50%;
-    top: 36px;
+    bottom: 24px;
     width: min(360px, 58%);
     aspect-ratio: 0.5;
     padding: 10px 10px 46px;
@@ -2130,15 +2137,17 @@
       0 28px 56px rgba(0,0,0,0.36),
       inset 0 1px 0 rgba(255,255,255,0.08);
     overflow: hidden;
+    transform-style: preserve-3d;
+    will-change: transform;
   }
 
   .reviews-bridge-device::before {
     content: "";
     position: absolute;
-    top: 11px;
+    top: 13px;
     left: 50%;
-    width: 34%;
-    height: 16px;
+    width: 26%;
+    height: 22px;
     border-radius: 999px;
     background: rgba(4,4,4,0.88);
     transform: translateX(-50%);
@@ -2148,8 +2157,11 @@
 
   .reviews-bridge-device--single {
     left: 50%;
-    top: 36px;
-    transform: translateX(-50%) rotate(7deg);
+    transform:
+      translateX(-50%)
+      translateY(calc(var(--bridge-device-lift) * -1))
+      rotate(var(--bridge-device-rotate))
+      scale(var(--bridge-device-scale));
   }
 
   .reviews-bridge-screen {
@@ -3871,20 +3883,21 @@
     }
 
     .reviews-bridge-title {
-      max-width: 8.5ch;
-      font-size: clamp(1.65rem, 8vw, 2.3rem);
+      max-width: none;
+      font-size: clamp(1.38rem, 6.2vw, 1.72rem);
+      text-wrap: nowrap;
     }
 
     .reviews-bridge-lead {
       max-width: 24ch;
-      font-size: 0.88rem;
-      line-height: 1.3;
+      font-size: 0.78rem;
+      line-height: 1.28;
     }
 
     .reviews-bridge-body {
-      max-width: 26ch;
-      font-size: 0.74rem;
-      line-height: 1.5;
+      max-width: 25ch;
+      font-size: 0.7rem;
+      line-height: 1.42;
     }
 
     .reviews-bridge-punch {
@@ -3902,37 +3915,45 @@
     }
 
     .reviews-bridge-stage {
+      --bridge-device-rotate: 10deg;
+      --bridge-device-lift: 18px;
+      --bridge-device-scale: 0.9;
       grid-column: auto;
       grid-row: auto;
-      min-height: 396px;
+      min-height: 362px;
       border-radius: 24px;
     }
 
     .reviews-bridge-badge {
       top: 12px;
-      left: 12px;
+      left: 50%;
       min-height: 26px;
       padding: 0 10px;
       font-size: 0.56rem;
       letter-spacing: 0.1em;
+      transform: translateX(-50%);
     }
 
     .reviews-bridge-device {
-      top: 44px;
-      width: min(274px, 76vw);
+      bottom: 16px;
+      width: min(264px, 73vw);
       padding: 8px 8px 38px;
       border-radius: 28px;
     }
 
     .reviews-bridge-device::before {
-      top: 9px;
-      height: 12px;
+      top: 11px;
+      width: 24%;
+      height: 18px;
     }
 
     .reviews-bridge-device--single {
       left: 50%;
-      top: 44px;
-      transform: translateX(-50%);
+      transform:
+        translateX(-50%)
+        translateY(calc(var(--bridge-device-lift) * -1))
+        rotate(var(--bridge-device-rotate))
+        scale(var(--bridge-device-scale));
     }
 
     .reviews-bridge-screen {
@@ -4804,9 +4825,8 @@
               <div class="reviews-bridge-copy">
                 <span class="reviews-bridge-label">Ask Yourself</span>
                 <h2 class="reviews-bridge-title">Ready to sell better?</h2>
-                <p class="reviews-bridge-lead">A clean surface comes from a repeatable finish system.</p>
-                <p class="reviews-bridge-body">Inside PolishMaster: exact finish paths, the core process, and premium model drops.</p>
-                <p class="reviews-bridge-punch">Make it read like a product.</p>
+                <p class="reviews-bridge-lead">A clean surface needs a repeatable system.</p>
+                <p class="reviews-bridge-body">Inside PolishMaster: finish paths, core process, premium drops.</p>
               </div>
 
               <div class="reviews-bridge-stage" aria-hidden="true">
@@ -4814,7 +4834,7 @@
 
                 <article class="reviews-bridge-device reviews-bridge-device--single">
                   <div class="reviews-bridge-screen">
-                    <img src="reviews-bridge-screen.png" alt="Large mobile-style screen showing a premium polished PolishMaster model" loading="lazy" decoding="async" />
+                    <img src="reviews-bridge-screen.png" alt="PolishMaster membership feed shown inside a mobile-style screen" loading="lazy" decoding="async" />
                   </div>
                 </article>
               </div>
@@ -5224,6 +5244,46 @@
         });
       }
 
+      function setupReviewsBridgeAnimation() {
+        var bridges = document.querySelectorAll(".reviews-bridge-stage");
+        if (!bridges.length) return;
+
+        function clamp(value, min, max) {
+          return Math.min(max, Math.max(min, value));
+        }
+
+        var ticking = false;
+
+        function updateBridgeStage() {
+          ticking = false;
+          var viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+          bridges.forEach(function (stage) {
+            var rect = stage.getBoundingClientRect();
+            var start = viewportHeight * 0.92;
+            var end = viewportHeight * 0.16;
+            var progress = clamp((start - rect.top) / (start - end), 0, 1);
+            var rotateStart = viewportHeight <= 820 ? 10 : 8;
+            var liftStart = viewportHeight <= 820 ? 18 : 28;
+            var scaleStart = 0.9;
+
+            stage.style.setProperty("--bridge-device-rotate", (rotateStart * (1 - progress)).toFixed(2) + "deg");
+            stage.style.setProperty("--bridge-device-lift", (liftStart * (1 - progress)).toFixed(1) + "px");
+            stage.style.setProperty("--bridge-device-scale", (scaleStart + ((1 - scaleStart) * progress)).toFixed(4));
+          });
+        }
+
+        function requestBridgeUpdate() {
+          if (ticking) return;
+          ticking = true;
+          window.requestAnimationFrame(updateBridgeStage);
+        }
+
+        updateBridgeStage();
+        window.addEventListener("scroll", requestBridgeUpdate, { passive: true });
+        window.addEventListener("resize", requestBridgeUpdate);
+        window.addEventListener("orientationchange", requestBridgeUpdate);
+      }
+
       comparisonSliders.forEach(function (slider) {
         var overlay = slider.querySelector("[data-comparison-overlay]");
         var divider = slider.querySelector("[data-comparison-divider]");
@@ -5308,6 +5368,8 @@
 
         setPosition((hintTrack || slider).getBoundingClientRect().left + ((hintTrack || slider).getBoundingClientRect().width / 2), hintTrack || slider);
       });
+
+      setupReviewsBridgeAnimation();
     })();
   </script>
 
