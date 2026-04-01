@@ -5500,6 +5500,7 @@
     border: 1px solid var(--pmx-line);
     border-radius: 20px;
     background: rgba(16,16,18,0.96);
+    overflow: clip;
   }
 
   .pmx-mechanism-visual {
@@ -5597,7 +5598,7 @@
     background: rgba(255,255,255,0.02);
     border: 1px solid rgba(255,255,255,0.05);
     opacity: 0.34;
-    transition: opacity 0.28s ease, border-color 0.28s ease, background 0.28s ease;
+    transition: opacity 0.28s ease, border-color 0.28s ease, background 0.28s ease, transform 0.28s ease;
   }
 
   .pmx-mechanism-item strong {
@@ -5616,6 +5617,7 @@
     opacity: 1;
     background: rgba(255,106,0,0.08);
     border-color: rgba(255,106,0,0.22);
+    transform: translate3d(0, -2px, 0);
   }
 
   .pmx-impact-strip {
@@ -5873,6 +5875,36 @@
     max-width: 12ch;
     margin-left: auto;
     margin-right: auto;
+  }
+
+  @media (max-width: 767px) {
+    .pmx-system-header {
+      margin-bottom: 18px;
+    }
+
+    .pmx-mechanism-stage {
+      gap: 14px;
+      padding: 18px;
+    }
+
+    .pmx-mechanism-visual {
+      min-height: 286px;
+      padding: 22px 18px 22px 58px;
+    }
+
+    .pmx-mechanism-progress-track {
+      top: 24px;
+      bottom: 24px;
+      left: 27px;
+    }
+
+    .pmx-mechanism-node::before {
+      left: -36px;
+    }
+
+    .pmx-mechanism-copy {
+      gap: 8px;
+    }
   }
 
   @media (min-width: 768px) {
@@ -6711,8 +6743,11 @@
         if (systemStage) {
           var systemNodes = systemStage.querySelectorAll("[data-step-node]");
           var systemCopy = systemStage.querySelectorAll("[data-step-copy]");
+          var systemLastIndex = 0;
 
           function setSystemState(index) {
+            if (index === systemLastIndex) return;
+            systemLastIndex = index;
             var progress = systemNodes.length > 1 ? (index / (systemNodes.length - 1)) : 1;
             systemStage.style.setProperty("--pmx-system-progress", (0.08 + (progress * 0.92)).toFixed(3));
             systemNodes.forEach(function (node, nodeIndex) {
@@ -6724,20 +6759,23 @@
             });
           }
 
+          function getSystemIndex(progress) {
+            return Math.max(0, Math.min(systemNodes.length - 1, Math.round(progress * (systemNodes.length - 1))));
+          }
+
+          systemLastIndex = -1;
           setSystemState(0);
 
           window.ScrollTrigger.matchMedia({
             "(max-width: 767px)": function () {
               window.ScrollTrigger.create({
                 trigger: systemStage,
-                start: "top top+=84",
-                end: "+=360",
-                pin: true,
-                pinSpacing: true,
-                scrub: 0.8,
+                start: "top 82%",
+                end: "bottom 36%",
+                scrub: 0.45,
+                invalidateOnRefresh: true,
                 onUpdate: function (self) {
-                  var index = Math.min(systemNodes.length - 1, Math.floor(self.progress * systemNodes.length));
-                  setSystemState(index);
+                  setSystemState(getSystemIndex(self.progress));
                 }
               });
             },
@@ -6747,9 +6785,9 @@
                 start: "top 55%",
                 end: "bottom 35%",
                 scrub: 0.8,
+                invalidateOnRefresh: true,
                 onUpdate: function (self) {
-                  var index = Math.min(systemNodes.length - 1, Math.floor(self.progress * systemNodes.length));
-                  setSystemState(index);
+                  setSystemState(getSystemIndex(self.progress));
                 }
               });
             }
