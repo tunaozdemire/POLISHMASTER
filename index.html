@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -1997,6 +1997,8 @@
     display: grid;
     gap: 14px;
     min-width: 0;
+    justify-items: center;
+    text-align: center;
   }
 
   .reviews-bridge-label {
@@ -2010,25 +2012,25 @@
   .reviews-bridge-title {
     max-width: none;
     color: #fff4ea;
-    font-size: clamp(1.76rem, 3.6vw, 2.7rem);
+    font-size: clamp(1.62rem, 3.2vw, 2.42rem);
     line-height: 1;
     letter-spacing: -0.06em;
     text-wrap: nowrap;
   }
 
   .reviews-bridge-lead {
-    max-width: 28ch;
+    max-width: 22ch;
     color: #fff4ea;
-    font-size: 0.95rem;
-    line-height: 1.32;
+    font-size: 0.88rem;
+    line-height: 1.28;
     font-weight: 700;
   }
 
   .reviews-bridge-body {
-    max-width: 30ch;
+    max-width: 28ch;
     color: rgba(255,240,228,0.58);
-    font-size: 0.82rem;
-    line-height: 1.52;
+    font-size: 0.78rem;
+    line-height: 1.44;
   }
 
   .reviews-bridge-body strong {
@@ -2060,12 +2062,12 @@
   .reviews-bridge-stage {
     --bridge-device-rotate: 8deg;
     --bridge-device-lift: 28px;
-    --bridge-device-scale: 0.92;
+    --bridge-device-scale: 0.94;
     grid-column: 2;
     grid-row: 1 / span 2;
     align-self: stretch;
     position: relative;
-    min-height: 540px;
+    min-height: 560px;
     border-radius: 30px;
     background:
       radial-gradient(circle at 50% 18%, rgba(255,255,255,0.07), transparent 26%),
@@ -2127,32 +2129,47 @@
     position: absolute;
     left: 50%;
     bottom: 24px;
-    width: min(360px, 58%);
-    aspect-ratio: 0.5;
-    padding: 10px 10px 46px;
-    border-radius: 38px;
+    width: min(232px, 38%);
+    aspect-ratio: 393 / 852;
+    padding: 11px;
+    border-radius: 42px;
     border: 1px solid rgba(255,255,255,0.12);
-    background: linear-gradient(180deg, rgba(41,38,40,0.96), rgba(10,9,10,0.98));
+    background: linear-gradient(160deg, rgba(85,82,84,0.96), rgba(20,18,19,0.98) 42%, rgba(8,7,8,1) 100%);
     box-shadow:
-      0 28px 56px rgba(0,0,0,0.36),
-      inset 0 1px 0 rgba(255,255,255,0.08);
+      0 32px 60px rgba(0,0,0,0.38),
+      inset 0 1px 0 rgba(255,255,255,0.16),
+      inset 0 -1px 0 rgba(0,0,0,0.32);
     overflow: hidden;
     transform-style: preserve-3d;
     will-change: transform;
   }
 
+  .reviews-bridge-device::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    box-shadow:
+      inset 0 0 0 1px rgba(255,255,255,0.06),
+      inset 0 14px 24px rgba(255,255,255,0.05),
+      inset 0 -14px 24px rgba(0,0,0,0.18);
+    pointer-events: none;
+  }
+
   .reviews-bridge-device::before {
     content: "";
     position: absolute;
-    top: 13px;
+    top: 18px;
     left: 50%;
-    width: 26%;
-    height: 22px;
+    width: 32%;
+    height: 28px;
     border-radius: 999px;
     background: rgba(4,4,4,0.88);
     transform: translateX(-50%);
-    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-    z-index: 2;
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.08),
+      0 2px 8px rgba(0,0,0,0.4);
+    z-index: 3;
   }
 
   .reviews-bridge-device--single {
@@ -2167,12 +2184,11 @@
   .reviews-bridge-screen {
     position: relative;
     height: 100%;
-    border-radius: 26px;
+    border-radius: 31px;
     overflow: hidden;
-    background: rgba(255,255,255,0.02);
+    background: #ffffff;
     box-shadow:
-      inset 0 1px 0 rgba(255,255,255,0.05),
-      inset 0 0 0 1px rgba(255,255,255,0.03);
+      inset 0 0 0 1px rgba(255,255,255,0.05);
   }
 
   .reviews-bridge-screen img {
@@ -2181,7 +2197,7 @@
     display: block;
     object-fit: cover;
     object-position: center top;
-    filter: saturate(0.94) contrast(1.03);
+    filter: saturate(0.98) contrast(1.02);
   }
 
   .reviews-bridge-device-label {
@@ -3884,20 +3900,20 @@
 
     .reviews-bridge-title {
       max-width: none;
-      font-size: clamp(1.38rem, 6.2vw, 1.72rem);
+      font-size: clamp(1.18rem, 5.2vw, 1.42rem);
       text-wrap: nowrap;
     }
 
     .reviews-bridge-lead {
-      max-width: 24ch;
-      font-size: 0.78rem;
-      line-height: 1.28;
+      max-width: 22ch;
+      font-size: 0.72rem;
+      line-height: 1.24;
     }
 
     .reviews-bridge-body {
-      max-width: 25ch;
-      font-size: 0.7rem;
-      line-height: 1.42;
+      max-width: 23ch;
+      font-size: 0.64rem;
+      line-height: 1.34;
     }
 
     .reviews-bridge-punch {
@@ -3917,10 +3933,10 @@
     .reviews-bridge-stage {
       --bridge-device-rotate: 10deg;
       --bridge-device-lift: 18px;
-      --bridge-device-scale: 0.9;
+      --bridge-device-scale: 0.92;
       grid-column: auto;
       grid-row: auto;
-      min-height: 362px;
+      min-height: 418px;
       border-radius: 24px;
     }
 
@@ -3936,15 +3952,15 @@
 
     .reviews-bridge-device {
       bottom: 16px;
-      width: min(264px, 73vw);
-      padding: 8px 8px 38px;
-      border-radius: 28px;
+      width: min(178px, 48vw);
+      padding: 8px;
+      border-radius: 31px;
     }
 
     .reviews-bridge-device::before {
-      top: 11px;
-      width: 24%;
-      height: 18px;
+      top: 13px;
+      width: 30%;
+      height: 22px;
     }
 
     .reviews-bridge-device--single {
@@ -3957,7 +3973,7 @@
     }
 
     .reviews-bridge-screen {
-      border-radius: 20px;
+      border-radius: 23px;
     }
 
     .reviews-bridge-device-label {
@@ -4330,6 +4346,889 @@
     .pm-contact-modal { padding: 56px 20px 32px; }
   }
 
+  :root {
+    --pmx-bg: #050505;
+    --pmx-text: #f7efe8;
+    --pmx-accent: #ff6a00;
+    --pmx-muted: rgba(255,255,255,0.55);
+    --pmx-card: rgba(16,16,18,0.96);
+    --pmx-line: rgba(255,255,255,0.08);
+    --pmx-card-radius: 20px;
+    --pmx-btn-radius: 14px;
+  }
+
+  body {
+    background: var(--pmx-bg);
+    color: var(--pmx-text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    padding-top: 40px;
+  }
+
+  body.pmx-announcement-hidden .pmx-announcement {
+    transform: translateY(-100%);
+  }
+
+  .pmx-announcement {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 120;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0 16px;
+    background: #ff6a00;
+    color: #000;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    text-align: center;
+    transition: transform 0.2s ease;
+  }
+
+  .pmx-announcement a {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .pmx-main {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 64px;
+    padding: 0 0 72px;
+  }
+
+  .pmx-shell {
+    width: min(100%, 560px);
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .pmx-copy-limit {
+    max-width: 480px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pmx-center {
+    text-align: center;
+  }
+
+  .pmx-kicker {
+    display: block;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pmx-accent);
+    margin-bottom: 12px;
+  }
+
+  .pmx-kicker--muted {
+    color: rgba(255,255,255,0.4);
+    letter-spacing: 0.1em;
+    margin-bottom: 20px;
+  }
+
+  .pmx-section-title {
+    font-size: clamp(1.4rem, 5.5vw, 1.9rem);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+
+  .pmx-section-subtitle {
+    margin-top: 8px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .pmx-hero {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .pmx-hero-media {
+    position: relative;
+    width: 100%;
+    height: 260px;
+    overflow: hidden;
+  }
+
+  .pmx-hero-media .comparison-slider {
+    width: 100vw;
+    max-width: none;
+    height: 100%;
+    margin-left: calc(50% - 50vw);
+    border-radius: 0;
+    border: 0;
+    box-shadow: none;
+    background: #101010;
+  }
+
+  .pmx-hero-media .comparison-base,
+  .pmx-hero-media .comparison-overlay {
+    inset: 0;
+  }
+
+  .pmx-hero-media .comparison-base img,
+  .pmx-hero-media .comparison-overlay img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pmx-hero-media .comparison-divider {
+    width: 2px;
+    background: rgba(255,255,255,0.68);
+    box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+  }
+
+  .pmx-hero-media .comparison-handle {
+    width: 36px;
+    height: 36px;
+    border-radius: 999px;
+    background: rgba(5,5,5,0.88);
+    border: 1px solid rgba(255,255,255,0.16);
+    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+  }
+
+  .pmx-hero-media .comparison-hint {
+    display: none;
+  }
+
+  .pmx-hero-media .slider-label {
+    top: 16px;
+    padding: 6px 10px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.6);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: #f7efe8;
+  }
+
+  .pmx-hero-media .slider-label-polished {
+    color: var(--pmx-accent);
+  }
+
+  .pmx-hero-media-gradient {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(5,5,5,0) 0%, #050505 100%);
+    pointer-events: none;
+  }
+
+  .pmx-hero-copy {
+    margin-top: 32px;
+  }
+
+  .pmx-hero-title {
+    margin-bottom: 16px;
+    font-size: clamp(2rem, 8.5vw, 2.8rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    color: #fff;
+  }
+
+  .pmx-hero-title span {
+    display: block;
+  }
+
+  .pmx-hero-title .is-muted {
+    color: rgba(255,255,255,0.38);
+  }
+
+  .pmx-hero-subhead {
+    margin-bottom: 28px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.62);
+  }
+
+  .pmx-primary-cta {
+    position: relative;
+    display: flex;
+    width: 100%;
+    min-height: 56px;
+    align-items: center;
+    justify-content: center;
+    padding: 0 20px;
+    border-radius: var(--pmx-btn-radius);
+    background: var(--pmx-accent);
+    color: #000;
+    font-size: 16px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    box-shadow: 0 16px 40px rgba(255,106,0,0.2);
+    overflow: hidden;
+    transition: transform 0.18s ease, background 0.18s ease;
+  }
+
+  .pmx-primary-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(110deg, transparent 0%, rgba(255,255,255,0.28) 45%, transparent 90%);
+    transform: translateX(-140%);
+    animation: pmxShimmer 3.2s linear infinite;
+    pointer-events: none;
+  }
+
+  .pmx-primary-cta:hover {
+    background: #ff7d1a;
+    transform: scale(1.01);
+  }
+
+  .pmx-primary-cta:active {
+    transform: scale(0.98);
+  }
+
+  @keyframes pmxShimmer {
+    0% { transform: translateX(-140%); }
+    100% { transform: translateX(140%); }
+  }
+
+  .pmx-trust-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  .pmx-trust-row strong {
+    color: var(--pmx-accent);
+    font-weight: 700;
+  }
+
+  .pmx-trust-row span {
+    color: rgba(255,255,255,0.55);
+  }
+
+  .pmx-trust-row .dot {
+    color: rgba(255,255,255,0.25);
+  }
+
+  .pmx-identity {
+    padding: 48px 0;
+    background: rgba(255,106,0,0.06);
+    border-top: 1px solid rgba(255,106,0,0.2);
+    border-bottom: 1px solid rgba(255,106,0,0.2);
+  }
+
+  .pmx-identity-title {
+    font-size: clamp(1.25rem, 5vw, 1.55rem);
+    font-weight: 700;
+    line-height: 1.35;
+    letter-spacing: -0.02em;
+    text-align: center;
+  }
+
+  .pmx-identity-title .is-accent {
+    color: var(--pmx-accent);
+  }
+
+  .pmx-identity-copy {
+    margin-top: 12px;
+    font-size: 14px;
+    line-height: 1.5;
+    text-align: center;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .pmx-proof-wall {
+    display: flex;
+    gap: 10px;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 0 20px 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .pmx-proof-wall::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pmx-proof-card {
+    position: relative;
+    flex: 0 0 200px;
+    height: 260px;
+    overflow: hidden;
+    border-radius: 16px;
+    border: 1px solid var(--pmx-line);
+    background: var(--pmx-card);
+    scroll-snap-align: start;
+  }
+
+  .pmx-proof-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pmx-proof-card::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 60px;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+  }
+
+  .pmx-proof-name {
+    position: absolute;
+    left: 12px;
+    bottom: 10px;
+    z-index: 1;
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .pmx-proof-meta {
+    margin-top: 16px;
+    font-size: 12px;
+    text-align: center;
+    color: rgba(255,255,255,0.38);
+  }
+
+  .pmx-step-grid,
+  .pmx-member-list,
+  .pmx-objections-list {
+    display: grid;
+    gap: 16px;
+  }
+
+  .pmx-system-header {
+    margin-bottom: 40px;
+  }
+
+  .pmx-step-card,
+  .tcard-v2,
+  .objection-block,
+  .founder-block-v2 {
+    overflow: hidden;
+    border: 1px solid var(--pmx-line);
+    border-radius: 20px;
+    background: var(--pmx-card);
+  }
+
+  .pmx-step-card {
+    padding: 0;
+  }
+
+  .pmx-step-media {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .pmx-step-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .pmx-step-badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    background: rgba(0,0,0,0.7);
+    color: var(--pmx-accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+  }
+
+  .pmx-step-body {
+    padding: 20px;
+  }
+
+  .pmx-step-title {
+    margin-bottom: 10px;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--pmx-text);
+  }
+
+  .pmx-step-list {
+    display: grid;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .pmx-step-list li {
+    position: relative;
+    padding-left: 16px;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(255,255,255,0.62);
+  }
+
+  .pmx-step-list li::before {
+    content: "·";
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: var(--pmx-accent);
+    font-weight: 700;
+  }
+
+  .pmx-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+
+  .pmx-stat-card {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 20px 16px;
+    border: 1px solid var(--pmx-line);
+    border-radius: 16px;
+    background: var(--pmx-card);
+  }
+
+  .pmx-stat-value {
+    font-size: 28px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--pmx-accent);
+  }
+
+  .pmx-stat-label {
+    font-size: 12px;
+    line-height: 1.4;
+    color: rgba(255,255,255,0.5);
+  }
+
+  .pmx-members-header {
+    margin-bottom: 32px;
+  }
+
+  .tcard-v2 {
+    padding: 24px 20px;
+  }
+
+  .pmx-member-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .pmx-member-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--pmx-text);
+  }
+
+  .pmx-member-meta {
+    margin-top: 2px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .pmx-member-stars {
+    font-size: 14px;
+    color: var(--pmx-accent);
+    letter-spacing: 0.08em;
+    white-space: nowrap;
+  }
+
+  .pmx-member-outcome {
+    margin: 16px 0 10px;
+    font-size: 18px;
+    font-weight: 800;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+
+  .pmx-member-quote {
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .pmx-members-aggregate {
+    margin-top: 8px;
+    font-size: 13px;
+    text-align: center;
+    color: rgba(255,255,255,0.38);
+  }
+
+  .locked-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+
+  .locked-card {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    border: 1px solid var(--pmx-line);
+    border-radius: 16px;
+    background: var(--pmx-card);
+  }
+
+  .locked-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: blur(8px) brightness(0.4);
+    transform: scale(1.05);
+  }
+
+  .locked-card--weekly img {
+    filter: blur(4px) brightness(0.5);
+  }
+
+  .locked-card-overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    text-align: center;
+  }
+
+  .locked-card-lock {
+    font-size: 24px;
+    color: rgba(255,255,255,0.8);
+  }
+
+  .locked-card-label {
+    font-size: 12px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.7);
+  }
+
+  .locked-card-sub {
+    font-size: 11px;
+    color: var(--pmx-accent);
+  }
+
+  .pmx-inline-link {
+    display: block;
+    margin-top: 16px;
+    font-size: 13px;
+    font-weight: 600;
+    text-align: center;
+    color: rgba(255,106,0,0.8);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .objection-block {
+    padding: 20px;
+  }
+
+  .objection-block h3 {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--pmx-text);
+  }
+
+  .objection-block p {
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.58);
+  }
+
+  .pricing-card-single {
+    padding: 28px 24px;
+    border: 1px solid rgba(255,106,0,0.3);
+    border-radius: 24px;
+    background: var(--pmx-card);
+    box-shadow: 0 20px 48px rgba(0,0,0,0.26);
+  }
+
+  .pmx-pricing-badge {
+    display: inline-block;
+    margin-bottom: 20px;
+    padding: 6px 12px;
+    border: 1px solid rgba(255,106,0,0.3);
+    border-radius: 8px;
+    background: rgba(255,106,0,0.12);
+    color: var(--pmx-accent);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+  }
+
+  .pmx-price-row {
+    display: flex;
+    align-items: flex-end;
+    gap: 6px;
+  }
+
+  .pmx-price {
+    font-size: 48px;
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    color: #fff;
+  }
+
+  .pmx-price-unit {
+    padding-bottom: 8px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .pmx-price-note {
+    margin-bottom: 24px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+  }
+
+  .pmx-pricing-list {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .pmx-pricing-list li {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+    font-size: 14px;
+    line-height: 1.45;
+    color: rgba(255,255,255,0.72);
+  }
+
+  .pmx-pricing-list li::before {
+    content: "✓";
+    flex-shrink: 0;
+    color: var(--pmx-accent);
+    font-weight: 700;
+  }
+
+  .pmx-pricing-trust {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    font-size: 12px;
+    color: rgba(255,255,255,0.38);
+  }
+
+  .pmx-pricing-italic {
+    margin-top: 16px;
+    font-size: 13px;
+    text-align: center;
+    font-style: italic;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .founder-block-v2 {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+  }
+
+  .pmx-founder-top {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .pmx-founder-photo {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    border: 2px solid rgba(255,106,0,0.3);
+    object-fit: cover;
+  }
+
+  .pmx-founder-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--pmx-text);
+  }
+
+  .pmx-founder-role {
+    font-size: 12px;
+    color: rgba(255,255,255,0.45);
+  }
+
+  .pmx-founder-quote {
+    position: relative;
+    padding-left: 18px;
+    font-size: 15px;
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .pmx-founder-quote::before {
+    content: "\"";
+    position: absolute;
+    left: 0;
+    top: -4px;
+    color: var(--pmx-accent);
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .final-cta-block {
+    padding: 64px 0;
+    text-align: center;
+    background: radial-gradient(circle at 50% 0%, rgba(255,106,0,0.1) 0%, transparent 60%);
+    border-top: 1px solid rgba(255,106,0,0.15);
+  }
+
+  .pmx-final-muted,
+  .pmx-final-strong {
+    font-size: clamp(1.6rem, 6.5vw, 2.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+  }
+
+  .pmx-final-muted {
+    margin-bottom: 4px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .pmx-final-strong {
+    margin-bottom: 32px;
+    color: #fff;
+  }
+
+  .pmx-final-note {
+    margin-top: 14px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.35);
+  }
+
+  .site-footer {
+    width: min(100%, 560px);
+    margin: 0 auto;
+    padding: 0 20px 48px;
+    background: transparent;
+    border: 0;
+  }
+
+  .site-footer-question {
+    display: inline-block;
+    margin: 0 auto 16px;
+    font-size: 13px;
+    color: rgba(255,106,0,0.7);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .site-footer-brand {
+    gap: 6px;
+    padding: 0;
+    text-align: center;
+  }
+
+  .site-footer-brand-lead {
+    font-size: 13px;
+    color: rgba(255,255,255,0.72);
+  }
+
+  .site-footer-brand-copy {
+    font-size: 12px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.42);
+  }
+
+  .site-footer-bottom {
+    margin-top: 18px;
+    display: grid;
+    gap: 16px;
+    justify-items: center;
+    text-align: center;
+    font-size: 12px;
+    color: rgba(255,255,255,0.34);
+  }
+
+  .site-footer nav {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px 16px;
+  }
+
+  .site-footer nav a {
+    color: rgba(255,255,255,0.45);
+  }
+
+  @media (min-width: 768px) {
+    .pmx-proof-card {
+      flex-basis: 240px;
+      height: 300px;
+    }
+
+    .pmx-step-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .pmx-stats-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .pmx-member-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+
+    .locked-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .pmx-objections-list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pmx-announcement,
+    .pmx-primary-cta,
+    .pmx-primary-cta::after {
+      transition: none;
+      animation: none;
+    }
+  }
 </style>
   <script>
     (function () {
@@ -4350,817 +5249,353 @@
     <div class="bg-grid"></div>
     <div class="bg-vignette"></div>
   </div>
-  <main id="top">
-    <section class="section">
-      <div class="card">
-        <div class="hero-content">
-          <span class="eyebrow">PolishMaster</span>
-          <h1 class="hero-headline"><span class="hero-line">Stop selling layer lines.</span><span class="hero-line">Start selling products.</span></h1>
-          <p class="hero-proof">Made for makers who want prints they can confidently sell.</p>
-
-          <div class="actions">
-            <div class="cta-stack">
-              <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                <span class="cta-text">Secure Your Access</span>
-                <span class="cta-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M5 12h14"></path>
-                    <path d="m13 6 6 6-6 6"></path>
-                  </svg>
-                </span>
-              </a>
-              <span class="cta-note">
-                <span class="cta-note-primary">Limited seats left.</span>
-                <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
-              </span>
-
-            </div>
+  <div class="pmx-announcement" data-pmx-announcement>
+    <span>Launch price ends April 30</span>
+    <span>&middot;</span>
+    <span>$29 &rarr; $49</span>
+    <span>&middot;</span>
+    <a href="#pricing-section" data-scroll-pricing>Join Now &rarr;</a>
+  </div>
+  <main id="top" class="pmx-main">
+    <section class="pmx-hero" aria-label="PolishMaster hero">
+      <div class="pmx-hero-media">
+        <div class="comparison-slider" data-comparison-slider>
+          <div class="comparison-base">
+            <img src="cross-before.png" alt="Raw 3D printed cross before sanding and polishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
           </div>
-
-          <section class="founder-block" aria-label="Founder story">
-            <div class="founder-body">
-              <div class="founder-topline">
-                <span class="founder-tag">From the creator</span>
-              </div>
-              <p class="founder-quote">"I built <strong>PolishMaster</strong> to turn raw prints into product-ready finishes without guesswork."</p>
-              <div class="founder-meta">
-                <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Portrait of Hugo M., founder of PolishMaster" class="founder-photo" loading="lazy" />
-                <div class="founder-meta-copy">
-                  <div class="founder-name">Hugo M.</div>
-                  <div class="founder-role">Founder, PolishMaster</div>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <div class="visual">
-            <div class="comparison-slider" data-comparison-slider>
-              <div class="comparison-base">
-                <img src="cross-before.png" alt="Raw 3D printed cross before sanding and polishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
-              </div>
-              <div class="comparison-overlay" data-comparison-overlay>
-                <img src="cross-after.png" alt="Polished 3D printed cross after layer-line removal and finishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
-              </div>
-              <div class="comparison-divider" data-comparison-divider></div>
-              <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
-                <svg viewBox="0 0 20 20">
-                  <polyline points="6,8 3,10 6,12" />
-                  <polyline points="14,8 17,10 14,12" />
-                  <line x1="3" y1="10" x2="17" y2="10" />
-                </svg>
-              </div>
-              <div class="slider-label slider-label-raw">RAW</div>
-              <div class="slider-label slider-label-polished">POLISHED</div>
-            </div>
-            <div class="comparison-hint" aria-hidden="true">
-              <div class="comparison-hint-track" data-comparison-track>
-                <span class="comparison-hint-thumb" data-comparison-thumb></span>
-              </div>
-            </div>
+          <div class="comparison-overlay" data-comparison-overlay>
+            <img src="cross-after.png" alt="Polished 3D printed cross after layer-line removal and finishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
           </div>
-
-          <section class="flow-section system-access" aria-label="PolishMaster system access">
-            <div class="outcome-track" aria-label="PolishMaster outcomes">
-              <article class="outcome-item">
-                <h3 class="outcome-title">Remove the amateur surface look.</h3>
-                <p class="outcome-copy">Your print stops looking cheap.</p>
-              </article>
-
-              <article class="outcome-item">
-                <h3 class="outcome-title">Turn prints into sellable products.</h3>
-                <p class="outcome-copy">People read it as a product, not a print.</p>
-              </article>
-
-              <article class="outcome-item">
-                <h3 class="outcome-title">Charge with more confidence.</h3>
-                <p class="outcome-copy">Better finish. Better perception. Better price.</p>
-              </article>
-            </div>
-
-            <div class="system-access-cta actions">
-              <div class="cta-stack">
-                <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                  <span class="cta-text">Secure Your Access</span>
-                  <span class="cta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M5 12h14"></path>
-                      <path d="m13 6 6 6-6 6"></path>
-                    </svg>
-                  </span>
-                </a>
-                <span class="cta-note">
-                  <span class="cta-note-primary">Backed by 200+ real member reviews.</span>
-                  <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
-                </span>
-              </div>
-            </div>
-          </section>
-
-          <section class="flow-section reviews-section">
-            <div class="reviews-header">
-              <span class="social-label">Real Member Reviews</span>
-              <div class="reviews-title-wrap">
-                <span class="reviews-orbit" aria-hidden="true"></span>
-                <h2 class="reviews-title">Members ship cleaner finishes</h2>
-              </div>
-              <p class="reviews-copy">How makers turn raw prints into premium products.</p>
-              <div class="reviews-rating-row">
-                <strong class="reviews-big-score">4.7</strong>
-                <div class="reviews-rating-meta">
-                  <div class="stars-lg">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                  <div class="reviews-count">Based on 178 reviews from 200+ members</div>
-                </div>
-              </div>
-              <div class="reviews-proof-row">
-                <span class="reviews-proof-chip">PLA and PETG workflows</span>
-                <span class="reviews-proof-chip">Before / after proof</span>
-                <span class="reviews-proof-chip">Repeat-order outcomes</span>
-                <span class="reviews-proof-chip">Global maker feedback</span>
-              </div>
-            </div>
-            <div class="testimonials-outer">
-              <div class="testimonials-cols">
-                <div class="testimonials-col col-a">
-                  <div class="testimonials-track track-a">
-                    <article class="tcard tcard-featured">
-                      <p class="tcard-text">"My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-orange-closeup.png" alt="Close-up of a polished orange 3D printed part with a high-gloss finish" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Ethan</div>
-                          <div class="tcard-role">Etsy Seller | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"This was the first guide that felt systematic. Same part, cleaner surface, and no special tools beyond the basics."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-hook-comparison.png" alt="Before-and-after black utility hook showing raw FDM texture versus polished glossy finish" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Marcus</div>
-                          <div class="tcard-role">Hobbyist | UK</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"The sanding sequence paid for itself fast. I went from a dull surface to a clean mirror gloss in one session."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-blue-gloss.png" alt="Blue polished 3D printed object with mirror gloss on a wooden table" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Liam" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Liam</div>
-                          <div class="tcard-role">Product Designer | Canada</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Curved parts were the biggest surprise. The polished version finally looked intentional instead of straight off the printer."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-curved-comparison.png" alt="Before-and-after comparison of a curved black 3D printed part with raw and polished surfaces" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Daniel" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Daniel</div>
-                          <div class="tcard-role">Miniature Painter | Germany</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★☆☆</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Better finish quality helped me charge more. My first customer came back for three more pieces."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-car-mount.png" alt="Gloss-finished blue 3D printed car phone mount installed on a dashboard" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Sam" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Sam</div>
-                          <div class="tcard-role">Small Business Owner | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Got this for my daughter's birthday. Smooth finish, looks clean. She wore it all day. Happy with it."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-birthday-tiara.png" alt="Child wearing a birthday tiara made from a smooth finished 3D print at a party" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Ben" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Ben</div>
-                          <div class="tcard-role">Hobby Maker | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    </article>
-                  
-                    <article class="tcard tcard-featured">
-                      <p class="tcard-text">"My prints finally look sellable. Layer lines disappeared, the surface feels consistent edge to edge, and clients keep asking whether I had them professionally finished before shipping."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-orange-closeup.png" alt="Close-up of a polished orange 3D printed part with a high-gloss finish" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Ethan" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Ethan</div>
-                          <div class="tcard-role">Etsy Seller | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"This was the first guide that felt systematic. Same part, cleaner surface, and no special tools beyond the basics."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-hook-comparison.png" alt="Before-and-after black utility hook showing raw FDM texture versus polished glossy finish" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/55.jpg" alt="Marcus" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Marcus</div>
-                          <div class="tcard-role">Hobbyist | UK</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"The sanding sequence paid for itself fast. I went from a dull surface to a clean mirror gloss in one session."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-blue-gloss.png" alt="Blue polished 3D printed object with mirror gloss on a wooden table" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/44.jpg" alt="Liam" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Liam</div>
-                          <div class="tcard-role">Product Designer | Canada</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Curved parts were the biggest surprise. The polished version finally looked intentional instead of straight off the printer."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-curved-comparison.png" alt="Before-and-after comparison of a curved black 3D printed part with raw and polished surfaces" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="Daniel" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Daniel</div>
-                          <div class="tcard-role">Miniature Painter | Germany</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★☆☆</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Better finish quality helped me charge more. My first customer came back for three more pieces."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-car-mount.png" alt="Gloss-finished blue 3D printed car phone mount installed on a dashboard" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/22.jpg" alt="Sam" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Sam</div>
-                          <div class="tcard-role">Small Business Owner | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"Got this for my daughter's birthday. Smooth finish, looks clean. She wore it all day. Happy with it."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-birthday-tiara.png" alt="Child wearing a birthday tiara made from a smooth finished 3D print at a party" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/29.jpg" alt="Ben" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Ben</div>
-                          <div class="tcard-role">Hobby Maker | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                    </article>
-                  </div>
-                </div>
-                <div class="testimonials-col col-b">
-                  <div class="testimonials-track track-b">
-                    <article class="tcard">
-                      <p class="tcard-text">"The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-soap-dish.png" alt="Gloss-finished 3D printed soap dish styled as a premium bathroom product" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/63.jpg" alt="Nabil" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Nabil</div>
-                          <div class="tcard-role">Architect | Morocco</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I use it on cosplay props, and the surface upgrade reads immediately in photos. The finished piece looks production-ready."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-panel-comparison.png" alt="Gloved hands holding raw and finished black 3D printed panel-like parts" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Kai" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Kai</div>
-                          <div class="tcard-role">Cosplay Creator | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I was skeptical, but the first before-and-after sold me. Pure PLA, completely different finish."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-pla-planter.png" alt="Polished orange PLA planter holding a succulent on a windowsill" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">James</div>
-                          <div class="tcard-role">Engineer | Canada</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I followed the tougher workflow on functional parts, and the finish still came out clean enough to confidently show customers."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-bracket-comparison.png" alt="Orange-gloved hands holding a raw and a polished black 3D printed bracket" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Amir" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Amir</div>
-                          <div class="tcard-role">Maker | UAE</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★☆</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"The matte finish path cleaned up broad faces without softening the edges. That made product shots much easier."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-prism-comparison.png" alt="Hand holding a raw and a polished black faceted 3D printed part outdoors" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Carlos</div>
-                          <div class="tcard-role">Freelance Modeller | Spain</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                  
-                    <article class="tcard">
-                      <p class="tcard-text">"The polishing steps were simple and easy to follow. One session made my prints look noticeably more premium."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-soap-dish.png" alt="Gloss-finished 3D printed soap dish styled as a premium bathroom product" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/63.jpg" alt="Nabil" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Nabil</div>
-                          <div class="tcard-role">Architect | Morocco</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I use it on cosplay props, and the surface upgrade reads immediately in photos. The finished piece looks production-ready."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-panel-comparison.png" alt="Gloved hands holding raw and finished black 3D printed panel-like parts" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/81.jpg" alt="Kai" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Kai</div>
-                          <div class="tcard-role">Cosplay Creator | USA</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I was skeptical, but the first before-and-after sold me. Pure PLA, completely different finish."</p>
-                      <div class="tcard-media tcard-media--wide">
-                        <img src="review-pla-planter.png" alt="Polished orange PLA planter holding a succulent on a windowsill" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/12.jpg" alt="James" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">James</div>
-                          <div class="tcard-role">Engineer | Canada</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"I followed the tougher workflow on functional parts, and the finish still came out clean enough to confidently show customers."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-bracket-comparison.png" alt="Orange-gloved hands holding a raw and a polished black 3D printed bracket" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/37.jpg" alt="Amir" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Amir</div>
-                          <div class="tcard-role">Maker | UAE</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★☆</div>
-                    </article>
-                    <article class="tcard">
-                      <p class="tcard-text">"The matte finish path cleaned up broad faces without softening the edges. That made product shots much easier."</p>
-                      <div class="tcard-media tcard-media--portrait-proof">
-                        <img src="review-prism-comparison.png" alt="Hand holding a raw and a polished black faceted 3D printed part outdoors" loading="lazy" decoding="async" />
-                      </div>
-                      <div class="tcard-author">
-                        <img src="https://randomuser.me/api/portraits/men/41.jpg" alt="Carlos" class="tcard-avatar" />
-                        <div>
-                          <div class="tcard-name">Carlos</div>
-                          <div class="tcard-role">Freelance Modeller | Spain</div>
-                        </div>
-                      </div>
-                      <div class="tcard-stars">★★★★★</div>
-                    </article>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="reviews-more-label">Trusted by 200+ makers inside PolishMaster</div>
-            <div class="reviews-section-cta system-access-cta actions">
-              <div class="cta-stack">
-                <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                  <span class="cta-text">Secure Your Access</span>
-                  <span class="cta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M5 12h14"></path>
-                      <path d="m13 6 6 6-6 6"></path>
-                    </svg>
-                  </span>
-                </a>
-                <span class="cta-note">
-                  <span class="cta-note-primary">Limited seats left.</span>
-                  <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
-                </span>
-              </div>
-            </div>
-          </section>
-
-          <section class="flow-section reviews-bridge" aria-label="Why makers step inside PolishMaster">
-            <div class="reviews-bridge-grid">
-              <div class="reviews-bridge-copy">
-                <span class="reviews-bridge-label">Ask Yourself</span>
-                <h2 class="reviews-bridge-title">Ready to sell better?</h2>
-                <p class="reviews-bridge-lead">A clean surface needs a repeatable system.</p>
-                <p class="reviews-bridge-body">Inside PolishMaster: finish paths, core process, premium drops.</p>
-              </div>
-
-              <div class="reviews-bridge-stage" aria-hidden="true">
-                <span class="reviews-bridge-badge">Inside PolishMaster</span>
-
-                <article class="reviews-bridge-device reviews-bridge-device--single">
-                  <div class="reviews-bridge-screen">
-                    <img src="reviews-bridge-screen.png" alt="PolishMaster membership feed shown inside a mobile-style screen" loading="lazy" decoding="async" />
-                  </div>
-                </article>
-              </div>
-
-              <div class="reviews-bridge-actions system-access-cta actions">
-                <div class="cta-stack">
-                  <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                    <span class="cta-text">Secure Your Access</span>
-                    <span class="cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24">
-                        <path d="M5 12h14"></path>
-                        <path d="m13 6 6 6-6 6"></path>
-                      </svg>
-                    </span>
-                  </a>
-                  <span class="cta-note">
-                    <span class="cta-note-primary">Built around the results you just saw above.</span>
-                    <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-          </section>
-
-          <section class="flow-section inside-section" aria-label="What you get inside PolishMaster">
-            <div class="inside-header">
-              <span class="inside-label">LIMITED ACCESS</span>
-              <h2 class="inside-title">What you unlock inside</h2>
-              <p class="inside-copy">Not public. Not explained outside.</p>
-            </div>
-
-            <div class="inside-stack">
-              <article class="inside-feature inside-feature--process">
-                <div class="inside-feature-media inside-feature-media--surface">
-                  <span class="inside-feature-badge">Core process</span>
-                  <img src="surface-comparison.png" alt="Raw versus polished 3D printed surface comparison" loading="lazy" decoding="async" />
-                </div>
-                <div class="inside-feature-body">
-                  <h3 class="inside-feature-title">Finish system</h3>
-                  <p class="inside-feature-copy">The exact standard behind every product-ready surface</p>
-                  <ul class="inside-feature-list">
-                    <li>3-step sanding sequence</li>
-                    <li>Exact grit order</li>
-                    <li>No-guesswork workflow</li>
-                  </ul>
-                </div>
-              </article>
-
-              <article class="inside-feature inside-feature--finish">
-                <div class="inside-feature-media inside-feature-media--surface">
-                  <span class="inside-feature-badge">Finish paths</span>
-                  <img src="surface-control-paths.png" alt="3D printed sample showing controlled finish paths from raw to refined surface" loading="lazy" decoding="async" />
-                </div>
-                <div class="inside-feature-body">
-                  <h3 class="inside-feature-title">Surface control paths</h3>
-                  <p class="inside-feature-copy">Different finishes. Same system. No improvisation</p>
-                  <ul class="inside-feature-list">
-                    <li>Gloss finish guide</li>
-                    <li>Matte finish guide</li>
-                    <li>Built around the final look</li>
-                  </ul>
-                </div>
-              </article>
-
-              <article class="inside-feature inside-feature--materials">
-                <div class="inside-feature-media inside-feature-media--surface">
-                  <span class="inside-feature-badge">Premium model drops</span>
-                  <img src="king.png" alt="Premium polished 3D printed model showcased inside PolishMaster" loading="lazy" decoding="async" />
-                </div>
-                <div class="inside-feature-body">
-                  <h3 class="inside-feature-title">System posts &amp; premium models</h3>
-                  <p class="inside-feature-copy">Weekly premium models, built to finish clean.</p>
-                  <ul class="inside-feature-list">
-                    <li>New premium drops every week</li>
-                    <li>Shapes that polish into a premium look</li>
-                    <li>Made to feel product-ready on display</li>
-                  </ul>
-                </div>
-              </article>
-            </div>
-            <div class="inside-section-cta system-access-cta actions">
-              <div class="cta-stack">
-                <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                  <span class="cta-text">Secure Your Access</span>
-                  <span class="cta-icon" aria-hidden="true">
-                    <svg viewBox="0 0 24 24">
-                      <path d="M5 12h14"></path>
-                      <path d="m13 6 6 6-6 6"></path>
-                    </svg>
-                  </span>
-                </a>
-                <span class="cta-note">
-                  <span class="cta-note-primary">Limited seats left.</span>
-                  <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
-                </span>
-              </div>
-            </div>
-          </section>
-
-          <section class="flow-section choice-section" aria-label="PolishMaster choice">
-            <div class="choice-header">
-              <span class="choice-label">Your Surface Choice</span>
-              <h2 class="choice-title">Choose What You Sell</h2>
-              <p class="choice-copy">One finish keeps the work in hobby territory. The other makes buyers read it like a product.</p>
-            </div>
-            <div class="choice-grid">
-              <article class="choice-card">
-                <div class="choice-kicker">Leave It Raw</div>
-                <h3 class="choice-card-title">Sell Layer Lines</h3>
-                <p class="choice-card-copy">They still see a hobby seller.</p>
-                <ul class="choice-list">
-                  <li>Lower perceived value</li>
-                  <li>Less pricing power</li>
-                  <li>Buyers see a print, not a product</li>
-                </ul>
-                <div class="choice-footer choice-footer-passive">
-                  <div class="choice-meta" aria-hidden="true">
-                    <div class="choice-meta-line">
-                      <svg viewBox="0 0 24 24"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
-                      <span>Cancel anytime</span>
-                    </div>
-                    <div class="choice-price">
-                      <svg viewBox="0 0 24 24"><path d="M12 3 6 5.5v5.7c0 4.1 2.5 7.9 6 9.8 3.5-1.9 6-5.7 6-9.8V5.5L12 3z"></path></svg>
-                      <span>$29/month</span>
-                    </div>
-                    <div class="choice-anchor">Pays for itself fast.</div>
-                    <div class="choice-lock">Launch price locked.</div>
-                  </div>
-                  <a class="cta cta-secondary cta-secondary-passive" href="#top" data-return-hero>
-                    <span class="cta-text">Keep Selling Prints</span>
-                  </a>
-                </div>
-              </article>
-
-              <article class="choice-card is-action">
-                <div class="choice-kicker">PolishMaster</div>
-                <h3 class="choice-card-title">Sell Products</h3>
-                <p class="choice-card-copy">Turn prints into products.</p>
-                <ul class="choice-list">
-                  <li>Higher perceived value</li>
-                  <li>Higher price confidence</li>
-                  <li>Buyers see a product, not a print</li>
-                </ul>
-                <div class="choice-footer">
-                  <div class="choice-meta">
-                    <div class="choice-meta-line">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12"></path><path d="M18 6 6 18"></path></svg>
-                      <span>Cancel anytime</span>
-                    </div>
-                    <div class="choice-price">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 6 5.5v5.7c0 4.1 2.5 7.9 6 9.8 3.5-1.9 6-5.7 6-9.8V5.5L12 3z"></path></svg>
-                      <span>$29/month</span>
-                    </div>
-                    <div class="choice-anchor">Pays for itself fast.</div>
-                    <div class="choice-lock">Launch price locked.</div>
-                  </div>
-                  <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                    <span class="cta-text">Secure Your Access</span>
-                  </a>
-                </div>
-              </article>
-            </div>
-          </section>
-
-          <section class="flow-section faq-shell inline-faq-section">
-            <div class="faq-promo" aria-label="Lock in current access">
-              <span class="faq-promo-label">Lock In Current Access</span>
-              <div class="faq-promo-mark">
-                <span class="faq-promo-icon" aria-hidden="true">
-                  <svg viewBox="0 0 24 24">
-                    <path d="M12 16v-3"></path>
-                    <path d="M9.5 9.5V8.8a2.5 2.5 0 1 1 5 0v.7"></path>
-                    <path d="M7 11.5h10v7H7z"></path>
-                  </svg>
-                </span>
-                <h2 class="faq-promo-title">Current pricing is still available</h2>
-              </div>
-              <p class="faq-promo-lead">Join now and keep the same rate as PolishMaster grows.</p>
-              <p class="faq-promo-copy">Get the full finishing system, premium model drops, and future updates without waiting.</p>
-              <div class="faq-promo-actions system-access-cta actions">
-                <div class="cta-stack">
-                  <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-                    <span class="cta-text">Secure Your Access</span>
-                    <span class="cta-icon" aria-hidden="true">
-                      <svg viewBox="0 0 24 24">
-                        <path d="M5 12h14"></path>
-                        <path d="m13 6 6 6-6 6"></path>
-                      </svg>
-                    </span>
-                  </a>
-                  <span class="cta-note">
-                    <span class="cta-note-primary">Secure your access while the launch rate is still live.</span>
-                    <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div class="faq-header">
-              <span class="faq-section-kicker">Still Thinking?</span>
-              <h2 class="faq-section-title">Frequently Asked Questions</h2>
-            </div>
-            <div class="faq-list">
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">1. What is PolishMaster and what do I get when I join?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Full access to the PolishMaster 3D print finishing system — immediately.</span>You get a structured finishing system built for 3D print makers. <ul>
-                    <li>Full sanding sequence (grit by grit)</li>
-                    <li>Surface refinement techniques</li>
-                    <li>Polishing steps for gloss or matte</li>
-                    <li>Guidance on tool &amp; material types to use</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">2. Is this the official PolishMaster website?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes. polishmaster.co is the official website of PolishMaster.</span>This site is the official home of the PolishMaster 3D print finishing system. <ul>
-                    <li>Official brand site for PolishMaster</li>
-                    <li>Official access point to the member system and Patreon</li>
-                    <li>Focused specifically on 3D print finishing and sellable surfaces</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">3. Do you sell 3D printing tools or teach the finishing method?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">PolishMaster teaches the method — no tools or physical products are sold here.</span>This is a knowledge system, not a store. <ul>
-                    <li>No physical products are sold</li>
-                    <li>You learn what types of tools work and why</li>
-                    <li>You source the tools yourself, locally</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">4. Does PolishMaster work with PLA, PLA+ and PETG?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Built for common FDM filaments with standard sanding and polishing supplies.</span>Primarily designed for common FDM filaments. <ul>
-                    <li>Works best with PLA and PLA+</li>
-                    <li>Compatible with PETG and similar plastics</li>
-                    <li>Based on surface control, not a specific brand</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">5. Can I follow PolishMaster with tools from my local store?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">The system is built around tool categories, not brands — substitutions work.</span>The method focuses on principles, not specific brands. <ul>
-                    <li>You'll learn what properties matter in each tool</li>
-                    <li>Local hardware-store alternatives work fine</li>
-                    <li>Contact available after joining for specific questions</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">6. Does PolishMaster work for miniatures, figures and cosplay props?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Yes for most prints — highly detailed miniatures just require more care.</span>The method works, but small parts require more patience. <ul>
-                    <li>Great results on regular-sized models</li>
-                    <li>Challenging on ultra-detailed miniatures</li>
-                    <li>Flat and curved surfaces both supported</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-              <div class="faq-item">
-                <button class="faq-toggle" type="button">
-                  <span class="faq-question">7. Still have questions?</span>
-                  <span class="faq-icon"><svg viewBox="0 0 14 14"><line x1="7" y1="1" x2="7" y2="13"/><line x1="1" y1="7" x2="13" y2="7"/></svg></span>
-                </button>
-                <div class="faq-content"><div class="faq-content-inner"><div class="faq-answer"><span class="faq-lead">Use the Contact button below and send us your question directly.</span>If you're still unsure, tap the Contact button below and we'll point you in the right direction. <ul>
-                    <li>Best for specific questions before joining</li>
-                    <li>Helpful if your case is different from the examples above</li>
-                    <li>Fastest way to get a direct answer from us</li>
-                  </ul>
-                </div></div></div>
-              </div>
-
-            </div>
-          </section>
-          <div class="cta-stack">
-            <a class="cta cta-secondary" href="https://www.patreon.com/15111337/join">
-              <span class="cta-text">Secure Your Access</span>
-              <span class="cta-icon" aria-hidden="true">
-                <svg viewBox="0 0 24 24"><path d="M5 12h14"></path><path d="m13 6 6 6-6 6"></path></svg>
-              </span>
-            </a>
-            <span class="cta-note">
-              <span class="cta-note-primary">Limited seats left.</span>
-              <span class="cta-note-secondary">No Patreon? 30-sec setup or Google.</span>
-            </span>
+          <div class="comparison-divider" data-comparison-divider></div>
+          <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
+            <svg viewBox="0 0 20 20">
+              <polyline points="6,8 3,10 6,12" />
+              <polyline points="14,8 17,10 14,12" />
+              <line x1="3" y1="10" x2="17" y2="10" />
+            </svg>
           </div>
+          <div class="slider-label slider-label-raw">RAW</div>
+          <div class="slider-label slider-label-polished">POLISHED</div>
+        </div>
+        <div class="pmx-hero-media-gradient"></div>
+      </div>
+      <div class="pmx-shell pmx-hero-copy">
+        <span class="pmx-kicker">USED BY 217 MAKERS</span>
+        <h1 class="pmx-hero-title">
+          <span class="is-muted">Your prints look homemade.</span>
+          <span>They don't have to.</span>
+        </h1>
+        <p class="pmx-hero-subhead pmx-copy-limit">The finishing system makers use to charge 3-5x more. Works on PLA, PLA+, and PETG.</p>
+        <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join">Join the System - $29/mo</a>
+        <div class="pmx-trust-row" aria-label="Membership trust row">
+          <strong>&#9733; 4.7</strong>
+          <span class="dot">&middot;</span>
+          <span>178 members</span>
+          <span class="dot">&middot;</span>
+          <span>Cancel anytime</span>
         </div>
       </div>
     </section>
+
+    <section class="pmx-identity" aria-label="Identity statement">
+      <div class="pmx-shell">
+        <p class="pmx-identity-title pmx-copy-limit">You're not undercharging because your work isn't good. You're undercharging because your surface looks <span class="is-accent">unfinished.</span></p>
+        <p class="pmx-identity-copy pmx-copy-limit">PolishMaster fixes the surface. The price follows.</p>
+      </div>
+    </section>
+
+    <section class="pmx-section pmx-proof" aria-label="What members produce">
+      <div class="pmx-shell pmx-center">
+        <span class="pmx-kicker pmx-kicker--muted">What members produce</span>
+      </div>
+      <div class="pmx-proof-wall" aria-label="Member proof wall">
+        <article class="pmx-proof-card">
+          <img src="review-car-mount.png" alt="Blue finished car mount with smooth glossy surface" loading="lazy" decoding="async" />
+          <span class="pmx-proof-name">Jake M.</span>
+        </article>
+        <article class="pmx-proof-card">
+          <img src="review-orange-closeup.png" alt="Glossy orange finished print close-up" loading="lazy" decoding="async" />
+          <span class="pmx-proof-name">Liam R.</span>
+        </article>
+        <article class="pmx-proof-card">
+          <img src="review-pla-planter.png" alt="Orange geometric planter with polished surface on a wooden table" loading="lazy" decoding="async" />
+          <span class="pmx-proof-name">Sara T.</span>
+        </article>
+        <article class="pmx-proof-card">
+          <img src="review-soap-dish.png" alt="Polished soap dish 3D print on a marble bathroom counter" loading="lazy" decoding="async" />
+          <span class="pmx-proof-name">Ben K.</span>
+        </article>
+        <article class="pmx-proof-card">
+          <img src="review-bracket-comparison.png" alt="Before-and-after black bracket print showing raw and polished versions" loading="lazy" decoding="async" />
+          <span class="pmx-proof-name">Amir H.</span>
+        </article>
+        <article class="pmx-proof-card">
+          <img src="review-candle-holder.png" alt="Finished candle holder on a wooden table" loading="lazy" decoding="async" />
+          <span class="pmx-proof-name">Nabil A.</span>
+        </article>
+      </div>
+      <p class="pmx-proof-meta">217 active members &middot; 94% renew past 30 days</p>
+    </section>
+
+    <section class="pmx-section pmx-system" aria-label="The PolishMaster system">
+      <div class="pmx-shell pmx-center pmx-system-header">
+        <span class="pmx-kicker">THE SYSTEM</span>
+        <h2 class="pmx-section-title">3 steps. Repeatable every time.</h2>
+      </div>
+      <div class="pmx-shell">
+        <div class="pmx-step-grid">
+          <article class="pmx-step-card">
+            <div class="pmx-step-media">
+              <img src="surface-comparison.png" alt="Raw and polished prints used to show the prep stage" loading="lazy" decoding="async" />
+              <span class="pmx-step-badge">01</span>
+            </div>
+            <div class="pmx-step-body">
+              <h3 class="pmx-step-title">Prep the surface</h3>
+              <ul class="pmx-step-list">
+                <li>Exact grit sequence: 220 - 400 - 800</li>
+                <li>Works on PLA, PLA+, PETG</li>
+                <li>20-30 min on standard prints</li>
+              </ul>
+            </div>
+          </article>
+          <article class="pmx-step-card">
+            <div class="pmx-step-media">
+              <img src="surface-control-paths.png" alt="Surface control paths used to choose final finish" loading="lazy" decoding="async" />
+              <span class="pmx-step-badge">02</span>
+            </div>
+            <div class="pmx-step-body">
+              <h3 class="pmx-step-title">Choose your finish</h3>
+              <ul class="pmx-step-list">
+                <li>Gloss path: final compound application</li>
+                <li>Matte path: controlled flatting agent</li>
+                <li>Same process - different endpoint</li>
+              </ul>
+            </div>
+          </article>
+          <article class="pmx-step-card">
+            <div class="pmx-step-media">
+              <img src="king.png" alt="Premium-looking finished print result" loading="lazy" decoding="async" />
+              <span class="pmx-step-badge">03</span>
+            </div>
+            <div class="pmx-step-body">
+              <h3 class="pmx-step-title">Product-ready result</h3>
+              <ul class="pmx-step-list">
+                <li>No visible layer lines</li>
+                <li>Passes the "injection-molded" test</li>
+                <li>Shelf, sale, or gift - same standard</li>
+              </ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pmx-section pmx-outcomes" aria-label="Outcome numbers">
+      <div class="pmx-shell pmx-center">
+        <span class="pmx-kicker pmx-kicker--muted">What the system delivers</span>
+      </div>
+      <div class="pmx-shell">
+        <div class="pmx-stats-grid">
+          <article class="pmx-stat-card">
+            <strong class="pmx-stat-value">+$28</strong>
+            <span class="pmx-stat-label">avg. price lift per piece</span>
+          </article>
+          <article class="pmx-stat-card">
+            <strong class="pmx-stat-value">38 min</strong>
+            <span class="pmx-stat-label">avg. finish time</span>
+          </article>
+          <article class="pmx-stat-card">
+            <strong class="pmx-stat-value">3</strong>
+            <span class="pmx-stat-label">filament types covered</span>
+          </article>
+          <article class="pmx-stat-card">
+            <strong class="pmx-stat-value">94%</strong>
+            <span class="pmx-stat-label">renew past 30 days</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pmx-section pmx-members" aria-label="Member results">
+      <div class="pmx-shell pmx-center pmx-members-header">
+        <h2 class="pmx-section-title">From the members</h2>
+        <p class="pmx-section-subtitle">Real results. No stock photos.</p>
+      </div>
+      <div class="pmx-shell">
+        <div class="pmx-member-list">
+          <article class="tcard-v2">
+            <div class="pmx-member-top">
+              <div>
+                <div class="pmx-member-name">Jake M.</div>
+                <div class="pmx-member-meta">Etsy seller &middot; Portland, OR</div>
+              </div>
+              <div class="pmx-member-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+            <div class="pmx-member-outcome">Went from $9 to $52 per piece.</div>
+            <p class="pmx-member-quote">After the sanding sequence, the exact same print stopped looking homemade. Buyers started reading it like a finished product instead of a raw print.</p>
+          </article>
+          <article class="tcard-v2">
+            <div class="pmx-member-top">
+              <div>
+                <div class="pmx-member-name">Liam R.</div>
+                <div class="pmx-member-meta">Product designer &middot; Toronto, ON</div>
+              </div>
+              <div class="pmx-member-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+            <div class="pmx-member-outcome">Customers ask if it's injection-molded.</div>
+            <p class="pmx-member-quote">The gloss path made the part look calmer and more expensive on the first session. That one surface shift changed how customers judged the whole piece.</p>
+          </article>
+          <article class="tcard-v2">
+            <div class="pmx-member-top">
+              <div>
+                <div class="pmx-member-name">Sam T.</div>
+                <div class="pmx-member-meta">Small shop owner &middot; Austin, TX</div>
+              </div>
+              <div class="pmx-member-stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+            </div>
+            <div class="pmx-member-outcome">First sale after joining paid for 6 months.</div>
+            <p class="pmx-member-quote">I applied the system on my next print and the difference was immediate. The first cleaner sale covered the membership before the month even ended.</p>
+          </article>
+        </div>
+        <p class="pmx-members-aggregate">&#9733;&#9733;&#9733;&#9733;&#9734;  4.7 average  &middot;  178 verified reviews</p>
+      </div>
+    </section>
+
+    <section class="pmx-section pmx-locked" aria-label="Locked preview">
+      <div class="pmx-shell pmx-center">
+        <h2 class="pmx-section-title">Inside PolishMaster</h2>
+        <p class="pmx-section-subtitle">Unlocks the moment you join.</p>
+      </div>
+      <div class="pmx-shell">
+        <div class="locked-grid">
+          <article class="locked-card">
+            <img src="surface-comparison.png" alt="Blurred preview of the 3-step sanding system" loading="lazy" decoding="async" />
+            <div class="locked-card-overlay">
+              <span class="locked-card-lock">&#128274;</span>
+              <span class="locked-card-label">3-Step Sanding System</span>
+            </div>
+          </article>
+          <article class="locked-card">
+            <img src="review-blue-gloss.png" alt="Blurred preview of gloss finish path" loading="lazy" decoding="async" />
+            <div class="locked-card-overlay">
+              <span class="locked-card-lock">&#128274;</span>
+              <span class="locked-card-label">Gloss Finish Path</span>
+            </div>
+          </article>
+          <article class="locked-card">
+            <img src="surface-control-paths.png" alt="Blurred preview of matte finish path" loading="lazy" decoding="async" />
+            <div class="locked-card-overlay">
+              <span class="locked-card-lock">&#128274;</span>
+              <span class="locked-card-label">Matte Finish Path</span>
+            </div>
+          </article>
+          <article class="locked-card locked-card--weekly">
+            <img src="king.png" alt="Blurred preview of this week's model drop" loading="lazy" decoding="async" />
+            <div class="locked-card-overlay">
+              <span class="locked-card-lock">&#128274;</span>
+              <span class="locked-card-label">This Week's Drop &rarr;</span>
+              <span class="locked-card-sub">New every Monday</span>
+            </div>
+          </article>
+        </div>
+        <a class="pmx-inline-link" href="#pricing-section" data-scroll-pricing>Join to unlock all content &rarr;</a>
+      </div>
+    </section>
+
+    <section class="pmx-section pmx-objections" aria-label="Before you decide">
+      <div class="pmx-shell pmx-center">
+        <h2 class="pmx-section-title">Before you decide</h2>
+      </div>
+      <div class="pmx-shell">
+        <div class="pmx-objections-list">
+          <article class="objection-block">
+            <h3>Will this work on my printer and filament?</h3>
+            <p>Yes. The system is built around PLA, PLA+, and PETG - the three most common filament types. It doesn't matter whether you have a Bambu, Prusa, Ender, or anything else. The surface prep happens after the print.</p>
+          </article>
+          <article class="objection-block">
+            <h3>What if I join and it's not right for me?</h3>
+            <p>Cancel anytime from your Patreon dashboard - no emails, no forms, no waiting. One click. Your access ends at the current billing period.</p>
+          </article>
+          <article class="objection-block">
+            <h3>How fast will I see results?</h3>
+            <p>Most members apply the system on their first print within 24 hours of joining. The before/after difference is visible on that same piece. Charging more takes longer - it depends on your platform and audience - but the surface difference is immediate.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="pmx-section pmx-pricing" id="pricing-section" aria-label="Pricing">
+      <div class="pmx-shell pmx-center">
+        <span class="pmx-kicker">JOIN POLISHMASTER</span>
+        <p class="pmx-section-subtitle">One plan. Everything included.</p>
+      </div>
+      <div class="pmx-shell">
+        <div class="pricing-card-single">
+          <span class="pmx-pricing-badge">LAUNCH PRICE - ends April 30</span>
+          <div class="pmx-price-row">
+            <strong class="pmx-price">$29</strong>
+            <span class="pmx-price-unit">/month</span>
+          </div>
+          <p class="pmx-price-note">Increases to $49 on May 1</p>
+          <ul class="pmx-pricing-list">
+            <li>3-step sanding system with exact grit specs</li>
+            <li>Gloss and matte finish guides</li>
+            <li>Weekly premium model drops</li>
+            <li>New content added every month</li>
+            <li>Cancel anytime - no contracts</li>
+          </ul>
+          <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join">Join the System - $29/mo</a>
+          <div class="pmx-pricing-trust">
+            <span>&#128274; Secure checkout</span>
+            <span>&middot;</span>
+            <span>Cancel anytime</span>
+          </div>
+        </div>
+        <p class="pmx-pricing-italic">Members report recovering their first month's cost in a single sale.</p>
+      </div>
+    </section>
+
+    <section class="pmx-section pmx-founder" aria-label="Founder note">
+      <div class="pmx-shell">
+        <article class="founder-block-v2">
+          <div class="pmx-founder-top">
+            <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Portrait of Hugo M., founder of PolishMaster" class="pmx-founder-photo" loading="lazy" />
+            <div>
+              <div class="pmx-founder-name">Hugo M.</div>
+              <div class="pmx-founder-role">Founder, PolishMaster</div>
+            </div>
+          </div>
+          <p class="pmx-founder-quote">I was charging $8 for prints that cost me $4 to make. After cracking the finishing system, my average order went to $47. I built PolishMaster so you don't spend two years figuring out what I figured out the hard way.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="final-cta-block" aria-label="Final call to action">
+      <div class="pmx-shell">
+        <p class="pmx-final-muted">Still finishing raw?</p>
+        <p class="pmx-final-strong">Everyone here was, before they joined.</p>
+        <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join">Join the System - $29/mo</a>
+        <p class="pmx-final-note">217 makers already inside.</p>
+      </div>
+    </section>
+    <template id="legacy-main"></template>
   </main>
 
   <footer class="site-footer">
+    <a class="site-footer-question" href="#" data-contact>Questions? &rarr;</a>
     <div class="site-footer-brand">
       <span class="site-footer-brand-lead">Official website of PolishMaster.</span>
       <span class="site-footer-brand-copy">The 3D print finishing system built for makers who want premium-looking, sellable products.</span>
     </div>
-    <div>&copy; 2026 PolishMaster. All rights reserved.</div>
-    <nav>
-      <a href="#" data-modal="privacy">Privacy</a>
-      <a href="#" data-modal="security">Security</a>
-      <a href="#" data-modal="terms">Terms</a>
-      <a href="#" data-contact>Contact</a>
-    </nav>
+    <div class="site-footer-bottom">
+      <div>&copy; 2026 PolishMaster. All rights reserved.</div>
+      <nav>
+        <a href="#" data-modal="privacy">Privacy</a>
+        <a href="#" data-modal="security">Security</a>
+        <a href="#" data-modal="terms">Terms</a>
+        <a href="#" data-contact>Contact</a>
+      </nav>
+    </div>
   </footer>
 
   <!-- LEGAL MODALS -->
@@ -5370,6 +5805,47 @@
       });
 
       setupReviewsBridgeAnimation();
+    })();
+  </script>
+
+  <script>
+    (function () {
+      var body = document.body;
+      var announcement = document.querySelector('[data-pmx-announcement]');
+      if (!announcement) return;
+
+      var lastScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+      var ticking = false;
+
+      function updateAnnouncement() {
+        ticking = false;
+        var currentScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+        if (currentScroll < 16 || currentScroll < lastScroll) {
+          body.classList.remove('pmx-announcement-hidden');
+        } else if (currentScroll > lastScroll + 4) {
+          body.classList.add('pmx-announcement-hidden');
+        }
+        lastScroll = currentScroll;
+      }
+
+      function requestAnnouncementUpdate() {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(updateAnnouncement);
+      }
+
+      document.querySelectorAll('[data-scroll-pricing]').forEach(function (link) {
+        link.addEventListener('click', function (e) {
+          var target = document.getElementById('pricing-section');
+          if (!target) return;
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      updateAnnouncement();
+      window.addEventListener('scroll', requestAnnouncementUpdate, { passive: true });
+      window.addEventListener('resize', requestAnnouncementUpdate);
     })();
   </script>
 
@@ -5585,7 +6061,7 @@
         return 'data:image/svg+xml;charset=UTF-8,' + encodeURIComponent(svg);
       }
 
-      document.querySelectorAll('.tcard-avatar, .founder-photo').forEach(function(image) {
+      document.querySelectorAll('.tcard-avatar, .founder-photo, .pmx-founder-photo').forEach(function(image) {
         image.addEventListener('error', function() {
           var label = image.getAttribute('alt') || 'PolishMaster member';
           image.src = makeFallbackAvatar(label);
@@ -5606,13 +6082,12 @@
         });
       });
 
-      var contactLink = document.querySelector('[data-contact]');
-      if (contactLink) {
+      document.querySelectorAll('[data-contact]').forEach(function(contactLink) {
         contactLink.addEventListener('click', function(e) {
           e.preventDefault();
           openContact();
         });
-      }
+      });
 
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
@@ -5738,5 +6213,6 @@
   </script>
 </body>
 </html>
+
 
 
