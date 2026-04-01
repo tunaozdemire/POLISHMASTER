@@ -4548,6 +4548,14 @@
     display: block;
   }
 
+  .pmx-hero-title .hero-line-dim {
+    color: rgba(255,255,255,0.35);
+  }
+
+  .pmx-hero-title .hero-line-bright {
+    color: #ffffff;
+  }
+
   .pmx-hero-title .is-muted {
     color: rgba(255,255,255,0.38);
   }
@@ -4799,6 +4807,11 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 12px;
+  }
+
+  .pmx-system-stack {
+    display: grid;
+    gap: 24px;
   }
 
   .pmx-stat-card {
@@ -5295,16 +5308,9 @@
   }
 
   .pmx-announcement-label {
-    display: inline-flex;
-    align-items: center;
-    min-height: 26px;
-    padding: 0 10px;
-    border-radius: 999px;
-    background: rgba(0,0,0,0.08);
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     white-space: nowrap;
   }
 
@@ -5319,9 +5325,9 @@
 
   .pmx-announcement-price {
     justify-self: end;
-    font-size: 14px;
-    font-weight: 800;
-    letter-spacing: -0.02em;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
     white-space: nowrap;
   }
 
@@ -5342,9 +5348,7 @@
   }
 
   body.pmx-announcement-compact .pmx-announcement-label {
-    min-height: 22px;
-    padding: 0 9px;
-    font-size: 10px;
+    font-size: 12px;
   }
 
   body.pmx-announcement-compact .pmx-announcement-link,
@@ -5407,73 +5411,54 @@
     transition: transform 0.55s ease, opacity 0.2s ease;
   }
 
-  .pmx-proof-strip {
-    padding-top: 0;
-    margin-top: -16px;
+  .pmx-proof > .pmx-center {
+    margin-bottom: 20px;
   }
 
-  .pmx-proof-strip-grid {
-    display: grid;
+  .pmx-proof-wall {
+    display: flex;
+    flex-direction: row;
     gap: 10px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    padding: 0 20px 16px;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
   }
 
-  .pmx-proof-strip-card {
-    padding: 16px 18px;
-    border-radius: 18px;
-    border: 1px solid var(--pmx-line);
-    background: rgba(12,12,14,0.92);
-  }
-
-  .pmx-proof-strip-card strong {
-    display: block;
-    margin-bottom: 4px;
-    font-size: 16px;
-    font-weight: 800;
-    line-height: 1.15;
-    color: #fff;
-    letter-spacing: -0.02em;
-  }
-
-  .pmx-proof-strip-card span {
-    font-size: 13px;
-    color: rgba(255,255,255,0.52);
-  }
-
-  .pmx-proof-stack {
-    display: grid;
-    gap: 16px;
-  }
-
-  .pmx-proof-card--stack {
-    display: grid;
-    height: auto;
-    flex: initial;
-    scroll-snap-align: unset;
-  }
-
-  .pmx-proof-card--stack::after {
+  .pmx-proof-wall::-webkit-scrollbar {
     display: none;
   }
 
-  .pmx-proof-card--stack img {
-    min-height: 280px;
+  .pmx-proof-wall .pmx-proof-card {
+    flex: 0 0 200px;
+    min-width: 200px;
+    height: 260px;
+  }
+
+  .pmx-proof-wall .pmx-proof-card img {
     transform: scale(1.035);
     transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .pmx-proof-card--stack.is-visible img,
-  .pmx-proof-card--stack[data-reveal].is-visible img {
+  .pmx-proof-wall .pmx-proof-card.is-visible img,
+  .pmx-proof-wall .pmx-proof-card[data-reveal].is-visible img {
     transform: scale(1);
   }
 
   .pmx-proof-card-copy {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 10px;
+    z-index: 2;
     display: grid;
-    gap: 6px;
-    padding: 16px 16px 18px;
+    gap: 4px;
   }
 
   .pmx-proof-outcome {
-    font-size: 17px;
+    font-size: 13px;
     font-weight: 800;
     line-height: 1.18;
     color: #fff;
@@ -5481,12 +5466,8 @@
   }
 
   .pmx-proof-caption {
-    font-size: 12px;
-    color: rgba(255,255,255,0.5);
-  }
-
-  .pmx-proof-name {
-    display: none;
+    font-size: 11px;
+    color: rgba(255,255,255,0.7);
   }
 
   .pmx-system-header {
@@ -5808,54 +5789,19 @@
     font-weight: 600;
   }
 
-  .pmx-faq-list {
-    grid-template-columns: 1fr;
-  }
-
-  .pmx-faq-item {
-    padding: 0;
-  }
-
-  .pmx-faq-toggle {
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 18px 20px;
-    background: transparent;
-    color: #fff;
+  .objection-q {
+    margin-bottom: 10px;
     font-size: 15px;
     font-weight: 700;
-    text-align: left;
+    color: #f7efe8;
   }
 
-  .pmx-faq-caret {
-    flex-shrink: 0;
-    color: rgba(255,255,255,0.56);
-    transition: transform 0.24s ease;
-  }
-
-  .pmx-faq-panel {
-    display: grid;
-    grid-template-rows: 0fr;
-    transition: grid-template-rows 0.24s ease;
-  }
-
-  .pmx-faq-panel > * {
-    overflow: hidden;
-  }
-
-  .pmx-faq-panel p {
-    padding: 0 20px 18px;
-  }
-
-  .pmx-faq-item.is-open .pmx-faq-panel {
-    grid-template-rows: 1fr;
-  }
-
-  .pmx-faq-item.is-open .pmx-faq-caret {
-    transform: rotate(45deg);
+  .objection-a {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.58);
   }
 
   .pmx-founder-case {
@@ -5878,6 +5824,45 @@
   }
 
   @media (max-width: 767px) {
+    .pmx-hero {
+      min-height: unset;
+      height: auto;
+    }
+
+    .pmx-hero-media,
+    .pmx-hero-media .comparison-slider {
+      height: min(55vw, 260px);
+    }
+
+    .pmx-hero-copy {
+      margin-top: 24px;
+    }
+
+    .pmx-hero-title {
+      margin-bottom: 12px;
+    }
+
+    .pmx-hero-subhead {
+      margin-bottom: 20px;
+      font-size: 15px;
+      line-height: 1.5;
+    }
+
+    .pmx-hero-chips {
+      gap: 8px;
+      margin: 0 0 16px;
+    }
+
+    .pmx-chip {
+      min-height: 32px;
+      padding: 0 10px;
+      font-size: 11px;
+    }
+
+    .pmx-trust-row {
+      margin-top: 10px;
+    }
+
     .pmx-system-header {
       margin-bottom: 18px;
     }
@@ -5910,18 +5895,6 @@
   @media (min-width: 768px) {
     .pmx-announcement-bar {
       grid-template-columns: auto 1fr auto;
-    }
-
-    .pmx-proof-strip-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .pmx-proof-stack {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .pmx-proof-card--stack img {
-      min-height: 320px;
     }
 
     .pmx-mechanism-stage {
@@ -5960,13 +5933,10 @@
     .pmx-mechanism-node,
     .pmx-mechanism-item,
     .pmx-member-expand,
-    .pmx-faq-panel,
-    .pmx-faq-caret,
     .pmx-announcement,
     .pmx-announcement-progress > span,
     .pmx-primary-cta,
-    .pmx-primary-cta::after,
-    .pmx-proof-card--stack img {
+    .pmx-primary-cta::after {
       transition: none !important;
       animation: none !important;
       transform: none !important;
@@ -5995,8 +5965,8 @@
   </div>
   <div class="pmx-announcement" data-pmx-announcement>
     <div class="pmx-announcement-bar pmx-shell">
-      <span class="pmx-announcement-label">Launch Price Active</span>
-      <a class="pmx-announcement-link" href="#pricing-section" data-scroll-pricing>Join Now &rarr;</a>
+      <span class="pmx-announcement-label">Price increases May 1</span>
+      <a class="pmx-announcement-link" href="#pricing-section" data-scroll-pricing>Join at $29 &rarr;</a>
       <strong class="pmx-announcement-price">$29 &rarr; $49</strong>
     </div>
     <span class="pmx-announcement-progress" aria-hidden="true"><span data-pmx-progress></span></span>
@@ -6027,8 +5997,8 @@
       <div class="pmx-shell pmx-hero-copy">
         <span class="pmx-kicker" data-reveal="text">USED BY 217 MAKERS</span>
         <h1 class="pmx-hero-title" data-reveal="text">
-          <span>Stop selling prints</span>
-          <span>that look <span class="is-muted">printed.</span></span>
+          <span class="hero-line-dim">Your prints look homemade.</span>
+          <span class="hero-line-bright">They don't have to.</span>
         </h1>
         <p class="pmx-hero-subhead pmx-copy-limit" data-reveal="text">The finishing system makers use to charge 3-5x more. Works on PLA, PLA+, and PETG.</p>
         <div class="pmx-hero-chips">
@@ -6047,23 +6017,6 @@
       </div>
     </section>
 
-    <section class="pmx-section pmx-proof-strip" aria-label="Fast proof highlights">
-      <div class="pmx-shell pmx-proof-strip-grid">
-        <article class="pmx-proof-strip-card" data-reveal="card">
-          <strong>Went from $9 &rarr; $52</strong>
-          <span>Higher perceived value</span>
-        </article>
-        <article class="pmx-proof-strip-card" data-reveal="card">
-          <strong>Injection-molded look</strong>
-          <span>Cleaner surface read</span>
-        </article>
-        <article class="pmx-proof-strip-card" data-reveal="card">
-          <strong>Paid back in 1 sale</strong>
-          <span>Immediate cost recovery</span>
-        </article>
-      </div>
-    </section>
-
     <section class="pmx-identity" aria-label="Identity statement">
       <div class="pmx-shell">
         <p class="pmx-identity-title pmx-copy-limit" data-reveal="text">You're not undercharging because your work isn't bad. You're undercharging because your surface still looks <span class="is-accent">unfinished.</span></p>
@@ -6074,45 +6027,44 @@
     <section class="pmx-section pmx-proof" aria-label="What members produce">
       <div class="pmx-shell pmx-center">
         <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">What members produce</span>
-        <h2 class="pmx-section-title" data-reveal="text">Cleaner surface. Higher perceived value.</h2>
       </div>
-      <div class="pmx-shell pmx-proof-stack" aria-label="Member proof wall">
-        <article class="pmx-proof-card pmx-proof-card--stack" data-reveal="card">
+      <div class="pmx-proof-wall" aria-label="Member proof wall">
+        <article class="pmx-proof-card" data-reveal="card">
           <img src="review-car-mount.png" alt="Blue finished car mount with smooth glossy surface" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Retail look</strong>
             <span class="pmx-proof-caption">Jake M. · interior accessory</span>
           </div>
         </article>
-        <article class="pmx-proof-card pmx-proof-card--stack" data-reveal="card">
+        <article class="pmx-proof-card" data-reveal="card">
           <img src="review-orange-closeup.png" alt="Glossy orange finished print close-up" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Higher perceived value</strong>
             <span class="pmx-proof-caption">Liam R. · premium product surface</span>
           </div>
         </article>
-        <article class="pmx-proof-card pmx-proof-card--stack" data-reveal="card">
+        <article class="pmx-proof-card" data-reveal="card">
           <img src="review-pla-planter.png" alt="Orange geometric planter with polished surface on a wooden table" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Gift-ready finish</strong>
             <span class="pmx-proof-caption">Sara T. · home decor drop</span>
           </div>
         </article>
-        <article class="pmx-proof-card pmx-proof-card--stack" data-reveal="card">
+        <article class="pmx-proof-card" data-reveal="card">
           <img src="review-soap-dish.png" alt="Polished soap dish 3D print on a marble bathroom counter" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Cleaner read at first glance</strong>
             <span class="pmx-proof-caption">Ben K. · bathroom accessory</span>
           </div>
         </article>
-        <article class="pmx-proof-card pmx-proof-card--stack" data-reveal="card">
+        <article class="pmx-proof-card" data-reveal="card">
           <img src="review-bracket-comparison.png" alt="Before-and-after black bracket print showing raw and polished versions" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Before/after difference that sells</strong>
             <span class="pmx-proof-caption">Amir H. · bracket comparison</span>
           </div>
         </article>
-        <article class="pmx-proof-card pmx-proof-card--stack" data-reveal="card">
+        <article class="pmx-proof-card" data-reveal="card">
           <img src="review-candle-holder.png" alt="Finished candle holder on a wooden table" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Premium shelf presence</strong>
@@ -6126,55 +6078,52 @@
     <section class="pmx-section pmx-system pmx-mechanism" aria-label="How the system works">
       <div class="pmx-shell pmx-center pmx-system-header">
         <span class="pmx-kicker" data-reveal="text">THE SYSTEM</span>
-        <h2 class="pmx-section-title" data-reveal="text">Print to price, in 5 states.</h2>
+        <h2 class="pmx-section-title" data-reveal="text">3 steps. Repeatable every time.</h2>
       </div>
       <div class="pmx-shell">
-        <div class="pmx-mechanism-stage" data-system-stage>
-          <div class="pmx-mechanism-visual" aria-hidden="true">
-            <div class="pmx-mechanism-progress-track"><span class="pmx-mechanism-progress-fill"></span></div>
-            <div class="pmx-mechanism-node is-active" data-step-node="0">
-              <span class="pmx-node-index">01</span>
-              <span class="pmx-node-label">Print</span>
+        <div class="pmx-system-stack">
+          <article class="pmx-step-card" data-reveal="card">
+            <div class="pmx-step-media">
+              <img src="surface-comparison.png" alt="Sanding surface prep step" loading="lazy" decoding="async" />
+              <span class="pmx-step-badge">01</span>
             </div>
-            <div class="pmx-mechanism-node" data-step-node="1">
-              <span class="pmx-node-index">02</span>
-              <span class="pmx-node-label">Surface control</span>
+            <div class="pmx-step-body">
+              <h3 class="pmx-step-title">Prep the surface</h3>
+              <ul class="pmx-step-list">
+                <li>Exact grit sequence: 220 &rarr; 400 &rarr; 800</li>
+                <li>Works on PLA, PLA+, PETG</li>
+                <li>20-30 min on standard prints</li>
+              </ul>
             </div>
-            <div class="pmx-mechanism-node" data-step-node="2">
-              <span class="pmx-node-index">03</span>
-              <span class="pmx-node-label">Finish path</span>
+          </article>
+          <article class="pmx-step-card" data-reveal="card">
+            <div class="pmx-step-media">
+              <img src="surface-control-paths.png" alt="Finish path selection" loading="lazy" decoding="async" />
+              <span class="pmx-step-badge">02</span>
             </div>
-            <div class="pmx-mechanism-node" data-step-node="3">
-              <span class="pmx-node-index">04</span>
-              <span class="pmx-node-label">Perception</span>
+            <div class="pmx-step-body">
+              <h3 class="pmx-step-title">Choose your finish</h3>
+              <ul class="pmx-step-list">
+                <li>Gloss path: final compound application</li>
+                <li>Matte path: controlled flatting agent</li>
+                <li>Same process - different endpoint</li>
+              </ul>
             </div>
-            <div class="pmx-mechanism-node" data-step-node="4">
-              <span class="pmx-node-index">05</span>
-              <span class="pmx-node-label">Monetization</span>
+          </article>
+          <article class="pmx-step-card" data-reveal="card">
+            <div class="pmx-step-media">
+              <img src="king.png" alt="Finished product-ready result" loading="lazy" decoding="async" />
+              <span class="pmx-step-badge">03</span>
             </div>
-          </div>
-          <div class="pmx-mechanism-copy">
-            <div class="pmx-mechanism-item is-active" data-step-copy="0">
-              <strong>Print</strong>
-              <span>Raw layer lines set the first read.</span>
+            <div class="pmx-step-body">
+              <h3 class="pmx-step-title">Product-ready result</h3>
+              <ul class="pmx-step-list">
+                <li>No visible layer lines</li>
+                <li>Passes the "injection-molded" test</li>
+                <li>Shelf, sale, or gift - same standard</li>
+              </ul>
             </div>
-            <div class="pmx-mechanism-item" data-step-copy="1">
-              <strong>Surface control</strong>
-              <span>Exact prep removes randomness from the result.</span>
-            </div>
-            <div class="pmx-mechanism-item" data-step-copy="2">
-              <strong>Finish path</strong>
-              <span>Gloss or matte changes the endpoint, not the system.</span>
-            </div>
-            <div class="pmx-mechanism-item" data-step-copy="3">
-              <strong>Perception</strong>
-              <span>The cleaner read makes the part feel manufactured.</span>
-            </div>
-            <div class="pmx-mechanism-item" data-step-copy="4">
-              <strong>Monetization</strong>
-              <span>Better perceived quality creates room to charge more.</span>
-            </div>
-          </div>
+          </article>
         </div>
       </div>
     </section>
@@ -6198,8 +6147,8 @@
             <span class="pmx-stat-label">renew past 30 days</span>
           </article>
           <article class="pmx-stat-card" data-reveal="card">
-            <strong class="pmx-stat-value" data-count="217">217</strong>
-            <span class="pmx-stat-label">active members</span>
+            <strong class="pmx-stat-value" data-count="3">3</strong>
+            <span class="pmx-stat-label">filament types covered</span>
           </article>
         </div>
       </div>
@@ -6222,6 +6171,8 @@
             <li data-reveal="card">3-step sanding system with exact grit specs</li>
             <li data-reveal="card">Gloss and matte finish guides</li>
             <li data-reveal="card">Weekly premium model drops</li>
+            <li data-reveal="card">New content added every month</li>
+            <li data-reveal="card">Cancel anytime - no contracts</li>
           </ul>
           <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join" data-reveal="cta">Join the System - $29/mo</a>
           <div class="pmx-pricing-trust" data-reveal="text">
@@ -6350,55 +6301,23 @@
       </div>
     </section>
 
-    <section class="pmx-section pmx-why" aria-label="Why the system works">
-      <div class="pmx-shell pmx-center">
-        <h2 class="pmx-section-title" data-reveal="text">Why this works</h2>
-      </div>
-      <div class="pmx-shell pmx-why-grid">
-        <article class="pmx-why-line" data-reveal="card"><strong>01</strong><span>Layer lines catch light.</span></article>
-        <article class="pmx-why-line" data-reveal="card"><strong>02</strong><span>Bad reflection reads cheap.</span></article>
-        <article class="pmx-why-line" data-reveal="card"><strong>03</strong><span>Surface control calms the read.</span></article>
-        <article class="pmx-why-line" data-reveal="card"><strong>04</strong><span>Calmer read creates pricing room.</span></article>
-      </div>
-    </section>
-
     <section class="pmx-section pmx-objections" aria-label="Before you decide">
       <div class="pmx-shell pmx-center">
         <h2 class="pmx-section-title" data-reveal="text">Before you decide</h2>
-        <div class="pmx-badge-row" data-reveal="text">
-          <span class="pmx-brand-badge">Bambu</span>
-          <span class="pmx-brand-badge">Prusa</span>
-          <span class="pmx-brand-badge">Ender</span>
-        </div>
       </div>
       <div class="pmx-shell">
-        <div class="pmx-objections-list pmx-faq-list">
-          <article class="objection-block pmx-faq-item" data-faq-item>
-            <button class="pmx-faq-toggle" type="button" aria-expanded="false">
-              <span>Will this work on my printer and filament?</span>
-              <span class="pmx-faq-caret">&plus;</span>
-            </button>
-            <div class="pmx-faq-panel">
-              <p>Yes. The system is built around PLA, PLA+, and PETG. Printer brand does not matter because the finish happens after the print.</p>
-            </div>
+        <div class="pmx-objections-list">
+          <article class="objection-block" data-reveal="card">
+            <p class="objection-q">Will this work on my printer and filament?</p>
+            <p class="objection-a">Yes. The system is built around PLA, PLA+, and PETG. Printer brand does not matter because the finish happens after the print.</p>
           </article>
-          <article class="objection-block pmx-faq-item" data-faq-item>
-            <button class="pmx-faq-toggle" type="button" aria-expanded="false">
-              <span>What if I join and it's not right for me?</span>
-              <span class="pmx-faq-caret">&plus;</span>
-            </button>
-            <div class="pmx-faq-panel">
-              <p>Cancel anytime from Patreon. No emails, no forms, no waiting. Access simply ends with the current billing period.</p>
-            </div>
+          <article class="objection-block" data-reveal="card">
+            <p class="objection-q">What if I join and it's not right for me?</p>
+            <p class="objection-a">Cancel anytime from Patreon. No emails, no forms, no waiting. Access simply ends with the current billing period.</p>
           </article>
-          <article class="objection-block pmx-faq-item" data-faq-item>
-            <button class="pmx-faq-toggle" type="button" aria-expanded="false">
-              <span>How fast will I see results?</span>
-              <span class="pmx-faq-caret">&plus;</span>
-            </button>
-            <div class="pmx-faq-panel">
-              <p>Most members apply the system on their next print within 24 hours. The surface difference is immediate on that same piece.</p>
-            </div>
+          <article class="objection-block" data-reveal="card">
+            <p class="objection-q">How fast will I see results?</p>
+            <p class="objection-a">Most members apply the system on their next print within 24 hours. The surface difference is immediate on that same piece.</p>
           </article>
         </div>
       </div>
@@ -6415,16 +6334,17 @@
             </div>
           </div>
           <div class="pmx-founder-case">$8 &rarr; $47 avg order</div>
-          <p class="pmx-founder-quote">I built PolishMaster after learning the hard way that surface finish, not print time, was what changed what buyers paid.</p>
+          <p class="pmx-founder-quote">I was charging $8 for prints that cost me $4 to make. After cracking the finishing system, my average order went to $47. I built PolishMaster so you don't spend two years figuring out what I figured out the hard way.</p>
         </article>
       </div>
     </section>
 
     <section class="final-cta-block" aria-label="Final call to action">
       <div class="pmx-shell pmx-final-stack">
-        <p class="pmx-final-muted" data-reveal="text">Your printer is not the problem.</p>
-        <p class="pmx-final-strong" data-reveal="text">Your surface standard is.</p>
+        <p class="pmx-final-muted" data-reveal="text">Still finishing raw?</p>
+        <p class="pmx-final-strong" data-reveal="text">Everyone here was, before they joined.</p>
         <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join" data-reveal="cta">Join the System - $29/mo</a>
+        <p class="pmx-final-note" data-reveal="text">217 makers already inside.</p>
         <p class="pmx-final-note" data-reveal="text">Launch price stays active through April 30.</p>
       </div>
     </section>
@@ -6592,11 +6512,9 @@
       });
 
       var revealGroups = [
-        ".pmx-proof-strip-grid",
-        ".pmx-proof-stack",
+        ".pmx-proof-wall",
         ".pmx-impact-strip",
-        ".pmx-locked-lanes",
-        ".pmx-why-grid"
+        ".pmx-locked-lanes"
       ];
 
       revealGroups.forEach(function (selector) {
@@ -6646,23 +6564,6 @@
             card.classList.add("is-open");
             toggle.setAttribute("aria-expanded", "true");
             toggle.textContent = "Hide result";
-          }
-        });
-      });
-
-      document.querySelectorAll("[data-faq-item]").forEach(function (item) {
-        var toggle = item.querySelector(".pmx-faq-toggle");
-        if (!toggle) return;
-        toggle.addEventListener("click", function () {
-          var shouldOpen = !item.classList.contains("is-open");
-          document.querySelectorAll("[data-faq-item]").forEach(function (otherItem) {
-            var otherToggle = otherItem.querySelector(".pmx-faq-toggle");
-            otherItem.classList.remove("is-open");
-            if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
-          });
-          if (shouldOpen) {
-            item.classList.add("is-open");
-            toggle.setAttribute("aria-expanded", "true");
           }
         });
       });
@@ -6739,60 +6640,6 @@
           });
         }
 
-        var systemStage = document.querySelector("[data-system-stage]");
-        if (systemStage) {
-          var systemNodes = systemStage.querySelectorAll("[data-step-node]");
-          var systemCopy = systemStage.querySelectorAll("[data-step-copy]");
-          var systemLastIndex = 0;
-
-          function setSystemState(index) {
-            if (index === systemLastIndex) return;
-            systemLastIndex = index;
-            var progress = systemNodes.length > 1 ? (index / (systemNodes.length - 1)) : 1;
-            systemStage.style.setProperty("--pmx-system-progress", (0.08 + (progress * 0.92)).toFixed(3));
-            systemNodes.forEach(function (node, nodeIndex) {
-              node.classList.toggle("is-active", nodeIndex === index);
-              node.classList.toggle("is-past", nodeIndex < index);
-            });
-            systemCopy.forEach(function (item, itemIndex) {
-              item.classList.toggle("is-active", itemIndex === index);
-            });
-          }
-
-          function getSystemIndex(progress) {
-            return Math.max(0, Math.min(systemNodes.length - 1, Math.round(progress * (systemNodes.length - 1))));
-          }
-
-          systemLastIndex = -1;
-          setSystemState(0);
-
-          window.ScrollTrigger.matchMedia({
-            "(max-width: 767px)": function () {
-              window.ScrollTrigger.create({
-                trigger: systemStage,
-                start: "top 82%",
-                end: "bottom 36%",
-                scrub: 0.45,
-                invalidateOnRefresh: true,
-                onUpdate: function (self) {
-                  setSystemState(getSystemIndex(self.progress));
-                }
-              });
-            },
-            "(min-width: 768px)": function () {
-              window.ScrollTrigger.create({
-                trigger: systemStage,
-                start: "top 55%",
-                end: "bottom 35%",
-                scrub: 0.8,
-                invalidateOnRefresh: true,
-                onUpdate: function (self) {
-                  setSystemState(getSystemIndex(self.progress));
-                }
-              });
-            }
-          });
-        }
       }
     })();
   </script>
