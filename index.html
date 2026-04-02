@@ -4462,6 +4462,12 @@
     width: 100%;
     height: 260px;
     overflow: hidden;
+    opacity: 0;
+    transform: translateY(14px) scale(0.988);
+  }
+
+  body.is-ready .pmx-hero-media {
+    animation: pmxHeroMediaEnter 880ms cubic-bezier(.22,1,.36,1) forwards;
   }
 
   .pmx-hero-media .comparison-slider {
@@ -4491,10 +4497,43 @@
 
   .pmx-hero-media .comparison-divider {
     width: 2px;
-    background: rgba(255,255,255,0.68);
-    box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
-    left: calc(50% - 1px);
-    animation: pmxHeroSeamShift 8.4s ease-in-out infinite, comparisonSeamPulse 3.2s ease-in-out infinite;
+    background: linear-gradient(
+      to bottom,
+      rgba(255,170,102,0.16) 0%,
+      rgba(255,194,148,0.56) 32%,
+      rgba(255,136,54,0.68) 50%,
+      rgba(255,194,148,0.56) 68%,
+      rgba(255,170,102,0.16) 100%
+    );
+    box-shadow:
+      0 0 0 1px rgba(0,0,0,0.24),
+      0 0 10px rgba(255,106,0,0.12),
+      0 0 22px rgba(255,106,0,0.06);
+    left: calc(0% - 1px);
+    opacity: 0;
+    z-index: 3;
+  }
+
+  .pmx-hero-media .comparison-trail {
+    position: absolute;
+    top: 8%;
+    bottom: 8%;
+    width: 82px;
+    left: calc(0% - 41px);
+    border-radius: 999px;
+    background:
+      radial-gradient(
+        ellipse at center,
+        rgba(255,136,54,0.42) 0%,
+        rgba(255,136,54,0.24) 34%,
+        rgba(255,136,54,0.1) 58%,
+        transparent 100%
+      );
+    filter: blur(12px);
+    opacity: 0;
+    mix-blend-mode: screen;
+    pointer-events: none;
+    z-index: 2;
   }
 
   .pmx-hero-media .comparison-handle {
@@ -4521,9 +4560,76 @@
   }
 
   .pmx-hero-media .comparison-overlay {
-    clip-path: inset(0 50% 0 0);
-    animation: pmxHeroOverlayShift 8.4s ease-in-out infinite;
+    clip-path: inset(0 100% 0 0);
     will-change: clip-path;
+  }
+
+  body.is-ready .pmx-hero-media .comparison-overlay {
+    animation:
+      pmxHeroOverlayEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
+      pmxHeroOverlayShift 8.4s ease-in-out 1.24s infinite;
+  }
+
+  body.is-ready .pmx-hero-media .comparison-divider {
+    animation:
+      pmxHeroSeamEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
+      pmxHeroSeamShift 8.4s ease-in-out 1.24s infinite,
+      comparisonSeamPulse 3.2s ease-in-out 1.24s infinite;
+  }
+
+  body.is-ready .pmx-hero-media .comparison-trail {
+    animation:
+      pmxHeroTrailEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
+      pmxHeroTrailShift 8.4s ease-in-out 1.24s infinite,
+      pmxHeroTrailGlow 3.2s ease-in-out 1.24s infinite;
+  }
+
+  @keyframes pmxHeroMediaEnter {
+    from {
+      opacity: 0;
+      transform: translateY(14px) scale(0.988);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+
+  @keyframes pmxHeroOverlayEnter {
+    0% { clip-path: inset(0 100% 0 0); }
+    100% { clip-path: inset(0 50% 0 0); }
+  }
+
+  @keyframes pmxHeroSeamEnter {
+    0% {
+      left: calc(0% - 1px);
+      opacity: 0;
+    }
+    100% {
+      left: calc(50% - 1px);
+      opacity: 0.9;
+    }
+  }
+
+  @keyframes pmxHeroTrailEnter {
+    0% {
+      left: calc(0% - 41px);
+      opacity: 0;
+    }
+    100% {
+      left: calc(50% - 41px);
+      opacity: 0.32;
+    }
+  }
+
+  @keyframes pmxHeroTrailShift {
+    0%, 100% { left: calc(46% - 41px); }
+    50% { left: calc(54% - 41px); }
+  }
+
+  @keyframes pmxHeroTrailGlow {
+    0%, 100% { opacity: 0.24; }
+    50% { opacity: 0.42; }
   }
 
   @keyframes pmxHeroOverlayShift {
@@ -4537,6 +4643,11 @@
   }
 
   @media (prefers-reduced-motion: reduce) {
+    .pmx-hero-media {
+      opacity: 1;
+      transform: none;
+      animation: none;
+    }
     .pmx-hero-media .comparison-overlay {
       animation: none;
       clip-path: inset(0 50% 0 0);
@@ -4544,6 +4655,12 @@
     .pmx-hero-media .comparison-divider {
       animation: comparisonSeamPulse 3.2s ease-in-out infinite;
       left: calc(50% - 1px);
+      opacity: 0.9;
+    }
+    .pmx-hero-media .comparison-trail {
+      animation: none;
+      left: calc(50% - 41px);
+      opacity: 0.3;
     }
   }
 
@@ -5937,13 +6054,24 @@
       height: min(55vw, 260px);
     }
 
-    .pmx-hero-media .comparison-overlay {
-      animation-name: pmxHeroOverlayShiftMobile;
-      animation-duration: 9s;
+    body.is-ready .pmx-hero-media .comparison-overlay {
+      animation:
+        pmxHeroOverlayEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
+        pmxHeroOverlayShiftMobile 9s ease-in-out 1.24s infinite;
     }
 
-    .pmx-hero-media .comparison-divider {
-      animation: pmxHeroSeamShiftMobile 9s ease-in-out infinite, comparisonSeamPulse 3.2s ease-in-out infinite;
+    body.is-ready .pmx-hero-media .comparison-divider {
+      animation:
+        pmxHeroSeamEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
+        pmxHeroSeamShiftMobile 9s ease-in-out 1.24s infinite,
+        comparisonSeamPulse 3.2s ease-in-out 1.24s infinite;
+    }
+
+    body.is-ready .pmx-hero-media .comparison-trail {
+      animation:
+        pmxHeroTrailEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
+        pmxHeroTrailShiftMobile 9s ease-in-out 1.24s infinite,
+        pmxHeroTrailGlow 3.2s ease-in-out 1.24s infinite;
     }
 
     .pmx-hero-copy {
@@ -6012,6 +6140,11 @@
   @keyframes pmxHeroSeamShiftMobile {
     0%, 100% { left: calc(47% - 1px); }
     50% { left: calc(53% - 1px); }
+  }
+
+  @keyframes pmxHeroTrailShiftMobile {
+    0%, 100% { left: calc(47% - 41px); }
+    50% { left: calc(53% - 41px); }
   }
 
   @media (min-width: 768px) {
@@ -6103,6 +6236,7 @@
           <div class="comparison-overlay">
             <img src="cross-after.png" alt="Polished 3D printed cross after layer-line removal and finishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
           </div>
+          <div class="comparison-trail" aria-hidden="true"></div>
           <div class="comparison-divider"></div>
           <div class="comparison-handle" aria-hidden="true">
             <svg viewBox="0 0 20 20">
