@@ -28,8 +28,8 @@
   <meta name="twitter:description" content="Official website of PolishMaster, the 3D print finishing system that helps makers turn raw prints into premium-looking, sellable products." />
   <meta name="twitter:image" content="https://www.polishmaster.co/surface-comparison.png" />
   <link rel="icon" type="image/png" href="logo.png.png" />
-  <link rel="preload" as="image" href="cross-before.png" />
-  <link rel="preload" as="image" href="cross-after.png" />
+<link rel="preload" as="image" href="cross-before-1024.webp" imagesrcset="cross-before-640.webp 640w, cross-before-1024.webp 1024w, cross-before-1400.webp 1400w" imagesizes="(max-width: 767px) 84vw, (max-width: 1200px) 68vw, 1350px" fetchpriority="high" />
+<link rel="preload" as="image" href="cross-after-1024.webp" imagesrcset="cross-after-640.webp 640w, cross-after-1024.webp 1024w, cross-after-1400.webp 1400w" imagesizes="(max-width: 767px) 84vw, (max-width: 1200px) 68vw, 1350px" fetchpriority="high" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -3530,7 +3530,8 @@
     margin-top: 2px;
   }
 
-  .site-footer a { color: rgba(255,255,255,0.4); }
+  .site-footer a:not(.site-footer-question) { color: rgba(255,255,255,0.4); }
+  .site-footer .site-footer-question { color: #ffc995; }
 
   /* ── ANIMATIONS ── */
   @keyframes shimmerSweep {
@@ -5398,13 +5399,14 @@
     display: inline-block;
     margin: 0 auto 16px;
     font-size: 13px;
-    color: var(--pmx-accent);
+    font-weight: 700;
+    color: #ffc995;
     text-decoration: underline;
     text-underline-offset: 2px;
   }
 
   .site-footer-question:visited {
-    color: var(--pmx-accent);
+    color: #ffc995;
   }
 
   .site-footer-brand {
@@ -5700,8 +5702,6 @@
     overscroll-behavior-x: contain;
     cursor: grab;
     touch-action: pan-y;
-    will-change: scroll-position;
-    transform: translateZ(0);
   }
 
   .pmx-proof-wall:active,
@@ -6356,6 +6356,7 @@
   <script>
     (function () {
       if (window.location.protocol === "file:") return;
+      if (window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1") return;
       ["/_vercel/insights/script.js", "/_vercel/speed-insights/script.js"].forEach(function (src) {
         var script = document.createElement("script");
         script.defer = true;
@@ -6385,10 +6386,10 @@
       <div class="pmx-hero-media" data-hero-media>
         <div class="comparison-slider pmx-hero-slider">
           <div class="comparison-base">
-            <img src="cross-before.png" alt="Raw 3D printed cross before sanding and polishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
+            <img src="cross-before-1024.webp" srcset="cross-before-640.webp 640w, cross-before-1024.webp 1024w, cross-before-1400.webp 1400w" sizes="(max-width: 767px) 84vw, (max-width: 1200px) 68vw, 1350px" alt="Raw 3D printed cross before sanding and polishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
           </div>
           <div class="comparison-overlay">
-            <img src="cross-after.png" alt="Polished 3D printed cross after layer-line removal and finishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
+            <img src="cross-after-1024.webp" srcset="cross-after-640.webp 640w, cross-after-1024.webp 1024w, cross-after-1400.webp 1400w" sizes="(max-width: 767px) 84vw, (max-width: 1200px) 68vw, 1350px" alt="Polished 3D printed cross after layer-line removal and finishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
           </div>
           <div class="comparison-trail" aria-hidden="true"></div>
           <div class="comparison-divider"></div>
@@ -6440,84 +6441,84 @@
       </div>
       <div class="pmx-proof-wall" aria-label="Member proof wall">
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-car-mount.png" alt="Blue finished car mount with smooth glossy surface" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-car-mount-768.webp" data-srcset="review-car-mount-480.webp 480w, review-car-mount-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Blue finished car mount with smooth glossy surface" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Retail look</strong>
             <span class="pmx-proof-caption">Jake M. · interior accessory</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-bracket-comparison.png" alt="Before-and-after black bracket print showing raw and polished versions" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-bracket-comparison-768.webp" data-srcset="review-bracket-comparison-480.webp 480w, review-bracket-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Before-and-after black bracket print showing raw and polished versions" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Before/after difference that sells</strong>
             <span class="pmx-proof-caption">Amir H. · bracket comparison</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-orange-closeup.png" alt="Glossy orange finished print close-up" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-orange-closeup-768.webp" data-srcset="review-orange-closeup-480.webp 480w, review-orange-closeup-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Glossy orange finished print close-up" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Higher perceived value</strong>
             <span class="pmx-proof-caption">Liam R. · premium product surface</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-panel-comparison.png" alt="Cosplay panel before and after finishing with smoother surface" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-panel-comparison-768.webp" data-srcset="review-panel-comparison-480.webp 480w, review-panel-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Cosplay panel before and after finishing with smoother surface" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Cosplay-ready surface</strong>
             <span class="pmx-proof-caption">Kai N. · prop panel finish</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-pla-planter.png" alt="Orange geometric planter with polished surface on a wooden table" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-pla-planter-768.webp" data-srcset="review-pla-planter-480.webp 480w, review-pla-planter-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Orange geometric planter with polished surface on a wooden table" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Gift-ready finish</strong>
             <span class="pmx-proof-caption">Sara T. · home decor drop</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-prism-comparison.png" alt="Raw and polished faceted print comparison in daylight" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-prism-comparison-768.webp" data-srcset="review-prism-comparison-480.webp 480w, review-prism-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Raw and polished faceted print comparison in daylight" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Sharper product perception</strong>
             <span class="pmx-proof-caption">Carlos V. · geometric product line</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-soap-dish.png" alt="Polished soap dish 3D print on a marble bathroom counter" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-soap-dish-768.webp" data-srcset="review-soap-dish-480.webp 480w, review-soap-dish-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Polished soap dish 3D print on a marble bathroom counter" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Cleaner read at first glance</strong>
             <span class="pmx-proof-caption">Ben K. · bathroom accessory</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-hook-comparison.png" alt="Utility hook before and after with cleaner polished finish" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-hook-comparison-768.webp" data-srcset="review-hook-comparison-480.webp 480w, review-hook-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Utility hook before and after with cleaner polished finish" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Functional parts that look premium</strong>
             <span class="pmx-proof-caption">Marcus T. · utility hardware</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-candle-holder.png" alt="Finished candle holder on a wooden table" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-candle-holder-768.webp" data-srcset="review-candle-holder-480.webp 480w, review-candle-holder-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Finished candle holder on a wooden table" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Premium shelf presence</strong>
             <span class="pmx-proof-caption">Nabil A. · candle holder finish</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-curved-comparison.png" alt="Curved black print with visible improvement after finishing" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-curved-comparison-768.webp" data-srcset="review-curved-comparison-480.webp 480w, review-curved-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Curved black print with visible improvement after finishing" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Curves read cleaner, faster</strong>
             <span class="pmx-proof-caption">Daniel F. · curved housing</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-blue-gloss.png" alt="Blue geometric print polished to a high-gloss finish" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-blue-gloss-768.webp" data-srcset="review-blue-gloss-480.webp 480w, review-blue-gloss-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Blue geometric print polished to a high-gloss finish" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Mirror gloss in one session</strong>
             <span class="pmx-proof-caption">Marta L. · display piece upgrade</span>
           </div>
         </article>
         <article class="pmx-proof-card" data-reveal="card">
-          <img src="review-birthday-tiara.png" alt="Finished birthday tiara print worn at a party" loading="lazy" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-birthday-tiara-768.webp" data-srcset="review-birthday-tiara-480.webp 480w, review-birthday-tiara-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Finished birthday tiara print worn at a party" loading="lazy" fetchpriority="low" decoding="async" />
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Gift-ready quality standard</strong>
             <span class="pmx-proof-caption">Ben A. · event accessory</span>
@@ -6536,7 +6537,7 @@
         <div class="pmx-mechanism-stage" data-reveal="card">
           <article class="step-card" data-reveal="card">
             <div class="step-img-wrap">
-              <img src="surface-comparison.png" alt="Step 1: surface prep" />
+              <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="surface-comparison-900.webp" data-srcset="surface-comparison-480.webp 480w, surface-comparison-900.webp 900w" data-sizes="(max-width: 767px) 100vw, (max-width: 1200px) 33vw, 360px" alt="Step 1: surface prep" loading="lazy" fetchpriority="low" decoding="async" />
               <span class="step-num">01</span>
             </div>
             <div class="step-body">
@@ -6551,7 +6552,7 @@
 
           <article class="step-card" data-reveal="card">
             <div class="step-img-wrap">
-              <img src="surface-control-paths.png" alt="Step 2: finish path" />
+              <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="surface-control-paths-900.webp" data-srcset="surface-control-paths-480.webp 480w, surface-control-paths-900.webp 900w" data-sizes="(max-width: 767px) 100vw, (max-width: 1200px) 33vw, 360px" alt="Step 2: finish path" loading="lazy" fetchpriority="low" decoding="async" />
               <span class="step-num">02</span>
             </div>
             <div class="step-body">
@@ -6566,7 +6567,7 @@
 
           <article class="step-card" data-reveal="card">
             <div class="step-img-wrap">
-              <img src="king.png" alt="Step 3: product-ready result" />
+              <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="king-900.webp" data-srcset="king-480.webp 480w, king-900.webp 900w" data-sizes="(max-width: 767px) 100vw, (max-width: 1200px) 33vw, 360px" alt="Step 3: product-ready result" loading="lazy" fetchpriority="low" decoding="async" />
               <span class="step-num">03</span>
             </div>
             <div class="step-body">
@@ -6709,7 +6710,7 @@
           </div>
           <div class="locked-grid">
             <article class="locked-card">
-              <img src="surface-comparison.png" alt="Blurred preview of the 3-step sanding system" loading="lazy" decoding="async" />
+            <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="surface-comparison-480.webp" data-srcset="surface-comparison-480.webp 480w, surface-comparison-900.webp 900w" data-sizes="(max-width: 767px) 44vw, 260px" alt="Blurred preview of the 3-step sanding system" loading="lazy" fetchpriority="low" decoding="async" />
               <span class="locked-card-veil" aria-hidden="true"></span>
               <div class="locked-card-overlay">
                 <span class="locked-card-lock">&#128274;</span>
@@ -6717,7 +6718,7 @@
               </div>
             </article>
             <article class="locked-card">
-              <img src="surface-control-paths.png" alt="Blurred preview of matte finish path" loading="lazy" decoding="async" />
+            <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="surface-control-paths-480.webp" data-srcset="surface-control-paths-480.webp 480w, surface-control-paths-900.webp 900w" data-sizes="(max-width: 767px) 44vw, 260px" alt="Blurred preview of matte finish path" loading="lazy" fetchpriority="low" decoding="async" />
               <span class="locked-card-veil" aria-hidden="true"></span>
               <div class="locked-card-overlay">
                 <span class="locked-card-lock">&#128274;</span>
@@ -6733,7 +6734,7 @@
           </div>
           <div class="locked-grid">
             <article class="locked-card">
-              <img src="review-blue-gloss.png" alt="Blurred preview of gloss finish path" loading="lazy" decoding="async" />
+            <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-blue-gloss-480.webp" data-srcset="review-blue-gloss-480.webp 480w, review-blue-gloss-768.webp 768w" data-sizes="(max-width: 767px) 44vw, 260px" alt="Blurred preview of gloss finish path" loading="lazy" fetchpriority="low" decoding="async" />
               <span class="locked-card-veil" aria-hidden="true"></span>
               <div class="locked-card-overlay">
                 <span class="locked-card-lock">&#128274;</span>
@@ -6741,7 +6742,7 @@
               </div>
             </article>
             <article class="locked-card locked-card--weekly">
-              <img src="king.png" alt="Blurred preview of this week's model drop" loading="lazy" decoding="async" />
+            <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="king-480.webp" data-srcset="king-480.webp 480w, king-900.webp 900w" data-sizes="(max-width: 767px) 44vw, 260px" alt="Blurred preview of this week's model drop" loading="lazy" fetchpriority="low" decoding="async" />
               <span class="locked-card-veil" aria-hidden="true"></span>
               <div class="locked-card-overlay">
                 <span class="locked-card-lock">&#128274;</span>
@@ -7098,6 +7099,12 @@
         }
 
         function tickProofWall(now) {
+          if (document.visibilityState === "hidden") {
+            lastFrame = now;
+            window.requestAnimationFrame(tickProofWall);
+            return;
+          }
+
           if (!lastFrame) lastFrame = now;
           var delta = Math.min(34, now - lastFrame);
           lastFrame = now;
@@ -7181,6 +7188,12 @@
             recalcProofLoop();
           }, 180);
         });
+        document.addEventListener("visibilitychange", function () {
+          if (document.visibilityState === "visible") {
+            lastFrame = 0;
+            recalcProofLoop();
+          }
+        });
 
         refreshProofFlowMode();
         recalcProofLoop();
@@ -7195,6 +7208,39 @@
             img.addEventListener("error", recalcProofLoop, { once: true });
           }
         });
+      }
+
+      function hydrateDeferredImage(img) {
+        if (!img || img.getAttribute("data-hydrated") === "true") return;
+        var srcset = img.getAttribute("data-srcset");
+        var sizes = img.getAttribute("data-sizes");
+        var src = img.getAttribute("data-src");
+        if (srcset) img.setAttribute("srcset", srcset);
+        if (sizes) img.setAttribute("sizes", sizes);
+        if (src) img.setAttribute("src", src);
+        img.setAttribute("data-hydrated", "true");
+      }
+
+      var deferredImages = Array.prototype.slice.call(document.querySelectorAll("img.pmx-deferred-img[data-src]"));
+      if (deferredImages.length) {
+        if ("IntersectionObserver" in window) {
+          var deferredImageObserver = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              hydrateDeferredImage(entry.target);
+              observer.unobserve(entry.target);
+            });
+          }, {
+            rootMargin: "280px 0px",
+            threshold: 0.01
+          });
+
+          deferredImages.forEach(function (img) {
+            deferredImageObserver.observe(img);
+          });
+        } else {
+          deferredImages.forEach(hydrateDeferredImage);
+        }
       }
 
       var heroCopy = document.querySelector(".pmx-hero-copy");
@@ -7698,13 +7744,6 @@
         }, { once: true });
       });
 
-      document.querySelectorAll('body *:not(script)').forEach(function(node) {
-        node.childNodes.forEach(function(child) {
-          if (child.nodeType !== Node.TEXT_NODE || !child.nodeValue) return;
-          child.nodeValue = normalizeText(child.nodeValue);
-        });
-      });
-
       document.querySelectorAll('[data-modal]').forEach(function(link) {
         link.addEventListener('click', function(e) {
           e.preventDefault();
@@ -7745,59 +7784,70 @@
       });
     })();
 
-    /* ── BACKGROUND POINTER TRACKING ── */
+    /* Background pointer + gradient loops (desktop-safe throttled) */
     (function() {
       var pointer = document.getElementById('bg-pointer');
       if (!pointer) return;
 
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) return;
+
       var isMobile = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+      var frame = 0;
+      var lastTick = 0;
+      var minFrameGap = 30;
+
+      var curX = window.innerWidth / 2;
+      var curY = window.innerHeight / 2;
+      var targetX = curX;
+      var targetY = curY;
+      var lastScroll = window.scrollY;
+      var cap = window.innerHeight * 0.38;
 
       if (isMobile) {
-        /* Mobile: gradient drifts lazily with scroll direction */
-        var cx = window.innerWidth  / 2;  /* start centered */
-        var cy = window.innerHeight / 2;
-        var tx = cx;
-        var ty = cy;
-        var lastScroll = window.scrollY;
-        var cap = window.innerHeight * 0.38; /* max drift from center */
-
         window.addEventListener('scroll', function() {
           var now = window.scrollY;
           var delta = now - lastScroll;
           lastScroll = now;
-          ty += delta * 0.18;                          /* subtle multiplier */
-          ty = Math.max(cy - cap, Math.min(cy + cap, ty)); /* clamp */
+          targetY += delta * 0.18;
+          targetY = Math.max((window.innerHeight / 2) - cap, Math.min((window.innerHeight / 2) + cap, targetY));
         }, { passive: true });
-
-        function movePointer() {
-          cx += (tx - cx) / 38;   /* heavy lag */
-          cy += (ty - cy) / 38;
-          pointer.style.transform = 'translate(' + Math.round(cx) + 'px, ' + Math.round(cy) + 'px)';
-          requestAnimationFrame(movePointer);
-        }
-        movePointer();
-
       } else {
-        /* Desktop: follow mouse cursor */
-        var curX = 0, curY = 0, tgX = 0, tgY = 0;
         document.addEventListener('mousemove', function(e) {
-          tgX = e.clientX;
-          tgY = e.clientY;
+          targetX = e.clientX;
+          targetY = e.clientY;
         });
-        function movePointer() {
-          curX += (tgX - curX) / 20;
-          curY += (tgY - curY) / 20;
-          pointer.style.transform = 'translate(' + Math.round(curX) + 'px, ' + Math.round(curY) + 'px)';
-          requestAnimationFrame(movePointer);
-        }
-        movePointer();
       }
+
+      function movePointer(now) {
+        if (document.visibilityState === 'hidden') {
+          frame = requestAnimationFrame(movePointer);
+          return;
+        }
+        if (now - lastTick < minFrameGap) {
+          frame = requestAnimationFrame(movePointer);
+          return;
+        }
+        lastTick = now;
+
+        var smooth = isMobile ? 38 : 20;
+        curX += (targetX - curX) / smooth;
+        curY += (targetY - curY) / smooth;
+        pointer.style.transform = 'translate(' + Math.round(curX) + 'px, ' + Math.round(curY) + 'px)';
+        frame = requestAnimationFrame(movePointer);
+      }
+
+      frame = requestAnimationFrame(movePointer);
+      window.addEventListener('beforeunload', function() {
+        cancelAnimationFrame(frame);
+      });
     })();
 
     (function() {
       var gradientCore = document.getElementById('bg-gradient-core');
       if (!gradientCore) return;
 
+      var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       var baseWidth = 126;
       var width = baseWidth;
       var direction = 1;
@@ -7805,6 +7855,8 @@
       var speed = 0.018;
       var topOffset = 10;
       var animationFrame = 0;
+      var lastTick = 0;
+      var minFrameGap = 40;
       var gradientColors = [
         '#050505',
         '#0f0906',
@@ -7816,10 +7868,19 @@
       ];
       var gradientStops = [24, 42, 58, 72, 84, 93, 100];
 
-      function renderGradient() {
+      function renderGradient(now) {
+        if (document.visibilityState === 'hidden') {
+          animationFrame = requestAnimationFrame(renderGradient);
+          return;
+        }
+        if (now - lastTick < minFrameGap) {
+          animationFrame = requestAnimationFrame(renderGradient);
+          return;
+        }
+        lastTick = now;
+
         if (width >= baseWidth + range) direction = -1;
         if (width <= baseWidth - range) direction = 1;
-
         width += direction * speed;
 
         var stopsString = gradientStops
@@ -7834,8 +7895,18 @@
         animationFrame = requestAnimationFrame(renderGradient);
       }
 
-      animationFrame = requestAnimationFrame(renderGradient);
+      if (reduceMotion) {
+        var staticStops = gradientStops
+          .map(function(stop, index) {
+            return gradientColors[index] + ' ' + stop + '%';
+          })
+          .join(', ');
+        gradientCore.style.background =
+          'radial-gradient(' + baseWidth + '% ' + (baseWidth + topOffset) + '% at 50% 20%, ' + staticStops + ')';
+        return;
+      }
 
+      animationFrame = requestAnimationFrame(renderGradient);
       window.addEventListener('beforeunload', function() {
         cancelAnimationFrame(animationFrame);
       });
