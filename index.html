@@ -4823,7 +4823,7 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     cursor: grab;
-    touch-action: pan-y;
+    touch-action: auto;
   }
 
   .pmx-proof-wall:active {
@@ -6143,6 +6143,11 @@
   }
 
   @media (max-width: 767px) {
+    [data-reveal] {
+      --pmx-reveal-blur: 0px;
+      transition-duration: 0.58s;
+    }
+
     .pmx-hero {
       min-height: unset;
       height: auto;
@@ -6816,6 +6821,7 @@
     (function () {
       var reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       var reduceMotion = reduceMotionQuery.matches;
+      var isTouchDevice = ("ontouchstart" in window) || (navigator.maxTouchPoints > 0);
       var comparisonSliders = document.querySelectorAll("[data-comparison-slider]");
 
       function setComparisonPosition(slider, percent) {
@@ -7092,6 +7098,8 @@
         recalcProofLoop();
         window.requestAnimationFrame(tickProofWall);
         window.addEventListener("load", recalcProofLoop, { once: true });
+        window.setTimeout(recalcProofLoop, 320);
+        window.setTimeout(recalcProofLoop, 980);
 
         proofWall.querySelectorAll("img").forEach(function (img) {
           if (!img.complete) {
@@ -7235,6 +7243,8 @@
 
       function updatePanelMotion(viewportH) {
         if (reduceMotion) return;
+        var maxShift = isTouchDevice ? 5.5 : 9;
+        var maxScaleBoost = isTouchDevice ? 0.0045 : 0.008;
         scrollPanels.forEach(function (panel) {
           var rect = panel.getBoundingClientRect();
           if (rect.bottom < -120 || rect.top > viewportH + 120) {
@@ -7245,8 +7255,8 @@
           var progress = (viewportH - rect.top) / (viewportH + rect.height);
           var clamped = Math.max(0, Math.min(1, progress));
           var centered = (clamped - 0.5) * 2;
-          var shift = -centered * 9;
-          var scale = 1 + (0.008 * (1 - Math.min(Math.abs(centered), 1)));
+          var shift = -centered * maxShift;
+          var scale = 1 + (maxScaleBoost * (1 - Math.min(Math.abs(centered), 1)));
           panel.style.setProperty("--pmx-scroll-y", shift.toFixed(2) + "px");
           panel.style.setProperty("--pmx-scroll-scale", scale.toFixed(4));
         });
@@ -7291,8 +7301,15 @@
       }
 
       window.addEventListener("scroll", requestScrollAnimationRender, { passive: true });
+      window.addEventListener("touchmove", requestScrollAnimationRender, { passive: true });
       window.addEventListener("resize", requestScrollAnimationRender);
       window.addEventListener("orientationchange", requestScrollAnimationRender);
+      window.addEventListener("pageshow", requestScrollAnimationRender);
+      document.addEventListener("visibilitychange", function () {
+        if (document.visibilityState === "visible") {
+          requestScrollAnimationRender();
+        }
+      });
       window.addEventListener("load", requestScrollAnimationRender);
       requestScrollAnimationRender();
     })();
