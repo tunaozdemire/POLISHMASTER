@@ -6955,6 +6955,62 @@
       });
 
       var proofWall = document.querySelector(".pmx-proof-wall");
+      var proofLoopWidth = 0;
+      var proofLoopSyncing = false;
+
+      function recalcProofLoopWidth() {
+        if (!proofWall) return;
+        proofLoopWidth = Math.max(0, Math.floor(proofWall.scrollWidth / 2));
+      }
+
+      if (proofWall && !proofWall.hasAttribute("data-proof-loop-ready")) {
+        var proofOriginalCards = Array.prototype.slice.call(proofWall.querySelectorAll(".pmx-proof-card"));
+        proofOriginalCards.forEach(function (card) {
+          var clone = card.cloneNode(true);
+          clone.setAttribute("data-proof-clone", "true");
+          proofWall.appendChild(clone);
+        });
+        proofWall.setAttribute("data-proof-loop-ready", "true");
+      }
+
+      if (proofWall) {
+        function normalizeProofLoopScroll() {
+          if (proofLoopSyncing || proofLoopWidth <= 0) return;
+          var current = proofWall.scrollLeft;
+          if (current >= proofLoopWidth) {
+            proofLoopSyncing = true;
+            proofWall.scrollLeft = current - proofLoopWidth;
+            proofLoopSyncing = false;
+          } else if (current <= 1) {
+            proofLoopSyncing = true;
+            proofWall.scrollLeft = current + proofLoopWidth;
+            proofLoopSyncing = false;
+          }
+        }
+
+        recalcProofLoopWidth();
+        if (proofLoopWidth > 0 && proofWall.scrollLeft <= 1) {
+          proofWall.scrollLeft = 1;
+        }
+
+        proofWall.addEventListener("scroll", normalizeProofLoopScroll, { passive: true });
+        window.addEventListener("resize", function () {
+          recalcProofLoopWidth();
+          normalizeProofLoopScroll();
+        }, { passive: true });
+        window.addEventListener("orientationchange", function () {
+          window.setTimeout(function () {
+            recalcProofLoopWidth();
+            normalizeProofLoopScroll();
+          }, 140);
+        });
+        window.addEventListener("load", function () {
+          window.setTimeout(function () {
+            recalcProofLoopWidth();
+            normalizeProofLoopScroll();
+          }, 120);
+        }, { once: true });
+      }
 
       function hydrateDeferredImage(img, forceEager) {
         if (!img || img.getAttribute("data-hydrated") === "true") return;
