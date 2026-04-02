@@ -4818,7 +4818,7 @@
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: none;
     padding: 0 20px 16px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -5692,7 +5692,7 @@
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x proximity;
+    scroll-snap-type: none;
     padding: 0 20px 16px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
@@ -6945,7 +6945,7 @@
         }
 
         var loopWidth = 0;
-        var autoSpeedBase = reduceMotion ? 0.012 : 0.042; // one-direction flow speed
+        var autoSpeedBase = reduceMotion ? 0.012 : 0.03; // visible but still premium-slow right-to-left flow
         var pausedUntil = 0;
         var manualActiveUntil = 0;
         var lastFrame = 0;
@@ -7002,6 +7002,9 @@
           loopWidth = Math.max(0, proofWall.scrollWidth / 2);
           if (loopWidth > 0) {
             normalizeProofScroll();
+            if (proofWall.scrollLeft < 1) {
+              proofWall.scrollLeft = 1;
+            }
           }
           lastKnownScroll = proofWall.scrollLeft;
           tagVisibleProofCardsAsSeen();
@@ -7079,7 +7082,7 @@
         proofWall.addEventListener("touchstart", function () { markManualInteraction(2600); }, { passive: true });
         proofWall.addEventListener("touchmove", function () { markManualInteraction(1200); }, { passive: true });
         proofWall.addEventListener("touchend", function () { pauseAutoFlow(1100); }, { passive: true });
-        proofWall.addEventListener("mouseenter", function () { pauseAutoFlow(850); });
+        // Keep flow alive while user hovers; pause only on explicit interaction.
         proofWall.addEventListener("dragstart", function (e) { e.preventDefault(); });
         window.addEventListener("resize", recalcProofLoop, { passive: true });
         window.addEventListener("orientationchange", function () {
