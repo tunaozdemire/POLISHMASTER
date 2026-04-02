@@ -5447,8 +5447,9 @@
   }
 
   @media (min-width: 768px) {
-    .pmx-proof-card {
+    .pmx-proof-wall .pmx-proof-card {
       flex-basis: 240px;
+      min-width: 240px;
       height: 300px;
     }
 
@@ -5690,13 +5691,10 @@
 
   .pmx-proof-wall {
     display: flex;
-    flex-direction: row;
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: none;
-    scroll-padding-left: 20px;
-    padding: 0 20px 16px 20px;
+    padding: 6px 20px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
@@ -5704,9 +5702,9 @@
     touch-action: pan-x;
   }
 
-  .pmx-proof-wall:active,
   .pmx-proof-wall.is-dragging {
     cursor: grabbing;
+    user-select: none;
   }
 
   .pmx-proof-wall::-webkit-scrollbar {
@@ -5723,22 +5721,38 @@
     border-radius: 16px;
     border: 1px solid var(--pmx-line);
     background: var(--pmx-card);
-    -webkit-transform: translateZ(0);
-    transform: translateZ(0);
     isolation: isolate;
+    opacity: 0;
+    transform: translateZ(0) translateY(12px);
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.28s ease;
+  }
+
+  .pmx-proof-wall .pmx-proof-card.is-visible {
+    opacity: 1;
+    transform: translateZ(0) translateY(0);
+  }
+
+  @media (hover: hover) {
+    .pmx-proof-wall .pmx-proof-card.is-visible:hover {
+      box-shadow: 0 10px 32px rgba(0, 0, 0, 0.38);
+      transform: translateZ(0) translateY(-4px);
+    }
   }
 
   .pmx-proof-wall .pmx-proof-card img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transform: scale(1.035);
-    transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    display: block;
+    transform: scale(1.04);
+    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
     user-select: none;
     -webkit-user-drag: none;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
-    will-change: transform;
   }
 
   .pmx-proof-wall .pmx-proof-card.is-visible img,
@@ -5746,14 +5760,26 @@
     transform: scale(1);
   }
 
+  @media (hover: hover) {
+    .pmx-proof-wall .pmx-proof-card.is-visible:hover img {
+      transform: scale(1.05);
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+  }
+
   .pmx-proof-card-copy {
     position: absolute;
-    left: 12px;
-    right: 12px;
-    bottom: 10px;
+    inset: auto 0 0;
     z-index: 2;
+    padding: 52px 12px 13px;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.76) 0%,
+      rgba(0, 0, 0, 0.30) 55%,
+      transparent 100%
+    );
     display: grid;
-    gap: 4px;
+    gap: 3px;
   }
 
   .pmx-proof-outcome {
@@ -5762,11 +5788,13 @@
     line-height: 1.18;
     color: #fff;
     letter-spacing: -0.02em;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
   }
 
   .pmx-proof-caption {
     font-size: 11px;
-    color: rgba(255,255,255,0.7);
+    color: rgba(255, 255, 255, 0.72);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
   }
 
   .pmx-proof-meta {
@@ -6200,8 +6228,7 @@
 
     .pmx-proof-wall {
       gap: 10px;
-      padding: 0 16px 14px 16px;
-      scroll-padding-left: 16px;
+      padding: 6px 16px 18px;
     }
 
     .pmx-proof-wall .pmx-proof-card {
@@ -6211,21 +6238,16 @@
     }
 
     .pmx-proof-card-copy {
-      left: 10px;
-      right: 10px;
-      bottom: 9px;
-      gap: 3px;
+      padding: 44px 10px 11px;
     }
 
     .pmx-proof-outcome {
       font-size: 12.5px;
-      line-height: 1.2;
       letter-spacing: -0.016em;
     }
 
     .pmx-proof-caption {
       font-size: 10.5px;
-      line-height: 1.3;
     }
 
     .pmx-mechanism-stage {
@@ -6939,200 +6961,175 @@
         setPosition((hintTrack || slider).getBoundingClientRect().left + ((hintTrack || slider).getBoundingClientRect().width / 2), hintTrack || slider);
       });
 
-      var revealGroups = [
-        ".pmx-proof-wall",
-        ".pmx-impact-strip",
-        ".pmx-locked-lanes",
-        ".pmx-mechanism-stage"
-      ];
+      (function () {
+        var wall = document.querySelector(".pmx-proof-wall");
+        if (!wall) return;
 
-      revealGroups.forEach(function (selector) {
-        var group = document.querySelector(selector);
-        if (!group) return;
-        group.querySelectorAll("[data-reveal]").forEach(function (item, index) {
-          item.style.transitionDelay = Math.min(index * 0.08, 0.28) + "s";
-        });
-      });
+        if (!wall.hasAttribute("data-proof-loop-ready")) {
+          Array.prototype.slice.call(wall.querySelectorAll(".pmx-proof-card"))
+            .forEach(function (card) {
+              var clone = card.cloneNode(true);
+              clone.setAttribute("data-proof-clone", "true");
+              clone.classList.add("is-visible");
+              clone.style.transitionDelay = "";
+              wall.appendChild(clone);
+            });
+          wall.setAttribute("data-proof-loop-ready", "true");
+        }
 
-      var proofWall = document.querySelector(".pmx-proof-wall");
-      var proofLoopWidth = 0;
-      var proofLoopSyncing = false;
-      var proofNormalizeRaf = 0;
+        var loopW = 0, syncing = false, normRaf = 0;
 
-      function recalcProofLoopWidth() {
-        if (!proofWall) return;
-        proofLoopWidth = Math.max(0, Math.floor(proofWall.scrollWidth / 2));
-      }
+        function recalcLoop() {
+          loopW = Math.max(0, Math.floor(wall.scrollWidth / 2));
+        }
 
-      if (proofWall && !proofWall.hasAttribute("data-proof-loop-ready")) {
-        var proofOriginalCards = Array.prototype.slice.call(proofWall.querySelectorAll(".pmx-proof-card"));
-        proofOriginalCards.forEach(function (card) {
-          var clone = card.cloneNode(true);
-          clone.setAttribute("data-proof-clone", "true");
-          proofWall.appendChild(clone);
-        });
-        proofWall.setAttribute("data-proof-loop-ready", "true");
-      }
-
-      if (proofWall) {
-        function normalizeProofLoopScroll() {
-          if (proofLoopSyncing || proofLoopWidth <= 0) return;
-          var current = proofWall.scrollLeft;
-          var wrapBuffer = Math.max(28, Math.floor(proofWall.clientWidth * 0.08));
-          var next = current;
-
-          while (next >= (proofLoopWidth + wrapBuffer)) {
-            next -= proofLoopWidth;
-          }
-          while (next <= 1) {
-            next += proofLoopWidth;
-          }
-
-          if (Math.abs(next - current) > 0.5) {
-            proofLoopSyncing = true;
-            proofWall.scrollLeft = next;
-            proofLoopSyncing = false;
+        function normalize() {
+          if (syncing || loopW <= 0) return;
+          var x = wall.scrollLeft;
+          var buf = Math.max(24, wall.clientWidth * 0.06);
+          var n = x;
+          while (n >= loopW + buf) n -= loopW;
+          while (n <= 1) n += loopW;
+          if (Math.abs(n - x) > 0.5) {
+            syncing = true;
+            wall.scrollLeft = n;
+            syncing = false;
           }
         }
 
-        function requestProofNormalize() {
-          if (proofNormalizeRaf) return;
-          proofNormalizeRaf = window.requestAnimationFrame(function () {
-            proofNormalizeRaf = 0;
-            normalizeProofLoopScroll();
-          });
+        function scheduleNorm() {
+          if (normRaf) return;
+          normRaf = requestAnimationFrame(function () { normRaf = 0; normalize(); });
         }
 
-        recalcProofLoopWidth();
-        if (proofLoopWidth > 0 && proofWall.scrollLeft <= 1) {
-          proofWall.scrollLeft = 1;
-        }
+        var drag = { on: false, x0: 0, sl0: 0, vx: 0, px: 0, pt: 0, raf: 0 };
 
-        proofWall.addEventListener("scroll", requestProofNormalize, { passive: true });
-        proofWall.addEventListener("touchmove", requestProofNormalize, { passive: true });
-        proofWall.addEventListener("pointerup", requestProofNormalize, { passive: true });
-        proofWall.addEventListener("touchend", requestProofNormalize, { passive: true });
-        window.addEventListener("resize", function () {
-          recalcProofLoopWidth();
-          requestProofNormalize();
+        wall.addEventListener("pointerdown", function (e) {
+          if (e.pointerType === "touch" || e.button !== 0) return;
+          cancelAnimationFrame(drag.raf);
+          drag.on = true;
+          drag.x0 = e.clientX;
+          drag.sl0 = wall.scrollLeft;
+          drag.vx = 0;
+          drag.px = e.clientX;
+          drag.pt = performance.now();
+          wall.classList.add("is-dragging");
+          wall.setPointerCapture(e.pointerId);
+          e.preventDefault();
+        }, { passive: false });
+
+        wall.addEventListener("pointermove", function (e) {
+          if (!drag.on) return;
+          wall.scrollLeft = drag.sl0 + (drag.x0 - e.clientX);
+          var now = performance.now(), dt = now - drag.pt;
+          if (dt > 0) drag.vx = (e.clientX - drag.px) / dt;
+          drag.px = e.clientX;
+          drag.pt = now;
         }, { passive: true });
-        window.addEventListener("orientationchange", function () {
-          window.setTimeout(function () {
-            recalcProofLoopWidth();
-            requestProofNormalize();
-          }, 140);
-        });
-        window.addEventListener("load", function () {
-          window.setTimeout(function () {
-            recalcProofLoopWidth();
-            requestProofNormalize();
-          }, 120);
-        }, { once: true });
-      }
 
-      function hydrateDeferredImage(img, forceEager) {
-        if (!img || img.getAttribute("data-hydrated") === "true") return;
-        if (forceEager) {
-          img.setAttribute("loading", "eager");
-          img.setAttribute("fetchpriority", "high");
+        function endDrag(e) {
+          if (!drag.on) return;
+          drag.on = false;
+          wall.classList.remove("is-dragging");
+          if (e && e.pointerId != null) wall.releasePointerCapture(e.pointerId);
+          var vel = drag.vx * 13;
+          (function momentum() {
+            if (Math.abs(vel) < 0.4) { scheduleNorm(); return; }
+            wall.scrollLeft -= vel;
+            vel *= 0.93;
+            scheduleNorm();
+            drag.raf = requestAnimationFrame(momentum);
+          })();
         }
-        var srcset = img.getAttribute("data-srcset");
-        var sizes = img.getAttribute("data-sizes");
-        var src = img.getAttribute("data-src");
-        if (srcset) img.setAttribute("srcset", srcset);
-        if (sizes) img.setAttribute("sizes", sizes);
-        if (src) img.setAttribute("src", src);
-        img.setAttribute("data-hydrated", "true");
-      }
 
-      var deferredImages = Array.prototype.slice.call(document.querySelectorAll("img.pmx-deferred-img[data-src]"));
-      if (deferredImages.length) {
-        var isMobileDeferred = window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(pointer: coarse)").matches;
-        var proofDeferredImages = proofWall ? deferredImages.filter(function (img) {
-          return proofWall.contains(img);
-        }) : [];
-        var nonProofDeferredImages = proofWall ? deferredImages.filter(function (img) {
-          return !proofWall.contains(img);
-        }) : deferredImages;
+        wall.addEventListener("pointerup", endDrag, { passive: true });
+        wall.addEventListener("pointercancel", endDrag, { passive: true });
 
-        if (isMobileDeferred && proofDeferredImages.length) {
-          proofDeferredImages.slice(0, 8).forEach(function (img) {
-            hydrateDeferredImage(img, true);
-          });
+        function hydrateImg(img, eager) {
+          if (!img || img.dataset.hydrated) return;
+          if (eager) {
+            img.setAttribute("loading", "eager");
+            img.setAttribute("fetchpriority", "high");
+          }
+          var ss = img.getAttribute("data-srcset");
+          var sz = img.getAttribute("data-sizes");
+          var s = img.getAttribute("data-src");
+          if (ss) img.setAttribute("srcset", ss);
+          if (sz) img.setAttribute("sizes", sz);
+          if (s) img.setAttribute("src", s);
+          img.dataset.hydrated = "true";
         }
+
+        var allImgs = Array.prototype.slice.call(
+          wall.querySelectorAll("img.pmx-deferred-img[data-src]")
+        );
+
+        allImgs.slice(0, 6).forEach(function (img) { hydrateImg(img, true); });
 
         if ("IntersectionObserver" in window) {
-          if (nonProofDeferredImages.length) {
-            var nonProofObserver = new IntersectionObserver(function (entries, observer) {
-              entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                hydrateDeferredImage(entry.target);
-                observer.unobserve(entry.target);
-              });
-            }, {
-              root: null,
-              rootMargin: isMobileDeferred ? "260px 0px" : "320px 0px",
-              threshold: 0.01
+          var imgObs = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              hydrateImg(entry.target, false);
+              obs.unobserve(entry.target);
             });
+          }, { root: wall, rootMargin: "0px 420px 0px 420px", threshold: 0 });
 
-            nonProofDeferredImages.forEach(function (img) {
-              nonProofObserver.observe(img);
-            });
-          }
-
-          if (proofWall && proofDeferredImages.length) {
-            var proofImageObserver = new IntersectionObserver(function (entries, observer) {
-              entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                hydrateDeferredImage(entry.target, false);
-                observer.unobserve(entry.target);
-              });
-            }, {
-              root: proofWall,
-              rootMargin: "0px 400px 0px 400px",
-              threshold: 0
-            });
-
-            proofDeferredImages.forEach(function (img) {
-              proofImageObserver.observe(img);
-            });
-          }
+          allImgs.slice(6).forEach(function (img) { imgObs.observe(img); });
         } else {
-          deferredImages.forEach(hydrateDeferredImage);
+          allImgs.forEach(function (img) { hydrateImg(img, false); });
         }
-      }
 
-      if (proofWall) {
-        var proofCards = Array.prototype.slice.call(proofWall.querySelectorAll(".pmx-proof-card[data-reveal='card']"));
-        if (proofCards.length) {
-          if ("IntersectionObserver" in window) {
-            var proofRevealObserver = new IntersectionObserver(function (entries, observer) {
-              entries.forEach(function (entry) {
-                if (!entry.isIntersecting) return;
-                var card = entry.target;
-                card.classList.add("is-visible");
-                window.setTimeout(function () {
-                  card.style.transitionDelay = "";
-                }, 1000);
-                observer.unobserve(card);
-              });
-            }, {
-              root: proofWall,
-              rootMargin: "0px 80px 0px 80px",
-              threshold: 0.08
-            });
+        var origCards = Array.prototype.slice.call(
+          wall.querySelectorAll(".pmx-proof-card:not([data-proof-clone])[data-reveal='card']")
+        );
 
-            proofCards.forEach(function (card, index) {
-              card.style.transitionDelay = Math.min(index * 0.08, 0.28) + "s";
-              proofRevealObserver.observe(card);
-            });
-          } else {
-            proofCards.forEach(function (card) {
+        if ("IntersectionObserver" in window && origCards.length) {
+          var revealObs = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              var card = entry.target;
+              var img = card.querySelector("img");
+              if (img) img.style.willChange = "transform";
               card.classList.add("is-visible");
+              setTimeout(function () {
+                card.style.transitionDelay = "";
+                if (img) img.style.willChange = "";
+              }, 1050);
+              obs.unobserve(card);
             });
-          }
+          }, { root: wall, rootMargin: "0px 80px 0px 80px", threshold: 0.05 });
+
+          origCards.forEach(function (card, i) {
+            card.style.transitionDelay = Math.min(i * 0.07, 0.21) + "s";
+            revealObs.observe(card);
+          });
+        } else {
+          origCards.forEach(function (c) { c.classList.add("is-visible"); });
         }
-      }
+
+        recalcLoop();
+        if (loopW > 0 && wall.scrollLeft <= 1) wall.scrollLeft = 1;
+
+        wall.addEventListener("scroll", scheduleNorm, { passive: true });
+        wall.addEventListener("touchend", scheduleNorm, { passive: true });
+        window.addEventListener("resize", function () { recalcLoop(); scheduleNorm(); }, { passive: true });
+        window.addEventListener("orientationchange", function () {
+          setTimeout(function () { recalcLoop(); scheduleNorm(); }, 150);
+        });
+        window.addEventListener("load", function () {
+          setTimeout(function () { recalcLoop(); scheduleNorm(); }, 100);
+        }, { once: true });
+      })();
+
+      [".pmx-impact-strip", ".pmx-locked-lanes", ".pmx-mechanism-stage"]
+        .forEach(function (selector) {
+          var group = document.querySelector(selector);
+          if (!group) return;
+          group.querySelectorAll("[data-reveal]").forEach(function (item, index) {
+            item.style.transitionDelay = Math.min(index * 0.08, 0.28) + "s";
+          });
+        });
 
       var heroCopy = document.querySelector(".pmx-hero-copy");
       if (heroCopy) {
@@ -7153,8 +7150,11 @@
         if (heroTrust) heroTrust.style.transitionDelay = "0.43s";
       }
 
+      var _proofWall = document.querySelector(".pmx-proof-wall");
       var revealItems = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]")).filter(function (item) {
-        return !(proofWall && item.matches(".pmx-proof-card[data-reveal='card']") && proofWall.contains(item));
+        return !(_proofWall &&
+          item.matches(".pmx-proof-card[data-reveal='card']") &&
+          _proofWall.contains(item));
       });
       function markRevealed(item) {
         if (!item || item.classList.contains("is-visible")) return;
