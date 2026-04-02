@@ -7122,6 +7122,62 @@
         }, { once: true });
       })();
 
+      (function () {
+        var proofWallForDeferred = document.querySelector(".pmx-proof-wall");
+        var deferredOutsideProof = Array.prototype.slice.call(
+          document.querySelectorAll("img.pmx-deferred-img[data-src]")
+        ).filter(function (img) {
+          return !(proofWallForDeferred && proofWallForDeferred.contains(img));
+        });
+
+        if (!deferredOutsideProof.length) return;
+
+        function hydrateDeferredImage(img, forceEager) {
+          if (!img || img.getAttribute("data-hydrated") === "true" || img.dataset.hydrated === "true") return;
+          if (forceEager) {
+            img.setAttribute("loading", "eager");
+            img.setAttribute("fetchpriority", "high");
+          }
+          var srcset = img.getAttribute("data-srcset");
+          var sizes = img.getAttribute("data-sizes");
+          var src = img.getAttribute("data-src");
+          if (srcset) img.setAttribute("srcset", srcset);
+          if (sizes) img.setAttribute("sizes", sizes);
+          if (src) img.setAttribute("src", src);
+          img.setAttribute("data-hydrated", "true");
+          img.dataset.hydrated = "true";
+        }
+
+        var mobileDeferred = window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(pointer: coarse)").matches;
+        if (mobileDeferred) {
+          deferredOutsideProof.slice(0, 6).forEach(function (img) {
+            hydrateDeferredImage(img, true);
+          });
+        }
+
+        if ("IntersectionObserver" in window) {
+          var deferredObserver = new IntersectionObserver(function (entries, observer) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              hydrateDeferredImage(entry.target, false);
+              observer.unobserve(entry.target);
+            });
+          }, {
+            root: null,
+            rootMargin: mobileDeferred ? "280px 0px" : "340px 0px",
+            threshold: 0.01
+          });
+
+          deferredOutsideProof.forEach(function (img) {
+            deferredObserver.observe(img);
+          });
+        } else {
+          deferredOutsideProof.forEach(function (img) {
+            hydrateDeferredImage(img, false);
+          });
+        }
+      })();
+
       [".pmx-impact-strip", ".pmx-locked-lanes", ".pmx-mechanism-stage"]
         .forEach(function (selector) {
           var group = document.querySelector(selector);
