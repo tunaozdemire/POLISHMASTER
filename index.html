@@ -6974,6 +6974,21 @@
         ".pmx-mechanism-stage"
       ];
 
+      function hydrateProofImageNow(img, forceEager) {
+        if (!img || img.getAttribute("data-hydrated") === "true") return;
+        var srcset = img.getAttribute("data-srcset");
+        var sizes = img.getAttribute("data-sizes");
+        var src = img.getAttribute("data-src");
+        if (forceEager) {
+          img.setAttribute("loading", "eager");
+          img.setAttribute("fetchpriority", "high");
+        }
+        if (srcset) img.setAttribute("srcset", srcset);
+        if (sizes) img.setAttribute("sizes", sizes);
+        if (src) img.setAttribute("src", src);
+        img.setAttribute("data-hydrated", "true");
+      }
+
       revealGroups.forEach(function (selector) {
         var group = document.querySelector(selector);
         if (!group) return;
@@ -6984,11 +6999,26 @@
 
       var proofWall = document.querySelector(".pmx-proof-wall");
       if (proofWall) {
+        function hydrateProofWallImages(forceEager) {
+          proofWall.querySelectorAll("img.pmx-deferred-img[data-src]").forEach(function (img) {
+            hydrateProofImageNow(img, !!forceEager);
+          });
+        }
+
+        var shouldPrimeProofForMobile = window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(pointer: coarse)").matches;
+        if (shouldPrimeProofForMobile) {
+          hydrateProofWallImages(true);
+        }
+
         if (!proofWall.hasAttribute("data-proof-loop-ready")) {
           var originalCards = Array.prototype.slice.call(proofWall.querySelectorAll(".pmx-proof-card"));
           if (originalCards.length > 0) {
             originalCards.forEach(function (card) {
               var clone = card.cloneNode(true);
+              var cloneDeferredImage = clone.querySelector("img.pmx-deferred-img[data-src]");
+              if (cloneDeferredImage) {
+                hydrateProofImageNow(cloneDeferredImage, false);
+              }
               clone.removeAttribute("data-reveal");
               clone.classList.remove("is-visible");
               proofWall.appendChild(clone);
@@ -7130,6 +7160,7 @@
         }, { passive: true });
 
         proofWall.addEventListener("pointerdown", function (e) {
+          hydrateProofWallImages(false);
           markManualInteraction(2800);
           if (e.pointerType !== "mouse" && e.pointerType !== "pen") return;
           isPointerDragging = true;
@@ -7167,7 +7198,10 @@
           markManualInteraction(2200);
           animateIncomingProofCards(flowDirection);
         }, { passive: true });
-        proofWall.addEventListener("touchstart", function () { markManualInteraction(2600); }, { passive: true });
+        proofWall.addEventListener("touchstart", function () {
+          hydrateProofWallImages(false);
+          markManualInteraction(2600);
+        }, { passive: true });
         proofWall.addEventListener("touchmove", function () {
           markManualInteraction(1400);
           handleProofScroll();
