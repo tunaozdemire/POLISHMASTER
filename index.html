@@ -6393,7 +6393,7 @@
       <div class="pmx-shell pmx-center">
         <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">What members produce</span>
       </div>
-      <div class="pmx-proof-wall" aria-label="Member proof wall">
+      <div class="pmx-proof-wall" aria-label="Member proof wall" data-reveal="card">
         <article class="pmx-proof-card" data-reveal="card">
           <img src="review-car-mount.png" alt="Blue finished car mount with smooth glossy surface" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
@@ -6488,8 +6488,8 @@
         <h2 class="pmx-section-title" data-reveal="text">3 steps. Repeatable every time.</h2>
       </div>
       <div class="pmx-shell">
-        <div class="pmx-mechanism-stage">
-          <article class="step-card">
+        <div class="pmx-mechanism-stage" data-reveal="card">
+          <article class="step-card" data-reveal="card">
             <div class="step-img-wrap">
               <img src="surface-comparison.png" alt="Step 1: surface prep" />
               <span class="step-num">01</span>
@@ -6504,7 +6504,7 @@
             </div>
           </article>
 
-          <article class="step-card">
+          <article class="step-card" data-reveal="card">
             <div class="step-img-wrap">
               <img src="surface-control-paths.png" alt="Step 2: finish path" />
               <span class="step-num">02</span>
@@ -6519,7 +6519,7 @@
             </div>
           </article>
 
-          <article class="step-card">
+          <article class="step-card" data-reveal="card">
             <div class="step-img-wrap">
               <img src="king.png" alt="Step 3: product-ready result" />
               <span class="step-num">03</span>
@@ -6924,7 +6924,8 @@
       var revealGroups = [
         ".pmx-proof-wall",
         ".pmx-impact-strip",
-        ".pmx-locked-lanes"
+        ".pmx-locked-lanes",
+        ".pmx-mechanism-stage"
       ];
 
       revealGroups.forEach(function (selector) {
@@ -7135,11 +7136,16 @@
       }
 
       function updateRevealAnimations(viewportH) {
+        var viewportW = window.innerWidth || document.documentElement.clientWidth || 0;
         var enterAt = viewportH * 0.9;
+        var leftBound = viewportW * 0.02;
+        var rightBound = viewportW * 0.98;
         revealItems.forEach(function (item) {
           if (item.classList.contains("is-visible")) return;
           var rect = item.getBoundingClientRect();
-          if (rect.top <= enterAt && rect.bottom >= viewportH * 0.02) {
+          var verticallyVisible = rect.top <= enterAt && rect.bottom >= viewportH * 0.02;
+          var horizontallyVisible = (viewportW <= 0) || (rect.left <= rightBound && rect.right >= leftBound);
+          if (verticallyVisible && horizontallyVisible) {
             markRevealed(item);
           }
         });
@@ -7242,9 +7248,15 @@
       });
 
       function updatePanelMotion(viewportH) {
-        if (reduceMotion) return;
-        var maxShift = isTouchDevice ? 5.5 : 9;
-        var maxScaleBoost = isTouchDevice ? 0.0045 : 0.008;
+        if (reduceMotion || isTouchDevice) {
+          scrollPanels.forEach(function (panel) {
+            panel.style.setProperty("--pmx-scroll-y", "0px");
+            panel.style.setProperty("--pmx-scroll-scale", "1");
+          });
+          return;
+        }
+        var maxShift = 9;
+        var maxScaleBoost = 0.008;
         scrollPanels.forEach(function (panel) {
           var rect = panel.getBoundingClientRect();
           if (rect.bottom < -120 || rect.top > viewportH + 120) {
@@ -7302,6 +7314,7 @@
 
       window.addEventListener("scroll", requestScrollAnimationRender, { passive: true });
       window.addEventListener("touchmove", requestScrollAnimationRender, { passive: true });
+      window.addEventListener("touchstart", requestScrollAnimationRender, { passive: true });
       window.addEventListener("resize", requestScrollAnimationRender);
       window.addEventListener("orientationchange", requestScrollAnimationRender);
       window.addEventListener("pageshow", requestScrollAnimationRender);
@@ -7312,6 +7325,8 @@
       });
       window.addEventListener("load", requestScrollAnimationRender);
       requestScrollAnimationRender();
+      window.setTimeout(requestScrollAnimationRender, 180);
+      window.setTimeout(requestScrollAnimationRender, 680);
     })();
   </script>
 
