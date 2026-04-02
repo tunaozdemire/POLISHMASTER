@@ -4473,6 +4473,8 @@
     border: 0;
     box-shadow: none;
     background: #101010;
+    pointer-events: none;
+    touch-action: pan-y;
   }
 
   .pmx-hero-media .comparison-base,
@@ -4491,15 +4493,12 @@
     width: 2px;
     background: rgba(255,255,255,0.68);
     box-shadow: 0 0 0 1px rgba(0,0,0,0.25);
+    left: calc(50% - 1px);
+    animation: pmxHeroSeamShift 8.4s ease-in-out infinite, comparisonSeamPulse 3.2s ease-in-out infinite;
   }
 
   .pmx-hero-media .comparison-handle {
-    width: 36px;
-    height: 36px;
-    border-radius: 999px;
-    background: rgba(5,5,5,0.88);
-    border: 1px solid rgba(255,255,255,0.16);
-    box-shadow: 0 12px 24px rgba(0,0,0,0.3);
+    display: none;
   }
 
   .pmx-hero-media .comparison-hint {
@@ -4519,6 +4518,33 @@
 
   .pmx-hero-media .slider-label-polished {
     color: var(--pmx-accent);
+  }
+
+  .pmx-hero-media .comparison-overlay {
+    clip-path: inset(0 50% 0 0);
+    animation: pmxHeroOverlayShift 8.4s ease-in-out infinite;
+    will-change: clip-path;
+  }
+
+  @keyframes pmxHeroOverlayShift {
+    0%, 100% { clip-path: inset(0 54% 0 0); }
+    50% { clip-path: inset(0 46% 0 0); }
+  }
+
+  @keyframes pmxHeroSeamShift {
+    0%, 100% { left: calc(46% - 1px); }
+    50% { left: calc(54% - 1px); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pmx-hero-media .comparison-overlay {
+      animation: none;
+      clip-path: inset(0 50% 0 0);
+    }
+    .pmx-hero-media .comparison-divider {
+      animation: comparisonSeamPulse 3.2s ease-in-out infinite;
+      left: calc(50% - 1px);
+    }
   }
 
   .pmx-hero-media-gradient {
@@ -5911,6 +5937,15 @@
       height: min(55vw, 260px);
     }
 
+    .pmx-hero-media .comparison-overlay {
+      animation-name: pmxHeroOverlayShiftMobile;
+      animation-duration: 9s;
+    }
+
+    .pmx-hero-media .comparison-divider {
+      animation: pmxHeroSeamShiftMobile 9s ease-in-out infinite, comparisonSeamPulse 3.2s ease-in-out infinite;
+    }
+
     .pmx-hero-copy {
       margin-top: 24px;
     }
@@ -5967,6 +6002,16 @@
     .pmx-mechanism-copy {
       gap: 8px;
     }
+  }
+
+  @keyframes pmxHeroOverlayShiftMobile {
+    0%, 100% { clip-path: inset(0 53% 0 0); }
+    50% { clip-path: inset(0 47% 0 0); }
+  }
+
+  @keyframes pmxHeroSeamShiftMobile {
+    0%, 100% { left: calc(47% - 1px); }
+    50% { left: calc(53% - 1px); }
   }
 
   @media (min-width: 768px) {
@@ -6051,15 +6096,15 @@
   <main id="top" class="pmx-main" role="main">
     <section class="pmx-hero" aria-label="PolishMaster hero">
       <div class="pmx-hero-media" data-hero-media>
-        <div class="comparison-slider pmx-hero-slider" data-comparison-slider data-hero-transform>
+        <div class="comparison-slider pmx-hero-slider">
           <div class="comparison-base">
             <img src="cross-before.png" alt="Raw 3D printed cross before sanding and polishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
           </div>
-          <div class="comparison-overlay" data-comparison-overlay>
+          <div class="comparison-overlay">
             <img src="cross-after.png" alt="Polished 3D printed cross after layer-line removal and finishing" draggable="false" loading="eager" fetchpriority="high" decoding="async" />
           </div>
-          <div class="comparison-divider" data-comparison-divider></div>
-          <div class="comparison-handle" aria-hidden="true" data-comparison-handle>
+          <div class="comparison-divider"></div>
+          <div class="comparison-handle" aria-hidden="true">
             <svg viewBox="0 0 20 20">
               <polyline points="6,8 3,10 6,12" />
               <polyline points="14,8 17,10 14,12" />
