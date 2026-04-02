@@ -6957,6 +6957,7 @@
       var proofWall = document.querySelector(".pmx-proof-wall");
       var proofLoopWidth = 0;
       var proofLoopSyncing = false;
+      var proofNormalizeRaf = 0;
 
       function recalcProofLoopWidth() {
         if (!proofWall) return;
@@ -6977,15 +6978,29 @@
         function normalizeProofLoopScroll() {
           if (proofLoopSyncing || proofLoopWidth <= 0) return;
           var current = proofWall.scrollLeft;
-          if (current >= proofLoopWidth) {
+          var wrapBuffer = Math.max(28, Math.floor(proofWall.clientWidth * 0.08));
+          var next = current;
+
+          while (next >= (proofLoopWidth + wrapBuffer)) {
+            next -= proofLoopWidth;
+          }
+          while (next <= 1) {
+            next += proofLoopWidth;
+          }
+
+          if (Math.abs(next - current) > 0.5) {
             proofLoopSyncing = true;
-            proofWall.scrollLeft = current - proofLoopWidth;
-            proofLoopSyncing = false;
-          } else if (current <= 1) {
-            proofLoopSyncing = true;
-            proofWall.scrollLeft = current + proofLoopWidth;
+            proofWall.scrollLeft = next;
             proofLoopSyncing = false;
           }
+        }
+
+        function requestProofNormalize() {
+          if (proofNormalizeRaf) return;
+          proofNormalizeRaf = window.requestAnimationFrame(function () {
+            proofNormalizeRaf = 0;
+            normalizeProofLoopScroll();
+          });
         }
 
         recalcProofLoopWidth();
@@ -6993,21 +7008,24 @@
           proofWall.scrollLeft = 1;
         }
 
-        proofWall.addEventListener("scroll", normalizeProofLoopScroll, { passive: true });
+        proofWall.addEventListener("scroll", requestProofNormalize, { passive: true });
+        proofWall.addEventListener("touchmove", requestProofNormalize, { passive: true });
+        proofWall.addEventListener("pointerup", requestProofNormalize, { passive: true });
+        proofWall.addEventListener("touchend", requestProofNormalize, { passive: true });
         window.addEventListener("resize", function () {
           recalcProofLoopWidth();
-          normalizeProofLoopScroll();
+          requestProofNormalize();
         }, { passive: true });
         window.addEventListener("orientationchange", function () {
           window.setTimeout(function () {
             recalcProofLoopWidth();
-            normalizeProofLoopScroll();
+            requestProofNormalize();
           }, 140);
         });
         window.addEventListener("load", function () {
           window.setTimeout(function () {
             recalcProofLoopWidth();
-            normalizeProofLoopScroll();
+            requestProofNormalize();
           }, 120);
         }, { once: true });
       }
