@@ -4567,20 +4567,20 @@
   body.is-ready .pmx-hero-media .comparison-overlay {
     animation:
       pmxHeroOverlayEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
-      pmxHeroOverlayShift 8.4s ease-in-out 1.24s infinite;
+      pmxHeroOverlayShift 8.4s ease-in-out 1.24s infinite alternate;
   }
 
   body.is-ready .pmx-hero-media .comparison-divider {
     animation:
       pmxHeroSeamEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
-      pmxHeroSeamShift 8.4s ease-in-out 1.24s infinite,
+      pmxHeroSeamShift 8.4s ease-in-out 1.24s infinite alternate,
       comparisonSeamPulse 3.2s ease-in-out 1.24s infinite;
   }
 
   body.is-ready .pmx-hero-media .comparison-trail {
     animation:
       pmxHeroTrailEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
-      pmxHeroTrailShift 8.4s ease-in-out 1.24s infinite,
+      pmxHeroTrailShift 8.4s ease-in-out 1.24s infinite alternate,
       pmxHeroTrailGlow 3.2s ease-in-out 1.24s infinite;
   }
 
@@ -4623,8 +4623,9 @@
   }
 
   @keyframes pmxHeroTrailShift {
-    0%, 100% { left: calc(46% - 41px); }
-    50% { left: calc(54% - 41px); }
+    0% { left: calc(50% - 41px); }
+    50% { left: calc(53% - 41px); }
+    100% { left: calc(47% - 41px); }
   }
 
   @keyframes pmxHeroTrailGlow {
@@ -4633,13 +4634,15 @@
   }
 
   @keyframes pmxHeroOverlayShift {
-    0%, 100% { clip-path: inset(0 54% 0 0); }
-    50% { clip-path: inset(0 46% 0 0); }
+    0% { clip-path: inset(0 50% 0 0); }
+    50% { clip-path: inset(0 47% 0 0); }
+    100% { clip-path: inset(0 53% 0 0); }
   }
 
   @keyframes pmxHeroSeamShift {
-    0%, 100% { left: calc(46% - 1px); }
-    50% { left: calc(54% - 1px); }
+    0% { left: calc(50% - 1px); }
+    50% { left: calc(53% - 1px); }
+    100% { left: calc(47% - 1px); }
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -4810,10 +4813,19 @@
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     padding: 0 20px 16px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    cursor: grab;
+  }
+
+  .pmx-proof-wall:active {
+    cursor: grabbing;
+  }
+
+  .pmx-proof-wall.is-dragging {
+    cursor: grabbing;
   }
 
   .pmx-proof-wall::-webkit-scrollbar {
@@ -5635,10 +5647,16 @@
     gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-snap-type: x mandatory;
+    scroll-snap-type: x proximity;
     padding: 0 20px 16px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    cursor: grab;
+  }
+
+  .pmx-proof-wall:active,
+  .pmx-proof-wall.is-dragging {
+    cursor: grabbing;
   }
 
   .pmx-proof-wall::-webkit-scrollbar {
@@ -5660,6 +5678,8 @@
     object-fit: cover;
     transform: scale(1.035);
     transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+    user-select: none;
+    -webkit-user-drag: none;
   }
 
   .pmx-proof-wall .pmx-proof-card.is-visible img,
@@ -6057,20 +6077,20 @@
     body.is-ready .pmx-hero-media .comparison-overlay {
       animation:
         pmxHeroOverlayEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
-        pmxHeroOverlayShiftMobile 9s ease-in-out 1.24s infinite;
+        pmxHeroOverlayShiftMobile 9s ease-in-out 1.24s infinite alternate;
     }
 
     body.is-ready .pmx-hero-media .comparison-divider {
       animation:
         pmxHeroSeamEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
-        pmxHeroSeamShiftMobile 9s ease-in-out 1.24s infinite,
+        pmxHeroSeamShiftMobile 9s ease-in-out 1.24s infinite alternate,
         comparisonSeamPulse 3.2s ease-in-out 1.24s infinite;
     }
 
     body.is-ready .pmx-hero-media .comparison-trail {
       animation:
         pmxHeroTrailEnter 1120ms cubic-bezier(.22,1,.36,1) 120ms forwards,
-        pmxHeroTrailShiftMobile 9s ease-in-out 1.24s infinite,
+        pmxHeroTrailShiftMobile 9s ease-in-out 1.24s infinite alternate,
         pmxHeroTrailGlow 3.2s ease-in-out 1.24s infinite;
     }
 
@@ -6133,18 +6153,21 @@
   }
 
   @keyframes pmxHeroOverlayShiftMobile {
-    0%, 100% { clip-path: inset(0 53% 0 0); }
-    50% { clip-path: inset(0 47% 0 0); }
+    0% { clip-path: inset(0 50% 0 0); }
+    50% { clip-path: inset(0 47.5% 0 0); }
+    100% { clip-path: inset(0 52.5% 0 0); }
   }
 
   @keyframes pmxHeroSeamShiftMobile {
-    0%, 100% { left: calc(47% - 1px); }
-    50% { left: calc(53% - 1px); }
+    0% { left: calc(50% - 1px); }
+    50% { left: calc(52.5% - 1px); }
+    100% { left: calc(47.5% - 1px); }
   }
 
   @keyframes pmxHeroTrailShiftMobile {
-    0%, 100% { left: calc(47% - 41px); }
-    50% { left: calc(53% - 41px); }
+    0% { left: calc(50% - 41px); }
+    50% { left: calc(52.5% - 41px); }
+    100% { left: calc(47.5% - 41px); }
   }
 
   @media (min-width: 768px) {
@@ -6325,6 +6348,48 @@
           <div class="pmx-proof-card-copy">
             <strong class="pmx-proof-outcome">Premium shelf presence</strong>
             <span class="pmx-proof-caption">Nabil A. · candle holder finish</span>
+          </div>
+        </article>
+        <article class="pmx-proof-card" data-reveal="card">
+          <img src="review-blue-gloss.png" alt="Blue geometric print polished to a high-gloss finish" loading="lazy" decoding="async" />
+          <div class="pmx-proof-card-copy">
+            <strong class="pmx-proof-outcome">Mirror gloss in one session</strong>
+            <span class="pmx-proof-caption">Marta L. · display piece upgrade</span>
+          </div>
+        </article>
+        <article class="pmx-proof-card" data-reveal="card">
+          <img src="review-panel-comparison.png" alt="Cosplay panel before and after finishing with smoother surface" loading="lazy" decoding="async" />
+          <div class="pmx-proof-card-copy">
+            <strong class="pmx-proof-outcome">Cosplay-ready surface</strong>
+            <span class="pmx-proof-caption">Kai N. · prop panel finish</span>
+          </div>
+        </article>
+        <article class="pmx-proof-card" data-reveal="card">
+          <img src="review-prism-comparison.png" alt="Raw and polished faceted print comparison in daylight" loading="lazy" decoding="async" />
+          <div class="pmx-proof-card-copy">
+            <strong class="pmx-proof-outcome">Sharper product perception</strong>
+            <span class="pmx-proof-caption">Carlos V. · geometric product line</span>
+          </div>
+        </article>
+        <article class="pmx-proof-card" data-reveal="card">
+          <img src="review-hook-comparison.png" alt="Utility hook before and after with cleaner polished finish" loading="lazy" decoding="async" />
+          <div class="pmx-proof-card-copy">
+            <strong class="pmx-proof-outcome">Functional parts that look premium</strong>
+            <span class="pmx-proof-caption">Marcus T. · utility hardware</span>
+          </div>
+        </article>
+        <article class="pmx-proof-card" data-reveal="card">
+          <img src="review-curved-comparison.png" alt="Curved black print with visible improvement after finishing" loading="lazy" decoding="async" />
+          <div class="pmx-proof-card-copy">
+            <strong class="pmx-proof-outcome">Curves read cleaner, faster</strong>
+            <span class="pmx-proof-caption">Daniel F. · curved housing</span>
+          </div>
+        </article>
+        <article class="pmx-proof-card" data-reveal="card">
+          <img src="review-birthday-tiara.png" alt="Finished birthday tiara print worn at a party" loading="lazy" decoding="async" />
+          <div class="pmx-proof-card-copy">
+            <strong class="pmx-proof-outcome">Gift-ready quality standard</strong>
+            <span class="pmx-proof-caption">Ben A. · event accessory</span>
           </div>
         </article>
       </div>
@@ -6783,6 +6848,124 @@
         });
       });
 
+      var proofWall = document.querySelector(".pmx-proof-wall");
+      if (proofWall) {
+        if (!proofWall.hasAttribute("data-proof-loop-ready")) {
+          var originalCards = Array.prototype.slice.call(proofWall.children);
+          if (originalCards.length > 0) {
+            originalCards.forEach(function (card) {
+              var clone = card.cloneNode(true);
+              clone.removeAttribute("data-reveal");
+              clone.classList.remove("is-visible");
+              proofWall.appendChild(clone);
+            });
+            proofWall.setAttribute("data-proof-loop-ready", "true");
+          }
+        }
+
+        var loopWidth = 0;
+        var autoSpeed = reduceMotion ? 0.016 : 0.034;
+        var pausedUntil = 0;
+        var lastFrame = 0;
+        var isMouseDragging = false;
+        var dragStartX = 0;
+        var dragStartScroll = 0;
+        var loopStarted = false;
+
+        function recalcProofLoop() {
+          loopWidth = Math.max(0, proofWall.scrollWidth / 2);
+          if (loopWidth > 0) {
+            proofWall.scrollLeft = proofWall.scrollLeft % loopWidth;
+          }
+        }
+
+        function pauseAutoFlow(ms) {
+          pausedUntil = performance.now() + (typeof ms === "number" ? ms : 2200);
+        }
+
+        function tickProofWall(now) {
+          if (!lastFrame) lastFrame = now;
+          var delta = Math.min(34, now - lastFrame);
+          lastFrame = now;
+
+          if (!isMouseDragging && now >= pausedUntil && loopWidth > 32) {
+            var nextScrollLeft = proofWall.scrollLeft + (autoSpeed * delta);
+            if (nextScrollLeft >= loopWidth) {
+              nextScrollLeft -= loopWidth;
+            }
+            proofWall.scrollLeft = nextScrollLeft;
+          } else if (loopWidth > 0) {
+            if (proofWall.scrollLeft >= loopWidth) {
+              proofWall.scrollLeft -= loopWidth;
+            } else if (proofWall.scrollLeft < 0) {
+              proofWall.scrollLeft += loopWidth;
+            }
+          }
+          window.requestAnimationFrame(tickProofWall);
+        }
+
+        proofWall.addEventListener("pointerdown", function (e) {
+          pauseAutoFlow(2800);
+          if (e.pointerType !== "mouse") return;
+          isMouseDragging = true;
+          dragStartX = e.clientX;
+          dragStartScroll = proofWall.scrollLeft;
+          proofWall.classList.add("is-dragging");
+          if (typeof proofWall.setPointerCapture === "function" && typeof e.pointerId === "number") {
+            proofWall.setPointerCapture(e.pointerId);
+          }
+        });
+
+        proofWall.addEventListener("pointermove", function (e) {
+          if (!isMouseDragging) return;
+          var deltaX = e.clientX - dragStartX;
+          proofWall.scrollLeft = dragStartScroll - deltaX;
+        });
+
+        function endMouseDrag() {
+          if (!isMouseDragging) return;
+          isMouseDragging = false;
+          proofWall.classList.remove("is-dragging");
+          if (loopWidth > 0) {
+            if (proofWall.scrollLeft >= loopWidth) {
+              proofWall.scrollLeft -= loopWidth;
+            } else if (proofWall.scrollLeft < 0) {
+              proofWall.scrollLeft += loopWidth;
+            }
+          }
+          pauseAutoFlow(1200);
+        }
+
+        proofWall.addEventListener("pointerup", endMouseDrag);
+        proofWall.addEventListener("pointercancel", endMouseDrag);
+        proofWall.addEventListener("wheel", function () { pauseAutoFlow(2000); }, { passive: true });
+        proofWall.addEventListener("touchstart", function () { pauseAutoFlow(2800); }, { passive: true });
+        proofWall.addEventListener("touchend", function () { pauseAutoFlow(1200); }, { passive: true });
+        proofWall.addEventListener("mouseenter", function () { pauseAutoFlow(900); });
+        proofWall.addEventListener("dragstart", function (e) { e.preventDefault(); });
+        window.addEventListener("resize", recalcProofLoop, { passive: true });
+        window.addEventListener("orientationchange", function () {
+          window.setTimeout(recalcProofLoop, 120);
+        });
+
+        function startProofLoop() {
+          if (loopStarted) return;
+          loopStarted = true;
+          recalcProofLoop();
+          window.requestAnimationFrame(tickProofWall);
+        }
+
+        startProofLoop();
+        window.addEventListener("load", recalcProofLoop, { once: true });
+
+        proofWall.querySelectorAll("img").forEach(function (img) {
+          if (!img.complete) {
+            img.addEventListener("load", recalcProofLoop, { once: true });
+            img.addEventListener("error", recalcProofLoop, { once: true });
+          }
+        });
+      }
+
       document.querySelectorAll(".pmx-hero-copy [data-reveal]").forEach(function (item, index) {
         item.style.transitionDelay = (index * 0.08) + "s";
       });
@@ -6875,7 +7058,7 @@
         var hero = document.querySelector(".pmx-hero");
         var heroMedia = document.querySelector("[data-hero-media]");
         var heroSlider = document.querySelector("[data-hero-transform]");
-        if (hero && heroMedia && heroSlider) {
+        if (hero && heroMedia) {
           window.gsap.fromTo(heroMedia, { scale: 1.035 }, {
             scale: 1,
             ease: "none",
@@ -6886,7 +7069,9 @@
               scrub: 0.8
             }
           });
+        }
 
+        if (hero && heroSlider) {
           window.ScrollTrigger.create({
             trigger: hero,
             start: "top top+=64",
