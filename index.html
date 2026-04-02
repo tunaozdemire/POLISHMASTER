@@ -5693,10 +5693,15 @@
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: none;
+    scroll-padding-left: 20px;
     padding: 0 20px 16px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
+    overscroll-behavior-x: contain;
     cursor: grab;
+    touch-action: pan-y;
+    will-change: scroll-position;
+    transform: translateZ(0);
   }
 
   .pmx-proof-wall:active,
@@ -5709,12 +5714,15 @@
   }
 
   .pmx-proof-wall .pmx-proof-card {
+    position: relative;
     flex: 0 0 220px;
     min-width: 220px;
     height: 280px;
     scroll-snap-align: start;
     overflow: hidden;
     border-radius: 16px;
+    border: 1px solid var(--pmx-line);
+    background: var(--pmx-card);
   }
 
   .pmx-proof-wall .pmx-proof-card.is-flow-enter-left {
@@ -5787,6 +5795,13 @@
   .pmx-proof-caption {
     font-size: 11px;
     color: rgba(255,255,255,0.7);
+  }
+
+  .pmx-proof-meta {
+    margin-top: 16px;
+    font-size: 12px;
+    text-align: center;
+    color: rgba(255,255,255,0.62);
   }
 
   .pmx-system-header {
@@ -6211,6 +6226,36 @@
       margin-bottom: 18px;
     }
 
+    .pmx-proof-wall {
+      gap: 10px;
+      padding: 0 16px 14px 16px;
+      scroll-padding-left: 16px;
+    }
+
+    .pmx-proof-wall .pmx-proof-card {
+      flex: 0 0 min(74vw, 252px);
+      min-width: min(74vw, 252px);
+      height: clamp(236px, 62vw, 282px);
+    }
+
+    .pmx-proof-card-copy {
+      left: 10px;
+      right: 10px;
+      bottom: 9px;
+      gap: 3px;
+    }
+
+    .pmx-proof-outcome {
+      font-size: 12.5px;
+      line-height: 1.2;
+      letter-spacing: -0.016em;
+    }
+
+    .pmx-proof-caption {
+      font-size: 10.5px;
+      line-height: 1.3;
+    }
+
     .pmx-mechanism-stage {
       gap: 14px;
       padding: 18px;
@@ -6393,7 +6438,7 @@
       <div class="pmx-shell pmx-center">
         <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">What members produce</span>
       </div>
-      <div class="pmx-proof-wall" aria-label="Member proof wall" data-reveal="card">
+      <div class="pmx-proof-wall" aria-label="Member proof wall">
         <article class="pmx-proof-card" data-reveal="card">
           <img src="review-car-mount.png" alt="Blue finished car mount with smooth glossy surface" loading="lazy" decoding="async" />
           <div class="pmx-proof-card-copy">
@@ -6952,7 +6997,6 @@
         }
 
         var loopWidth = 0;
-        var autoSpeedBase = reduceMotion ? 0.012 : 0.03; // visible but still premium-slow right-to-left flow
         var pausedUntil = 0;
         var manualActiveUntil = 0;
         var lastFrame = 0;
@@ -6960,7 +7004,18 @@
         var dragStartX = 0;
         var dragStartScroll = 0;
         var lastKnownScroll = 0;
+        var flowDirection = 1;
         var seenProofCards = new WeakSet();
+        var lastEntranceAnimationAt = 0;
+        var lastScrollProcessAt = 0;
+        var autoSpeedBase = 0.02;
+        var autoScrollCarry = 0;
+
+        function refreshProofFlowMode() {
+          var isSmall = window.matchMedia("(max-width: 767px)").matches;
+          var isCoarse = window.matchMedia("(pointer: coarse)").matches;
+          autoSpeedBase = reduceMotion ? 0.01 : ((isSmall || isCoarse) ? 0.018 : 0.03);
+        }
 
         function normalizeProofScroll() {
           if (loopWidth <= 0) return;
@@ -6988,6 +7043,9 @@
         }
 
         function animateIncomingProofCards(direction) {
+          var now = performance.now();
+          if (now - lastEntranceAnimationAt < 160) return;
+          lastEntranceAnimationAt = now;
           var wallRect = proofWall.getBoundingClientRect();
           var className = direction >= 0 ? "is-flow-enter-left" : "is-flow-enter-right";
           proofWall.querySelectorAll(".pmx-proof-card").forEach(function (card) {
@@ -7030,8 +7088,11 @@
         function handleProofScroll() {
           normalizeProofScroll();
           var delta = proofWall.scrollLeft - lastKnownScroll;
-          if (Math.abs(delta) > 0.4 && performance.now() <= manualActiveUntil) {
-            animateIncomingProofCards(getProofDirection(delta));
+          if (Math.abs(delta) > 0.45) {
+            flowDirection = getProofDirection(delta);
+            if (performance.now() <= manualActiveUntil) {
+              animateIncomingProofCards(flowDirection);
+            }
           }
           lastKnownScroll = proofWall.scrollLeft;
         }
@@ -7042,13 +7103,24 @@
           lastFrame = now;
 
           if (!isPointerDragging && now >= pausedUntil && loopWidth > 48) {
-            proofWall.scrollLeft += autoSpeedBase * delta; // single direction flow
-            normalizeProofScroll();
+            var projectedStep = (autoSpeedBase * delta) + autoScrollCarry;
+            var wholeStep = Math.floor(projectedStep);
+            autoScrollCarry = projectedStep - wholeStep;
+            if (wholeStep > 0) {
+              proofWall.scrollLeft += wholeStep * flowDirection;
+              normalizeProofScroll();
+              lastKnownScroll = proofWall.scrollLeft;
+            }
           }
           window.requestAnimationFrame(tickProofWall);
         }
 
-        proofWall.addEventListener("scroll", handleProofScroll, { passive: true });
+        proofWall.addEventListener("scroll", function () {
+          var now = performance.now();
+          if (now - lastScrollProcessAt < 60) return;
+          lastScrollProcessAt = now;
+          handleProofScroll();
+        }, { passive: true });
 
         proofWall.addEventListener("pointerdown", function (e) {
           markManualInteraction(2800);
@@ -7066,7 +7138,7 @@
           if (!isPointerDragging) return;
           var deltaX = e.clientX - dragStartX;
           proofWall.scrollLeft = dragStartScroll - deltaX;
-          markManualInteraction(1200);
+          markManualInteraction(1300);
           handleProofScroll();
         });
 
@@ -7076,6 +7148,7 @@
           proofWall.classList.remove("is-dragging");
           normalizeProofScroll();
           pauseAutoFlow(1200);
+          flowDirection = 1;
         }
 
         proofWall.addEventListener("pointerup", endProofPointerDrag);
@@ -7083,19 +7156,33 @@
         proofWall.addEventListener("lostpointercapture", endProofPointerDrag);
         proofWall.addEventListener("wheel", function (e) {
           var dominantDelta = Math.abs(e.deltaX) > Math.abs(e.deltaY) ? e.deltaX : e.deltaY;
+          flowDirection = getProofDirection(dominantDelta || 1);
           markManualInteraction(2200);
-          animateIncomingProofCards(getProofDirection(dominantDelta));
+          animateIncomingProofCards(flowDirection);
         }, { passive: true });
         proofWall.addEventListener("touchstart", function () { markManualInteraction(2600); }, { passive: true });
-        proofWall.addEventListener("touchmove", function () { markManualInteraction(1200); }, { passive: true });
-        proofWall.addEventListener("touchend", function () { pauseAutoFlow(1100); }, { passive: true });
-        // Keep flow alive while user hovers; pause only on explicit interaction.
+        proofWall.addEventListener("touchmove", function () {
+          markManualInteraction(1400);
+          handleProofScroll();
+        }, { passive: true });
+        proofWall.addEventListener("touchend", function () {
+          pauseAutoFlow(1200);
+          flowDirection = 1;
+        }, { passive: true });
         proofWall.addEventListener("dragstart", function (e) { e.preventDefault(); });
-        window.addEventListener("resize", recalcProofLoop, { passive: true });
+
+        window.addEventListener("resize", function () {
+          refreshProofFlowMode();
+          recalcProofLoop();
+        }, { passive: true });
         window.addEventListener("orientationchange", function () {
-          window.setTimeout(recalcProofLoop, 120);
+          window.setTimeout(function () {
+            refreshProofFlowMode();
+            recalcProofLoop();
+          }, 180);
         });
 
+        refreshProofFlowMode();
         recalcProofLoop();
         window.requestAnimationFrame(tickProofWall);
         window.addEventListener("load", recalcProofLoop, { once: true });
