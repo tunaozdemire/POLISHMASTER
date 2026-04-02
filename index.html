@@ -4663,10 +4663,12 @@
 
   .pmx-proof-wall {
     display: flex;
-    gap: 10px;
+    flex-direction: row;
+    gap: 12px;
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    padding: 0 20px 16px;
+    padding: 0 20px 16px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -4677,8 +4679,9 @@
 
   .pmx-proof-card {
     position: relative;
-    flex: 0 0 200px;
-    height: 260px;
+    flex: 0 0 220px;
+    min-width: 220px;
+    height: 280px;
     overflow: hidden;
     border-radius: 16px;
     border: 1px solid var(--pmx-line);
@@ -4801,6 +4804,74 @@
     top: 0;
     color: var(--pmx-accent);
     font-weight: 700;
+  }
+
+  .step-card {
+    background: rgba(16,16,18,0.96);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 20px;
+  }
+
+  .step-img-wrap {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+  }
+
+  .step-img-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .step-num {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    background: rgba(0,0,0,0.7);
+    color: #ff6a00;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 4px 8px;
+    border-radius: 6px;
+  }
+
+  .step-body {
+    padding: 20px;
+  }
+
+  .step-body h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f7efe8;
+    margin-bottom: 10px;
+  }
+
+  .step-body ul {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .step-body li {
+    font-size: 14px;
+    color: rgba(255,255,255,0.62);
+    padding-left: 14px;
+    position: relative;
+  }
+
+  .step-body li::before {
+    content: "·";
+    color: #ff6a00;
+    font-weight: 700;
+    position: absolute;
+    left: 0;
   }
 
   .pmx-stats-grid {
@@ -5418,11 +5489,11 @@
   .pmx-proof-wall {
     display: flex;
     flex-direction: row;
-    gap: 10px;
+    gap: 12px;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-snap-type: x mandatory;
-    padding: 0 20px 16px;
+    padding: 0 20px 16px 20px;
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
   }
@@ -5432,12 +5503,18 @@
   }
 
   .pmx-proof-wall .pmx-proof-card {
-    flex: 0 0 200px;
-    min-width: 200px;
-    height: 260px;
+    flex: 0 0 220px;
+    min-width: 220px;
+    height: 280px;
+    scroll-snap-align: start;
+    overflow: hidden;
+    border-radius: 16px;
   }
 
   .pmx-proof-wall .pmx-proof-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
     transform: scale(1.035);
     transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
   }
@@ -5997,8 +6074,8 @@
       <div class="pmx-shell pmx-hero-copy">
         <span class="pmx-kicker" data-reveal="text">USED BY 217 MAKERS</span>
         <h1 class="pmx-hero-title" data-reveal="text">
-          <span class="hero-line-dim">Your prints look homemade.</span>
-          <span class="hero-line-bright">They don't have to.</span>
+          <span style="display:block; color:rgba(255,255,255,0.35);">Your prints look homemade.</span>
+          <span style="display:block; color:#ffffff;">They don't have to.</span>
         </h1>
         <p class="pmx-hero-subhead pmx-copy-limit" data-reveal="text">The finishing system makers use to charge 3-5x more. Works on PLA, PLA+, and PETG.</p>
         <div class="pmx-hero-chips">
@@ -6081,46 +6158,48 @@
         <h2 class="pmx-section-title" data-reveal="text">3 steps. Repeatable every time.</h2>
       </div>
       <div class="pmx-shell">
-        <div class="pmx-system-stack">
-          <article class="pmx-step-card" data-reveal="card">
-            <div class="pmx-step-media">
-              <img src="surface-comparison.png" alt="Sanding surface prep step" loading="lazy" decoding="async" />
-              <span class="pmx-step-badge">01</span>
+        <div class="pmx-mechanism-stage">
+          <article class="step-card">
+            <div class="step-img-wrap">
+              <img src="surface-comparison.png" alt="Step 1: surface prep" />
+              <span class="step-num">01</span>
             </div>
-            <div class="pmx-step-body">
-              <h3 class="pmx-step-title">Prep the surface</h3>
-              <ul class="pmx-step-list">
-                <li>Exact grit sequence: 220 &rarr; 400 &rarr; 800</li>
+            <div class="step-body">
+              <h3>Prep the surface</h3>
+              <ul>
+                <li>Exact grit sequence: 220 → 400 → 800</li>
                 <li>Works on PLA, PLA+, PETG</li>
-                <li>20-30 min on standard prints</li>
+                <li>20–30 min on standard prints</li>
               </ul>
             </div>
           </article>
-          <article class="pmx-step-card" data-reveal="card">
-            <div class="pmx-step-media">
-              <img src="surface-control-paths.png" alt="Finish path selection" loading="lazy" decoding="async" />
-              <span class="pmx-step-badge">02</span>
+
+          <article class="step-card">
+            <div class="step-img-wrap">
+              <img src="surface-control-paths.png" alt="Step 2: finish path" />
+              <span class="step-num">02</span>
             </div>
-            <div class="pmx-step-body">
-              <h3 class="pmx-step-title">Choose your finish</h3>
-              <ul class="pmx-step-list">
+            <div class="step-body">
+              <h3>Choose your finish</h3>
+              <ul>
                 <li>Gloss path: final compound application</li>
                 <li>Matte path: controlled flatting agent</li>
-                <li>Same process - different endpoint</li>
+                <li>Same process — different endpoint</li>
               </ul>
             </div>
           </article>
-          <article class="pmx-step-card" data-reveal="card">
-            <div class="pmx-step-media">
-              <img src="king.png" alt="Finished product-ready result" loading="lazy" decoding="async" />
-              <span class="pmx-step-badge">03</span>
+
+          <article class="step-card">
+            <div class="step-img-wrap">
+              <img src="king.png" alt="Step 3: product-ready result" />
+              <span class="step-num">03</span>
             </div>
-            <div class="pmx-step-body">
-              <h3 class="pmx-step-title">Product-ready result</h3>
-              <ul class="pmx-step-list">
+            <div class="step-body">
+              <h3>Product-ready result</h3>
+              <ul>
                 <li>No visible layer lines</li>
                 <li>Passes the "injection-molded" test</li>
-                <li>Shelf, sale, or gift - same standard</li>
+                <li>Shelf, sale, or gift — same standard</li>
               </ul>
             </div>
           </article>
