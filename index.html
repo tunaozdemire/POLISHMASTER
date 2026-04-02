@@ -7210,8 +7210,12 @@
         });
       }
 
-      function hydrateDeferredImage(img) {
+      function hydrateDeferredImage(img, forceEager) {
         if (!img || img.getAttribute("data-hydrated") === "true") return;
+        if (forceEager) {
+          img.setAttribute("loading", "eager");
+          img.setAttribute("fetchpriority", "high");
+        }
         var srcset = img.getAttribute("data-srcset");
         var sizes = img.getAttribute("data-sizes");
         var src = img.getAttribute("data-src");
@@ -7223,7 +7227,30 @@
 
       var deferredImages = Array.prototype.slice.call(document.querySelectorAll("img.pmx-deferred-img[data-src]"));
       if (deferredImages.length) {
+        var isSmallViewport = window.matchMedia("(max-width: 767px)").matches;
+        var isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
+        var prioritizeMobileProof = isSmallViewport || isCoarsePointer;
+        var proofDeferredImages = deferredImages.filter(function (img) {
+          return !!img.closest(".pmx-proof-wall");
+        });
+
+        function hydrateDeferredBatch(images, count, forceEager) {
+          var remaining = typeof count === "number" ? count : images.length;
+          images.forEach(function (img) {
+            if (remaining <= 0) return;
+            if (img.getAttribute("data-hydrated") === "true") return;
+            hydrateDeferredImage(img, !!forceEager);
+            remaining -= 1;
+          });
+        }
+
+        if (prioritizeMobileProof && proofDeferredImages.length) {
+          // Make the initial swipe range feel instantly ready on mobile.
+          hydrateDeferredBatch(proofDeferredImages, 6, true);
+        }
+
         if ("IntersectionObserver" in window) {
+          var deferredRootMargin = prioritizeMobileProof ? "220px 0px" : "320px 0px";
           var deferredImageObserver = new IntersectionObserver(function (entries, observer) {
             entries.forEach(function (entry) {
               if (!entry.isIntersecting) return;
@@ -7231,7 +7258,7 @@
               observer.unobserve(entry.target);
             });
           }, {
-            rootMargin: "280px 0px",
+            rootMargin: deferredRootMargin,
             threshold: 0.01
           });
 
