@@ -7247,10 +7247,26 @@
         if (prioritizeMobileProof && proofDeferredImages.length) {
           // Make the initial swipe range feel instantly ready on mobile.
           hydrateDeferredBatch(proofDeferredImages, 6, true);
+
+          // As the proof section approaches, hydrate the rest to avoid dark swaps mid-swipe.
+          var proofSection = document.querySelector(".pmx-proof");
+          if (proofSection && "IntersectionObserver" in window) {
+            var proofPrefetchObserver = new IntersectionObserver(function (entries, observer) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                hydrateDeferredBatch(proofDeferredImages);
+                observer.disconnect();
+              });
+            }, {
+              rootMargin: "400px 0px",
+              threshold: 0.01
+            });
+            proofPrefetchObserver.observe(proofSection);
+          }
         }
 
         if ("IntersectionObserver" in window) {
-          var deferredRootMargin = prioritizeMobileProof ? "220px 0px" : "320px 0px";
+          var deferredRootMargin = prioritizeMobileProof ? "260px 0px" : "320px 0px";
           var deferredImageObserver = new IntersectionObserver(function (entries, observer) {
             entries.forEach(function (entry) {
               if (!entry.isIntersecting) return;
