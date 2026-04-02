@@ -5723,6 +5723,9 @@
     border-radius: 16px;
     border: 1px solid var(--pmx-line);
     background: var(--pmx-card);
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    isolation: isolate;
   }
 
   .pmx-proof-wall .pmx-proof-card img {
@@ -5733,6 +5736,9 @@
     transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1);
     user-select: none;
     -webkit-user-drag: none;
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    will-change: transform;
   }
 
   .pmx-proof-wall .pmx-proof-card.is-visible img,
@@ -6948,6 +6954,7 @@
         });
       });
 
+      var proofWall = document.querySelector(".pmx-proof-wall");
 
       function hydrateDeferredImage(img, forceEager) {
         if (!img || img.getAttribute("data-hydrated") === "true") return;
@@ -6966,28 +6973,90 @@
 
       var deferredImages = Array.prototype.slice.call(document.querySelectorAll("img.pmx-deferred-img[data-src]"));
       if (deferredImages.length) {
-        var isSmallViewport = window.matchMedia("(max-width: 767px)").matches;
-        var isCoarsePointer = window.matchMedia("(pointer: coarse)").matches;
-        var prioritizeMobileDeferred = isSmallViewport || isCoarsePointer;
+        var isMobileDeferred = window.matchMedia("(max-width: 900px)").matches || window.matchMedia("(pointer: coarse)").matches;
+        var proofDeferredImages = proofWall ? deferredImages.filter(function (img) {
+          return proofWall.contains(img);
+        }) : [];
+        var nonProofDeferredImages = proofWall ? deferredImages.filter(function (img) {
+          return !proofWall.contains(img);
+        }) : deferredImages;
+
+        if (isMobileDeferred && proofDeferredImages.length) {
+          proofDeferredImages.slice(0, 8).forEach(function (img) {
+            hydrateDeferredImage(img, true);
+          });
+        }
 
         if ("IntersectionObserver" in window) {
-          var deferredRootMargin = prioritizeMobileDeferred ? "260px 0px" : "320px 0px";
-          var deferredImageObserver = new IntersectionObserver(function (entries, observer) {
-            entries.forEach(function (entry) {
-              if (!entry.isIntersecting) return;
-              hydrateDeferredImage(entry.target);
-              observer.unobserve(entry.target);
+          if (nonProofDeferredImages.length) {
+            var nonProofObserver = new IntersectionObserver(function (entries, observer) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                hydrateDeferredImage(entry.target);
+                observer.unobserve(entry.target);
+              });
+            }, {
+              root: null,
+              rootMargin: isMobileDeferred ? "260px 0px" : "320px 0px",
+              threshold: 0.01
             });
-          }, {
-            rootMargin: deferredRootMargin,
-            threshold: 0.01
-          });
 
-          deferredImages.forEach(function (img) {
-            deferredImageObserver.observe(img);
-          });
+            nonProofDeferredImages.forEach(function (img) {
+              nonProofObserver.observe(img);
+            });
+          }
+
+          if (proofWall && proofDeferredImages.length) {
+            var proofImageObserver = new IntersectionObserver(function (entries, observer) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                hydrateDeferredImage(entry.target, false);
+                observer.unobserve(entry.target);
+              });
+            }, {
+              root: proofWall,
+              rootMargin: "0px 400px 0px 400px",
+              threshold: 0
+            });
+
+            proofDeferredImages.forEach(function (img) {
+              proofImageObserver.observe(img);
+            });
+          }
         } else {
           deferredImages.forEach(hydrateDeferredImage);
+        }
+      }
+
+      if (proofWall) {
+        var proofCards = Array.prototype.slice.call(proofWall.querySelectorAll(".pmx-proof-card[data-reveal='card']"));
+        if (proofCards.length) {
+          if ("IntersectionObserver" in window) {
+            var proofRevealObserver = new IntersectionObserver(function (entries, observer) {
+              entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                var card = entry.target;
+                card.classList.add("is-visible");
+                window.setTimeout(function () {
+                  card.style.transitionDelay = "";
+                }, 1000);
+                observer.unobserve(card);
+              });
+            }, {
+              root: proofWall,
+              rootMargin: "0px 80px 0px 80px",
+              threshold: 0.08
+            });
+
+            proofCards.forEach(function (card, index) {
+              card.style.transitionDelay = Math.min(index * 0.08, 0.28) + "s";
+              proofRevealObserver.observe(card);
+            });
+          } else {
+            proofCards.forEach(function (card) {
+              card.classList.add("is-visible");
+            });
+          }
         }
       }
 
@@ -7010,7 +7079,9 @@
         if (heroTrust) heroTrust.style.transitionDelay = "0.43s";
       }
 
-      var revealItems = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]"));
+      var revealItems = Array.prototype.slice.call(document.querySelectorAll("[data-reveal]")).filter(function (item) {
+        return !(proofWall && item.matches(".pmx-proof-card[data-reveal='card']") && proofWall.contains(item));
+      });
       function markRevealed(item) {
         if (!item || item.classList.contains("is-visible")) return;
         item.classList.add("is-visible");
