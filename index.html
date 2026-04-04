@@ -5,6 +5,10 @@
   <meta name="theme-color" content="#000000" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
+  <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <title>PolishMaster Official Site | 3D Print Finishing System</title>
   <meta
     name="description"
@@ -6784,8 +6788,8 @@
     });
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js" integrity="sha384-HOvlOYPIs/zjoIkWUGXkVmXsjr8GuZLV+Q+rcPwmJOVZVpvTSXQChiN4t9Euv9Vc" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js" integrity="sha384-P8VzCVnT9NBUkMrpcIZrJbA7EBjJvh/fJS6PmP+4nLIM284DtsImIv8D0fFjIkeh" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
   <script>
     (function () {
@@ -7468,13 +7472,29 @@
           .replace(/â˜†/g, '\u2606');
       }
 
-      function buildContent(data) {
-        var html = '<h1>' + normalizeText(data.title) + '</h1><span class="pm-modal-date">' + normalizeText(data.date) + '</span><hr class="pm-divider">';
+      function clearNode(node) {
+        while (node && node.firstChild) node.removeChild(node.firstChild);
+      }
+
+      function createTextElement(tagName, text, className) {
+        var el = document.createElement(tagName);
+        el.textContent = normalizeText(text);
+        if (className) el.className = className;
+        return el;
+      }
+
+      function renderModalContent(data) {
+        if (!contentEl) return;
+        clearNode(contentEl);
+        contentEl.appendChild(createTextElement('h1', data.title));
+        contentEl.appendChild(createTextElement('span', data.date, 'pm-modal-date'));
+        var divider = document.createElement('hr');
+        divider.className = 'pm-divider';
+        contentEl.appendChild(divider);
         data.body.forEach(function(item) {
-          if (item.type === 'h2') html += '<h2>' + normalizeText(item.text) + '</h2>';
-          else if (item.type === 'p') html += '<p>' + normalizeText(item.text) + '</p>';
+          if (item.type === 'h2') contentEl.appendChild(createTextElement('h2', item.text));
+          else if (item.type === 'p') contentEl.appendChild(createTextElement('p', item.text));
         });
-        return html;
       }
 
       var overlay = document.getElementById('pm-modal-overlay');
@@ -7516,7 +7536,7 @@
       function openModal(key) {
         var data = MODAL_CONTENT[key];
         if (!data) return;
-        contentEl.innerHTML = buildContent(data);
+        renderModalContent(data);
         modal.scrollTop = 0;
         lockScroll();
         overlay.hidden = false;
@@ -7551,15 +7571,6 @@
         });
       }
 
-      function escapeHtml(value) {
-        return String(value)
-          .replace(/&/g, '&amp;')
-          .replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;')
-          .replace(/"/g, '&quot;')
-          .replace(/'/g, '&#39;');
-      }
-
       function copyText(value) {
         if (navigator.clipboard && navigator.clipboard.writeText) {
           return navigator.clipboard.writeText(value);
@@ -7573,31 +7584,51 @@
         var emailAddress = 'polishmaserco@gmail.com';
         var draftedMessage = body + '\n\nFrom: ' + email;
         contactStatus.hidden = false;
-        contactStatus.innerHTML =
-          '<strong>Message prepared</strong>' +
-          '<span>Your email app should open. If it does not, send your message manually to <a href="mailto:' + emailAddress + '">' + emailAddress + '</a>.</span>' +
-          '<div class="pm-contact-actions">' +
-            '<button type="button" class="pm-contact-copy" data-copy="email">Copy email</button>' +
-            '<button type="button" class="pm-contact-copy" data-copy="subject">Copy subject</button>' +
-            '<button type="button" class="pm-contact-copy" data-copy="message">Copy message</button>' +
-          '</div>' +
-          '<div class="pm-contact-note">Subject: ' + escapeHtml(subject) + '</div>';
+        clearNode(contactStatus);
 
-        contactStatus.querySelectorAll('[data-copy]').forEach(function(button) {
+        var strong = document.createElement('strong');
+        strong.textContent = 'Message prepared';
+        contactStatus.appendChild(strong);
+
+        var info = document.createElement('span');
+        info.appendChild(document.createTextNode('Your email app should open. If it does not, send your message manually to '));
+        var mailLink = document.createElement('a');
+        mailLink.href = 'mailto:' + emailAddress;
+        mailLink.textContent = emailAddress;
+        info.appendChild(mailLink);
+        info.appendChild(document.createTextNode('.'));
+        contactStatus.appendChild(info);
+
+        var actions = document.createElement('div');
+        actions.className = 'pm-contact-actions';
+        contactStatus.appendChild(actions);
+
+        [
+          { key: 'email', label: 'Copy email', value: emailAddress },
+          { key: 'subject', label: 'Copy subject', value: subject },
+          { key: 'message', label: 'Copy message', value: draftedMessage }
+        ].forEach(function(action) {
+          var button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'pm-contact-copy';
+          button.textContent = action.label;
+          actions.appendChild(button);
           button.addEventListener('click', function() {
-            var key = button.getAttribute('data-copy');
-            var value = key === 'email' ? emailAddress : key === 'subject' ? subject : draftedMessage;
-            copyText(value).then(function() {
-              var originalLabel = key === 'email' ? 'Copy email' : key === 'subject' ? 'Copy subject' : 'Copy message';
+            copyText(action.value).then(function() {
               button.textContent = 'Copied';
               window.setTimeout(function() {
-                button.textContent = originalLabel;
+                button.textContent = action.label;
               }, 1200);
             }).catch(function() {
               button.textContent = 'Copy unavailable';
             });
           });
         });
+
+        var note = document.createElement('div');
+        note.className = 'pm-contact-note';
+        note.textContent = 'Subject: ' + subject;
+        contactStatus.appendChild(note);
       }
 
       function makeFallbackAvatar(name) {
