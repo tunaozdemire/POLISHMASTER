@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
-  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:;" />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net 'sha256-lhuiRZeTfAz56qg2A5LsmsEwzYhFIvuZxwWHC9ZHjik=' 'sha256-ZvbzulybyOruouxWYjiQIY5ebz2eLlLrRnbCbtu8ef0=' 'sha256-Y7E+mRGBHJwS2jzgYHvQkX3ZlOJkKBYeAcVCfKHNjP0=' 'sha256-5GX5etMX2qFJZc1PqI2QBknUIaLNj7AFYE+Kc4ss0A4=' 'sha256-gZCmMUfdbQsMT9fci1OJoBSMSHZbJaBbEuGXob5XE98=' 'sha256-BXnFK83caJbNhAN/+HhyXQaC0tXkWRv5OWGpif98oqM='; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self' mailto:; frame-ancestors 'none';" />
   <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=()" />
   <meta http-equiv="X-Content-Type-Options" content="nosniff" />
   <title>PolishMaster | 3D Print Finishing System for Sellable Products</title>
@@ -6770,7 +6770,7 @@
       <div class="pmx-shell">
         <article class="founder-block-v2" data-reveal="card">
           <div class="pmx-founder-top">
-            <img src="https://randomuser.me/api/portraits/men/34.jpg" alt="Portrait of Hugo M., founder of PolishMaster" class="pmx-founder-photo" loading="lazy" />
+            <img src="founder-avatar.svg" alt="Portrait of Hugo M., founder of PolishMaster" class="pmx-founder-photo" loading="lazy" />
             <div>
               <div class="pmx-founder-name">Hugo M.</div>
               <div class="pmx-founder-role">Founder, PolishMaster</div>
@@ -7475,7 +7475,7 @@
             { type: 'h2', text: '6. Your Rights' },
             { type: 'p', text: 'You have the right to access, update, or delete the information we hold on you. Contact us at any time to exercise these rights.' },
             { type: 'h2', text: '7. Contact' },
-            { type: 'p', text: 'Questions about this Privacy Policy? Email us at polishmaserco@gmail.com.' }
+            { type: 'p', text: 'Questions about this Privacy Policy? Email us at polishmasterco@gmail.com.' }
           ]
         },
         security: {
@@ -7491,7 +7491,7 @@
             { type: 'h2', text: 'Payment Security' },
             { type: 'p', text: 'Payments are handled through Patreon, a PCI-DSS compliant platform. We never store payment card data on our servers.' },
             { type: 'h2', text: 'Vulnerability Disclosure' },
-            { type: 'p', text: 'Found a security issue? Please contact polishmaserco@gmail.com for responsible disclosure. We respond promptly.' },
+            { type: 'p', text: 'Found a security issue? Please contact polishmasterco@gmail.com for responsible disclosure. We respond promptly.' },
             { type: 'h2', text: 'Incident Response' },
             { type: 'p', text: 'In the event of a breach, we notify affected users in accordance with applicable law, typically within 72 hours.' }
           ]
@@ -7517,7 +7517,7 @@
             { type: 'h2', text: '8. Changes' },
             { type: 'p', text: 'We may modify these terms at any time. Significant changes will be communicated by email or on the platform. Continued use constitutes acceptance.' },
             { type: 'h2', text: '9. Contact' },
-            { type: 'p', text: 'For questions about these Terms, email polishmaserco@gmail.com.' }
+            { type: 'p', text: 'For questions about these Terms, email polishmasterco@gmail.com.' }
           ]
         }
       };
@@ -7641,7 +7641,7 @@
       function setContactStatus(name, email, body) {
         if (!contactStatus) return;
         var subject = 'Message from ' + name;
-        var emailAddress = 'polishmaserco@gmail.com';
+        var emailAddress = 'polishmasterco@gmail.com';
         var draftedMessage = body + '\n\nFrom: ' + email;
         contactStatus.hidden = false;
         clearNode(contactStatus);
@@ -7734,7 +7734,7 @@
           var name = contactForm.querySelector('[name="name"]').value.trim();
           var email = contactForm.querySelector('[name="email"]').value.trim();
           var body = contactForm.querySelector('[name="body"]').value.trim();
-          var mailto = 'mailto:polishmaserco@gmail.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
+          var mailto = 'mailto:polishmasterco@gmail.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
           setContactStatus(name, email, body);
           window.location.href = mailto;
         });

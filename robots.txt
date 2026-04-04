@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 Sitemap: https://www.polishmaster.co/sitemap.xml
-Host: https://www.polishmaster.co
+Host: www.polishmaster.co
