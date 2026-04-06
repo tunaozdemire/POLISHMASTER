@@ -22,10 +22,6 @@
   <link rel="alternate" href="https://www.polishmaster.co/" hreflang="en" />
   <link rel="alternate" href="https://www.polishmaster.co/" hreflang="x-default" />
   <link rel="sitemap" type="application/xml" title="Sitemap" href="https://www.polishmaster.co/sitemap.xml" />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="preconnect" href="https://www.patreon.com" />
-  <link rel="dns-prefetch" href="//cdn.jsdelivr.net" />
-  <link rel="dns-prefetch" href="//www.patreon.com" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="PolishMaster" />
   <meta property="og:locale" content="en_US" />
@@ -6866,9 +6862,6 @@
     });
   </script>
 
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
-
   <script>
     (function () {
       var reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -6892,6 +6885,7 @@
         var hintThumb = slider.parentElement ? slider.parentElement.querySelector("[data-comparison-thumb]") : null;
         var hintTrack = slider.parentElement ? slider.parentElement.querySelector("[data-comparison-track]") : null;
         var isDragging = false;
+        var dragListenersAttached = false;
         var activeDragSurface = hintTrack || slider;
         if (!slider.querySelector("[data-comparison-overlay]") || !slider.querySelector("[data-comparison-divider]")) return;
 
@@ -6914,6 +6908,11 @@
           if (hintThumb) hintThumb.style.left = percent + "%";
         }
 
+        function centerX(sourceEl) {
+          var rect = (sourceEl || slider).getBoundingClientRect();
+          return rect.left + (rect.width / 2);
+        }
+
         function forwardWheelScroll(e) {
           if (isDragging) return;
           if (document.body.classList.contains("modal-open")) return;
@@ -6923,18 +6922,35 @@
         }
 
         function stopDragging() {
-          if (!isDragging) return;
+          if (!isDragging) {
+            if (dragListenersAttached) {
+              window.removeEventListener("pointermove", onPointerMove);
+              window.removeEventListener("pointerup", stopDragging);
+              window.removeEventListener("pointercancel", stopDragging);
+              dragListenersAttached = false;
+            }
+            return;
+          }
           isDragging = false;
           activeDragSurface = hintTrack || slider;
           slider.classList.remove("is-dragging");
+          window.removeEventListener("pointermove", onPointerMove);
+          window.removeEventListener("pointerup", stopDragging);
+          window.removeEventListener("pointercancel", stopDragging);
+          dragListenersAttached = false;
           slider.classList.add("is-returning");
           triggerHaptic(10);
           window.setTimeout(function () {
-            setPosition((hintTrack || slider).getBoundingClientRect().left + ((hintTrack || slider).getBoundingClientRect().width / 2), hintTrack || slider);
+            setPosition(centerX(hintTrack || slider), hintTrack || slider);
           }, 30);
           window.setTimeout(function () {
             slider.classList.remove("is-returning");
           }, 920);
+        }
+
+        function onPointerMove(e) {
+          if (!isDragging) return;
+          setPosition(e.clientX, activeDragSurface);
         }
 
         function startDragging(e, sourceEl) {
@@ -6946,6 +6962,12 @@
           if (e.pointerType && e.pointerType !== "mouse") triggerHaptic(14);
           if (e.pointerType && e.pointerType !== "mouse" && typeof activeDragSurface.setPointerCapture === "function" && typeof e.pointerId === "number") {
             activeDragSurface.setPointerCapture(e.pointerId);
+          }
+          if (!dragListenersAttached) {
+            window.addEventListener("pointermove", onPointerMove);
+            window.addEventListener("pointerup", stopDragging);
+            window.addEventListener("pointercancel", stopDragging);
+            dragListenersAttached = true;
           }
           setPosition(e.clientX, activeDragSurface);
         }
@@ -6962,15 +6984,7 @@
         });
         slider.addEventListener("wheel", forwardWheelScroll, { passive: false });
 
-        window.addEventListener("pointermove", function (e) {
-          if (!isDragging) return;
-          setPosition(e.clientX, activeDragSurface);
-        });
-
-        window.addEventListener("pointerup", stopDragging);
-        window.addEventListener("pointercancel", stopDragging);
-
-        setPosition((hintTrack || slider).getBoundingClientRect().left + ((hintTrack || slider).getBoundingClientRect().width / 2), hintTrack || slider);
+        setPosition(centerX(hintTrack || slider), hintTrack || slider);
       });
 
       (function () {
@@ -7224,9 +7238,12 @@
           item.matches(".pmx-proof-card[data-reveal='card']") &&
           _proofWall.contains(item));
       });
+      var pendingRevealItems = new Set(revealItems);
+      var reduceMotionRevealDone = false;
       function markRevealed(item) {
         if (!item || item.classList.contains("is-visible")) return;
         item.classList.add("is-visible");
+        pendingRevealItems.delete(item);
       }
 
       function updateRevealAnimations(viewportH) {
@@ -7234,8 +7251,8 @@
         var enterAt = viewportH * 0.9;
         var leftBound = viewportW * 0.02;
         var rightBound = viewportW * 0.98;
-        revealItems.forEach(function (item) {
-          if (item.classList.contains("is-visible")) return;
+        if (!pendingRevealItems.size) return;
+        pendingRevealItems.forEach(function (item) {
           var rect = item.getBoundingClientRect();
           var verticallyVisible = rect.top <= enterAt && rect.bottom >= viewportH * 0.02;
           var horizontallyVisible = (viewportW <= 0) || (rect.left <= rightBound && rect.right >= leftBound);
@@ -7285,11 +7302,12 @@
 
       var metricsTriggered = false;
       var metricsSection = document.querySelector(".pmx-impact-strip");
+      var reduceMotionMetricsDone = false;
+      var metricItems = metricsSection ? metricsSection.querySelectorAll("[data-count]") : [];
       function triggerMetrics() {
         if (metricsTriggered || !metricsSection) return;
         metricsTriggered = true;
-        var items = metricsSection.querySelectorAll("[data-count]");
-        items.forEach(function (item, index) {
+        metricItems.forEach(function (item, index) {
           window.setTimeout(function () {
             animateMetricValue(item);
           }, index < 2 ? index * 70 : 180 + ((index - 2) * 70));
@@ -7373,7 +7391,10 @@
         if (!viewportH) return;
 
         if (reduceMotion) {
-          revealItems.forEach(function (item) { markRevealed(item); });
+          if (!reduceMotionRevealDone) {
+            revealItems.forEach(function (item) { markRevealed(item); });
+            reduceMotionRevealDone = true;
+          }
         } else {
           updateRevealAnimations(viewportH);
           updatePanelMotion(viewportH);
@@ -7382,9 +7403,12 @@
 
         if (metricsSection) {
           if (reduceMotion) {
-            metricsSection.querySelectorAll("[data-count]").forEach(function (item) {
-              item.textContent = (item.getAttribute("data-prefix") || "") + item.getAttribute("data-count") + (item.getAttribute("data-suffix") || "");
-            });
+            if (!reduceMotionMetricsDone) {
+              metricItems.forEach(function (item) {
+                item.textContent = (item.getAttribute("data-prefix") || "") + item.getAttribute("data-count") + (item.getAttribute("data-suffix") || "");
+              });
+              reduceMotionMetricsDone = true;
+            }
           } else if (!metricsTriggered) {
             var metricRect = metricsSection.getBoundingClientRect();
             if (metricRect.top <= viewportH * 0.78 && metricRect.bottom >= viewportH * 0.08) {
@@ -7446,8 +7470,9 @@
         }
 
         if (progressFill) {
-          progressFill.style.setProperty('--pmx-banner-progress', progress.toFixed(4));
-          progressFill.style.transform = 'scaleX(' + progress.toFixed(4) + ')';
+          var progressValue = progress.toFixed(4);
+          progressFill.style.setProperty('--pmx-banner-progress', progressValue);
+          progressFill.style.transform = 'scaleX(' + progressValue + ')';
         }
       }
 
