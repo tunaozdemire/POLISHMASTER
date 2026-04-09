@@ -6168,20 +6168,20 @@
 
   @media (max-width: 767px) {
     body {
-      --pmx-banner-height: 36px;
+      --pmx-banner-height: 34px;
     }
 
     .pmx-announcement-bar {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 10px;
-      padding-inline: 10px;
+      gap: 8px;
+      padding-inline: 12px;
     }
 
     .pmx-announcement-label,
     .pmx-announcement-link {
-      font-size: 10.5px;
+      font-size: 10px;
       line-height: 1;
     }
 
@@ -6189,6 +6189,9 @@
       flex: 1 1 auto;
       min-width: 0;
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 700;
     }
 
     .pmx-announcement-link {
@@ -6215,11 +6218,11 @@
 
     .pmx-hero-media,
     .pmx-hero-media .comparison-slider {
-      height: min(44vw, 206px);
+      height: min(41vw, 192px);
     }
 
     .pmx-hero-media-gradient {
-      height: 42px;
+      height: 18px;
     }
 
     body.is-ready .pmx-hero-media .comparison-overlay {
@@ -6243,34 +6246,34 @@
     }
 
     .pmx-hero-copy {
-      margin-top: 8px;
+      margin-top: 0;
       gap: 0;
     }
 
     .pmx-hero-title {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-size: clamp(1.88rem, 8.9vw, 2.55rem);
       line-height: 1.03;
     }
 
     .pmx-hero-subhead {
-      margin-bottom: 12px;
-      font-size: 14px;
-      line-height: 1.42;
+      margin-bottom: 10px;
+      font-size: 13px;
+      line-height: 1.38;
     }
 
     .pmx-hero-chips {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 6px;
-      margin: 12px 0 0;
+      margin: 10px 0 0;
       order: 6;
     }
 
     .pmx-chip {
-      min-height: 30px;
+      min-height: 28px;
       padding: 0 8px;
-      font-size: 10px;
+      font-size: 9.5px;
       justify-content: center;
       text-align: center;
       white-space: nowrap;
@@ -6278,7 +6281,7 @@
 
     .pmx-hero-copy .pmx-kicker {
       order: 1;
-      margin-bottom: 10px;
+      margin-bottom: 8px;
       font-size: 10px;
       letter-spacing: 0.22em;
     }
@@ -6294,15 +6297,15 @@
     .pmx-hero-copy .pmx-primary-cta {
       order: 4;
       width: 100%;
-      min-height: 52px;
-      margin-top: 2px;
+      min-height: 50px;
+      margin-top: 0;
       justify-content: center;
     }
 
     .pmx-trust-row {
       order: 5;
-      margin-top: 10px;
-      font-size: 12px;
+      margin-top: 8px;
+      font-size: 11.5px;
       row-gap: 4px;
       justify-content: flex-start;
     }
@@ -6454,8 +6457,8 @@
   </div>
   <div class="pmx-announcement" data-pmx-announcement>
     <div class="pmx-announcement-bar pmx-shell">
-      <span class="pmx-announcement-label">Launch pricing ends May 1</span>
-      <a class="pmx-announcement-link" href="#pricing-section" data-scroll-pricing>Secure access at $29 &rarr;</a>
+      <span class="pmx-announcement-label">Launch price ends May 1</span>
+      <a class="pmx-announcement-link" href="#pricing-section" data-scroll-pricing>Get $29 access &rarr;</a>
       <strong class="pmx-announcement-price">$29 &rarr; $49</strong>
     </div>
     <span class="pmx-announcement-progress" aria-hidden="true"><span data-pmx-progress></span></span>
