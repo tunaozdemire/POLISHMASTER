@@ -208,6 +208,20 @@
     --shadow: 0 20px 60px rgba(0,0,0,0.5);
     --r-card: 24px;
     --r-btn: 18px;
+    --pmx-space-1: 8px;
+    --pmx-space-2: 12px;
+    --pmx-space-3: 16px;
+    --pmx-space-4: 20px;
+    --pmx-space-5: 24px;
+    --pmx-space-6: 32px;
+    --pmx-space-7: 40px;
+    --pmx-space-8: 56px;
+    --pmx-space-9: 72px;
+    --pmx-section-gap: var(--pmx-space-4);
+    --pmx-stack-tight: var(--pmx-space-2);
+    --pmx-stack-base: var(--pmx-space-3);
+    --pmx-card-padding: 22px;
+    --pmx-card-padding-lg: 24px;
   }
 
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -4472,8 +4486,25 @@
     z-index: 1;
     display: flex;
     flex-direction: column;
-    gap: 64px;
-    padding: 0 0 72px;
+    gap: var(--pmx-space-9);
+    padding: 0 0 var(--pmx-space-9);
+  }
+
+  .pmx-section {
+    display: grid;
+    gap: var(--pmx-section-gap);
+  }
+
+  .pmx-section > .pmx-shell.pmx-center {
+    display: grid;
+    justify-items: center;
+    gap: var(--pmx-space-2);
+  }
+
+  .pmx-section > .pmx-shell.pmx-center > .pmx-kicker,
+  .pmx-section > .pmx-shell.pmx-center > .pmx-kicker--muted,
+  .pmx-section > .pmx-shell.pmx-center > .pmx-section-subtitle {
+    margin: 0;
   }
 
   .pmx-shell {
@@ -4499,13 +4530,13 @@
     letter-spacing: 0.12em;
     text-transform: uppercase;
     color: var(--pmx-accent);
-    margin-bottom: 12px;
+    margin-bottom: var(--pmx-space-2);
   }
 
   .pmx-kicker--muted {
     color: rgba(255,255,255,0.62);
     letter-spacing: 0.1em;
-    margin-bottom: 20px;
+    margin-bottom: var(--pmx-space-2);
   }
 
   .pmx-section-title {
@@ -4517,7 +4548,10 @@
   }
 
   .pmx-section-subtitle {
-    margin-top: 8px;
+    max-width: 42ch;
+    margin-top: var(--pmx-space-2);
+    margin-left: auto;
+    margin-right: auto;
     font-size: 14px;
     line-height: 1.55;
     color: rgba(255,255,255,0.68);
@@ -4759,11 +4793,13 @@
   }
 
   .pmx-hero-copy {
-    margin-top: 32px;
+    display: grid;
+    gap: var(--pmx-stack-base);
+    margin-top: var(--pmx-space-5);
   }
 
   .pmx-hero-title {
-    margin-bottom: 16px;
+    margin-bottom: 0;
     font-size: clamp(2rem, 8.5vw, 2.8rem);
     font-weight: 800;
     line-height: 1.1;
@@ -4793,7 +4829,7 @@
   }
 
   .pmx-hero-subhead {
-    margin-bottom: 28px;
+    margin-bottom: 0;
     font-size: 16px;
     line-height: 1.55;
     color: rgba(255,255,255,0.62);
@@ -4848,7 +4884,7 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 12px;
+    margin-top: 0;
     font-size: 13px;
     line-height: 1.4;
   }
@@ -4901,7 +4937,9 @@
   }
 
   .pmx-system-header {
-    margin-bottom: 40px;
+    display: grid;
+    gap: var(--pmx-space-2);
+    margin-bottom: 0;
   }
 
   .pmx-step-card,
@@ -4944,11 +4982,13 @@
   }
 
   .pmx-step-body {
-    padding: 20px;
+    display: grid;
+    gap: var(--pmx-space-2);
+    padding: var(--pmx-card-padding);
   }
 
   .pmx-step-title {
-    margin-bottom: 10px;
+    margin-bottom: 0;
     font-size: 18px;
     font-weight: 700;
     color: var(--pmx-text);
@@ -5012,14 +5052,16 @@
   }
 
   .step-body {
-    padding: 20px;
+    display: grid;
+    gap: var(--pmx-space-2);
+    padding: var(--pmx-card-padding);
   }
 
   .step-body h3 {
     font-size: 18px;
     font-weight: 700;
     color: #f7efe8;
-    margin-bottom: 10px;
+    margin-bottom: 0;
   }
 
   .step-body ul {
@@ -5081,11 +5123,13 @@
   }
 
   .pmx-members-header {
-    margin-bottom: 32px;
+    display: grid;
+    gap: var(--pmx-space-2);
+    margin-bottom: 0;
   }
 
   .tcard-v2 {
-    padding: 24px 20px;
+    padding: var(--pmx-card-padding-lg);
   }
 
   .pmx-member-top {
@@ -5115,7 +5159,7 @@
   }
 
   .pmx-member-outcome {
-    margin: 16px 0 10px;
+    margin: var(--pmx-space-3) 0 var(--pmx-space-2);
     font-size: 18px;
     font-weight: 800;
     line-height: 1.2;
@@ -5193,7 +5237,7 @@
 
   .pmx-inline-link {
     display: block;
-    margin-top: 16px;
+    margin-top: var(--pmx-space-3);
     font-size: 13px;
     font-weight: 600;
     text-align: center;
@@ -5207,11 +5251,11 @@
   }
 
   .objection-block {
-    padding: 20px;
+    padding: var(--pmx-card-padding);
   }
 
   .objection-block h3 {
-    margin-bottom: 10px;
+    margin-bottom: var(--pmx-space-2);
     font-size: 15px;
     font-weight: 700;
     color: var(--pmx-text);
@@ -5224,7 +5268,7 @@
   }
 
   .pricing-card-single {
-    padding: 28px 24px;
+    padding: var(--pmx-card-padding-lg);
     border: 1px solid rgba(255,106,0,0.3);
     border-radius: 24px;
     background: var(--pmx-card);
@@ -5233,7 +5277,7 @@
 
   .pmx-pricing-badge {
     display: inline-block;
-    margin-bottom: 20px;
+    margin-bottom: var(--pmx-space-3);
     padding: 6px 12px;
     border: 1px solid rgba(255,106,0,0.3);
     border-radius: 8px;
@@ -5265,7 +5309,7 @@
   }
 
   .pmx-price-note {
-    margin-bottom: 24px;
+    margin-bottom: var(--pmx-space-4);
     font-size: 12px;
     color: rgba(255,255,255,0.62);
   }
@@ -5273,7 +5317,7 @@
   .pmx-pricing-list {
     display: grid;
     gap: 12px;
-    margin: 0 0 28px;
+    margin: 0 0 var(--pmx-space-5);
     padding: 0;
     list-style: none;
   }
@@ -5300,13 +5344,13 @@
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-top: 14px;
+    margin-top: var(--pmx-space-3);
     font-size: 12px;
     color: rgba(255,255,255,0.62);
   }
 
   .pmx-pricing-italic {
-    margin-top: 16px;
+    margin-top: var(--pmx-space-3);
     font-size: 13px;
     text-align: center;
     font-style: italic;
@@ -5316,8 +5360,8 @@
   .founder-block-v2 {
     display: flex;
     flex-direction: column;
-    gap: 16px;
-    padding: 24px;
+    gap: var(--pmx-space-3);
+    padding: var(--pmx-card-padding-lg);
   }
 
   .pmx-founder-top {
@@ -5366,7 +5410,7 @@
   }
 
   .final-cta-block {
-    padding: 64px 0;
+    padding: var(--pmx-space-8) 0;
     text-align: center;
     background: radial-gradient(circle at 50% 0%, rgba(255,106,0,0.1) 0%, transparent 60%);
     border-top: 1px solid rgba(255,106,0,0.15);
@@ -5381,17 +5425,17 @@
   }
 
   .pmx-final-muted {
-    margin-bottom: 4px;
+    margin-bottom: 0;
     color: rgba(255,255,255,0.35);
   }
 
   .pmx-final-strong {
-    margin-bottom: 32px;
+    margin-bottom: 0;
     color: #fff;
   }
 
   .pmx-final-note {
-    margin-top: 14px;
+    margin-top: 0;
     font-size: 13px;
     color: rgba(255,255,255,0.35);
   }
@@ -5399,14 +5443,14 @@
   .site-footer {
     width: min(100%, 560px);
     margin: 0 auto;
-    padding: 0 20px 48px;
+    padding: 0 20px var(--pmx-space-8);
     background: transparent;
     border: 0;
   }
 
   .site-footer-question {
     display: inline-block;
-    margin: 0 auto 16px;
+    margin: 0 auto var(--pmx-space-3);
     font-size: 13px;
     font-weight: 700;
     color: #ffc995;
@@ -5436,7 +5480,7 @@
   }
 
   .site-footer-bottom {
-    margin-top: 18px;
+    margin-top: var(--pmx-space-4);
     display: grid;
     gap: 16px;
     justify-items: center;
@@ -5515,7 +5559,7 @@
   }
 
   .pmx-main {
-    gap: 56px;
+    gap: clamp(56px, 7vw, 72px);
   }
 
   html.pmx-reveal [data-reveal] {
@@ -5649,8 +5693,7 @@
   }
 
   .pmx-hero-copy {
-    display: grid;
-    gap: 0;
+    gap: var(--pmx-space-3);
   }
 
   .pmx-hero-title {
@@ -5661,7 +5704,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin: 0 0 22px;
+    margin: 0;
   }
 
   .pmx-chip {
@@ -5695,7 +5738,7 @@
   }
 
   .pmx-proof > .pmx-center {
-    margin-bottom: 20px;
+    margin-bottom: 0;
   }
 
   .pmx-proof-wall {
@@ -5814,7 +5857,7 @@
   }
 
   .pmx-system-header {
-    margin-bottom: 24px;
+    gap: var(--pmx-space-2);
   }
 
   .pmx-mechanism-stage {
@@ -6016,14 +6059,14 @@
   }
 
   .pmx-locked-lane {
-    padding: 18px;
+    padding: 20px;
     border: 1px solid var(--pmx-line);
     border-radius: 20px;
     background: rgba(16,16,18,0.96);
   }
 
   .pmx-locked-lane-head {
-    margin-bottom: 14px;
+    margin-bottom: var(--pmx-space-3);
   }
 
   .pmx-locked-lane-head h3 {
@@ -6156,7 +6199,11 @@
 
   .pmx-final-stack {
     display: grid;
-    gap: 0;
+    gap: var(--pmx-space-2);
+  }
+
+  .pmx-final-stack .pmx-primary-cta {
+    margin-top: 4px;
   }
 
   .pmx-final-muted,
@@ -6175,14 +6222,15 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 8px;
+      gap: 10px;
+      min-height: 34px;
       padding-inline: 12px;
     }
 
     .pmx-announcement-label,
     .pmx-announcement-link {
-      font-size: 10px;
-      line-height: 1;
+      font-size: 10.5px;
+      line-height: 1.15;
     }
 
     .pmx-announcement-label {
@@ -6247,26 +6295,25 @@
 
     .pmx-hero-copy {
       margin-top: 0;
-      gap: 0;
+      gap: 10px;
     }
 
     .pmx-hero-title {
-      margin-bottom: 8px;
+      margin-bottom: 0;
       font-size: clamp(1.88rem, 8.9vw, 2.55rem);
       line-height: 1.03;
     }
 
     .pmx-hero-subhead {
-      margin-bottom: 10px;
       font-size: 13px;
-      line-height: 1.38;
+      line-height: 1.42;
     }
 
     .pmx-hero-chips {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 6px;
-      margin: 10px 0 0;
+      margin: 0;
       order: 6;
     }
 
@@ -6281,7 +6328,7 @@
 
     .pmx-hero-copy .pmx-kicker {
       order: 1;
-      margin-bottom: 8px;
+      margin-bottom: 0;
       font-size: 10px;
       letter-spacing: 0.22em;
     }
@@ -6298,20 +6345,19 @@
       order: 4;
       width: 100%;
       min-height: 50px;
-      margin-top: 0;
       justify-content: center;
     }
 
     .pmx-trust-row {
       order: 5;
-      margin-top: 8px;
+      margin-top: 0;
       font-size: 11.5px;
       row-gap: 4px;
       justify-content: flex-start;
     }
 
     .pmx-system-header {
-      margin-bottom: 18px;
+      gap: 10px;
     }
 
     .pmx-proof-wall {
@@ -6360,6 +6406,22 @@
 
     .pmx-mechanism-copy {
       gap: 8px;
+    }
+
+    .pricing-card-single,
+    .tcard-v2,
+    .founder-block-v2 {
+      padding: 20px;
+    }
+
+    .step-body,
+    .objection-block,
+    .pmx-locked-lane {
+      padding: 18px;
+    }
+
+    .pmx-final-stack {
+      gap: 10px;
     }
   }
 
