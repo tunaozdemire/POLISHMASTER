@@ -6168,24 +6168,35 @@
 
   @media (max-width: 767px) {
     body {
-      --pmx-banner-height: 38px;
+      --pmx-banner-height: 36px;
     }
 
     .pmx-announcement-bar {
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 8px;
-      padding-inline: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding-inline: 10px;
     }
 
     .pmx-announcement-label,
     .pmx-announcement-link {
-      font-size: 11px;
-      line-height: 1.1;
+      font-size: 10.5px;
+      line-height: 1;
+    }
+
+    .pmx-announcement-label {
+      flex: 1 1 auto;
+      min-width: 0;
+      white-space: nowrap;
     }
 
     .pmx-announcement-link {
-      justify-self: end;
+      flex: 0 0 auto;
       text-align: right;
+      white-space: nowrap;
+      text-decoration: none;
+      font-weight: 800;
     }
 
     .pmx-announcement-price {
@@ -6204,7 +6215,11 @@
 
     .pmx-hero-media,
     .pmx-hero-media .comparison-slider {
-      height: min(46vw, 214px);
+      height: min(44vw, 206px);
+    }
+
+    .pmx-hero-media-gradient {
+      height: 42px;
     }
 
     body.is-ready .pmx-hero-media .comparison-overlay {
@@ -6228,7 +6243,7 @@
     }
 
     .pmx-hero-copy {
-      margin-top: 18px;
+      margin-top: 8px;
       gap: 0;
     }
 
@@ -6245,19 +6260,20 @@
     }
 
     .pmx-hero-chips {
-      gap: 8px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
       margin: 12px 0 0;
       order: 6;
     }
 
-    .pmx-hero-chips .pmx-chip:last-child {
-      display: none;
-    }
-
     .pmx-chip {
       min-height: 30px;
-      padding: 0 10px;
-      font-size: 11px;
+      padding: 0 8px;
+      font-size: 10px;
+      justify-content: center;
+      text-align: center;
+      white-space: nowrap;
     }
 
     .pmx-hero-copy .pmx-kicker {
@@ -6476,9 +6492,9 @@
         </h1>
         <p class="pmx-hero-subhead pmx-copy-limit" data-reveal="text">Charge 3–5x more with a product-ready finish. Works on PLA, PLA+, PETG, ABS, ASA, and more.</p>
         <div class="pmx-hero-chips">
-          <span class="pmx-chip" data-reveal="chip">Product-ready finish</span>
-          <span class="pmx-chip" data-reveal="chip">20-30 min process</span>
-          <span class="pmx-chip" data-reveal="chip">Works on major filaments</span>
+          <span class="pmx-chip" data-reveal="chip">Product-ready</span>
+          <span class="pmx-chip" data-reveal="chip">20-30 min</span>
+          <span class="pmx-chip" data-reveal="chip">10+ filaments</span>
         </div>
         <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join" data-reveal="cta">Secure Your Access - $29/mo</a>
         <div class="pmx-trust-row" aria-label="Membership trust row" data-reveal="text">
