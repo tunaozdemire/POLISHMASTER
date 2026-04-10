@@ -1,11 +1,20 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="Founder icon">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="PolishMaster founder">
   <defs>
     <linearGradient id="pmGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ff8a3d" />
-      <stop offset="100%" stop-color="#7a2200" />
+      <stop offset="0%" stop-color="#ff8a3d"/>
+      <stop offset="100%" stop-color="#7a2200"/>
     </linearGradient>
   </defs>
-  <rect width="256" height="256" rx="128" fill="url(#pmGrad)" />
-  <circle cx="128" cy="128" r="72" fill="none" stroke="#fff4ea" stroke-width="12" opacity="0.85" />
-  <path d="M128 76L141 114L181 114L149 137L161 176L128 152L95 176L107 137L75 114L115 114Z" fill="#fff4ea" />
+  <!-- Background circle -->
+  <rect width="256" height="256" rx="128" fill="url(#pmGrad)"/>
+  <!-- Bottle body -->
+  <path d="M94,104 L94,206 Q94,220 128,220 Q162,220 162,206 L162,104 Q162,93 153,92 L103,92 Q94,93 94,104 Z" fill="rgba(255,255,255,0.96)"/>
+  <!-- Neck -->
+  <rect x="111" y="73" width="34" height="22" rx="7" fill="rgba(255,255,255,0.96)"/>
+  <!-- Cross — horizontal bar -->
+  <rect x="82" y="48" width="92" height="27" rx="9" fill="rgba(255,255,255,0.96)"/>
+  <!-- Cross — vertical bar -->
+  <rect x="115" y="26" width="26" height="71" rx="9" fill="rgba(255,255,255,0.96)"/>
+  <!-- Orange gloss accent (references logo's orange edge) -->
+  <path d="M106,108 L106,202" stroke="rgba(255,106,0,0.5)" stroke-width="6" stroke-linecap="round"/>
 </svg>
