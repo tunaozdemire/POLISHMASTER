@@ -5527,8 +5527,9 @@
       padding: 0 48px;
     }
 
-    /* ── SECTION SPACING ── */
+    /* ── SECTION PADDING + SPACING ── */
     .pmx-section {
+      padding: 88px 0;
       gap: clamp(48px, 5vw, 72px);
     }
 
@@ -5566,13 +5567,13 @@
       margin-left: 0;
       aspect-ratio: unset;
     }
-    /* Left-edge fade: media blends into dark background */
+    /* Left-edge fade: media blends into background */
     .pmx-hero-media-gradient {
       top: 0;
       bottom: 0;
       right: auto;
       height: 100%;
-      width: 80px;
+      width: 120px;
       background: linear-gradient(to right, #050505 0%, transparent 100%);
     }
     .pmx-hero-copy {
@@ -5580,23 +5581,50 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding-top: 80px;
-      padding-bottom: 80px;
+      padding-top: 88px;
+      padding-bottom: 88px;
       gap: var(--pmx-space-3);
     }
     .pmx-hero-title {
       font-size: clamp(2.6rem, 3.8vw, 3.6rem);
-      max-width: 14ch;
+      max-width: 13ch;
     }
     .pmx-hero-subhead {
       font-size: 18px;
+      max-width: 36ch;
     }
     .pmx-hero-chips {
       flex-wrap: nowrap;
     }
+    /* CTA in hero: max-width so it doesn't stretch full column */
+    .pmx-hero .pmx-primary-cta {
+      max-width: 400px;
+    }
+    /* Trust row: left-align in hero copy column */
+    .pmx-hero-copy .pmx-trust-row {
+      justify-content: flex-start;
+    }
+    /* Global CTA desktop sizing */
     .pmx-primary-cta {
       font-size: 18px;
       min-height: 60px;
+    }
+
+    /* ── IDENTITY SECTION ── */
+    .pmx-identity {
+      padding: 72px 0;
+    }
+    .pmx-identity-title {
+      font-size: clamp(1.6rem, 2.5vw, 2.2rem);
+      max-width: 28ch;
+      margin: 0 auto;
+    }
+    .pmx-identity-copy {
+      font-size: 16px;
+      margin-top: 16px;
+      max-width: 36ch;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* ── PROOF WALL ── */
@@ -5611,45 +5639,78 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
     }
+    .pmx-step-media {
+      height: 260px;
+    }
+    .pmx-step-title {
+      font-size: 20px;
+    }
+    .pmx-step-list li {
+      font-size: 15px;
+    }
 
     /* ── STATS ── */
     .pmx-stats-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 20px;
     }
+    .pmx-stat-card {
+      padding: 28px 24px;
+    }
+    .pmx-stat-value {
+      font-size: 40px;
+    }
+    .pmx-stat-label {
+      font-size: 13px;
+    }
 
     /* ── PRICING ── */
     .pricing-card-single {
-      max-width: 520px;
+      max-width: 640px;
       margin: 0 auto;
-      padding: 40px 48px;
+      padding: 44px 56px;
+    }
+    .pmx-price {
+      font-size: 64px;
+    }
+    .pmx-pricing-list li {
+      font-size: 15px;
     }
 
-    /* ── FOUNDER ── */
+    /* ── FOUNDER — proper 2-column grid ── */
     .founder-block-v2 {
-      flex-direction: row !important;
-      align-items: flex-start;
-      gap: 40px;
+      display: grid !important;
+      grid-template-columns: 150px 1fr;
+      grid-template-areas:
+        "identity case"
+        "identity quote";
+      column-gap: 40px;
+      row-gap: 20px;
       padding: 36px 40px;
     }
     .pmx-founder-top {
-      flex-shrink: 0;
-      width: 130px;
+      grid-area: identity;
+      display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
       gap: 10px;
+      align-self: start;
+    }
+    .pmx-founder-case {
+      grid-area: case;
+      font-size: 30px;
+      align-self: end;
+    }
+    .pmx-founder-quote {
+      grid-area: quote;
+      font-size: 17px;
+      line-height: 1.65;
+      align-self: start;
     }
     .pmx-founder-photo {
       width: 72px;
       height: 72px;
-    }
-    .pmx-founder-case {
-      font-size: 30px;
-    }
-    .pmx-founder-quote {
-      font-size: 17px;
-      line-height: 1.65;
     }
 
     /* ── MEMBERS ── */
@@ -5660,6 +5721,12 @@
     .pmx-member-list--stack {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
+    }
+    .pmx-member-outcome {
+      font-size: 22px;
+    }
+    .pmx-member-quote {
+      font-size: 15px;
     }
 
     /* ── LOCKED ── */
@@ -5676,6 +5743,12 @@
     .pmx-objections-list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
+    }
+    .objection-block h3 {
+      font-size: 16px;
+    }
+    .objection-block p {
+      font-size: 15px;
     }
 
     /* ── MECHANISM ── */
@@ -5708,9 +5781,72 @@
     }
 
     /* ── FINAL CTA ── */
+    .final-cta-block {
+      padding: 96px 0;
+    }
     .pmx-final-stack {
-      max-width: 540px;
+      max-width: 680px;
       margin: 0 auto;
+    }
+    .pmx-final-strong,
+    .pmx-final-muted {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+    }
+
+    /* ── FOOTER — horizontal 3-column layout ── */
+    .site-footer {
+      width: min(100%, 1140px);
+      padding: 40px 48px 56px;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 48px;
+      text-align: left;
+    }
+    .site-footer > a.site-footer-question {
+      order: 3;
+      align-self: center;
+      flex-shrink: 0;
+      font-size: 14px;
+    }
+    .site-footer-brand {
+      flex: 1;
+      min-width: 0;
+      justify-items: start;
+      text-align: left;
+      padding: 0;
+    }
+    .site-footer-brand-copy {
+      max-width: 36ch;
+    }
+    .site-footer-bottom {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 8px;
+      text-align: right;
+      margin-top: 0;
+    }
+    .site-footer nav {
+      justify-content: flex-end;
+    }
+
+    /* ── CARD HOVER STATES (desktop only) ── */
+    .tcard-v2,
+    .objection-block,
+    .pmx-step-card,
+    .pmx-stat-card {
+      transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
+    }
+    .tcard-v2:hover,
+    .objection-block:hover,
+    .pmx-step-card:hover,
+    .pmx-stat-card:hover {
+      transform: translateY(-4px);
+      border-color: rgba(255,106,0,0.22);
+      box-shadow: 0 16px 40px rgba(0,0,0,0.32), 0 0 0 1px rgba(255,106,0,0.1);
     }
 
   }
