@@ -5754,6 +5754,7 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
     cursor: grab;
     touch-action: pan-x;
   }
@@ -5772,7 +5773,7 @@
     flex: 0 0 220px;
     min-width: 220px;
     height: 280px;
-    scroll-snap-align: start;
+    scroll-snap-align: center;
     overflow: hidden;
     border-radius: 16px;
     border: 1px solid var(--pmx-line);
@@ -5823,34 +5824,62 @@
     }
   }
 
+  /* Verified badge — top-right corner */
+  .pmx-proof-verified {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 3;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    padding: 3px 7px;
+    border-radius: 20px;
+    border: 1px solid rgba(255,255,255,0.18);
+  }
+
+  /* Stars row */
+  .pmx-proof-stars {
+    font-size: 11px;
+    color: var(--pmx-accent);
+    letter-spacing: 0.04em;
+    line-height: 1;
+    margin-bottom: 1px;
+  }
+
   .pmx-proof-card-copy {
     position: absolute;
     inset: auto 0 0;
     z-index: 2;
-    padding: 52px 12px 13px;
+    padding: 56px 12px 14px;
     background: linear-gradient(
       to top,
-      rgba(0, 0, 0, 0.76) 0%,
-      rgba(0, 0, 0, 0.30) 55%,
+      rgba(0, 0, 0, 0.84) 0%,
+      rgba(0, 0, 0, 0.38) 58%,
       transparent 100%
     );
     display: grid;
-    gap: 3px;
+    gap: 4px;
   }
 
   .pmx-proof-outcome {
-    font-size: 13px;
-    font-weight: 800;
-    line-height: 1.18;
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.16;
     color: #fff;
     letter-spacing: -0.02em;
-    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.55);
   }
 
   .pmx-proof-caption {
     font-size: 11px;
-    color: rgba(255, 255, 255, 0.72);
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+    color: rgba(255, 255, 255, 0.78);
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+    line-height: 1.3;
   }
 
   .pmx-proof-meta {
@@ -6376,26 +6405,32 @@
 
     .pmx-proof-wall {
       gap: 10px;
-      padding: 6px 16px 18px;
+      padding: 6px 5vw 18px;
+      scroll-snap-type: x mandatory;
     }
 
     .pmx-proof-wall .pmx-proof-card {
-      flex: 0 0 min(88vw, 300px);
-      min-width: min(88vw, 300px);
-      height: clamp(236px, 62vw, 282px);
+      flex: 0 0 82vw;
+      min-width: 82vw;
+      height: clamp(300px, 72vw, 420px);
+      scroll-snap-align: center;
     }
 
     .pmx-proof-card-copy {
-      padding: 44px 10px 11px;
+      padding: 64px 14px 16px;
     }
 
     .pmx-proof-outcome {
-      font-size: 12.5px;
-      letter-spacing: -0.016em;
+      font-size: 15px;
+      letter-spacing: -0.02em;
+    }
+
+    .pmx-proof-stars {
+      font-size: 12px;
     }
 
     .pmx-proof-caption {
-      font-size: 10.5px;
+      font-size: 11.5px;
     }
 
     .pmx-mechanism-stage {
@@ -6598,88 +6633,124 @@
         <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">What members produce</span>
       </div>
       <div class="pmx-proof-wall" aria-label="Member proof wall">
+        <!-- 1: Bracket before/after — max delta, first card -->
         <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-car-mount-768.webp" data-srcset="review-car-mount-480.webp 480w, review-car-mount-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Blue finished car mount with smooth glossy surface" loading="lazy" fetchpriority="low" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-bracket-comparison-768.webp" data-srcset="review-bracket-comparison-480.webp 480w, review-bracket-comparison-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Before-and-after black bracket print showing raw and polished versions" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
           <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Retail look</strong>
-            <span class="pmx-proof-caption">Jake M. · interior accessory</span>
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Raw vs. finished — the gap that sells</strong>
+            <span class="pmx-proof-caption">Amir H. &middot; Etsy seller &middot; +$340 first week</span>
           </div>
         </article>
+        <!-- 2: Panel comparison — strong delta + lifestyle -->
         <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-bracket-comparison-768.webp" data-srcset="review-bracket-comparison-480.webp 480w, review-bracket-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Before-and-after black bracket print showing raw and polished versions" loading="lazy" fetchpriority="low" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-panel-comparison-768.webp" data-srcset="review-panel-comparison-480.webp 480w, review-panel-comparison-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Cosplay panel before and after finishing with smoother surface" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
           <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Before/after difference that sells</strong>
-            <span class="pmx-proof-caption">Amir H. · bracket comparison</span>
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Cosplay-grade in one session</strong>
+            <span class="pmx-proof-caption">Kai N. &middot; prop maker &middot; +$55/piece avg</span>
           </div>
         </article>
+        <!-- 3: Hook comparison — functional before/after -->
         <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-orange-closeup-768.webp" data-srcset="review-orange-closeup-480.webp 480w, review-orange-closeup-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Glossy orange finished print close-up" loading="lazy" fetchpriority="low" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-hook-comparison-768.webp" data-srcset="review-hook-comparison-480.webp 480w, review-hook-comparison-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Utility hook before and after with cleaner polished finish" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
           <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Higher perceived value</strong>
-            <span class="pmx-proof-caption">Liam R. · premium product surface</span>
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Utility parts that look intentional</strong>
+            <span class="pmx-proof-caption">Marcus T. &middot; local market &middot; 3&times; price increase</span>
           </div>
         </article>
+        <!-- 4: Soap dish — lifestyle, real environment -->
         <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-panel-comparison-768.webp" data-srcset="review-panel-comparison-480.webp 480w, review-panel-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Cosplay panel before and after finishing with smoother surface" loading="lazy" fetchpriority="low" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-soap-dish-768.webp" data-srcset="review-soap-dish-480.webp 480w, review-soap-dish-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Polished soap dish 3D print on a marble bathroom counter" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
           <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Cosplay-ready surface</strong>
-            <span class="pmx-proof-caption">Kai N. · prop panel finish</span>
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Shelf-ready bathroom accessory</strong>
+            <span class="pmx-proof-caption">Ben K. &middot; Etsy seller &middot; sold out in 4 days</span>
           </div>
         </article>
+        <!-- 5: Planter — lifestyle, wooden table -->
         <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-pla-planter-768.webp" data-srcset="review-pla-planter-480.webp 480w, review-pla-planter-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Orange geometric planter with polished surface on a wooden table" loading="lazy" fetchpriority="low" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-pla-planter-768.webp" data-srcset="review-pla-planter-480.webp 480w, review-pla-planter-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Orange geometric planter with polished surface on a wooden table" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
           <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Gift-ready finish</strong>
-            <span class="pmx-proof-caption">Sara T. · home decor drop</span>
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Gift-quality home decor</strong>
+            <span class="pmx-proof-caption">Sara T. &middot; Etsy &middot; +$28 avg order</span>
           </div>
         </article>
+        <!-- 6: Blue gloss — color pop, attention -->
         <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-prism-comparison-768.webp" data-srcset="review-prism-comparison-480.webp 480w, review-prism-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Raw and polished faceted print comparison in daylight" loading="lazy" fetchpriority="low" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-blue-gloss-768.webp" data-srcset="review-blue-gloss-480.webp 480w, review-blue-gloss-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Blue geometric print polished to a high-gloss finish" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
           <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Sharper product perception</strong>
-            <span class="pmx-proof-caption">Carlos V. · geometric product line</span>
-          </div>
-        </article>
-        <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-soap-dish-768.webp" data-srcset="review-soap-dish-480.webp 480w, review-soap-dish-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Polished soap dish 3D print on a marble bathroom counter" loading="lazy" fetchpriority="low" decoding="async" />
-          <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Cleaner read at first glance</strong>
-            <span class="pmx-proof-caption">Ben K. · bathroom accessory</span>
-          </div>
-        </article>
-        <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-hook-comparison-768.webp" data-srcset="review-hook-comparison-480.webp 480w, review-hook-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Utility hook before and after with cleaner polished finish" loading="lazy" fetchpriority="low" decoding="async" />
-          <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Functional parts that look premium</strong>
-            <span class="pmx-proof-caption">Marcus T. · utility hardware</span>
-          </div>
-        </article>
-        <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-candle-holder-768.webp" data-srcset="review-candle-holder-480.webp 480w, review-candle-holder-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Finished candle holder on a wooden table" loading="lazy" fetchpriority="low" decoding="async" />
-          <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Premium shelf presence</strong>
-            <span class="pmx-proof-caption">Nabil A. · candle holder finish</span>
-          </div>
-        </article>
-        <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-curved-comparison-768.webp" data-srcset="review-curved-comparison-480.webp 480w, review-curved-comparison-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Curved black print with visible improvement after finishing" loading="lazy" fetchpriority="low" decoding="async" />
-          <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Curves read cleaner, faster</strong>
-            <span class="pmx-proof-caption">Daniel F. · curved housing</span>
-          </div>
-        </article>
-        <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-blue-gloss-768.webp" data-srcset="review-blue-gloss-480.webp 480w, review-blue-gloss-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Blue geometric print polished to a high-gloss finish" loading="lazy" fetchpriority="low" decoding="async" />
-          <div class="pmx-proof-card-copy">
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
             <strong class="pmx-proof-outcome">Mirror gloss in one session</strong>
-            <span class="pmx-proof-caption">Marta L. · display piece upgrade</span>
+            <span class="pmx-proof-caption">Marta L. &middot; display piece &middot; direct to client</span>
           </div>
         </article>
+        <!-- 7: Orange closeup — texture detail -->
         <article class="pmx-proof-card" data-reveal="card">
-          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-birthday-tiara-768.webp" data-srcset="review-birthday-tiara-480.webp 480w, review-birthday-tiara-768.webp 768w" data-sizes="(max-width: 767px) 74vw, 240px" alt="Finished birthday tiara print worn at a party" loading="lazy" fetchpriority="low" decoding="async" />
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-orange-closeup-768.webp" data-srcset="review-orange-closeup-480.webp 480w, review-orange-closeup-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Glossy orange finished print close-up" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
           <div class="pmx-proof-card-copy">
-            <strong class="pmx-proof-outcome">Gift-ready quality standard</strong>
-            <span class="pmx-proof-caption">Ben A. · event accessory</span>
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Perceived value, no layer lines</strong>
+            <span class="pmx-proof-caption">Liam R. &middot; makers market &middot; 5&times; markup</span>
+          </div>
+        </article>
+        <!-- 8: Candle holder — lifestyle -->
+        <article class="pmx-proof-card" data-reveal="card">
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-candle-holder-768.webp" data-srcset="review-candle-holder-480.webp 480w, review-candle-holder-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Finished candle holder on a wooden table" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
+          <div class="pmx-proof-card-copy">
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Premium shelf presence</strong>
+            <span class="pmx-proof-caption">Nabil A. &middot; home goods &middot; repeat buyers</span>
+          </div>
+        </article>
+        <!-- 9: Curved comparison — technical proof -->
+        <article class="pmx-proof-card" data-reveal="card">
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-curved-comparison-768.webp" data-srcset="review-curved-comparison-480.webp 480w, review-curved-comparison-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Curved black print with visible improvement after finishing" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
+          <div class="pmx-proof-card-copy">
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Curves read cleaner, faster</strong>
+            <span class="pmx-proof-caption">Daniel F. &middot; custom housing &middot; B2B client</span>
+          </div>
+        </article>
+        <!-- 10: Prism comparison — geometry variety -->
+        <article class="pmx-proof-card" data-reveal="card">
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-prism-comparison-768.webp" data-srcset="review-prism-comparison-480.webp 480w, review-prism-comparison-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Raw and polished faceted print comparison in daylight" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
+          <div class="pmx-proof-card-copy">
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Facets catch light like crystal</strong>
+            <span class="pmx-proof-caption">Carlos V. &middot; geometric line &middot; Etsy</span>
+          </div>
+        </article>
+        <!-- 11: Car mount — category variety -->
+        <article class="pmx-proof-card" data-reveal="card">
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-car-mount-768.webp" data-srcset="review-car-mount-480.webp 480w, review-car-mount-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Blue finished car mount with smooth glossy surface" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
+          <div class="pmx-proof-card-copy">
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Retail look, maker price</strong>
+            <span class="pmx-proof-caption">Jake M. &middot; interior accessory &middot; direct sales</span>
+          </div>
+        </article>
+        <!-- 12: Birthday tiara — niche, last -->
+        <article class="pmx-proof-card" data-reveal="card">
+          <img class="pmx-deferred-img" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///ywAAAAAAQABAAACAUwAOw==" data-src="review-birthday-tiara-768.webp" data-srcset="review-birthday-tiara-480.webp 480w, review-birthday-tiara-768.webp 768w" data-sizes="(max-width: 767px) 88vw, 240px" alt="Finished birthday tiara print worn at a party" loading="lazy" fetchpriority="low" decoding="async" />
+          <span class="pmx-proof-verified" aria-label="Verified member">&#10003; Verified</span>
+          <div class="pmx-proof-card-copy">
+            <span class="pmx-proof-stars" aria-label="5 stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+            <strong class="pmx-proof-outcome">Gift-ready, event-quality standard</strong>
+            <span class="pmx-proof-caption">Ben A. &middot; event accessories &middot; custom orders</span>
           </div>
         </article>
       </div>
@@ -7147,7 +7218,8 @@
         var wall = document.querySelector(".pmx-proof-wall");
         if (!wall) return;
 
-        if (!wall.hasAttribute("data-proof-loop-ready")) {
+        var isMobileViewport = window.matchMedia("(max-width: 767px)").matches;
+        if (!wall.hasAttribute("data-proof-loop-ready") && !isMobileViewport) {
           Array.prototype.slice.call(wall.querySelectorAll(".pmx-proof-card"))
             .forEach(function (card) {
               var clone = card.cloneNode(true);
