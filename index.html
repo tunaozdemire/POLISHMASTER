@@ -5580,10 +5580,16 @@
       order: 1;
       display: flex;
       flex-direction: column;
+      align-items: flex-start;
       justify-content: center;
       padding-top: 88px;
       padding-bottom: 88px;
       gap: var(--pmx-space-3);
+    }
+    /* Override any auto-centering margins inherited by children */
+    .pmx-hero-copy > * {
+      margin-left: 0;
+      margin-right: 0;
     }
     .pmx-hero-title {
       font-size: clamp(2.6rem, 3.8vw, 3.6rem);
@@ -5592,17 +5598,21 @@
     .pmx-hero-subhead {
       font-size: 18px;
       max-width: 36ch;
+      margin-left: 0;
     }
     .pmx-hero-chips {
       flex-wrap: nowrap;
     }
     /* CTA in hero: max-width so it doesn't stretch full column */
     .pmx-hero .pmx-primary-cta {
-      max-width: 400px;
+      width: 100%;
+      max-width: 380px;
+      align-self: flex-start;
     }
     /* Trust row: left-align in hero copy column */
     .pmx-hero-copy .pmx-trust-row {
       justify-content: flex-start;
+      margin-left: 0;
     }
     /* Global CTA desktop sizing */
     .pmx-primary-cta {
