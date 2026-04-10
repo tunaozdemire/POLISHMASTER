@@ -5514,40 +5514,205 @@
     color: rgba(255,255,255,0.66);
   }
 
+  /* ═══════════════════════════════════════════════
+     DESKTOP LAYOUT  ≥ 768px
+     All rules here are desktop-only.
+     Mobile styles (max-width: 767px) are untouched.
+  ═══════════════════════════════════════════════ */
   @media (min-width: 768px) {
+
+    /* ── CONTAINER ── */
     .pmx-shell {
-      width: min(100%, 1080px);
-      padding: 0 40px;
+      width: min(100%, 1140px);
+      padding: 0 48px;
     }
 
+    /* ── SECTION SPACING ── */
+    .pmx-section {
+      gap: clamp(48px, 5vw, 72px);
+    }
+
+    /* ── TYPOGRAPHY ── */
+    .pmx-section-title {
+      font-size: clamp(2rem, 3vw, 2.8rem);
+    }
+    .pmx-section-subtitle {
+      font-size: 16px;
+      max-width: 54ch;
+    }
+    .pmx-kicker,
+    .pmx-kicker--muted {
+      font-size: 12px;
+    }
+
+    /* ── HERO — SPLIT LAYOUT ── */
+    .pmx-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+      min-height: 92vh;
+      align-items: stretch;
+      overflow: hidden;
+    }
+    .pmx-hero-media {
+      order: 2;
+      height: auto;
+      min-height: 92vh;
+      width: 100%;
+    }
+    .pmx-hero-media .comparison-slider {
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      margin-left: 0;
+      aspect-ratio: unset;
+    }
+    /* Left-edge fade: media blends into dark background */
+    .pmx-hero-media-gradient {
+      top: 0;
+      bottom: 0;
+      right: auto;
+      height: 100%;
+      width: 80px;
+      background: linear-gradient(to right, #050505 0%, transparent 100%);
+    }
+    .pmx-hero-copy {
+      order: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-top: 80px;
+      padding-bottom: 80px;
+      gap: var(--pmx-space-3);
+    }
+    .pmx-hero-title {
+      font-size: clamp(2.6rem, 3.8vw, 3.6rem);
+      max-width: 14ch;
+    }
+    .pmx-hero-subhead {
+      font-size: 18px;
+    }
+    .pmx-hero-chips {
+      flex-wrap: nowrap;
+    }
+    .pmx-primary-cta {
+      font-size: 18px;
+      min-height: 60px;
+    }
+
+    /* ── PROOF WALL ── */
     .pmx-proof-wall .pmx-proof-card {
-      flex-basis: 240px;
-      min-width: 240px;
-      height: 300px;
+      flex-basis: 280px;
+      min-width: 280px;
+      height: 340px;
     }
 
+    /* ── STEPS ── */
     .pmx-step-grid {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      gap: 24px;
     }
 
+    /* ── STATS ── */
     .pmx-stats-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 20px;
     }
 
+    /* ── PRICING ── */
+    .pricing-card-single {
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 40px 48px;
+    }
+
+    /* ── FOUNDER ── */
+    .founder-block-v2 {
+      flex-direction: row !important;
+      align-items: flex-start;
+      gap: 40px;
+      padding: 36px 40px;
+    }
+    .pmx-founder-top {
+      flex-shrink: 0;
+      width: 130px;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 10px;
+    }
+    .pmx-founder-photo {
+      width: 72px;
+      height: 72px;
+    }
+    .pmx-founder-case {
+      font-size: 30px;
+    }
+    .pmx-founder-quote {
+      font-size: 17px;
+      line-height: 1.65;
+    }
+
+    /* ── MEMBERS ── */
     .pmx-member-list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 20px;
+      gap: 24px;
+    }
+    .pmx-member-list--stack {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
     }
 
+    /* ── LOCKED ── */
     .locked-grid {
       grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+    }
+    .pmx-locked-lanes {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
     }
 
+    /* ── OBJECTIONS / FAQ ── */
     .pmx-objections-list {
       grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    /* ── MECHANISM ── */
+    .pmx-mechanism-stage {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      align-items: start;
+      min-height: 520px;
+      padding: 32px;
+      gap: 28px;
+    }
+    .pmx-mechanism-visual {
+      min-height: 460px;
+    }
+
+    /* ── IMPACT STRIP ── */
+    .pmx-impact-strip {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
       gap: 20px;
     }
+
+    /* ── WHY GRID ── */
+    .pmx-why-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    /* ── ANNOUNCEMENT BAR ── */
+    .pmx-announcement-bar {
+      grid-template-columns: auto 1fr auto;
+    }
+
+    /* ── FINAL CTA ── */
+    .pmx-final-stack {
+      max-width: 540px;
+      margin: 0 auto;
+    }
+
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -6508,37 +6673,6 @@
     100% { left: calc(47.5% - 41px); }
   }
 
-  @media (min-width: 768px) {
-    .pmx-announcement-bar {
-      grid-template-columns: auto 1fr auto;
-    }
-
-    .pmx-mechanism-stage {
-      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-      align-items: start;
-      min-height: 430px;
-    }
-
-    .pmx-mechanism-visual {
-      min-height: 382px;
-    }
-
-    .pmx-impact-strip {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .pmx-member-list--stack {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .pmx-locked-lanes {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-
-    .pmx-why-grid {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-    }
-  }
 
   @media (prefers-reduced-motion: reduce) {
     [data-reveal],
