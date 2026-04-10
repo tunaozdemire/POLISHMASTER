@@ -5754,7 +5754,6 @@
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     overscroll-behavior-x: contain;
-    scroll-snap-type: x mandatory;
     cursor: grab;
     touch-action: pan-x;
   }
@@ -7362,18 +7361,21 @@
           origCards.forEach(function (c) { c.classList.add("is-visible"); });
         }
 
-        recalcLoop();
-        if (loopW > 0 && wall.scrollLeft <= 1) wall.scrollLeft = 1;
-
-        wall.addEventListener("scroll", scheduleNorm, { passive: true });
-        wall.addEventListener("touchend", scheduleNorm, { passive: true });
-        window.addEventListener("resize", function () { recalcLoop(); scheduleNorm(); }, { passive: true });
-        window.addEventListener("orientationchange", function () {
-          setTimeout(function () { recalcLoop(); scheduleNorm(); }, 150);
-        });
-        window.addEventListener("load", function () {
-          setTimeout(function () { recalcLoop(); scheduleNorm(); }, 100);
-        }, { once: true });
+        if (!isMobileViewport) {
+          recalcLoop();
+          if (loopW > 0 && wall.scrollLeft <= 1) wall.scrollLeft = 1;
+          wall.addEventListener("scroll", scheduleNorm, { passive: true });
+          wall.addEventListener("touchend", scheduleNorm, { passive: true });
+        }
+        if (!isMobileViewport) {
+          window.addEventListener("resize", function () { recalcLoop(); scheduleNorm(); }, { passive: true });
+          window.addEventListener("orientationchange", function () {
+            setTimeout(function () { recalcLoop(); scheduleNorm(); }, 150);
+          });
+          window.addEventListener("load", function () {
+            setTimeout(function () { recalcLoop(); scheduleNorm(); }, 100);
+          }, { once: true });
+        }
       })();
 
       (function () {
