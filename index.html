@@ -1031,7 +1031,7 @@
       inset 0 1px 0 rgba(255,255,255,0.04),
       0 12px 24px rgba(0,0,0,0.16);
     overflow: hidden;
-    animation: outcomeGlowCycle 9s ease-in-out infinite;
+    animation: outcomeGlowCycle 4.5s ease-in-out infinite;
     text-align: center;
   }
 
@@ -1048,7 +1048,7 @@
     box-shadow:
       0 0 0 6px rgba(255,106,0,0.07),
       0 0 18px rgba(255,106,0,0.2);
-    animation: outcomeDotCycle 9s ease-in-out infinite;
+    animation: outcomeDotCycle 4.5s ease-in-out infinite;
     display: none;
   }
 
@@ -1061,19 +1061,19 @@
     transform: translateX(-145%) skewX(-16deg);
     opacity: 0;
     pointer-events: none;
-    animation: outcomeSweep 9s ease-in-out infinite;
+    animation: outcomeSweep 4.5s ease-in-out infinite;
   }
 
   .outcome-item:nth-child(2),
   .outcome-item:nth-child(2)::before,
   .outcome-item:nth-child(2)::after {
-    animation-delay: 3s;
+    animation-delay: 1.5s;
   }
 
   .outcome-item:nth-child(3),
   .outcome-item:nth-child(3)::before,
   .outcome-item:nth-child(3)::after {
-    animation-delay: 6s;
+    animation-delay: 3s;
   }
 
   .outcome-title {
@@ -1170,7 +1170,7 @@
   .system-step.step-a,
   .system-step.step-b,
   .system-step.step-c {
-    animation: activeStepPulse 12s cubic-bezier(.32,0,.18,1) infinite;
+    animation: activeStepPulse 5s cubic-bezier(.32,0,.18,1) infinite;
   }
 
   .system-step.step-a::before,
@@ -1179,20 +1179,20 @@
   .system-step.step-a::after,
   .system-step.step-b::after,
   .system-step.step-c::after {
-    animation-duration: 12s;
+    animation-duration: 5s;
     animation-iteration-count: infinite;
     animation-timing-function: cubic-bezier(.32,0,.18,1);
   }
 
   .system-step.step-a { animation-delay: 0s; }
-  .system-step.step-b { animation-delay: 3s; }
-  .system-step.step-c { animation-delay: 6s; }
+  .system-step.step-b { animation-delay: 1.25s; }
+  .system-step.step-c { animation-delay: 2.5s; }
   .system-step.step-a::before,
   .system-step.step-a::after { animation-delay: 0s; }
   .system-step.step-b::before,
-  .system-step.step-b::after { animation-delay: 3s; }
+  .system-step.step-b::after { animation-delay: 1.25s; }
   .system-step.step-c::before,
-  .system-step.step-c::after { animation-delay: 6s; }
+  .system-step.step-c::after { animation-delay: 2.5s; }
   .system-step.step-a::before,
   .system-step.step-b::before,
   .system-step.step-c::before { animation-name: activeStepSweep; }
@@ -1408,16 +1408,16 @@
         0 0 0 1px rgba(255,255,255,0);
     }
     24%, 42% {
-      border-color: rgba(255,106,0,0.28);
+      border-color: rgba(255,106,0,0.14);
       background:
-        radial-gradient(circle at 50% -10%, rgba(255,106,0,0.1), transparent 58%),
-        linear-gradient(180deg, rgba(255,255,255,0.05), rgba(255,255,255,0.018)),
+        radial-gradient(circle at 50% -10%, rgba(255,106,0,0.05), transparent 58%),
+        linear-gradient(180deg, rgba(255,255,255,0.04), rgba(255,255,255,0.015)),
         rgba(12,11,11,0.82);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.05),
-        0 0 0 1px rgba(255,106,0,0.08),
-        0 14px 30px rgba(0,0,0,0.22),
-        0 0 26px rgba(255,106,0,0.07);
+        inset 0 1px 0 rgba(255,255,255,0.04),
+        0 0 0 1px rgba(255,106,0,0.04),
+        0 14px 30px rgba(0,0,0,0.2),
+        0 0 16px rgba(255,106,0,0.04);
     }
   }
 
@@ -1459,12 +1459,12 @@
         0 12px 24px rgba(0,0,0,0.16);
     }
     8%, 16% {
-      border-color: rgba(255,136,48,0.34);
+      border-color: rgba(255,136,48,0.18);
       box-shadow:
-        inset 0 1px 0 rgba(255,255,255,0.07),
-        0 16px 34px rgba(0,0,0,0.2),
-        0 0 0 1px rgba(255,128,32,0.08),
-        0 0 28px rgba(255,106,0,0.12);
+        inset 0 1px 0 rgba(255,255,255,0.06),
+        0 14px 28px rgba(0,0,0,0.18),
+        0 0 0 1px rgba(255,128,32,0.05),
+        0 0 18px rgba(255,106,0,0.07);
     }
   }
 
@@ -4529,7 +4529,7 @@
     font-weight: 700;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: var(--pmx-accent);
+    color: rgba(255,255,255,0.52);
     margin-bottom: var(--pmx-space-2);
   }
 
@@ -6605,9 +6605,9 @@
         </h1>
         <p class="pmx-hero-subhead pmx-copy-limit" data-reveal="text">Charge 3–5x more with a product-ready finish.</p>
         <div class="pmx-hero-chips">
-          <span class="pmx-chip" data-reveal="chip">Product-ready</span>
-          <span class="pmx-chip" data-reveal="chip">20-30 min</span>
-          <span class="pmx-chip" data-reveal="chip">10+ filaments</span>
+          <span class="pmx-chip" data-reveal="chip">Ready to sell</span>
+          <span class="pmx-chip" data-reveal="chip">30 min finish</span>
+          <span class="pmx-chip" data-reveal="chip">No layer lines</span>
         </div>
         <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join" data-reveal="cta">Secure Your Access - $29/mo</a>
         <div class="pmx-trust-row" aria-label="Membership trust row" data-reveal="text">
@@ -6615,7 +6615,7 @@
           <span class="dot">&middot;</span>
           <span>178 verified reviews</span>
           <span class="dot">&middot;</span>
-          <span>Launch pricing active</span>
+          <span style="color:var(--pmx-accent);font-weight:700;">Launch pricing ends May 1</span>
         </div>
       </div>
     </section>
@@ -6629,7 +6629,7 @@
 
     <section class="pmx-section pmx-proof" aria-label="What members produce">
       <div class="pmx-shell pmx-center">
-        <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">What members produce</span>
+        <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">This is what $29/month produces</span>
       </div>
       <div class="pmx-proof-wall" aria-label="Member proof wall">
         <!-- 1: Bracket before/after — max delta, first card -->
@@ -6758,7 +6758,7 @@
 
     <section class="pmx-section pmx-system pmx-mechanism" aria-label="How the system works">
       <div class="pmx-shell pmx-center pmx-system-header">
-        <span class="pmx-kicker" data-reveal="text">THE SYSTEM</span>
+        <span class="pmx-kicker" data-reveal="text">How it works</span>
         <h2 class="pmx-section-title" data-reveal="text">3 steps. Repeatable every time.</h2>
       </div>
       <div class="pmx-shell">
@@ -6771,9 +6771,8 @@
             <div class="step-body">
               <h3>Prep the surface</h3>
               <ul>
-                <li>Print your own tools.</li>
-                <li>Works on PLA, PLA+, PETG, ABS, ASA and more.</li>
-                <li>20–30 min on standard prints</li>
+                <li>No special tools — print what you need.</li>
+                <li>Done in 20–30 min on any standard print.</li>
               </ul>
             </div>
           </article>
@@ -6786,9 +6785,8 @@
             <div class="step-body">
               <h3>Choose your finish</h3>
               <ul>
-                <li>Gloss path: final compound application</li>
-                <li>Matte path: controlled flatting agent</li>
-                <li>Same process — different endpoint</li>
+                <li>Gloss or matte — same 3-step path.</li>
+                <li>Repeatable result every single time.</li>
               </ul>
             </div>
           </article>
@@ -6801,9 +6799,8 @@
             <div class="step-body">
               <h3>Product-ready result</h3>
               <ul>
-                <li>No visible layer lines</li>
-                <li>Passes the "injection-molded" test</li>
-                <li>Shelf, sale, or gift — same standard</li>
+                <li>Passes the injection-molded test.</li>
+                <li>Shelf, sale, or gift — same standard.</li>
               </ul>
             </div>
           </article>
@@ -6813,7 +6810,7 @@
 
     <section class="pmx-section pmx-outcomes" aria-label="Outcome numbers">
       <div class="pmx-shell pmx-center">
-        <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">What changes after the finish</span>
+        <span class="pmx-kicker pmx-kicker--muted" data-reveal="text">The numbers don't lie</span>
       </div>
       <div class="pmx-shell">
         <div class="pmx-impact-strip">
@@ -6839,7 +6836,7 @@
 
     <section class="pmx-section pmx-pricing" id="pricing-section" aria-label="Pricing">
       <div class="pmx-shell pmx-center">
-        <span class="pmx-kicker" data-reveal="text">GET ACCESS</span>
+        <span class="pmx-kicker" data-reveal="text">Join 250+ makers</span>
         <p class="pmx-section-subtitle" data-reveal="text">Everything inside. One monthly plan.</p>
       </div>
       <div class="pmx-shell">
@@ -6986,7 +6983,7 @@
 
     <section class="pmx-section pmx-objections" id="faq" aria-label="Before you decide">
       <div class="pmx-shell pmx-center">
-        <h2 class="pmx-section-title" data-reveal="text">What makers ask before joining</h2>
+        <h2 class="pmx-section-title" data-reveal="text">Why 94% of members renew past 30 days</h2>
       </div>
       <div class="pmx-shell">
         <div class="pmx-objections-list">
@@ -7354,7 +7351,7 @@
           }, { root: wall, rootMargin: "0px 80px 0px 80px", threshold: 0.05 });
 
           origCards.forEach(function (card, i) {
-            card.style.transitionDelay = Math.min(i * 0.07, 0.21) + "s";
+            card.style.transitionDelay = Math.min(i * 0.12, 0.36) + "s";
             revealObs.observe(card);
           });
         } else {
@@ -7478,7 +7475,7 @@
 
       function updateRevealAnimations(viewportH) {
         var viewportW = window.innerWidth || document.documentElement.clientWidth || 0;
-        var enterAt = viewportH * 0.9;
+        var enterAt = viewportH * 0.85;
         var leftBound = viewportW * 0.02;
         var rightBound = viewportW * 0.98;
         if (!pendingRevealItems.size) return;
