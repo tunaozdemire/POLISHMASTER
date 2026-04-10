@@ -5366,6 +5366,8 @@
     flex-direction: column;
     gap: var(--pmx-space-3);
     padding: var(--pmx-card-padding-lg);
+    border-left: 3px solid rgba(255,106,0,0.55) !important;
+    background: linear-gradient(135deg, rgba(255,106,0,0.06) 0%, var(--pmx-card) 55%) !important;
   }
 
   .pmx-founder-top {
@@ -5399,11 +5401,11 @@
     font-size: 15px;
     font-style: italic;
     line-height: 1.6;
-    color: rgba(255,255,255,0.65);
+    color: rgba(255,255,255,0.82);
   }
 
   .pmx-founder-quote::before {
-    content: "\"";
+    content: "\201C";
     position: absolute;
     left: 0;
     top: -4px;
@@ -5411,6 +5413,15 @@
     font-size: 24px;
     font-weight: 700;
     line-height: 1;
+  }
+
+  .pmx-founder-quote::after {
+    content: "\201D";
+    color: var(--pmx-accent);
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1;
+    margin-left: 2px;
   }
 
   .final-cta-block {
@@ -6866,6 +6877,25 @@
       </div>
     </section>
 
+    <section class="pmx-section pmx-founder" aria-label="Founder note">
+      <div class="pmx-shell pmx-center">
+        <span class="pmx-kicker--muted" data-reveal="text">From the founder</span>
+      </div>
+      <div class="pmx-shell">
+        <article class="founder-block-v2" data-reveal="card">
+          <div class="pmx-founder-top">
+            <img src="founder-avatar.svg" alt="PolishMaster founder" class="pmx-founder-photo" loading="lazy" />
+            <div>
+              <div class="pmx-founder-name">Tuna Ö.</div>
+              <div class="pmx-founder-role">FDM print seller · Created PolishMaster</div>
+            </div>
+          </div>
+          <div class="pmx-founder-case">$8 &rarr; $47 avg order</div>
+          <p class="pmx-founder-quote">Two years. That's how long I charged $8 for prints before I cracked the finishing system. One month after, my average order hit $47 — same printer, same filament, same customer base. I built PolishMaster so you get there in 30 days, not two years.</p>
+        </article>
+      </div>
+    </section>
+
     <section class="pmx-section pmx-members" aria-label="Member results">
       <div class="pmx-shell pmx-center pmx-members-header">
         <h2 class="pmx-section-title" data-reveal="text">What changed for members</h2>
@@ -7001,22 +7031,6 @@
             <p class="objection-a">Most members apply the system on their next print within 24 hours. The surface difference is immediate on that same piece.</p>
           </article>
         </div>
-      </div>
-    </section>
-
-    <section class="pmx-section pmx-founder" aria-label="Founder note">
-      <div class="pmx-shell">
-        <article class="founder-block-v2" data-reveal="card">
-          <div class="pmx-founder-top">
-            <img src="founder-avatar.svg" alt="PolishMaster founder icon" class="pmx-founder-photo" loading="lazy" />
-            <div>
-              <div class="pmx-founder-name">Founder</div>
-              <div class="pmx-founder-role">Founder of PolishMaster</div>
-            </div>
-          </div>
-          <div class="pmx-founder-case">$8 &rarr; $47 avg order</div>
-          <p class="pmx-founder-quote">I was charging $8 for prints that cost me $4 to make. After cracking the finishing system, my average order went to $47. I built PolishMaster so you don't spend two years figuring out what I figured out the hard way.</p>
-        </article>
       </div>
     </section>
 
