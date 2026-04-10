@@ -5605,6 +5605,7 @@
     opacity: 1;
     transform: translate3d(0, 0, 0) scale(1);
     filter: blur(0);
+    will-change: auto;
   }
 
   .pmx-scroll-panel {
@@ -6218,7 +6219,11 @@
 
   @media (max-width: 767px) {
     body {
-      --pmx-banner-height: 34px;
+      --pmx-banner-height: 30px;
+    }
+
+    .pmx-announcement {
+      opacity: 0.82;
     }
 
     .pmx-announcement-bar {
@@ -6226,7 +6231,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      min-height: 34px;
+      min-height: 30px;
       padding-inline: 12px;
     }
 
@@ -6259,7 +6264,8 @@
 
     html.pmx-reveal [data-reveal] {
       --pmx-reveal-blur: 0px;
-      transition-duration: 0.58s;
+      transition-duration: 0.46s;
+      will-change: transform, opacity;
     }
 
     .pmx-hero {
@@ -6357,6 +6363,11 @@
       font-size: 11.5px;
       row-gap: 4px;
       justify-content: flex-start;
+      display: none;
+    }
+
+    .pmx-hero-copy .pmx-kicker {
+      display: none;
     }
 
     .pmx-system-header {
@@ -6369,8 +6380,8 @@
     }
 
     .pmx-proof-wall .pmx-proof-card {
-      flex: 0 0 min(74vw, 252px);
-      min-width: min(74vw, 252px);
+      flex: 0 0 min(88vw, 300px);
+      min-width: min(88vw, 300px);
       height: clamp(236px, 62vw, 282px);
     }
 
@@ -6558,7 +6569,7 @@
           <span class="hero-line-dim">Your prints look homemade.</span>
           <span class="hero-line-bright">They don't have to.</span>
         </h1>
-        <p class="pmx-hero-subhead pmx-copy-limit" data-reveal="text">Charge 3–5x more with a product-ready finish. Works on PLA, PLA+, PETG, ABS, ASA, and more.</p>
+        <p class="pmx-hero-subhead pmx-copy-limit" data-reveal="text">Charge 3–5x more with a product-ready finish.</p>
         <div class="pmx-hero-chips">
           <span class="pmx-chip" data-reveal="chip">Product-ready</span>
           <span class="pmx-chip" data-reveal="chip">20-30 min</span>
@@ -6846,14 +6857,14 @@
 
     <section class="pmx-section pmx-locked" aria-label="Inside PolishMaster">
       <div class="pmx-shell pmx-center">
-        <h2 class="pmx-section-title" data-reveal="text">What you unlock inside</h2>
-        <p class="pmx-section-subtitle" data-reveal="text">See the standard. Then turn it into sellable output.</p>
+        <h2 class="pmx-section-title" data-reveal="text">Everything you need to sell premium prints</h2>
+        <p class="pmx-section-subtitle" data-reveal="text">Finish one piece. Charge what it's actually worth.</p>
       </div>
       <div class="pmx-shell pmx-locked-lanes">
         <article class="pmx-locked-lane" data-reveal="card">
           <div class="pmx-locked-lane-head">
-            <h3>Master the finish standard</h3>
-            <p>Exact process. Cleaner surface.</p>
+            <h3>Get surfaces that actually sell</h3>
+            <p>Step-by-step process. No guesswork.</p>
           </div>
           <div class="locked-grid">
             <article class="locked-card">
@@ -6876,8 +6887,8 @@
         </article>
         <article class="pmx-locked-lane" data-reveal="card">
           <div class="pmx-locked-lane-head">
-            <h3>Build more sellable products</h3>
-            <p>New drops. Better decisions.</p>
+            <h3>Designs you can print and sell today</h3>
+            <p>New drop every Monday. Full commercial rights.</p>
           </div>
           <div class="locked-grid">
             <article class="locked-card">
@@ -6910,12 +6921,12 @@
       <div class="pmx-shell">
         <div class="pmx-objections-list">
           <article class="objection-block" data-reveal="card">
-            <p class="objection-q">Will this work on my printer and filament?</p>
-            <p class="objection-a">Yes. The system is built around PLA, PLA+, and PETG. Printer brand does not matter because the finish happens after the print.</p>
+            <p class="objection-q">Works on any FDM printer and material?</p>
+            <p class="objection-a">The finish happens after the print, so your printer brand doesn't matter. The system is built around PLA, PLA+, and PETG — the materials where the money is.</p>
           </article>
           <article class="objection-block" data-reveal="card">
-            <p class="objection-q">What if I join and it's not right for me?</p>
-            <p class="objection-a">Cancel anytime directly inside Patreon. No emails, no forms, no waiting. Access simply ends with the current billing period.</p>
+            <p class="objection-q">What if it doesn't work for me?</p>
+            <p class="objection-a">Cancel anytime directly inside Patreon. No emails, no forms, no waiting. Access ends with the current billing period — no lock-in.</p>
           </article>
           <article class="objection-block" data-reveal="card">
             <p class="objection-q">How fast will I see results?</p>
@@ -6944,8 +6955,8 @@
     <section class="final-cta-block" aria-label="Final call to action">
       <div class="pmx-shell pmx-final-stack">
         <p class="pmx-final-muted" data-reveal="text">Still finishing raw?</p>
-        <p class="pmx-final-strong" data-reveal="text">Everyone here was, before they joined.</p>
-        <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join" data-reveal="cta">Secure Your Access - $29/mo</a>
+        <p class="pmx-final-strong" data-reveal="text">Your next polished piece could sell this week.</p>
+        <a class="pmx-primary-cta" href="https://www.patreon.com/15111337/join" data-reveal="cta">Start Finishing Better — $29/mo</a>
         <p class="pmx-final-note" data-reveal="text">250+ makers already inside.</p>
         <p class="pmx-final-note" data-reveal="text">Launch pricing ends May 1.</p>
       </div>
