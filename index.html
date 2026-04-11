@@ -39,8 +39,8 @@
   <meta name="twitter:image:alt" content="Raw versus polished 3D printed surface finished with the PolishMaster system" />
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
   <link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
-<link rel="preload" as="image" href="cross-before-1024.webp" imagesrcset="cross-before-640.webp 640w, cross-before-1024.webp 1024w, cross-before-1400.webp 1400w" imagesizes="(max-width: 767px) 84vw, (max-width: 1200px) 68vw, 1350px" fetchpriority="high" />
-<link rel="preload" as="image" href="cross-after-1024.webp" imagesrcset="cross-after-640.webp 640w, cross-after-1024.webp 1024w, cross-after-1400.webp 1400w" imagesizes="(max-width: 767px) 84vw, (max-width: 1200px) 68vw, 1350px" fetchpriority="high" />
+  <link rel="preload" as="image" href="cross-before-1024.webp" fetchpriority="high" />
+  <link rel="preload" as="image" href="cross-after-1024.webp" fetchpriority="high" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -1314,13 +1314,6 @@
     filter: blur(0.1px);
   }
 
-  .ghost-access.is-left {
-    transform: translateX(20px) scale(0.94);
-  }
-
-  .ghost-access.is-right {
-    transform: translateX(-20px) scale(0.94);
-  }
 
   .cycle-panel::before {
     content: "";
@@ -2885,15 +2878,11 @@
     padding-left: 18px;
     padding-right: 18px;
     min-height: 56px;
-    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04)) !important;
-    border-color: rgba(255,255,255,0.12) !important;
+    background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04));
+    border-color: rgba(255,255,255,0.12);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.05),
-      0 6px 14px rgba(0,0,0,0.12) !important;
-  }
-
-  .choice-footer-passive .cta-secondary-passive .cta-text {
-    color: rgba(255,245,238,0.78);
+      0 6px 14px rgba(0,0,0,0.12);
   }
 
   .choice-footer-passive .cta-secondary-passive::before {
@@ -2904,7 +2893,7 @@
   .choice-footer-passive .cta-secondary-passive::after {
     background:
       linear-gradient(135deg, rgba(255,255,255,0.12), rgba(255,255,255,0.04) 50%, rgba(255,255,255,0.08) 100%),
-      rgba(22,22,26,0.94) !important;
+      rgba(22,22,26,0.94);
   }
 
   .choice-footer-passive .cta-secondary-passive .cta-text {
@@ -4164,8 +4153,8 @@
   }
 
   /* ── SLIDER LABELS ── */
-  .slider-label-before,
-  .slider-label-after {
+  .slider-label-raw,
+  .slider-label-polished {
     position: absolute;
     bottom: 12px;
     z-index: 4;
@@ -4181,14 +4170,14 @@
     border: 1px solid rgba(255,255,255,0.14);
     pointer-events: none;
   }
-  .slider-label-before { left: 12px; }
-  .slider-label-after  { right: 12px; }
+  .slider-label-raw { left: 12px; }
+  .slider-label-polished { right: 12px; }
 
   /* ── FEATURED CARD ── */
   .tcard-featured {
-    border-color: rgba(255,106,0,0.35) !important;
-    background: linear-gradient(160deg, rgba(255,106,0,0.1), rgba(255,255,255,0.03)) !important;
-    box-shadow: 0 0 0 1px rgba(255,106,0,0.18), 0 8px 28px rgba(255,106,0,0.12) !important;
+    border-color: rgba(255,106,0,0.35);
+    background: linear-gradient(160deg, rgba(255,106,0,0.1), rgba(255,255,255,0.03));
+    box-shadow: 0 0 0 1px rgba(255,106,0,0.18), 0 8px 28px rgba(255,106,0,0.12);
   }
 
   /* ── SECONDARY CTA ── */
@@ -4196,17 +4185,17 @@
     display: flex;
     margin-top: 12px;
     width: 100%;
-    background: linear-gradient(180deg, rgba(255,106,0,0.16), rgba(255,106,0,0.06)) !important;
-    border-color: rgba(255,106,0,0.28) !important;
+    background: linear-gradient(180deg, rgba(255,106,0,0.16), rgba(255,106,0,0.06));
+    border-color: rgba(255,106,0,0.28);
     box-shadow:
       inset 0 1px 0 rgba(255,255,255,0.08),
       0 8px 18px rgba(255,106,0,0.12),
-      0 0 20px rgba(255,106,0,0.08) !important;
+      0 0 20px rgba(255,106,0,0.08);
   }
   .cta-secondary:not(.cta-secondary-passive)::after {
     background:
       linear-gradient(135deg, rgba(255,106,0,0.16), rgba(255,106,0,0.05) 50%, rgba(255,106,0,0.12) 100%),
-      rgba(10,10,11,0.9) !important;
+      rgba(10,10,11,0.9);
   }
 
 /* ── SPARKLES ── */
@@ -4260,8 +4249,8 @@
     top: 22px;
     right: 22px;
     z-index: 9100;
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border-radius: 50%;
     background: rgba(255,255,255,0.06);
     border: 1px solid rgba(255,255,255,0.10);
@@ -5366,8 +5355,8 @@
     flex-direction: column;
     gap: var(--pmx-space-3);
     padding: var(--pmx-card-padding-lg);
-    border-left: 3px solid rgba(255,106,0,0.55) !important;
-    background: linear-gradient(135deg, rgba(255,106,0,0.06) 0%, var(--pmx-card) 55%) !important;
+    border-left: 3px solid rgba(255,106,0,0.55);
+    background: linear-gradient(135deg, rgba(255,106,0,0.06) 0%, var(--pmx-card) 55%);
   }
 
   .pmx-founder-top {
@@ -5689,7 +5678,7 @@
 
     /* ── FOUNDER — proper 2-column grid ── */
     .founder-block-v2 {
-      display: grid !important;
+      display: grid;
       grid-template-columns: 150px 1fr;
       grid-template-areas:
         "identity case"
@@ -6834,11 +6823,11 @@
     .pmx-primary-cta,
     .pmx-primary-cta::after,
     .pmx-scroll-panel {
-      transition: none !important;
-      animation: none !important;
-      transform: none !important;
-      opacity: 1 !important;
-      filter: none !important;
+      transition: none;
+      animation: none;
+      transform: none;
+      opacity: 1;
+      filter: none;
     }
   }
 </style>
@@ -7198,8 +7187,8 @@
             </div>
             <div class="pmx-member-outcome">Went from $9 to $52 per piece.</div>
             <p class="pmx-member-context">Cleaner surface changed how buyers judged the same model.</p>
-            <button class="pmx-member-toggle" type="button" aria-expanded="false">Read the full result</button>
-            <div class="pmx-member-expand">
+            <button class="pmx-member-toggle" type="button" aria-expanded="false" aria-controls="pmx-member-expand-1">Read the full result</button>
+            <div class="pmx-member-expand" id="pmx-member-expand-1">
               <p class="pmx-member-quote">After the sanding sequence, the exact same print stopped looking homemade. Buyers started reading it like a finished product instead of a raw print.</p>
             </div>
           </article>
@@ -7213,8 +7202,8 @@
             </div>
             <div class="pmx-member-outcome">Customers ask if it's injection-molded.</div>
             <p class="pmx-member-context">The finish path changed the read before anyone touched the part.</p>
-            <button class="pmx-member-toggle" type="button" aria-expanded="false">Read the full result</button>
-            <div class="pmx-member-expand">
+            <button class="pmx-member-toggle" type="button" aria-expanded="false" aria-controls="pmx-member-expand-2">Read the full result</button>
+            <div class="pmx-member-expand" id="pmx-member-expand-2">
               <p class="pmx-member-quote">The gloss path made the part look calmer and more expensive on the first session. That one surface shift changed how customers judged the whole piece.</p>
             </div>
           </article>
@@ -7228,8 +7217,8 @@
             </div>
             <div class="pmx-member-outcome">One cleaner sale covered 6 months.</div>
             <p class="pmx-member-context">The visual difference was immediate on the very next print.</p>
-            <button class="pmx-member-toggle" type="button" aria-expanded="false">Read the full result</button>
-            <div class="pmx-member-expand">
+            <button class="pmx-member-toggle" type="button" aria-expanded="false" aria-controls="pmx-member-expand-3">Read the full result</button>
+            <div class="pmx-member-expand" id="pmx-member-expand-3">
               <p class="pmx-member-quote">I applied the system on my next print and the difference was immediate. The first cleaner sale covered the membership before the month even ended.</p>
             </div>
           </article>
@@ -7368,9 +7357,9 @@
         <h2 class="pm-modal-title">Get in Touch</h2>
         <p class="pm-modal-sub">Send us a message and we'll get back to you.</p>
         <form class="pm-contact-form" id="pm-contact-form">
-          <label class="pm-field"><span>Name</span><input type="text" name="name" placeholder="Your name" autocomplete="name" required /></label>
-          <label class="pm-field"><span>Email</span><input type="email" name="email" placeholder="your@email.com" autocomplete="email" required /></label>
-          <label class="pm-field"><span>Message</span><textarea name="body" rows="4" placeholder="What's on your mind?" required></textarea></label>
+          <label class="pm-field" for="contact-name"><span>Name</span><input id="contact-name" type="text" name="name" placeholder="Your name" autocomplete="name" required /></label>
+          <label class="pm-field" for="contact-email"><span>Email</span><input id="contact-email" type="email" name="email" placeholder="your@email.com" autocomplete="email" required /></label>
+          <label class="pm-field" for="contact-body"><span>Message</span><textarea id="contact-body" name="body" rows="4" placeholder="What's on your mind?" required></textarea></label>
           <button type="submit" class="pm-contact-submit">Send Message</button>
         </form>
         <p class="pm-contact-note">Static site note: we'll prepare your message and give you a reliable email fallback if your device does not open a mail app automatically.</p>
@@ -7386,6 +7375,8 @@
   </script>
 
   <script>
+    const PATREON_URL = "https://www.patreon.com/15111337/join";
+
     (function () {
       var reduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
       var reduceMotion = reduceMotionQuery.matches;
@@ -7774,7 +7765,7 @@
       }
 
       function updateRevealAnimations(viewportH) {
-        var viewportW = window.innerWidth || document.documentElement.clientWidth || 0;
+        var viewportW = _cachedViewportW;
         var enterAt = viewportH * 0.85;
         var leftBound = viewportW * 0.02;
         var rightBound = viewportW * 0.98;
@@ -7789,12 +7780,13 @@
         });
       }
 
-      document.querySelectorAll("[data-member-card]").forEach(function (card) {
+      var memberCards = Array.prototype.slice.call(document.querySelectorAll("[data-member-card]"));
+      memberCards.forEach(function (card) {
         var toggle = card.querySelector(".pmx-member-toggle");
         if (!toggle) return;
         toggle.addEventListener("click", function () {
           var shouldOpen = !card.classList.contains("is-open");
-          document.querySelectorAll("[data-member-card]").forEach(function (otherCard) {
+          memberCards.forEach(function (otherCard) {
             var otherToggle = otherCard.querySelector(".pmx-member-toggle");
             otherCard.classList.remove("is-open");
             if (otherToggle) {
@@ -7913,8 +7905,15 @@
         });
       }
 
+      let _cachedViewportH = window.innerHeight || document.documentElement.clientHeight || 0;
+      let _cachedViewportW = window.innerWidth || document.documentElement.clientWidth || 0;
+      window.addEventListener("resize", function () {
+        _cachedViewportH = window.innerHeight || document.documentElement.clientHeight || 0;
+        _cachedViewportW = window.innerWidth || document.documentElement.clientWidth || 0;
+      }, { passive: true });
+
       function renderScrollAnimations() {
-        var viewportH = window.innerHeight || document.documentElement.clientHeight || 0;
+        var viewportH = _cachedViewportH;
         if (!viewportH) return;
 
         if (reduceMotion) {
@@ -8301,12 +8300,17 @@
       if (contactForm) {
         contactForm.addEventListener('submit', function(e) {
           e.preventDefault();
-          var name = contactForm.querySelector('[name="name"]').value.trim();
-          var email = contactForm.querySelector('[name="email"]').value.trim();
-          var body = contactForm.querySelector('[name="body"]').value.trim();
-          var mailto = 'mailto:polishmasterco@gmail.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
-          setContactStatus(name, email, body);
-          window.location.href = mailto;
+          try {
+            var name = contactForm.querySelector('[name="name"]').value.trim();
+            var email = contactForm.querySelector('[name="email"]').value.trim();
+            var body = contactForm.querySelector('[name="body"]').value.trim();
+            var mailto = 'mailto:polishmasterco@gmail.com?subject=Message from ' + encodeURIComponent(name) + '&body=' + encodeURIComponent(body + '\n\nFrom: ' + email);
+            setContactStatus(name, email, body);
+            window.location.href = mailto;
+          } catch (err) {
+            var submitBtn = contactForm.querySelector('[type="submit"]');
+            if (submitBtn) submitBtn.textContent = 'Something went wrong — please try again.';
+          }
         });
       }
 
